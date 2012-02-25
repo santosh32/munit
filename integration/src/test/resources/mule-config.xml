@@ -1,0 +1,74 @@
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xmlns:http="http://www.mulesoft.org/schema/mule/http"
+      xmlns:sfdc="http://www.mulesoft.org/schema/mule/sfdc"
+      xmlns:xmlsecurity="http://www.mulesoft.org/schema/mule/xmlsecurity"
+      xmlns:sftp="http://www.mulesoft.org/schema/mule/sftp"
+      xmlns:json="http://www.mulesoft.org/schema/mule/json"
+      xsi:schemaLocation="
+        http://www.mulesoft.org/schema/mule/sfdc http://www.mulesoft.org/schema/mule/sfdc/4.0/mule-sfdc.xsd
+        http://www.mulesoft.org/schema/mule/xmlsecurity http://www.mulesoft.org/schema/mule/xmlsecurity/1.0/mule-xmlsecurity.xsd
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+        http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/3.2/mule-json.xsd
+        http://www.mulesoft.org/schema/mule/sftp http://www.mulesoft.org/schema/mule/sftp/current/mule-sftp.xsd
+        http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+
+
+    <!-- -->
+    <sfdc:config name="Salesforce" username="fernandofederico@mulesource.com"
+                 password="Mulesoft1234" securityToken="w0GzOE72D5YhONjntZQvx4hG" />
+
+
+    <custom-transformer name="httpToMapTransformer" class="org.mule.transport.http.transformers.HttpRequestBodyToParamMap" />
+
+
+    <flow name="campaignInfoFlow">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="10443" path="campaignInfo"/>
+
+        <sfdc:query query="SELECT Name, CreatedDate, EndDate, phone__c, cc_template__c FROM Campaign WHERE IsActive=true"
+                    config-ref="Salesforce" />
+
+        <response>
+            <json:object-to-json-transformer />
+        </response>
+    </flow>
+
+
+    <flow name="updateSalesforceTemaplate">
+        <http:inbound-endpoint exchange-pattern="one-way" host="localhost" port="10443" path="updateSalesforceTemaplate"/>
+
+        <transformer ref="httpToMapTransformer"/>
+
+        <sfdc:upsert type="Campaign" externalIdFieldName="Name">
+            <sfdc:objects>
+                <sfdc:object>
+                    <Name>#[map-payload:campaignName]</Name>
+                    <cc_template__c>#[map-payload:template]</cc_template__c>
+                </sfdc:object>
+            </sfdc:objects>
+        </sfdc:upsert>
+    </flow>
+
+
+    <flow name="campaignInfoToSFTPFlow">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="10443" path="campaignInfo-to-sftp"/>
+
+        <sfdc:query query="SELECT Name, CreatedDate, EndDate, phone__c, cc_template__c FROM Campaign WHERE IsActive=true"
+                    config-ref="Salesforce" />
+
+        <response>
+            <json:object-to-json-transformer />
+        </response>
+
+        <object-to-string-transformer/>
+
+        <sftp:outbound-endpoint host="localhost"
+                                port="3001" user="mulesoft" password="mulemanishere"
+                                outputPattern="JsonResult.txt" path="/tmp">
+        </sftp:outbound-endpoint>
+    </flow>
+
+
+
+</mule>

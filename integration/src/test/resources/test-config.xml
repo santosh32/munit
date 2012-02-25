@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Mule Development Kit
+    Copyright 2010-2011 (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:spring="http://www.springframework.org/schema/beans"
+      xmlns:mulemock="http://www.mulesoft.org/schema/mule/mock"
+      xmlns:muleassert="http://www.mulesoft.org/schema/mule/assert"
+      xmlns:httpclient="http://www.mulesoft.org/schema/mule/httpclient"
+      xmlns:sftpserver="http://www.mulesoft.org/schema/mule/sftpserver"
+      xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+        http://www.mulesoft.org/schema/mule/mock http://www.mulesoft.org/schema/mule/mock/1.0/mule-mock.xsd
+        http://www.mulesoft.org/schema/mule/assert http://www.mulesoft.org/schema/mule/assert/1.0/mule-assert.xsd
+        http://www.mulesoft.org/schema/mule/httpclient http://www.mulesoft.org/schema/mule/httpclient/1.0/mule-httpclient.xsd
+        http://www.mulesoft.org/schema/mule/sftpserver http://www.mulesoft.org/schema/mule/sftpserver/1.0/mule-sftpserver.xsd">
+
+
+    <spring:bean name="upsertType" class="java.lang.String">
+        <spring:constructor-arg value="Campaign"/>
+    </spring:bean>
+
+    <spring:bean name="externalIdFieldName" class="java.lang.String">
+        <spring:constructor-arg value="Name"/>
+    </spring:bean>
+
+    <spring:bean name="salesforceQuery" class="java.lang.String">
+        <spring:constructor-arg
+                value="SELECT Name, CreatedDate, EndDate, phone__c, cc_template__c FROM Campaign WHERE IsActive=true"/>
+    </spring:bean>
+
+    <spring:bean name="emptyMap" class="java.util.HashMap"/>
+
+    <spring:bean name="emptyList" class="java.util.ArrayList"/>
+    <spring:bean name="nonEmptyList" class="org.springframework.beans.factory.config.ListFactoryBean">
+        <spring:property name="sourceList">
+            <spring:list>
+                <spring:value>value 1</spring:value>
+                <spring:value>value 2</spring:value>
+            </spring:list>
+
+        </spring:property>
+    </spring:bean>
+
+    <spring:bean name="nonEmptyMap" class="org.springframework.beans.factory.config.MapFactoryBean">
+        <spring:property name="sourceMap">
+            <spring:map>
+                <spring:entry key="id1" value="test1"/>
+            </spring:map>
+        </spring:property>
+    </spring:bean>
+
+
+    <spring:bean name="upsertExpectedObjects" class="org.springframework.beans.factory.config.ListFactoryBean">
+        <spring:property name="sourceList">
+            <spring:list>
+                <spring:ref bean="upsertFirstParameter"/>
+            </spring:list>
+        </spring:property>
+    </spring:bean>
+
+    <spring:bean name="upsertFirstParameter" class="org.springframework.beans.factory.config.MapFactoryBean">
+        <spring:property name="sourceMap">
+            <spring:map>
+                <spring:entry key="Name" value="nameOfTheCampaign"/>
+                <spring:entry key="cc_template__c" value="theTemplate"/>
+            </spring:map>
+        </spring:property>
+    </spring:bean>
+
+    <spring:bean name="upsertHttpParameters" class="org.springframework.beans.factory.config.MapFactoryBean">
+        <spring:property name="sourceMap">
+            <spring:map>
+                <spring:entry key="campaignName" value="nameOfTheCampaign"/>
+                <spring:entry key="template" value="theTemplate"/>
+            </spring:map>
+        </spring:property>
+    </spring:bean>
+
+    <muleassert:config/>
+    <httpclient:config/>
+    <mulemock:config of="Salesforce" name="salesforceMock"/>
+    <sftpserver:config name="mockedSftpServer" port="3001" hostKey="/Users/fernandofederico/Desktop/source/devkit/mule-mock/src/test/resources/hostkey.pem"/>
+
+    <flow name="before.suite">
+        <sftpserver:start-server config-ref="mockedSftpServer" />
+    </flow>
+
+    <flow name="after.each.test">
+        <mulemock:reset config-ref="salesforceMock"/>
+    </flow>
+
+    <flow name="after.suite">
+        <sftpserver:stop-server config-ref="mockedSftpServer"/>
+    </flow>
+
+    <!--
+        Scenario: We make a call to Salesforce but it returns no result.
+
+        If Salesforce returns an empty list then an empty json must be returned.
+        Null Payload is not accepted.
+    -->
+    <flow name="testSalesforceReturnsEmptyMap">
+        <mulemock:expect config-ref="salesforceMock" when="query" mustReturn-ref="emptyList"/>
+
+        <flow-ref name="campaignInfoFlow"/>
+
+        <muleassert:assert-not-null/>
+        <muleassert:assert-that payloadIs-ref="#[string:[]]"/>
+    </flow>
+
+
+    <!--
+        Scenario: Salesforce must be called with a correct query
+
+        We need to validate that Salesforce is called querying the correct objects.
+    -->
+    <flow name="testThatSalesforceIsCorrectlyCalledWithVerify">
+
+        <mulemock:expect config-ref="salesforceMock" when="query" mustReturn-ref="nonEmptyList"/>
+
+
+        <flow-ref name="campaignInfoFlow"/>
+
+        <mulemock:verify-call config-ref="salesforceMock" messageProcessor="query">
+            <mulemock:parameters>
+                <mulemock:parameter value-ref="salesforceQuery"/>
+            </mulemock:parameters>
+        </mulemock:verify-call>
+
+
+        <muleassert:assert-not-null/>
+        <muleassert:assert-that payloadIs-ref='#[string:["value 1","value 2"]]'/>
+    </flow>
+
+
+    <!--
+        Scenario: Salesforce tries to connect but fails
+
+        If the connection fails then we return null payload
+    -->
+    <flow name="testThatNullPayloadIfFailsToConnect">
+
+        <mulemock:fail-on-connect config-ref="salesforceMock"/>
+
+        <flow-ref name="campaignInfoFlow"/>
+
+        <muleassert:assert-null/>
+    </flow>
+
+
+    <!--
+        Scenario: Salesforce fails when it tries to execute the query
+
+        If the query fails then we return null payload
+    -->
+    <flow name="testThatNullPayloadIfFailsWhenQuery">
+
+        <mulemock:expect-fail config-ref="salesforceMock" when="query" exceptionType="java.lang.Exception"/>
+
+        <flow-ref name="campaignInfoFlow"/>
+
+        <muleassert:assert-null/>
+    </flow>
+
+
+    <!--
+        Scenario: Salesforce must be called with a correct query
+
+        We need to validate that Salesforce is called querying the correct objects.
+    -->
+    <flow name="testThatSalesforceUpsertIsCalledCorrectly">
+
+        <mulemock:expect config-ref="salesforceMock" when="upsert" mustReturn-ref="emptyList"/>
+
+        <httpclient:execute address="http://localhost:10443/updateSalesforceTemaplate">
+            <httpclient:parameters ref="upsertHttpParameters"/>
+        </httpclient:execute>
+
+        <mulemock:verify-call config-ref="salesforceMock" messageProcessor="upsert" >
+            <mulemock:parameters>
+                <mulemock:parameter value-ref="externalIdFieldName"/>
+                <mulemock:parameter value-ref="upsertType"/>
+                <mulemock:parameter value-ref="upsertExpectedObjects"/>
+            </mulemock:parameters>
+        </mulemock:verify-call>
+
+        <muleassert:assert-that payloadIs-ref='#[string:]'/>
+    </flow>
+
+
+    <flow name="testIfWeCanWriteToSFTP">
+        <mulemock:expect config-ref="salesforceMock" when="query" mustReturn-ref="emptyList"/>
+
+        <flow-ref name="campaignInfoToSFTPFlow"/>
+
+        <sftpserver:contains-files file="JsonResult.txt" path="/tmp" />
+    </flow>
+
+
+</mule>
