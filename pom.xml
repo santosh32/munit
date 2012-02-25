@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.mule</groupId>
+    <artifactId>munit</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <mule.version>3.2.1</mule.version>
+        <mule.devkit.version>3.2</mule.devkit.version>
+        <junit.version>4.8.2</junit.version>
+        <mockito.version>1.8.2</mockito.version>
+    </properties>
+
+    <modules>
+    <module>assert</module>
+    <module>mock</module>
+    <module>httpclient</module>
+    <module>sftpserver</module>
+    <module>it</module>
+  </modules>
+    
+</project>
