@@ -1,0 +1,23 @@
+<!-- BEGIN_INCLUDE(assert:assertThat) -->
+    <mulemock:assert-that payloadIs="something"/>
+<!-- END_INCLUDE(assert:assertThat) -->
+
+<!-- BEGIN_INCLUDE(assert:assertTrue) -->
+    <mulemock:assert-true condition="expression"/>
+<!-- END_INCLUDE(assert:assertTrue) -->
+
+<!-- BEGIN_INCLUDE(assert:assertFalse) -->
+    <mulemock:assert-false condition="expression"/>
+<!-- END_INCLUDE(assert:assertFalse) -->
+
+<!-- BEGIN_INCLUDE(assert:assertOnEquals) -->
+    <mulemock:assert-on-equals expected="expression" value="expression"/>
+<!-- END_INCLUDE(assert:assertOnEquals) -->
+
+<!-- BEGIN_INCLUDE(assert:assertNotNull) -->
+    <mulemock:assert-not-null/>
+<!-- END_INCLUDE(assert:assertNotNull) -->
+
+<!-- BEGIN_INCLUDE(assert:assertNull) -->
+    <mulemock:assert-not-null/>
+<!-- END_INCLUDE(assert:assertNull) -->
