@@ -19,7 +19,7 @@
     <module>mock</module>
     <module>httpclient</module>
     <module>sftpserver</module>
-    <module>it</module>
+    <module>integration</module>
   </modules>
     
 </project>
