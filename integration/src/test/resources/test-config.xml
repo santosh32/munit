@@ -98,7 +98,7 @@
     <muleassert:config/>
     <httpclient:config/>
     <mulemock:config of="Salesforce" name="salesforceMock"/>
-    <sftpserver:config name="mockedSftpServer" port="3001" hostKey="/Users/fernandofederico/Desktop/source/devkit/mule-mock/src/test/resources/hostkey.pem"/>
+    <sftpserver:config name="mockedSftpServer" port="3001" hostKey="../../../resources/hostkey.pem"/>
 
     <flow name="before.suite">
         <sftpserver:start-server config-ref="mockedSftpServer" />

@@ -3,12 +3,10 @@
 
       xmlns:http="http://www.mulesoft.org/schema/mule/http"
       xmlns:sfdc="http://www.mulesoft.org/schema/mule/sfdc"
-      xmlns:xmlsecurity="http://www.mulesoft.org/schema/mule/xmlsecurity"
       xmlns:sftp="http://www.mulesoft.org/schema/mule/sftp"
       xmlns:json="http://www.mulesoft.org/schema/mule/json"
-      xsi:schemaLocation="
-        http://www.mulesoft.org/schema/mule/sfdc http://www.mulesoft.org/schema/mule/sfdc/4.0/mule-sfdc.xsd
-        http://www.mulesoft.org/schema/mule/xmlsecurity http://www.mulesoft.org/schema/mule/xmlsecurity/1.0/mule-xmlsecurity.xsd
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/sfdc http://www.mulesoft.org/schema/mule/sfdc/4.0/mule-sfdc.xsd
+
         http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
         http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/3.2/mule-json.xsd
         http://www.mulesoft.org/schema/mule/sftp http://www.mulesoft.org/schema/mule/sftp/current/mule-sftp.xsd
