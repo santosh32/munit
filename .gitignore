@@ -1,0 +1,7 @@
+.mule
+*.iml
+*.iws
+*.ipr
+/target
+.project
+.classpath
