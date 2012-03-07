@@ -22,14 +22,15 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xmlns:spring="http://www.springframework.org/schema/beans"
       xmlns:mulemock="http://www.mulesoft.org/schema/mule/mock"
-      xmlns:muleassert="http://www.mulesoft.org/schema/mule/assert"
+      xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
       xmlns:httpclient="http://www.mulesoft.org/schema/mule/httpclient"
       xmlns:sftpserver="http://www.mulesoft.org/schema/mule/sftpserver"
+      xmlns:mtest="http://www.mulesoft.org/schema/mule/mtest"
       xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.2/mule.xsd
         http://www.mulesoft.org/schema/mule/mock http://www.mulesoft.org/schema/mule/mock/1.0/mule-mock.xsd
-        http://www.mulesoft.org/schema/mule/assert http://www.mulesoft.org/schema/mule/assert/1.0/mule-assert.xsd
+        http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/1.0/mule-munit.xsd
         http://www.mulesoft.org/schema/mule/httpclient http://www.mulesoft.org/schema/mule/httpclient/1.0/mule-httpclient.xsd
         http://www.mulesoft.org/schema/mule/sftpserver http://www.mulesoft.org/schema/mule/sftpserver/1.0/mule-sftpserver.xsd">
 
@@ -95,45 +96,48 @@
         </spring:property>
     </spring:bean>
 
-    <muleassert:config/>
+    <munit:config/>
     <httpclient:config/>
     <mulemock:config of="Salesforce" name="salesforceMock"/>
-    <sftpserver:config name="mockedSftpServer" port="3001" hostKey="../../../resources/hostkey.pem"/>
+    <sftpserver:config name="mockedSftpServer" port="3001" hostKey="/Users/fernandofederico/Desktop/source/munit/integration/src/test/resources/hostkey.pem"/>
 
-    <flow name="before.suite">
+    <flow name="before.suite"
+        mtest:before-suite="Starting SFTP server ... ">
         <sftpserver:start-server config-ref="mockedSftpServer" />
     </flow>
 
-    <flow name="after.each.test">
+    <flow name="after.each.test"
+        mtest:before-test="Reseting mocks...">
         <mulemock:reset config-ref="salesforceMock"/>
     </flow>
 
-    <flow name="after.suite">
+    <flow name="startServer"
+          mtest:after-suite="Stopping SFTP server ..." >
         <sftpserver:stop-server config-ref="mockedSftpServer"/>
     </flow>
 
-    <!--
-        Scenario: We make a call to Salesforce but it returns no result.
+    <flow name="testSalesforceEmptyMap"
 
+          mtest:test="
+        We make a call to Salesforce but it returns no result.
         If Salesforce returns an empty list then an empty json must be returned.
-        Null Payload is not accepted.
-    -->
-    <flow name="testSalesforceReturnsEmptyMap">
+        Null Payload is not accepted.">
+
         <mulemock:expect config-ref="salesforceMock" when="query" mustReturn-ref="emptyList"/>
 
         <flow-ref name="campaignInfoFlow"/>
 
-        <muleassert:assert-not-null/>
-        <muleassert:assert-that payloadIs-ref="#[string:[]]"/>
+        <munit:assert-not-null/>
+        <munit:assert-that payloadIs-ref="#[string:[]]"/>
     </flow>
 
 
-    <!--
-        Scenario: Salesforce must be called with a correct query
 
-        We need to validate that Salesforce is called querying the correct objects.
-    -->
-    <flow name="testThatSalesforceIsCorrectlyCalledWithVerify">
+    <flow name="testThatSalesforceIsCorrectlyCalledWithVerify"
+
+          mtest:test="
+        Salesforce must be called with a correct query.
+        We need to validate that Salesforce is called querying the correct objects.">
 
         <mulemock:expect config-ref="salesforceMock" when="query" mustReturn-ref="nonEmptyList"/>
 
@@ -147,47 +151,62 @@
         </mulemock:verify-call>
 
 
-        <muleassert:assert-not-null/>
-        <muleassert:assert-that payloadIs-ref='#[string:["value 1","value 2"]]'/>
+        <munit:assert-not-null/>
+        <munit:assert-that payloadIs-ref='#[string:["value 1","value 2"]]'/>
     </flow>
 
 
-    <!--
-        Scenario: Salesforce tries to connect but fails
+    <flow name="testThatSalesforceIsCorrectlyCalled"
 
-        If the connection fails then we return null payload
-    -->
-    <flow name="testThatNullPayloadIfFailsToConnect">
+          mtest:test="
+        Salesforce must be called with a correct query.
+        We need to validate that Salesforce is called querying the correct objects.">
+
+        <mulemock:expect config-ref="salesforceMock" when="query" mustReturn-ref="nonEmptyList">
+            <mulemock:parameters>
+                <mulemock:parameter value-ref="salesforceQuery"/>
+            </mulemock:parameters>
+        </mulemock:expect>
+
+
+        <flow-ref name="campaignInfoFlow"/>
+
+        <munit:assert-not-null/>
+        <munit:assert-that payloadIs-ref='#[string:["value 1","value 2"]]'/>
+    </flow>
+
+
+    <flow name="testThatNullPayloadIfFailsToConnect"
+
+          mtest:test="
+        Salesforce tries to connect but fails.">
 
         <mulemock:fail-on-connect config-ref="salesforceMock"/>
 
         <flow-ref name="campaignInfoFlow"/>
 
-        <muleassert:assert-null/>
+        <munit:assert-null/>
     </flow>
 
 
-    <!--
-        Scenario: Salesforce fails when it tries to execute the query
+    <flow name="testThatNullPayloadIfFailsWhenQuery"
 
-        If the query fails then we return null payload
-    -->
-    <flow name="testThatNullPayloadIfFailsWhenQuery">
+          mtest:test="
+        Salesforce fails when it tries to execute the query.
+        If the query fails then we return null payload.">
 
-        <mulemock:expect-fail config-ref="salesforceMock" when="query" exceptionType="java.lang.Exception"/>
+        <mulemock:expect-fail config-ref="salesforceMock" when="query" throwA="java.lang.Exception"/>
 
         <flow-ref name="campaignInfoFlow"/>
 
-        <muleassert:assert-null/>
+        <munit:assert-null/>
     </flow>
 
 
-    <!--
-        Scenario: Salesforce must be called with a correct query
-
-        We need to validate that Salesforce is called querying the correct objects.
-    -->
-    <flow name="testThatSalesforceUpsertIsCalledCorrectly">
+    <flow name="testThatSalesforceUpsertIsCalledCorrectly"
+          mtest:test="
+        Salesforce must be called with a correct query.
+        We need to validate that Salesforce is called querying the correct objects.">
 
         <mulemock:expect config-ref="salesforceMock" when="upsert" mustReturn-ref="emptyList"/>
 
@@ -203,11 +222,16 @@
             </mulemock:parameters>
         </mulemock:verify-call>
 
-        <muleassert:assert-that payloadIs-ref='#[string:]'/>
+        <munit:assert-that payloadIs-ref='#[string:]'/>
     </flow>
 
 
-    <flow name="testIfWeCanWriteToSFTP">
+
+    <flow name="testIfWeCanWriteToSFTP"
+
+          mtest:test="
+        Testing SFTP Connection.">
+
         <mulemock:expect config-ref="salesforceMock" when="query" mustReturn-ref="emptyList"/>
 
         <flow-ref name="campaignInfoToSFTPFlow"/>
@@ -215,5 +239,39 @@
         <sftpserver:contains-files file="JsonResult.txt" path="/tmp" />
     </flow>
 
+    <flow name="testEchoWithNotNullPayload"
+          mtest:test="
+        Checking that we can set a payload for testing.">
 
+        <munit:set payload-ref='#[string:["value 1","value 2"]]'/>
+
+        <flow-ref name="echoFlow"/>
+
+        <munit:assert-that payloadIs-ref='#[string:["value 1","value 2"]]'/>
+    </flow>
+
+    <flow name="testEchoWithNullPayload"
+          mtest:test="
+        Checking that we can set a Null payload for testing.">
+
+        <munit:set-null-payload/>
+
+        <flow-ref name="echoFlow"/>
+
+        <munit:assert-null/>
+    </flow>
+
+    <flow name="testIfAnExceptionIsThrown"
+          mtest:test="
+        Check for an Exception.">
+
+        <flow-ref name="exceptionFlow"/>
+
+        <munit:fail message="We should not get here"/>
+
+        <default-exception-strategy>
+            <munit:assert-not-null/>
+        </default-exception-strategy>
+
+    </flow>
 </mule>

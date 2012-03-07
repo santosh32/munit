@@ -9,9 +9,13 @@ import org.mule.api.MuleContext;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
+import org.mule.api.annotations.param.Optional;
 import org.mule.api.context.MuleContextAware;
 import org.mule.api.registry.MuleRegistry;
 import org.mule.api.registry.RegistrationException;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -28,15 +32,24 @@ import static org.mockito.Mockito.*;
 
 
 /**
- * Module for Mocking
+ * <p>Module for Mocking devkit Modules.</p>
+ * 
+ * <p>With this module you can mock using mockito framework all the modules that are written with Mule Devkit.</p>
+ * 
+ * <p> In order to be able to mock a module it has to be declare with a reference name. For example:</p>
+ * 
+ * <p> <sfdc:config name="Salesforce" username="" password="" securityToken="" /></p>
+ * 
+ * <p> Otherwise the module/connector will not be accessible by a reference name and will not be able to be mocked. </p>
  *
  * @author Federico, Fernando
  */
 @Module(name="mock", schemaVersion="1.0")
-public class MockModule  implements MuleContextAware
+public class MockModule  implements MuleContextAware, BeanFactoryPostProcessor
+    
 {
     /**
-     * Bean that we want to mock.
+     * <p>Component that we want to mock.</p>
      */
     @Configurable
     private String of;
@@ -49,15 +62,20 @@ public class MockModule  implements MuleContextAware
     private Class<? extends Object> connectionKeyClass;
 
 
-    public static String getStackTrace(Throwable throwable) {
+    private static String getStackTrace(Throwable throwable) {
         Writer writer = new StringWriter();
         PrintWriter printWriter = new PrintWriter(writer);
         throwable.printStackTrace(printWriter);
         return writer.toString();
     }
+    
+    private static String removeSlashes(String messageProcessor)
+    {
+        return messageProcessor.replaceAll("-", "");
+    }
 
     /**
-     * Set The name of the bean to be mocked
+     * <p>Set The name of the bean to be mocked.</p>
      *
      * @param of The name of the bean to be mocked
      */
@@ -68,22 +86,29 @@ public class MockModule  implements MuleContextAware
 
 
     /**
-     * Expected behaviour of the mock.
+     * <p>Define what the mock must return on a message processor call.</p>
+     * 
+     * <p>If the message processor doesn't return any value then there is no need to define an expect.</p>
+     *
+     * <p>You can define the message processor parameters in the same order they appear in the API documentation. In
+     * order to define the behaviour on that particular case.</p>
      *
      * {@sample.xml ../../../doc/mock-connector.xml.sample mock:expect}
      *
-     * @param when Message processor id
-     * @param mustReturn Expected return value
+     * @param when Message processor name.
+     * @param mustReturn Expected return value.
+     * @param parameters Message processor parameters.
      */
     @Processor
-    public void expect(String when, final Object mustReturn)
+    public void expect(String when, @Optional List<Object> parameters, final Object mustReturn)
     {
         try {
 
             Method method = getMockedMethod(when);
 
             if ( method != null  ){
-                when(method.invoke(mock,getAnyParametersOf(method))).thenAnswer(new Answer<Object>() {
+                Object[] expectedParams = parameters != null ? parameters.toArray() : getAnyParametersOf(method);
+                when(method.invoke(mock, expectedParams)).thenAnswer(new Answer<Object>() {
                     @Override
                     public Object answer(InvocationOnMock invocationOnMock) throws Throwable {
                         return mustReturn;
@@ -97,16 +122,16 @@ public class MockModule  implements MuleContextAware
 
 
     /**
-     * Expect to fail when message processor is called
+     * <p>Expect to throw an exception when message processor is called. </p>
      *
      * {@sample.xml ../../../doc/mock-connector.xml.sample mock:expectFail}
      *
-     * @param exceptionType Java Exception full name
-     * @param when Message processor Id
+     * @param throwA Java Exception full qualified name.
+     * @param when Message processor name.
      *
      */
     @Processor
-    public void expectFail(String when, String exceptionType)
+    public void expectFail(String when, String throwA)
     {
         try {
 
@@ -114,7 +139,7 @@ public class MockModule  implements MuleContextAware
 
             if ( method != null  ){
                 when(method.invoke(mock, getAnyParametersOf(method)))
-                        .thenThrow((Throwable) Class.forName(exceptionType).newInstance());
+                        .thenThrow((Throwable) Class.forName(throwA).newInstance());
             }
 
         } catch (Exception e) {
@@ -183,14 +208,11 @@ public class MockModule  implements MuleContextAware
         Mockito.reset(mock);
     }
 
-
-
-
     private Method getMockedMethod(String messageProcessor) throws Exception {
         Method[] declaredMethods = mock.getClass().getDeclaredMethods();
         for ( Method method : declaredMethods )
         {
-            if ( method.getName().equals(messageProcessor) )
+            if (method.getName().equalsIgnoreCase(removeSlashes(messageProcessor)) )
             {
                 return method;
             }
@@ -200,11 +222,14 @@ public class MockModule  implements MuleContextAware
     }
 
     @Override
-    public void setMuleContext(MuleContext muleContext) {
+    public void setMuleContext(MuleContext muleContext)  {
         this.muleContext = muleContext;
+    }
 
+
+    @Override
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         MuleRegistry registry = muleContext.getRegistry();
-
         registerMock( buildMock(registry), registry);
     }
 
@@ -292,5 +317,4 @@ public class MockModule  implements MuleContextAware
         }
         return matchers;
     }
-
 }

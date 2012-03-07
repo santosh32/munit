@@ -3,100 +3,170 @@ package org.mule.munit;
 
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
+import org.mule.api.annotations.param.Optional;
 import org.mule.api.annotations.param.Payload;
 import org.mule.transport.NullPayload;
 
 import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
 
 /**
- * Module for asserting in Munit tests.
+ * <p>Module for asserting in Munit tests.</p>
  *
  * @author Federico, Fernando
  */
-@Module(name="assert", schemaVersion="1.0")
+@Module(name="munit", schemaVersion="1.0")
 public class AssertModule
 {
+    private static String wrapMessage(String message)
+    {
+        return message == null ? "" : message;
+    }
+
+
     /**
-     * Assert that the payload is equal to an expected value.
+     * <p>Assert that the payload is equal to an expected value.</p>
+     *
+     * <p>The payloadIs-ref can be any Object/expression. </p>
+     * <p>The assertion Fails if the payload is not equal to the payloadIs-ref</p>
      *
      * {@sample.xml ../../../doc/Assert-connector.xml.sample assert:assertThat}
      *
      * @param payloadIs Expected Value
      * @param payload payload
+     * @param message Description message to be shown in case of failure.
      */
     @Processor
-    public void assertThat(Object payloadIs, @Payload Object payload)
+    public void assertThat(@Optional String message, Object payloadIs, @Payload Object payload)
     {
-        assertEquals(payloadIs, payload);
+        assertEquals(wrapMessage(message), payloadIs, payload);
     }
 
     /**
-     * Assert for a true expression.
+     * <p>Assert for a true expression.</p>
      *
      * {@sample.xml ../../../doc/Assert-connector.xml.sample assert:assertTrue}
      *
-     * @param condition expected value
+     * @param condition Boolean expression
+     * @param message Description message to be shown in case of failure.
      */
     @Processor
-    public void assertTrue(Boolean condition)
+    public void assertTrue(@Optional String message, Boolean condition)
     {
-        junit.framework.Assert.assertTrue("Expected True but was False", condition);
+        junit.framework.Assert.assertTrue(wrapMessage(message), condition);
     }
 
 
     /**
-     * Check that two objects are equal.
+     * <p>Check that two objects are equal.</p>
      *
      * {@sample.xml ../../../doc/Assert-connector.xml.sample assert:assertOnEquals}
      *
-     * @param expected expected value
-     * @param value real value
+     * @param expected Expected value
+     * @param value Real value
+     * @param message Description message to be shown in case of failure.
      */
     @Processor
-    public void assertOnEquals(Object expected, Object value)
+    public void assertOnEquals(@Optional String message, Object expected, Object value)
     {
-        assertEquals(expected, value);
+        assertEquals(wrapMessage(message), expected, value);
+    }
+
+
+    /**
+     * Assert two objects are not equal
+     *
+     * {@sample.xml ../../../doc/Assert-connector.xml.sample assert:assertNotSame}
+     *
+     * @param expected expected value
+     * @param value real value
+     * @param message description message
+     */
+    @Processor
+    public void assertNotSame(@Optional String message, Object expected, Object value)
+    {
+        junit.framework.Assert.assertNotSame(wrapMessage(message), expected, value);
     }
 
     /**
-     * Check if an expression is false
+     * <p>Check if an expression is false.</p>
      *
      * {@sample.xml ../../../doc/Assert-connector.xml.sample assert:assertFalse}
      *
-     * @param condition expected value
+     * @param condition Boolean expression
+     * @param message Description message to be shown in case of failure.
      */
-
     @Processor
-    public void assertFalse(Boolean condition)
+    public void assertFalse(@Optional String message, Boolean condition)
     {
-        junit.framework.Assert.assertFalse("Expected False but was True", condition);
+        junit.framework.Assert.assertFalse(wrapMessage(message), condition);
     }
 
     /**
-     * Assert Not Null
+     * <p>Assert for a Not Null payload. </p>
      *
      * {@sample.xml ../../../doc/Assert-connector.xml.sample assert:assertNotNull}
      *
      * @param payload payload
+     * @param message Description message to be shown in case of failure.
      */
     @Processor
-    public void assertNotNull(@Payload Object payload)
+    public void assertNotNull(@Optional String message, @Payload Object payload)
     {
-        junit.framework.Assert.assertFalse(payload instanceof NullPayload);
+        junit.framework.Assert.assertFalse(wrapMessage(message), payload instanceof NullPayload);
     }
 
     /**
-     * Assert Null
+     * <p>Assert Null Payload. </p>
      *
      * {@sample.xml ../../../doc/Assert-connector.xml.sample assert:assertNull}
      *
      * @param payload payload
+     * @param message Description message to be shown in case of failure.
      */
     @Processor
-    public void assertNull(@Payload Object payload)
+    public void assertNull(@Optional String message, @Payload Object payload)
     {
-        junit.framework.Assert.assertTrue(payload instanceof NullPayload);
+        junit.framework.Assert.assertTrue(wrapMessage(message), payload instanceof NullPayload);
     }
+
+    /**
+     * <p>Defines the payload for testing.</p>
+     *
+     * {@sample.xml ../../../doc/Assert-connector.xml.sample assert:set}
+     *
+     * @param payload payload
+     * @return The testing payload
+     */
+    @Processor
+    public Object set(Object payload)
+    {
+        return payload;
+    }
+
+    /**
+     * <p>Defines a Null payload for testing.</p>
+     *
+     * {@sample.xml ../../../doc/Assert-connector.xml.sample assert:setNullPayload}
+     * @return Null payload
+     */
+    @Processor
+    public NullPayload setNullPayload()
+    {
+        return NullPayload.getInstance();
+    }
+
+
+    /**
+     * <p>Fail assertion.</p>
+     *
+     * {@sample.xml ../../../doc/Assert-connector.xml.sample assert:fail}
+     *
+     * @param message  Description message to be shown in case of failure.
+     */
+    @Processor
+    public void fail(@Optional String message)
+    {
+        junit.framework.Assert.fail(wrapMessage(message));
+    }
+
 }

@@ -69,4 +69,14 @@
 
 
 
+    <flow name="echoFlow">
+        <echo-component/>
+    </flow>
+
+    <custom-transformer name="exceptionTransformer" class="org.mule.ExceptionTransformer"/>
+
+    <sub-flow name="exceptionFlow">
+        <transformer ref="exceptionTransformer"/>
+    </sub-flow>
+
 </mule>

@@ -8,5 +8,4 @@ public class SalesforceConnectorTest extends AbstractMuleSuite {
     public String getConfigResources() {
         return "mule-config.xml, test-config.xml";
     }
-
 }

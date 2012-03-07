@@ -10,6 +10,7 @@ import org.junit.runner.notification.RunNotifier;
 import org.mule.MessageExchangePattern;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleEvent;
+import org.mule.api.MuleException;
 import org.mule.api.config.ConfigurationBuilder;
 import org.mule.api.construct.FlowConstruct;
 import org.mule.api.context.MuleContextBuilder;
@@ -25,6 +26,7 @@ import org.mule.tck.MuleTestUtils;
 import org.mule.tck.TestingWorkListener;
 import org.mule.util.ClassUtils;
 
+import javax.xml.namespace.QName;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,8 +35,13 @@ import java.util.List;
 
 public class MuleSuiteRunner extends Runner implements Filterable, Sortable{
     public static final String CLASSNAME_ANNOTATIONS_CONFIG_BUILDER = "org.mule.config.AnnotationsConfigurationBuilder";
+    private static QName BEFORE_SUITE = new QName("http://www.mulesoft.org/schema/mule/mtest", "before-suite");
+    private static QName AFTER_SUITE = new QName("http://www.mulesoft.org/schema/mule/mtest", "after-suite");
+    private static QName BEFORE_TEST = new QName("http://www.mulesoft.org/schema/mule/mtest", "before-test");
+    private static QName AFTER_TEST = new QName("http://www.mulesoft.org/schema/mule/mtest", "after-test");
+    private static QName TEST = new QName("http://www.mulesoft.org/schema/mule/mtest", "test");
 
-    TestSuite testSuite;
+    private TestSuite testSuite;
     MuleContext muleContext;
     String resources;
 
@@ -48,60 +55,84 @@ public class MuleSuiteRunner extends Runner implements Filterable, Sortable{
 
             testSuite = new TestSuite();
 
-            Flow before = lookupFlowConstruct("before.each.test");
-            Flow after = lookupFlowConstruct("after.each.test");
+            List<Flow> before = lookupFlows(BEFORE_TEST);
+            List<Flow> after = lookupFlows(AFTER_TEST);
             MuleRegistry registry = muleContext.getRegistry();
             Collection<FlowConstruct> flowConstructs = registry.lookupFlowConstructs();
             for ( FlowConstruct flowConstruct : flowConstructs )
             {
-                if ( flowConstruct.getName().startsWith("test"))
+                final Flow flow = (Flow) flowConstruct;
+
+                if ( ((Flow) flowConstruct).getAnnotation(TEST) != null )
                 {
-                    final Flow flow = (Flow) flowConstruct;
+
                     testSuite.addTest(new MuleTest(before,flow, after));
                 }
             }
 
         } catch (Exception e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            throw new RuntimeException(e);
         }
     }
 
+    private List<Flow> lookupFlows(QName qName)
+    {
+        List<Flow> flows = new ArrayList<Flow>();
+        Collection<Flow> flowConstructs = muleContext.getRegistry().lookupObjects(Flow.class);
+        for ( Flow flowConstruct : flowConstructs )
+        {
+            String annotation = (String) (flowConstruct).getAnnotation(qName);
+            if ( annotation != null  )
+            {
+                flows.add(flowConstruct);
+            }
+        }
+
+        return flows;
+    }
     
+    
+    private void process(QName qName, MuleEvent event) throws MuleException {
+        Collection<Flow> flowConstructs = muleContext.getRegistry().lookupObjects(Flow.class);
+        for ( Flow flowConstruct : flowConstructs )
+        {
+            String annotation = (String) (flowConstruct).getAnnotation(qName);
+            if ( annotation != null  )
+            {
+                System.out.printf("%n" + annotation + "%n");
+                (flowConstruct).process(event);
+            }
+        }
+    }
+
+
     @Override
     public Description getDescription() {
-        return makeDescription(testSuite);  //To change body of implemented methods use File | Settings | File Templates.
+        return makeDescription(testSuite);  
     }
 
     public TestListener createAdaptingListener(final RunNotifier notifier) {
         return new OldTestClassAdaptingListener(notifier);
     }
+    
     @Override
     public void run(RunNotifier notifier) {
         TestResult result= new TestResult();
         result.addListener(createAdaptingListener(notifier));
-        Flow beforeSuite = lookupFlowConstruct("before.suite");
-        Flow afterSuite = lookupFlowConstruct("after.suite");
 
         try
         {
-            if ( beforeSuite != null )
-                beforeSuite.process(muleEvent());
+            process(BEFORE_SUITE, muleEvent());
 
             testSuite.run(result);
 
-            if ( afterSuite != null )
-                afterSuite.process(muleEvent());
+            process(AFTER_SUITE, muleEvent());
         }
         catch(Exception e)
         {
             throw new RuntimeException("Could not Run the suite", e);
         }
 
-    }
-
-    protected Flow lookupFlowConstruct(String name)
-    {
-        return (Flow) muleContext.getRegistry().lookupFlowConstruct(name);
     }
 
     private static Description makeDescription(Test test) {
@@ -194,7 +225,6 @@ public class MuleSuiteRunner extends Runner implements Filterable, Sortable{
         fNotifier.fireTestStarted(asDescription(test));
     }
 
-    // Implement junit.framework.TestListener
     public void addError(Test test, Throwable t) {
         Failure failure= new Failure(asDescription(test), t);
         fNotifier.fireTestFailure(failure);
@@ -222,17 +252,17 @@ public class MuleSuiteRunner extends Runner implements Filterable, Sortable{
     public void addFailure(Test test, AssertionFailedError t) {
         addError(test, t);
     }
-        
-
 }
+
     public class MuleTest extends TestCase
     {
-        private Flow before;
+
+        private List<Flow> before;
         Flow flow;
-        private Flow after;
+        private List<Flow> after;
 
 
-        public MuleTest(Flow before, Flow flow, Flow after) {
+        public MuleTest(List<Flow> before, Flow flow, List<Flow> after) {
             this.before = before;
             this.flow = flow;
             this.after = after;
@@ -245,18 +275,44 @@ public class MuleSuiteRunner extends Runner implements Filterable, Sortable{
 
         @Override
         public int countTestCases() {
-            return 1;  //To change body of implemented methods use File | Settings | File Templates.
+            return 1;  
         }
 
         @Override
         protected void runTest() throws Throwable {
             MuleEvent event = muleEvent();
-            if (before != null)
-                before.process(event);
-            flow.process(event);
+            run(event, before, BEFORE_TEST);
 
-            if (after != null )
-                after.process(event);
+            showDescription();
+
+            try{
+                flow.process(event);
+            }
+            catch(Throwable t)
+            {
+                throw t;
+            }
+            finally {
+                run(event, after, AFTER_TEST);
+            }
+        }
+
+        private void run(MuleEvent event, List<Flow> flows, QName qName) throws MuleException {
+            if (flows != null)
+            {
+                for ( Flow flow : flows )
+                {
+                    System.out.println(flow.getAnnotation(qName));
+                    flow.process(event);
+                }
+            }
+        }
+
+        private void showDescription() {
+            String annotation = (String) flow.getAnnotation(TEST);
+            if ( annotation != null )
+
+                System.out.printf("%nDescription:%n************%n" + annotation.replaceAll("\\.", "\\.%n") + "%n");
         }
 
     }

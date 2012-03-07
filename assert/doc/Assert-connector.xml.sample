@@ -1,23 +1,39 @@
 <!-- BEGIN_INCLUDE(assert:assertThat) -->
-    <mulemock:assert-that payloadIs="something"/>
+    <munit:assert-that payloadIs-ref='#[string:["value 1","value 2"]]' />
 <!-- END_INCLUDE(assert:assertThat) -->
 
 <!-- BEGIN_INCLUDE(assert:assertTrue) -->
-    <mulemock:assert-true condition="expression"/>
+    <<munit:assert-true condition="#[groovy: return ( payload.length == 0 ) ;]"/>
 <!-- END_INCLUDE(assert:assertTrue) -->
 
 <!-- BEGIN_INCLUDE(assert:assertFalse) -->
-    <mulemock:assert-false condition="expression"/>
+    <munit:assert-false condition="#[groovy: return ( payload.length != 0 ) ;]"/>
 <!-- END_INCLUDE(assert:assertFalse) -->
 
 <!-- BEGIN_INCLUDE(assert:assertOnEquals) -->
-    <mulemock:assert-on-equals expected="expression" value="expression"/>
+     <munit:assert-on-equals expected-ref='#[string:]' value-ref='#[payload]'/>
 <!-- END_INCLUDE(assert:assertOnEquals) -->
 
 <!-- BEGIN_INCLUDE(assert:assertNotNull) -->
-    <mulemock:assert-not-null/>
+    <munit:assert-not-null/>
 <!-- END_INCLUDE(assert:assertNotNull) -->
 
 <!-- BEGIN_INCLUDE(assert:assertNull) -->
-    <mulemock:assert-not-null/>
+    <munit:assert-not-null/>
 <!-- END_INCLUDE(assert:assertNull) -->
+
+<!-- BEGIN_INCLUDE(assert:assertNotSame) -->
+    <munit:assert-not-same expected-ref='#[string:]' value-ref='#[payload]'/>
+<!-- END_INCLUDE(assert:assertNotSame) -->
+
+<!-- BEGIN_INCLUDE(assert:set) -->
+    <munit:set payload-ref='#[string:["value 1","value 2"]]'/>
+<!-- END_INCLUDE(assert:set) -->
+
+<!-- BEGIN_INCLUDE(assert:setNullPayload) -->
+    <munit:set-null-payload/>
+<!-- END_INCLUDE(assert:setNullPayload) -->
+
+<!-- BEGIN_INCLUDE(assert:fail) -->
+    <munit:fail message="This should not happen"/>
+<!-- END_INCLUDE(assert:fail) -->
