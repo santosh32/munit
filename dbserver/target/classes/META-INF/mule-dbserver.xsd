@@ -164,4 +164,57 @@
       </xs:complexContent>
     </xs:complexType>
   </xs:element>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/dbserver" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="start-db-server" substitutionGroup="mule:abstract-message-processor" type="StartDbServerType">
+    <xs:annotation>
+      <xs:documentation>&lt;p&gt;Start the server.&lt;/p&gt;</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="StartDbServerType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/dbserver" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="execute" substitutionGroup="mule:abstract-message-processor" type="ExecuteType">
+    <xs:annotation>
+      <xs:documentation>&lt;p&gt;Executes a SQL query&lt;/p&gt;</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="ExecuteType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="query" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>query to be executed</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/dbserver" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="stop-db-server" substitutionGroup="mule:abstract-message-processor" type="StopDbServerType">
+    <xs:annotation>
+      <xs:documentation>&lt;p&gt;Stops the server.&lt;/p&gt;</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="StopDbServerType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
 </xs:schema>

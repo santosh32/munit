@@ -1,37 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a7c53b32-1de6-40c8-8830-77f34195cb2a" name="Default" comment="assertion and mocking changes">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/integration/src/test/java/org/mule/tests/DBServerTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/integration/src/test/resources/dbserver-test-config.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assert/target/assert-1.0-javadoc.jar" afterPath="$PROJECT_DIR$/assert/target/assert-1.0-javadoc.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assert/target/assert-1.0-sources.jar" afterPath="$PROJECT_DIR$/assert/target/assert-1.0-sources.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assert/target/assert-1.0.jar" afterPath="$PROJECT_DIR$/assert/target/assert-1.0.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assert/target/assert-1.0.zip" afterPath="$PROJECT_DIR$/assert/target/assert-1.0.zip" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/dbserver-1.0-javadoc.jar" afterPath="$PROJECT_DIR$/dbserver/target/dbserver-1.0-javadoc.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/dbserver-1.0-sources.jar" afterPath="$PROJECT_DIR$/dbserver/target/dbserver-1.0-sources.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/dbserver-1.0.jar" afterPath="$PROJECT_DIR$/dbserver/target/dbserver-1.0.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/dbserver-1.0.zip" afterPath="$PROJECT_DIR$/dbserver/target/dbserver-1.0.zip" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ftpserver/target/ftpserver-1.0-javadoc.jar" afterPath="$PROJECT_DIR$/ftpserver/target/ftpserver-1.0-javadoc.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ftpserver/target/ftpserver-1.0-sources.jar" afterPath="$PROJECT_DIR$/ftpserver/target/ftpserver-1.0-sources.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ftpserver/target/ftpserver-1.0.jar" afterPath="$PROJECT_DIR$/ftpserver/target/ftpserver-1.0.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ftpserver/target/ftpserver-1.0.zip" afterPath="$PROJECT_DIR$/ftpserver/target/ftpserver-1.0.zip" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mock/target/mock-1.0-javadoc.jar" afterPath="$PROJECT_DIR$/mock/target/mock-1.0-javadoc.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mock/target/mock-1.0-sources.jar" afterPath="$PROJECT_DIR$/mock/target/mock-1.0-sources.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mock/target/mock-1.0.jar" afterPath="$PROJECT_DIR$/mock/target/mock-1.0.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mock/target/mock-1.0.zip" afterPath="$PROJECT_DIR$/mock/target/mock-1.0.zip" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/src/main/java/org/mule/munit/DBServerModule.java" afterPath="$PROJECT_DIR$/dbserver/src/main/java/org/mule/munit/DBServerModule.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/generated-sources/mule/META-INF/mule-dbserver.xsd" afterPath="$PROJECT_DIR$/dbserver/target/generated-sources/mule/META-INF/mule-dbserver.xsd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/generated-sources/mule/org/mule/munit/config/spring/DBServerModuleNamespaceHandler.java" afterPath="$PROJECT_DIR$/dbserver/target/generated-sources/mule/org/mule/munit/config/spring/DBServerModuleNamespaceHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/FTPServerWrapper.java" afterPath="$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/FTPServerWrapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/MockUser.java" afterPath="$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/MockUser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ftpserver/target/generated-sources/mule/META-INF/mule-ftpserver.xsd" afterPath="$PROJECT_DIR$/ftpserver/target/generated-sources/mule/META-INF/mule-ftpserver.xsd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/pom.xml" afterPath="$PROJECT_DIR$/integration/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/src/main/app/mule-config.xml" afterPath="$PROJECT_DIR$/integration/src/main/app/mule-config.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/src/test/resources/ftpserver-test-config.xml" afterPath="$PROJECT_DIR$/integration/src/test/resources/ftpserver-test-config.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mclient/target/generated-sources/mule/org/mule/munit/config/MClientCapabilitiesAdapter.java" afterPath="$PROJECT_DIR$/mclient/target/generated-sources/mule/org/mule/munit/config/MClientCapabilitiesAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+    <list default="true" id="a7c53b32-1de6-40c8-8830-77f34195cb2a" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assert/target/classes/org/mule/munit/config/AssertModuleCapabilitiesAdapter.class" afterPath="$PROJECT_DIR$/assert/target/classes/org/mule/munit/config/AssertModuleCapabilitiesAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/classes/org/mule/munit/DBServerModule.class" afterPath="$PROJECT_DIR$/dbserver/target/classes/org/mule/munit/DBServerModule.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/classes/org/mule/munit/config/DBServerModuleCapabilitiesAdapter.class" afterPath="$PROJECT_DIR$/dbserver/target/classes/org/mule/munit/config/DBServerModuleCapabilitiesAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/classes/org/mule/munit/config/spring/DBServerModuleNamespaceHandler.class" afterPath="$PROJECT_DIR$/dbserver/target/classes/org/mule/munit/config/spring/DBServerModuleNamespaceHandler.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ftpserver/target/classes/org/mule/munit/MockUser$1.class" afterPath="$PROJECT_DIR$/ftpserver/target/classes/org/mule/munit/MockUser$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ftpserver/target/classes/org/mule/munit/MockUser.class" afterPath="$PROJECT_DIR$/ftpserver/target/classes/org/mule/munit/MockUser.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ftpserver/target/classes/org/mule/munit/config/FTPServerModuleCapabilitiesAdapter.class" afterPath="$PROJECT_DIR$/ftpserver/target/classes/org/mule/munit/config/FTPServerModuleCapabilitiesAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mclient/target/classes/org/mule/munit/config/MClientCapabilitiesAdapter.class" afterPath="$PROJECT_DIR$/mclient/target/classes/org/mule/munit/config/MClientCapabilitiesAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mock/target/classes/org/mule/munit/config/MockModuleCapabilitiesAdapter.class" afterPath="$PROJECT_DIR$/mock/target/classes/org/mule/munit/config/MockModuleCapabilitiesAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assert/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/assert/target/maven-archiver/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/navtree_data.js" afterPath="$PROJECT_DIR$/dbserver/target/apidocs/assets/navtree_data.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/classes.html" afterPath="$PROJECT_DIR$/dbserver/target/apidocs/java/classes.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/current.xml" afterPath="$PROJECT_DIR$/dbserver/target/apidocs/java/current.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/hierarchy.html" afterPath="$PROJECT_DIR$/dbserver/target/apidocs/java/hierarchy.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/lists.js" afterPath="$PROJECT_DIR$/dbserver/target/apidocs/java/lists.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/DBServerModule.html" afterPath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/DBServerModule.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/DBServerModuleCapabilitiesAdapter.html" afterPath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/DBServerModuleCapabilitiesAdapter.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/DBServerModuleLifecycleAdapter.html" afterPath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/DBServerModuleLifecycleAdapter.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/package-descr.html" afterPath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/package-descr.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/package-summary.html" afterPath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/package-summary.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/spring/DBServerModuleConfigDefinitionParser.html" afterPath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/spring/DBServerModuleConfigDefinitionParser.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/spring/DBServerModuleNamespaceHandler.html" afterPath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/spring/DBServerModuleNamespaceHandler.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/spring/package-descr.html" afterPath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/spring/package-descr.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/spring/package-summary.html" afterPath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/spring/package-summary.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/mule/dbserver.html" afterPath="$PROJECT_DIR$/dbserver/target/apidocs/mule/dbserver.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/classes/META-INF/mule-dbserver.xsd" afterPath="$PROJECT_DIR$/dbserver/target/classes/META-INF/mule-dbserver.xsd" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/classes/org/mule/munit/config/DBServerModuleCapabilitiesAdapter.java" afterPath="$PROJECT_DIR$/dbserver/target/classes/org/mule/munit/config/DBServerModuleCapabilitiesAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/classes/org/mule/munit/config/spring/DBServerModuleNamespaceHandler.java" afterPath="$PROJECT_DIR$/dbserver/target/classes/org/mule/munit/config/spring/DBServerModuleNamespaceHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/dbserver/target/maven-archiver/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/FTPServerModule.html" afterPath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/FTPServerModule.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/config/FTPServerModuleCapabilitiesAdapter.html" afterPath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/config/FTPServerModuleCapabilitiesAdapter.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/config/FTPServerModuleLifecycleAdapter.html" afterPath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/config/FTPServerModuleLifecycleAdapter.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/mule/ftpserver.html" afterPath="$PROJECT_DIR$/ftpserver/target/apidocs/mule/ftpserver.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ftpserver/target/classes/META-INF/mule-ftpserver.xsd" afterPath="$PROJECT_DIR$/ftpserver/target/classes/META-INF/mule-ftpserver.xsd" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ftpserver/target/classes/org/mule/munit/config/FTPServerModuleCapabilitiesAdapter.java" afterPath="$PROJECT_DIR$/ftpserver/target/classes/org/mule/munit/config/FTPServerModuleCapabilitiesAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ftpserver/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/ftpserver/target/maven-archiver/pom.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/target/surefire-reports/TEST-org.mule.tests.AssertionsTest.xml" afterPath="$PROJECT_DIR$/integration/target/surefire-reports/TEST-org.mule.tests.AssertionsTest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/target/surefire-reports/TEST-org.mule.tests.FTPServerTest.xml" afterPath="$PROJECT_DIR$/integration/target/surefire-reports/TEST-org.mule.tests.FTPServerTest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/target/surefire-reports/TEST-org.mule.tests.MClientTest.xml" afterPath="$PROJECT_DIR$/integration/target/surefire-reports/TEST-org.mule.tests.MClientTest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/target/surefire-reports/org.mule.tests.AssertionsTest.txt" afterPath="$PROJECT_DIR$/integration/target/surefire-reports/org.mule.tests.AssertionsTest.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/target/surefire-reports/org.mule.tests.FTPServerTest.txt" afterPath="$PROJECT_DIR$/integration/target/surefire-reports/org.mule.tests.FTPServerTest.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/target/surefire-reports/org.mule.tests.MClientTest.txt" afterPath="$PROJECT_DIR$/integration/target/surefire-reports/org.mule.tests.MClientTest.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/target/test-classes/ftpserver-test-config.xml" afterPath="$PROJECT_DIR$/integration/target/test-classes/ftpserver-test-config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/target/test-classes/mule-config.xml" afterPath="$PROJECT_DIR$/integration/target/test-classes/mule-config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mock/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/mock/target/maven-archiver/pom.properties" />
     </list>
     <ignored path="munit.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -563,435 +578,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="integration" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="integration" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="integration" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mule" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="transformers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="integration" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mule" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tests" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="integration" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ftpserver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ftpserver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ftpserver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ftpserver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ftpserver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="doc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dbserver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dbserver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="target" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dbserver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="target" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="generated-sources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mule" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dbserver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="target" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="generated-sources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mule" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="META-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dbserver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="target" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="generated-sources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dbserver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dbserver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dbserver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dbserver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="doc" />
+              <option name="myItemId" value="mock" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>

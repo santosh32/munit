@@ -77,11 +77,7 @@
           mtest:test="
         Salesforce query response must be stored in the ftp server">
 
-        <mulemock:expect config-ref="salesforceMock" when="query" mustReturn-ref="nonEmptyList">
-            <mulemock:parameters>
-                <mulemock:parameter value-ref="salesforceQuery"/>
-            </mulemock:parameters>
-        </mulemock:expect>
+        <mulemock:expect config-ref="salesforceMock" when="query" mustReturn-ref="nonEmptyList"/>
 
 
         <flow-ref name="sendToFTP" />
