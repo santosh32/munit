@@ -21,7 +21,7 @@
     <module>mclient</module>
     <module>dbserver</module>
     <module>integration</module>
-
+    <module>mpmock</module>
   </modules>
     
 </project>

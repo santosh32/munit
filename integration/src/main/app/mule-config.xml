@@ -9,6 +9,7 @@
       xmlns:ftp="http://www.mulesoft.org/schema/mule/ftp"
       xmlns:jdbc="http://www.mulesoft.org/schema/mule/ee/jdbc"
       xmlns:spring="http://www.springframework.org/schema/beans"
+      xmlns:pm="http://www.mulesoft.org/schema/mule/peoplematter"
 
       xsi:schemaLocation="http://www.mulesoft.org/schema/mule/sfdc http://www.mulesoft.org/schema/mule/sfdc/4.0/mule-sfdc.xsd
         http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/3.2/mule-scripting.xsd
@@ -17,6 +18,7 @@
         http://www.mulesoft.org/schema/mule/sftp http://www.mulesoft.org/schema/mule/sftp/3.2/mule-sftp.xsd
         http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/ee/jdbc/3.2/mule-jdbc-ee.xsd
         http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/3.2/mule-http.xsd
+        http://www.mulesoft.org/schema/mule/peoplematter http://www.mulesoft.org/schema/mule/peoplematter/current/mule-peoplematter.xsd
         http://www.mulesoft.org/schema/mule/ftp http://www.mulesoft.org/schema/mule/ftp/3.2/mule-ftp.xsd">
 
 
@@ -150,5 +152,12 @@
         </enricher>
     </sub-flow>
 
+    <flow name="peopleMatterInbound">
+
+        <pm:secure-event-message-filter key="secure_key" />
+        <pm:event-to-xml-transformer />
+
+
+    </flow>
 
 </mule>

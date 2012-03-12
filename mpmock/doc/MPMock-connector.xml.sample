@@ -1,0 +1,7 @@
+<!-- BEGIN_INCLUDE(mpmock:assert-payload) -->
+    <mpmock:my-processor content="#[map-payload:content]" />
+<!-- END_INCLUDE(mpmock:assert-payload) -->
+
+<!-- BEGIN_INCLUDE(mpmock:respond) -->
+    <mpmock:my-processor content="#[map-payload:content]" />
+<!-- END_INCLUDE(mpmock:respond) -->

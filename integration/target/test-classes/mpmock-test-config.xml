@@ -1,0 +1,63 @@
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:spring="http://www.springframework.org/schema/beans"
+      xmlns:mpmock="http://www.mulesoft.org/schema/mule/mpmock"
+      xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+      xmlns:mtest="http://www.mulesoft.org/schema/mule/mtest"
+      xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.2/mule.xsd
+        http://www.mulesoft.org/schema/mule/mpmock http://www.mulesoft.org/schema/mule/mpmock/1.0/mule-mpmock.xsd
+        http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/1.0/mule-munit.xsd ">
+
+
+    <spring:beans>
+        <spring:import resource="mule-config.xml"/>
+        <spring:import resource="common-definitions.xml" />
+    </spring:beans>
+
+    <munit:config/>
+    <mpmock:config of="echoFlow:echo-component" name="mpMocked"/>
+    <mpmock:config of="peopleMatterInbound:secure-event-message-filter" name="secureEventMocked"/>
+    <mpmock:config of="peopleMatterInbound:event-to-xml-transformer" name="xmlTransformerMocked"/>
+
+
+    <flow name="testingEchoFlow"
+
+          mtest:test="
+        We want to test that the flow always returns the same payload as we had before calling it.">
+        <mpmock:assert-payload config-ref="mpMocked">
+            <munit:assert-that payloadIs-ref="#[string: Hello world!]"/>
+        </mpmock:assert-payload>
+
+        <mpmock:respond response-ref="#[string:Bye, Bye World]" config-ref="mpMocked"/>
+
+        <munit:set payload-ref="#[string: Hello world!]"/>
+
+        <flow-ref name="echoFlow"/>
+
+        <munit:assert-not-null/>
+        <munit:assert-that payloadIs-ref="#[string:Bye, Bye World]"/>
+    </flow>
+
+
+    <flow name="testingPeopleMatterInbound"
+
+          mtest:test="
+        Demonstration of how to mock a connector not done with devkit.">
+
+        <mpmock:respond response-ref="#[string:Mocked Response]" config-ref="secureEventMocked"/>
+        <mpmock:respond response-ref="#[string:myXml]" config-ref="xmlTransformerMocked"/>
+
+        <munit:set payload-ref="#[string: Hello world!]"/>
+
+        <flow-ref name="peopleMatterInbound"/>
+
+        <munit:assert-not-null/>
+        <munit:assert-that payloadIs-ref="#[string:myXml]"/>
+    </flow>
+
+
+
+
+</mule>

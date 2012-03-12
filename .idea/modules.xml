@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/integration/integration.iml" filepath="$PROJECT_DIR$/integration/integration.iml" />
       <module fileurl="file://$PROJECT_DIR$/mclient/mclient.iml" filepath="$PROJECT_DIR$/mclient/mclient.iml" />
       <module fileurl="file://$PROJECT_DIR$/mock/mock.iml" filepath="$PROJECT_DIR$/mock/mock.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mpmock/mpmock.iml" filepath="$PROJECT_DIR$/mpmock/mpmock.iml" />
       <module fileurl="file://$PROJECT_DIR$/munit.iml" filepath="$PROJECT_DIR$/munit.iml" />
     </modules>
   </component>
