@@ -24,6 +24,7 @@
         http://www.mulesoft.org/schema/mule/mclient http://www.mulesoft.org/schema/mule/mclient/1.0/mule-mclient.xsd">
 
     <spring:beans>
+        <spring:import resource="mule-config.xml"/>
         <spring:import resource="common-definitions.xml" />
     </spring:beans>
 

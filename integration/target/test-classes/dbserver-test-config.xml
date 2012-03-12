@@ -12,12 +12,18 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
       xmlns:dbserver="http://www.mulesoft.org/schema/mule/dbserver"
+      xmlns:spring="http://www.springframework.org/schema/beans"
       xmlns:mtest="http://www.mulesoft.org/schema/mule/mtest"
       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.2/mule.xsd
         http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/1.0/mule-munit.xsd
         http://www.mulesoft.org/schema/mule/dbserver http://www.mulesoft.org/schema/mule/dbserver/1.0/mule-dbserver.xsd">
 
+
+    <spring:beans>
+        <spring:import resource="mule-config.xml"/>
+    </spring:beans>
 
     <munit:config/>
     <dbserver:config jdbcUrl="jdbc:derby:memory:example;create=true"  creationalScript="

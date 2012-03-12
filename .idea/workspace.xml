@@ -2,13 +2,516 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7c53b32-1de6-40c8-8830-77f34195cb2a" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/integration/target/test-classes/mule-config.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/customizations.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/customizations.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/images/bg_fade.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/images/bg_images_sprite.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/images/bg_logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/images/body-gradient-tab.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/images/body-gradient.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/images/grad-rule-qv.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/images/hr_gray_main.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/images/hr_gray_side.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/images/left_off.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/images/left_on.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/images/mulesoft-logo-final.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/images/preliminary.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/images/resizable-e.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/images/resizable-e2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/images/resizable-eg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/images/resizable-s.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/images/resizable-s2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/images/resizable-sg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/images/right_off.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/images/right_on.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/images/sidenav-rule.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/images/spacer.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/images/triangle-closed-small.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/images/triangle-closed.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/images/triangle-opened-small.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/images/triangle-opened.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/jquery-history.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/jquery-resizable.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/mule-developer-core.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/mule-developer-docs.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/mule-developer-docs.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/mule-developer-prettify.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/mule-developer-reference.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/navtree_data.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/prettify.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/search_autocomplete.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/style.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/assets/triangle-none.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/guide/install.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/classes.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/current.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/hierarchy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/lists.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/AbstractMuleSuite.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/AssertModule.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/MuleSuiteRunner.MuleTest.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/MuleSuiteRunner.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/AssertFalseMessageProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/AssertModuleCapabilitiesAdapter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/AssertModuleLifecycleAdapter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/AssertNotNullMessageProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/AssertNotSameMessageProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/AssertNullMessageProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/AssertOnEqualsMessageProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/AssertThatMessageProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/AssertTrueMessageProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/FailMessageProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/SetMessageProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/SetNullPayloadMessageProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/package-descr.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/spring/AssertFalseDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/spring/AssertModuleConfigDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/spring/AssertModuleNamespaceHandler.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/spring/AssertNotNullDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/spring/AssertNotSameDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/spring/AssertNullDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/spring/AssertOnEqualsDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/spring/AssertThatDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/spring/AssertTrueDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/spring/FailDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/spring/SetDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/spring/SetNullPayloadDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/spring/package-descr.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/config/spring/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/package-descr.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/org/mule/munit/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/package-list" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/java/packages.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/mule/modules.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/apidocs/mule/munit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/assert-1.0-javadoc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/assert-1.0-sources.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/assert-1.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/assert-1.0.zip" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/javadoc-bundle-options/javadoc-options-javadoc-resources.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assert/target/maven-archiver/pom.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/customizations.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/customizations.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/images/bg_fade.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/images/bg_images_sprite.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/images/bg_logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/images/body-gradient-tab.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/images/body-gradient.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/images/grad-rule-qv.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/images/hr_gray_main.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/images/hr_gray_side.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/images/left_off.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/images/left_on.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/images/mulesoft-logo-final.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/images/preliminary.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/images/resizable-e.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/images/resizable-e2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/images/resizable-eg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/images/resizable-s.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/images/resizable-s2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/images/resizable-sg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/images/right_off.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/images/right_on.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/images/sidenav-rule.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/images/spacer.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/images/triangle-closed-small.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/images/triangle-closed.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/images/triangle-opened-small.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/images/triangle-opened.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/jquery-history.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/jquery-resizable.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/mule-developer-core.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/mule-developer-docs.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/mule-developer-docs.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/mule-developer-prettify.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/mule-developer-reference.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/navtree_data.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/prettify.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/search_autocomplete.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/style.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/assets/triangle-none.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/guide/install.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/classes.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/current.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/hierarchy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/lists.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/DBServerModule.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/DBServerModuleCapabilitiesAdapter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/DBServerModuleLifecycleAdapter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/ExecuteMessageProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/StartDbServerMessageProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/StopDbServerMessageProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/package-descr.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/spring/DBServerModuleConfigDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/spring/DBServerModuleNamespaceHandler.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/spring/ExecuteDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/spring/StartDbServerDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/spring/StopDbServerDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/spring/package-descr.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/config/spring/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/package-descr.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/org/mule/munit/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/package-list" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/java/packages.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/mule/dbserver.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/apidocs/mule/modules.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/dbserver-1.0-javadoc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/dbserver-1.0-sources.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/dbserver-1.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/dbserver-1.0.zip" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/javadoc-bundle-options/javadoc-options-javadoc-resources.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbserver/target/maven-archiver/pom.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/customizations.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/customizations.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/images/bg_fade.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/images/bg_images_sprite.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/images/bg_logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/images/body-gradient-tab.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/images/body-gradient.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/images/grad-rule-qv.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/images/hr_gray_main.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/images/hr_gray_side.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/images/left_off.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/images/left_on.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/images/mulesoft-logo-final.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/images/preliminary.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/images/resizable-e.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/images/resizable-e2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/images/resizable-eg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/images/resizable-s.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/images/resizable-s2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/images/resizable-sg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/images/right_off.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/images/right_on.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/images/sidenav-rule.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/images/spacer.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/images/triangle-closed-small.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/images/triangle-closed.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/images/triangle-opened-small.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/images/triangle-opened.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/jquery-history.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/jquery-resizable.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/mule-developer-core.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/mule-developer-docs.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/mule-developer-docs.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/mule-developer-prettify.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/mule-developer-reference.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/navtree_data.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/prettify.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/search_autocomplete.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/style.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/assets/triangle-none.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/guide/install.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/classes.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/current.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/hierarchy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/lists.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/FTPServer.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/FTPServerModule.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/FTPServerWrapper.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/MockUser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/MockUserManager.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/SFTPServerWrapper.MockPasswordAuthenticator.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/SFTPServerWrapper.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/config/ContainsFilesMessageProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/config/FTPServerModuleCapabilitiesAdapter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/config/FTPServerModuleLifecycleAdapter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/config/RemoveMessageProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/config/StartServerMessageProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/config/StopServerMessageProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/config/package-descr.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/config/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/config/spring/ContainsFilesDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/config/spring/FTPServerModuleConfigDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/config/spring/FTPServerModuleNamespaceHandler.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/config/spring/RemoveDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/config/spring/StartServerDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/config/spring/StopServerDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/config/spring/package-descr.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/config/spring/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/package-descr.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/org/mule/munit/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/package-list" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/java/packages.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/mule/ftpserver.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/apidocs/mule/modules.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/classes/org/mule/munit/plugin.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/ftpserver-1.0-javadoc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/ftpserver-1.0-sources.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/ftpserver-1.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/ftpserver-1.0.zip" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/javadoc-bundle-options/javadoc-options-javadoc-resources.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ftpserver/target/maven-archiver/pom.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/integration/target/integration-1.0.zip" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/integration/target/surefire-reports/TEST-org.mule.tests.FTPServerTest.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/integration/target/surefire-reports/TEST-org.mule.tests.MClientTest.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/integration/target/surefire-reports/org.mule.tests.MClientTest.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/customizations.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/customizations.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/images/bg_fade.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/images/bg_images_sprite.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/images/bg_logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/images/body-gradient-tab.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/images/body-gradient.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/images/grad-rule-qv.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/images/hr_gray_main.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/images/hr_gray_side.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/images/left_off.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/images/left_on.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/images/mulesoft-logo-final.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/images/preliminary.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/images/resizable-e.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/images/resizable-e2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/images/resizable-eg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/images/resizable-s.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/images/resizable-s2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/images/resizable-sg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/images/right_off.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/images/right_on.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/images/sidenav-rule.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/images/spacer.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/images/triangle-closed-small.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/images/triangle-closed.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/images/triangle-opened-small.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/images/triangle-opened.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/jquery-history.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/jquery-resizable.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/mule-developer-core.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/mule-developer-docs.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/mule-developer-docs.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/mule-developer-prettify.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/mule-developer-reference.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/navtree_data.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/prettify.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/search_autocomplete.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/style.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/assets/triangle-none.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/guide/install.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/java/classes.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/java/current.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/java/hierarchy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/java/lists.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/java/org/mule/munit/MClient.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/java/org/mule/munit/config/CallMessageProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/java/org/mule/munit/config/MClientCapabilitiesAdapter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/java/org/mule/munit/config/MClientLifecycleAdapter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/java/org/mule/munit/config/package-descr.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/java/org/mule/munit/config/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/java/org/mule/munit/config/spring/CallDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/java/org/mule/munit/config/spring/MClientConfigDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/java/org/mule/munit/config/spring/MClientNamespaceHandler.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/java/org/mule/munit/config/spring/NestedProcessorChain.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/java/org/mule/munit/config/spring/NestedProcessorString.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/java/org/mule/munit/config/spring/package-descr.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/java/org/mule/munit/config/spring/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/java/org/mule/munit/package-descr.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/java/org/mule/munit/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/java/package-list" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/java/packages.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/mule/mclient.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/apidocs/mule/modules.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/javadoc-bundle-options/javadoc-options-javadoc-resources.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/maven-archiver/pom.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/mclient-1.0-javadoc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/mclient-1.0-sources.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/mclient-1.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mclient/target/mclient-1.0.zip" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/customizations.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/customizations.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/images/bg_fade.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/images/bg_images_sprite.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/images/bg_logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/images/body-gradient-tab.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/images/body-gradient.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/images/grad-rule-qv.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/images/hr_gray_main.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/images/hr_gray_side.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/images/left_off.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/images/left_on.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/images/mulesoft-logo-final.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/images/preliminary.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/images/resizable-e.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/images/resizable-e2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/images/resizable-eg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/images/resizable-s.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/images/resizable-s2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/images/resizable-sg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/images/right_off.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/images/right_on.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/images/sidenav-rule.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/images/spacer.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/images/triangle-closed-small.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/images/triangle-closed.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/images/triangle-opened-small.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/images/triangle-opened.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/jquery-history.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/jquery-resizable.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/mule-developer-core.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/mule-developer-docs.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/mule-developer-docs.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/mule-developer-prettify.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/mule-developer-reference.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/navtree_data.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/prettify.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/search_autocomplete.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/style.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/assets/triangle-none.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/guide/install.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/java/classes.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/java/current.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/java/hierarchy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/java/lists.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/java/org/mule/munit/MockModule.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/java/org/mule/munit/config/ExpectFailMessageProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/java/org/mule/munit/config/ExpectMessageProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/java/org/mule/munit/config/FailOnConnectMessageProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/java/org/mule/munit/config/MockModuleCapabilitiesAdapter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/java/org/mule/munit/config/MockModuleLifecycleAdapter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/java/org/mule/munit/config/ResetMessageProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/java/org/mule/munit/config/VerifyCallMessageProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/java/org/mule/munit/config/package-descr.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/java/org/mule/munit/config/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/java/org/mule/munit/config/spring/ExpectDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/java/org/mule/munit/config/spring/ExpectFailDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/java/org/mule/munit/config/spring/FailOnConnectDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/java/org/mule/munit/config/spring/MockModuleConfigDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/java/org/mule/munit/config/spring/MockModuleNamespaceHandler.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/java/org/mule/munit/config/spring/ResetDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/java/org/mule/munit/config/spring/VerifyCallDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/java/org/mule/munit/config/spring/package-descr.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/java/org/mule/munit/config/spring/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/java/org/mule/munit/package-descr.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/java/org/mule/munit/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/java/package-list" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/java/packages.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/mule/mock.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/apidocs/mule/modules.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/javadoc-bundle-options/javadoc-options-javadoc-resources.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/maven-archiver/pom.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/mock-1.0-javadoc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/mock-1.0-sources.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/mock-1.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mock/target/mock-1.0.zip" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/customizations.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/customizations.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/images/bg_fade.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/images/bg_images_sprite.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/images/bg_logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/images/body-gradient-tab.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/images/body-gradient.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/images/grad-rule-qv.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/images/hr_gray_main.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/images/hr_gray_side.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/images/left_off.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/images/left_on.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/images/mulesoft-logo-final.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/images/preliminary.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/images/resizable-e.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/images/resizable-e2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/images/resizable-eg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/images/resizable-s.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/images/resizable-s2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/images/resizable-sg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/images/right_off.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/images/right_on.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/images/sidenav-rule.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/images/spacer.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/images/triangle-closed-small.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/images/triangle-closed.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/images/triangle-opened-small.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/images/triangle-opened.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/jquery-history.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/jquery-resizable.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/mule-developer-core.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/mule-developer-docs.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/mule-developer-docs.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/mule-developer-prettify.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/mule-developer-reference.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/navtree_data.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/prettify.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/search_autocomplete.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/style.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/assets/triangle-none.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/guide/install.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/java/classes.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/java/current.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/java/hierarchy.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/java/lists.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/java/org/mule/munit/MPMockModule.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/java/org/mule/munit/MockedMessageProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/java/org/mule/munit/config/AssertPayloadMessageProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/java/org/mule/munit/config/MPMockModuleCapabilitiesAdapter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/java/org/mule/munit/config/MPMockModuleLifecycleAdapter.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/java/org/mule/munit/config/RespondMessageProcessor.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/java/org/mule/munit/config/package-descr.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/java/org/mule/munit/config/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/java/org/mule/munit/config/spring/AssertPayloadDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/java/org/mule/munit/config/spring/MPMockModuleConfigDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/java/org/mule/munit/config/spring/MPMockModuleNamespaceHandler.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/java/org/mule/munit/config/spring/NestedProcessorChain.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/java/org/mule/munit/config/spring/NestedProcessorString.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/java/org/mule/munit/config/spring/RespondDefinitionParser.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/java/org/mule/munit/config/spring/package-descr.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/java/org/mule/munit/config/spring/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/java/org/mule/munit/package-descr.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/java/org/mule/munit/package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/java/package-list" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/java/packages.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/mule/modules.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/apidocs/mule/mpmock.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/javadoc-bundle-options/javadoc-options-javadoc-resources.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/maven-archiver/pom.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/mpmock-1.0-javadoc.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/mpmock-1.0-sources.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/mpmock-1.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/mpmock/target/mpmock-1.0.zip" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assert/target/classes/org/mule/munit/MuleSuiteRunner$MuleTest.class" afterPath="$PROJECT_DIR$/assert/target/classes/org/mule/munit/MuleSuiteRunner$MuleTest.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assert/target/classes/org/mule/munit/MuleSuiteRunner$OldTestClassAdaptingListener.class" afterPath="$PROJECT_DIR$/assert/target/classes/org/mule/munit/MuleSuiteRunner$OldTestClassAdaptingListener.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assert/target/classes/org/mule/munit/MuleSuiteRunner.class" afterPath="$PROJECT_DIR$/assert/target/classes/org/mule/munit/MuleSuiteRunner.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assert/target/classes/org/mule/munit/config/AssertModuleCapabilitiesAdapter.class" afterPath="$PROJECT_DIR$/assert/target/classes/org/mule/munit/config/AssertModuleCapabilitiesAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/classes/org/mule/munit/config/DBServerModuleCapabilitiesAdapter.class" afterPath="$PROJECT_DIR$/dbserver/target/classes/org/mule/munit/config/DBServerModuleCapabilitiesAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ftpserver/target/classes/org/mule/munit/config/FTPServerModuleCapabilitiesAdapter.class" afterPath="$PROJECT_DIR$/ftpserver/target/classes/org/mule/munit/config/FTPServerModuleCapabilitiesAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/target/test-classes/org/mule/tests/AssertionsTest.class" afterPath="$PROJECT_DIR$/integration/target/test-classes/org/mule/tests/AssertionsTest.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/target/test-classes/org/mule/tests/DBServerTest.class" afterPath="$PROJECT_DIR$/integration/target/test-classes/org/mule/tests/DBServerTest.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/target/test-classes/org/mule/tests/FTPServerTest.class" afterPath="$PROJECT_DIR$/integration/target/test-classes/org/mule/tests/FTPServerTest.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/target/test-classes/org/mule/tests/MClientTest.class" afterPath="$PROJECT_DIR$/integration/target/test-classes/org/mule/tests/MClientTest.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mclient/target/classes/org/mule/munit/config/MClientCapabilitiesAdapter.class" afterPath="$PROJECT_DIR$/mclient/target/classes/org/mule/munit/config/MClientCapabilitiesAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mock/target/classes/org/mule/munit/config/MockModuleCapabilitiesAdapter.class" afterPath="$PROJECT_DIR$/mock/target/classes/org/mule/munit/config/MockModuleCapabilitiesAdapter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mpmock/target/classes/org/mule/munit/config/MPMockModuleCapabilitiesAdapter.class" afterPath="$PROJECT_DIR$/mpmock/target/classes/org/mule/munit/config/MPMockModuleCapabilitiesAdapter.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/pom.xml" afterPath="$PROJECT_DIR$/integration/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/src/main/app/mule-config.xml" afterPath="$PROJECT_DIR$/integration/src/main/app/mule-config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assert/target/generated-sources/mule/org/mule/munit/config/AssertModuleCapabilitiesAdapter.java" afterPath="$PROJECT_DIR$/assert/target/generated-sources/mule/org/mule/munit/config/AssertModuleCapabilitiesAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/classes/org/mule/munit/config/DBServerModuleCapabilitiesAdapter.java" afterPath="$PROJECT_DIR$/dbserver/target/classes/org/mule/munit/config/DBServerModuleCapabilitiesAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/generated-sources/mule/org/mule/munit/config/DBServerModuleCapabilitiesAdapter.java" afterPath="$PROJECT_DIR$/dbserver/target/generated-sources/mule/org/mule/munit/config/DBServerModuleCapabilitiesAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/derby.log" afterPath="$PROJECT_DIR$/derby.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ftpserver/target/classes/org/mule/munit/config/FTPServerModuleCapabilitiesAdapter.java" afterPath="$PROJECT_DIR$/ftpserver/target/classes/org/mule/munit/config/FTPServerModuleCapabilitiesAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ftpserver/target/generated-sources/mule/org/mule/munit/config/FTPServerModuleCapabilitiesAdapter.java" afterPath="$PROJECT_DIR$/ftpserver/target/generated-sources/mule/org/mule/munit/config/FTPServerModuleCapabilitiesAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/src/test/java/org/mule/tests/AssertionsTest.java" afterPath="$PROJECT_DIR$/integration/src/test/java/org/mule/tests/AssertionsTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/src/test/java/org/mule/tests/DBServerTest.java" afterPath="$PROJECT_DIR$/integration/src/test/java/org/mule/tests/DBServerTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/src/test/java/org/mule/tests/FTPServerTest.java" afterPath="$PROJECT_DIR$/integration/src/test/java/org/mule/tests/FTPServerTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/src/test/java/org/mule/tests/MClientTest.java" afterPath="$PROJECT_DIR$/integration/src/test/java/org/mule/tests/MClientTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/src/test/resources/assertions-test-config.xml" afterPath="$PROJECT_DIR$/integration/src/test/resources/assertions-test-config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/src/test/resources/dbserver-test-config.xml" afterPath="$PROJECT_DIR$/integration/src/test/resources/dbserver-test-config.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/src/test/resources/ftpserver-test-config.xml" afterPath="$PROJECT_DIR$/integration/src/test/resources/ftpserver-test-config.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/src/test/resources/mclient-test-config.xml" afterPath="$PROJECT_DIR$/integration/src/test/resources/mclient-test-config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/target/surefire-reports/TEST-org.mule.tests.AssertionsTest.xml" afterPath="$PROJECT_DIR$/integration/target/surefire-reports/TEST-org.mule.tests.AssertionsTest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/target/surefire-reports/org.mule.tests.AssertionsTest.txt" afterPath="$PROJECT_DIR$/integration/target/surefire-reports/org.mule.tests.AssertionsTest.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/target/surefire-reports/org.mule.tests.FTPServerTest.txt" afterPath="$PROJECT_DIR$/integration/target/surefire-reports/org.mule.tests.FTPServerTest.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/target/test-classes/assertions-test-config.xml" afterPath="$PROJECT_DIR$/integration/target/test-classes/assertions-test-config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/target/test-classes/dbserver-test-config.xml" afterPath="$PROJECT_DIR$/integration/target/test-classes/dbserver-test-config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/target/test-classes/ftpserver-test-config.xml" afterPath="$PROJECT_DIR$/integration/target/test-classes/ftpserver-test-config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/target/test-classes/mclient-test-config.xml" afterPath="$PROJECT_DIR$/integration/target/test-classes/mclient-test-config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mclient/target/generated-sources/mule/org/mule/munit/config/MClientCapabilitiesAdapter.java" afterPath="$PROJECT_DIR$/mclient/target/generated-sources/mule/org/mule/munit/config/MClientCapabilitiesAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mock/target/generated-sources/mule/org/mule/munit/config/MockModuleCapabilitiesAdapter.java" afterPath="$PROJECT_DIR$/mock/target/generated-sources/mule/org/mule/munit/config/MockModuleCapabilitiesAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mpmock/target/classes/org/mule/munit/config/MPMockModuleCapabilitiesAdapter.java" afterPath="$PROJECT_DIR$/mpmock/target/classes/org/mule/munit/config/MPMockModuleCapabilitiesAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mpmock/target/generated-sources/mule/org/mule/munit/config/MPMockModuleCapabilitiesAdapter.java" afterPath="$PROJECT_DIR$/mpmock/target/generated-sources/mule/org/mule/munit/config/MPMockModuleCapabilitiesAdapter.java" />
     </list>
     <ignored path="munit.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -235,6 +738,19 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/mock/src/main/java/org/mule/munit/MockModule.java" line="264" class="org.mule.munit.MockModule" package="org.mule.munit">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
     </line_breakpoints>
     <breakpoint_any>
       <breakpoint>
@@ -276,37 +792,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="mule-config.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/integration/src/main/app/mule-config.xml">
+      <file leaf-file-name="mclient-test-config.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/integration/src/test/resources/mclient-test-config.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="154" column="35" selection-start="6285" selection-end="6304" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dbserver-test-config.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/integration/src/test/resources/dbserver-test-config.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ftpserver-test-config.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/integration/src/test/resources/ftpserver-test-config.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="110" selection-start="1212" selection-end="1212" vertical-scroll-proportion="0.4878049">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mpmock-test-config.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/integration/src/test/resources/mpmock-test-config.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="32" selection-start="1775" selection-end="1783" vertical-scroll-proportion="0.0">
+            <state line="26" column="51" selection-start="1210" selection-end="1210" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -321,51 +810,73 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MPMockModule.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mpmock/src/main/java/org/mule/munit/MPMockModule.java">
+      <file leaf-file-name="MClientTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/integration/src/test/java/org/mule/tests/MClientTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="151" selection-start="2141" selection-end="2141" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#5196#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MockedMessageProcessor.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mpmock/src/main/java/org/mule/munit/MockedMessageProcessor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="159" selection-start="1173" selection-end="1173" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AbstractEnvelopeInterceptor.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/mule/mule-core/3.2.1/mule-core-3.2.1-sources.jar!/org/mule/interceptor/AbstractEnvelopeInterceptor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="0" selection-start="2219" selection-end="2219" vertical-scroll-proportion="0.0">
+            <state line="15" column="78" selection-start="312" selection-end="312" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Flow.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/mule/mule-core/3.2.1/mule-core-3.2.1-sources.jar!/org/mule/construct/Flow.java">
+      <file leaf-file-name="MockModule.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/mock/src/main/java/org/mule/munit/MockModule.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="0" selection-start="3154" selection-end="3154" vertical-scroll-proportion="0.0">
+            <state line="269" column="254" selection-start="8494" selection-end="8494" vertical-scroll-proportion="0.9480519">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MuleSuiteRunner.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assert/src/main/java/org/mule/munit/MuleSuiteRunner.java">
+      <file leaf-file-name="mule-config.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/integration/src/main/app/mule-config.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="294" column="0" selection-start="9951" selection-end="9951" vertical-scroll-proportion="0.0">
+            <state line="85" column="19" selection-start="3643" selection-end="3643" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InboundEndpoint.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/mule/mule-core/3.2.1/mule-core-3.2.1-sources.jar!/org/mule/api/endpoint/InboundEndpoint.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="18" column="0" selection-start="676" selection-end="676" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DefaultInboundEndpoint.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/mule/mule-core/3.2.1/mule-core-3.2.1-sources.jar!/org/mule/endpoint/DefaultInboundEndpoint.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="40" column="13" selection-start="1610" selection-end="1610" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FTPServerTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/integration/src/test/java/org/mule/tests/FTPServerTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="16" selection-start="281" selection-end="281" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DBServerTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/integration/src/test/java/org/mule/tests/DBServerTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="16" selection-start="279" selection-end="279" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AssertionsTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/integration/src/test/java/org/mule/tests/AssertionsTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="142" selection-start="318" selection-end="318" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -386,13 +897,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/ftpserver/target/generated-sources/mule/org/mule/munit/config/StopServerMessageProcessor.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/integration/src/test/java/org/mule/tests/DBServerTest.java" />
-        <option value="$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/FTPServerWrapper.java" />
-        <option value="$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/MockUser.java" />
-        <option value="$PROJECT_DIR$/dbserver/src/main/java/org/mule/munit/DBServerModule.java" />
-        <option value="$PROJECT_DIR$/integration/src/test/resources/dbserver-test-config.xml" />
         <option value="$PROJECT_DIR$/mock/src/main/java/org/mule/munit/MockModule.java" />
         <option value="$PROJECT_DIR$/mpmock/doc/MPMock-connector.xml.sample" />
         <option value="$PROJECT_DIR$/integration/src/test/java/org/mule/tests/MpMockTest.java" />
@@ -401,7 +905,14 @@
         <option value="$PROJECT_DIR$/mpmock/src/main/java/org/mule/munit/MPMockModule.java" />
         <option value="$PROJECT_DIR$/integration/src/test/resources/mpmock-test-config.xml" />
         <option value="$PROJECT_DIR$/mpmock/src/main/java/org/mule/munit/MockedMessageProcessor.java" />
+        <option value="$PROJECT_DIR$/integration/src/test/resources/assertions-test-config.xml" />
+        <option value="$PROJECT_DIR$/integration/src/test/resources/dbserver-test-config.xml" />
         <option value="$PROJECT_DIR$/integration/src/test/resources/ftpserver-test-config.xml" />
+        <option value="$PROJECT_DIR$/integration/src/test/resources/mclient-test-config.xml" />
+        <option value="$PROJECT_DIR$/integration/src/test/java/org/mule/tests/MClientTest.java" />
+        <option value="$PROJECT_DIR$/integration/src/test/java/org/mule/tests/FTPServerTest.java" />
+        <option value="$PROJECT_DIR$/integration/src/test/java/org/mule/tests/DBServerTest.java" />
+        <option value="$PROJECT_DIR$/integration/src/test/java/org/mule/tests/AssertionsTest.java" />
       </list>
     </option>
   </component>
@@ -880,37 +1391,7 @@
       <recent name="org.mule.munit" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.MpMockTest">
-    <configuration default="false" name="FTPServerTest" type="JUnit" factoryName="JUnit" temporary="true">
-      <module name="integration" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="" />
-      <option name="PACKAGE_NAME" value="org.mule.tests" />
-      <option name="MAIN_CLASS_NAME" value="org.mule.tests.FTPServerTest" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs>
-        <env name="mule.verbose.exceptions" value="true" />
-      </envs>
-      <patterns />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="JUnit.org.mule.tests in integration">
     <configuration default="false" name="AssertionsTest.getConfigResources" type="JUnit" factoryName="JUnit" temporary="true">
       <module name="integration" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -997,6 +1478,34 @@
       <option name="MAIN_CLASS_NAME" value="org.mule.tests.MpMockTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="org.mule.tests in integration" type="JUnit" factoryName="JUnit" temporary="true">
+      <module name="integration" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="org.mule.tests" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="package" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -1135,11 +1644,11 @@
       </method>
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.FTPServerTest" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.AssertionsTest.getConfigResources" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.AssertionsTest" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.DBServerTest" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.MpMockTest" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.AssertionsTest.getConfigResources" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.AssertionsTest" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.DBServerTest" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.MpMockTest" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.org.mule.tests in integration" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -1180,17 +1689,17 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5048701" sideWeight="0.9296875" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37905845" sideWeight="0.09921875" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.47808442" sideWeight="0.92695314" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.47808442" sideWeight="0.0703125" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32947975" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32061687" sideWeight="0.4765625" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32061687" sideWeight="0.475" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18164062" sideWeight="0.6209416" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37905845" sideWeight="0.89804685" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18164062" sideWeight="0.52191556" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37905845" sideWeight="0.8953125" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32792208" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1255,86 +1764,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/integration/src/test/resources/assertions-test-config.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="727" selection-end="6228" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/integration/src/test/java/org/mule/tests/DBServerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="26" selection-start="180" selection-end="329" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mule/mule-core/3.2.1/mule-core-3.2.1-sources.jar!/org/mule/config/builders/AbstractConfigurationBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="0" selection-start="1895" selection-end="1895" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-beans/3.0.3.RELEASE/spring-beans-3.0.3.RELEASE-sources.jar!/org/springframework/beans/factory/support/AbstractBeanDefinition.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="387" column="15" selection-start="13210" selection-end="13210" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mock/src/main/java/org/mule/munit/MockModule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="243" column="0" selection-start="7722" selection-end="7722" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/integration/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="436" column="28" selection-start="13472" selection-end="13472" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mule/mule-core/3.2.1/mule-core-3.2.1-sources.jar!/org/mule/interceptor/AbstractEnvelopeInterceptor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="0" selection-start="2219" selection-end="2219" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mule/mule-core/3.2.1/mule-core-3.2.1-sources.jar!/org/mule/construct/Flow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="0" selection-start="3154" selection-end="3154" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assert/src/main/java/org/mule/munit/MuleSuiteRunner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="294" column="0" selection-start="9951" selection-end="9951" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/integration/src/test/java/org/mule/tests/MpMockTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="16" selection-start="352" selection-end="352" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mpmock/src/main/java/org/mule/munit/MPMockModule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="151" selection-start="2141" selection-end="2141" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#5196#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mpmock/src/main/java/org/mule/munit/MockedMessageProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="42" column="159" selection-start="1173" selection-end="1173" vertical-scroll-proportion="0.0">
@@ -1346,28 +1775,105 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/integration/src/test/resources/mpmock-test-config.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="32" selection-start="1775" selection-end="1783" vertical-scroll-proportion="0.0">
+        <state line="14" column="8" selection-start="872" selection-end="915" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/integration/src/main/app/mule-config.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="154" column="35" selection-start="6285" selection-end="6304" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/integration/src/test/resources/dbserver-test-config.xml">
+    <entry file="file://$PROJECT_DIR$/integration/src/test/resources/common-definitions.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/integration/src/test/resources/assertions-test-config.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="8" selection-start="1130" selection-end="1238" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/integration/src/test/resources/dbserver-test-config.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="8" selection-start="1001" selection-end="1044" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/integration/src/test/resources/ftpserver-test-config.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="110" selection-start="1212" selection-end="1212" vertical-scroll-proportion="0.4878049">
+        <state line="27" column="51" selection-start="1286" selection-end="1286" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/integration/src/test/resources/mclient-test-config.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="51" selection-start="1210" selection-end="1210" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/integration/src/test/java/org/mule/tests/MpMockTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="16" selection-start="352" selection-end="352" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/integration/src/test/java/org/mule/tests/FTPServerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="16" selection-start="281" selection-end="281" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/integration/src/test/java/org/mule/tests/DBServerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="16" selection-start="279" selection-end="279" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/integration/src/test/java/org/mule/tests/AssertionsTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="142" selection-start="318" selection-end="318" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/integration/src/test/java/org/mule/tests/MClientTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="78" selection-start="312" selection-end="312" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/integration/src/main/app/mule-config.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="85" column="19" selection-start="3643" selection-end="3643" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/mule/mule-core/3.2.1/mule-core-3.2.1-sources.jar!/org/mule/api/endpoint/InboundEndpoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="0" selection-start="676" selection-end="676" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/mule/mule-core/3.2.1/mule-core-3.2.1-sources.jar!/org/mule/endpoint/DefaultInboundEndpoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="13" selection-start="1610" selection-end="1610" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mock/src/main/java/org/mule/munit/MockModule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="269" column="254" selection-start="8494" selection-end="8494" vertical-scroll-proportion="0.9480519">
           <folding />
         </state>
       </provider>

@@ -10,6 +10,6 @@ import org.mule.munit.AbstractMuleSuite;
 public class AssertionsTest extends AbstractMuleSuite {
     @Override
     public String getConfigResources() {
-        return "mule-config.xml, assertions-test-config.xml";
+        return "assertions-test-config.xml";
     }
 }

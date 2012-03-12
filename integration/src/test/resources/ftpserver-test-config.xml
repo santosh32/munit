@@ -25,6 +25,7 @@
         http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/1.0/mule-munit.xsd">
 
     <spring:beans>
+        <spring:import resource="mule-config.xml"/>
         <spring:import resource="common-definitions.xml" />
     </spring:beans>
 

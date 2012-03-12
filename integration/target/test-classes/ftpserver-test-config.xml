@@ -22,10 +22,10 @@
         http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.2/mule.xsd
         http://www.mulesoft.org/schema/mule/mock http://www.mulesoft.org/schema/mule/mock/1.0/mule-mock.xsd
         http://www.mulesoft.org/schema/mule/ftpserver http://www.mulesoft.org/schema/mule/ftpserver/1.0/mule-ftpserver.xsd
-        http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/1.0/mule-munit.xsd
-        http://www.mulesoft.org/schema/mule/mclient http://www.mulesoft.org/schema/mule/mclient/1.0/mule-mclient.xsd">
+        http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/1.0/mule-munit.xsd">
 
     <spring:beans>
+        <spring:import resource="mule-config.xml"/>
         <spring:import resource="common-definitions.xml" />
     </spring:beans>
 

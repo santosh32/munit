@@ -10,7 +10,7 @@
     <artifactId>mpmock</artifactId>
     <version>1.0</version>
     <packaging>mule-module</packaging>
-    <name>Mule Cloud Connector</name>
+    <name>Mdoule for Message Processors Mocking</name>
 
     <properties>
         <mule.version>3.2.1</mule.version>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="11.662" errors="0" skipped="0" tests="2" name="org.mule.tests.FTPServerTest">
+<testsuite failures="0" time="7.531" errors="0" skipped="0" tests="2" name="org.mule.tests.MpMockTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Libraries"/>
@@ -64,6 +64,6 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="2.412" classname="org.mule.munit.MuleSuiteRunner$MuleTest" name="testThatSalesforceQueryIsStoredInTheSFTPServer"/>
-  <testcase time="1.107" classname="org.mule.munit.MuleSuiteRunner$MuleTest" name="testThatSalesforceQueryIsStoredInTheFTPServer"/>
+  <testcase time="0.015" classname="org.mule.munit.MuleSuiteRunner$MuleTest" name="testingEchoFlow"/>
+  <testcase time="0.016" classname="org.mule.munit.MuleSuiteRunner$MuleTest" name="testingPeopleMatterInbound"/>
 </testsuite>

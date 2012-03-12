@@ -32,6 +32,7 @@
 
 
     <spring:beans>
+        <spring:import resource="mule-config.xml"/>
         <spring:import resource="common-definitions.xml" />
     </spring:beans>
 

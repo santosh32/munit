@@ -10,6 +10,6 @@ import org.mule.munit.AbstractMuleSuite;
 public class MClientTest extends AbstractMuleSuite {
     @Override
     public String getConfigResources() {
-        return "mule-config.xml,  mclient-test-config.xml";
+        return "mclient-test-config.xml";
     }
 }

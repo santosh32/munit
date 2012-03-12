@@ -10,6 +10,6 @@ import org.mule.munit.AbstractMuleSuite;
 public class DBServerTest extends AbstractMuleSuite {
     @Override
     public String getConfigResources() {
-        return "mule-config.xml,  dbserver-test-config.xml";
+        return "dbserver-test-config.xml";
     }
 }
