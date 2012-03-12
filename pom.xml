@@ -18,9 +18,10 @@
     <module>assert</module>
     <module>mock</module>
     <module>ftpserver</module>
-    <module>integration</module>
     <module>mclient</module>
     <module>dbserver</module>
+    <module>integration</module>
+
   </modules>
     
 </project>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!--
+
+
+ Tests that include the usage of the dbserver for transport calls
+
+
+-->
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+      xmlns:dbserver="http://www.mulesoft.org/schema/mule/dbserver"
+      xmlns:mtest="http://www.mulesoft.org/schema/mule/mtest"
+      xsi:schemaLocation="
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.2/mule.xsd
+        http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/1.0/mule-munit.xsd
+        http://www.mulesoft.org/schema/mule/dbserver http://www.mulesoft.org/schema/mule/dbserver/1.0/mule-dbserver.xsd">
+
+
+    <munit:config/>
+    <dbserver:config jdbcUrl="jdbc:derby:memory:example;create=true"  creationalScript="
+    CREATE TABLE jobtitlelookup (jobtitle varchar(100) NOT NULL, eecsalaryorhourly varchar(20) DEFAULT NULL, jobtitleid int NOT NULL);
+    INSERT INTO jobtitlelookup (jobtitle, eecsalaryorhourly, jobtitleid) VALUES ('Culinary Team Member', 'HOURLY',3);
+    INSERT INTO jobtitlelookup (jobtitle, eecsalaryorhourly, jobtitleid) VALUES ('Other', 'SALARY',9);"/>
+
+    <flow name="before.suite"
+          mtest:before-suite="Starting DB server">
+
+        <dbserver:start-db-server />
+    </flow>
+
+
+    <flow name="after.suite"
+          mtest:after-suite="Stopping DB server">
+        <dbserver:stop-db-server />
+    </flow>
+
+    <flow name="testEnricherWhenValueExists"
+
+          mtest:test="
+        If the Job Id exist it must set the job property value with the database value">
+
+        <message-properties-transformer scope="invocation">
+            <add-message-property key="jobid" value="3" />
+        </message-properties-transformer>
+
+        <flow-ref name="enrichMessageFlow" />
+
+        <munit:assert-on-equals expected-ref="#[string:Culinary Team Member]" value-ref="#[variable:job]" />
+
+    </flow>
+
+
+    <flow name="testEnricherWhenValueDoesNotExists"
+
+          mtest:test="
+         If the Job Id doesn't exist it must set the job property value with HIR">
+
+        <message-properties-transformer scope="invocation">
+            <add-message-property key="jobid" value="11" />
+        </message-properties-transformer>
+
+        <flow-ref name="enrichMessageFlow" />
+
+        <munit:assert-on-equals expected-ref="#[string:HIR]" value-ref="#[variable:job]" />
+
+    </flow>
+
+
+</mule>

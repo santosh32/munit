@@ -22,6 +22,7 @@ package org.mule.munit;
 
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
+import org.mule.api.annotations.Processor;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -56,15 +57,19 @@ public class DBServerModule
      * {@sample.xml ../../../doc/DBServer-connector.xml.sample dbserver:start}
      *
      */
-    public void startSever()
+    @Processor
+    public void startDbServer()
     {
         try {
 
             addJdbcToClassLoader();
             connection = DriverManager.getConnection(jdbcUrl);
             Statement stmt = connection.createStatement();
-
-            stmt.execute(creationalScript);
+            String[] expressions = creationalScript.split(";");
+            for ( String expression : expressions)
+            {
+                stmt.execute(expression);
+            }
         } catch (Exception e) {
             throw new RuntimeException("Could not start the database server", e);
         }
@@ -78,6 +83,7 @@ public class DBServerModule
      * @param query query to be executed
      * @return result of the SQL query.
      */
+    @Processor
     public Object execute(String query)
     {
         Statement statement = null;
@@ -94,7 +100,8 @@ public class DBServerModule
      *
      * {@sample.xml ../../../doc/DBServer-connector.xml.sample dbserver:stop}
      */
-    public void stopServer() {
+    @Processor
+    public void stopDbServer() {
         try {
             if ( connection != null ) connection.close();
         } catch (SQLException e) {
@@ -105,5 +112,13 @@ public class DBServerModule
     private void addJdbcToClassLoader() throws InstantiationException,
             IllegalAccessException, ClassNotFoundException {
         Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
+    }
+
+    public void setJdbcUrl(String jdbcUrl) {
+        this.jdbcUrl = jdbcUrl;
+    }
+
+    public void setCreationalScript(String creationalScript) {
+        this.creationalScript = creationalScript;
     }
 }

@@ -101,6 +101,10 @@
                         </inclusion>
                         <inclusion>
                             <groupId>org.mule.munit</groupId>
+                            <artifactId>dbserver</artifactId>
+                        </inclusion>
+                        <inclusion>
+                            <groupId>org.mule.munit</groupId>
                             <artifactId>mclient</artifactId>
                         </inclusion>
 					</inclusions>
@@ -474,6 +478,19 @@
         <dependency>
             <groupId>org.mule.munit</groupId>
             <artifactId>ftpserver</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mulesoft.muleesb.transports</groupId>
+            <artifactId>mule-transport-jdbc-ee</artifactId>
+            <version>${mule.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.mule.munit</groupId>
+            <artifactId>dbserver</artifactId>
             <version>1.0</version>
         </dependency>
 

@@ -2,30 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7c53b32-1de6-40c8-8830-77f34195cb2a" name="Default" comment="assertion and mocking changes">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assert/target/generated-sources/mule/org/mule/munit/config/AssertFalseMessageProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assert/target/generated-sources/mule/org/mule/munit/config/AssertModuleCapabilitiesAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assert/target/generated-sources/mule/org/mule/munit/config/AssertModuleLifecycleAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assert/target/generated-sources/mule/org/mule/munit/config/AssertNotNullMessageProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assert/target/generated-sources/mule/org/mule/munit/config/AssertNotSameMessageProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assert/target/generated-sources/mule/org/mule/munit/config/AssertNullMessageProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assert/target/generated-sources/mule/org/mule/munit/config/AssertOnEqualsMessageProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assert/target/generated-sources/mule/org/mule/munit/config/AssertThatMessageProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assert/target/generated-sources/mule/org/mule/munit/config/AssertTrueMessageProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assert/target/generated-sources/mule/org/mule/munit/config/FailMessageProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assert/target/generated-sources/mule/org/mule/munit/config/SetMessageProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assert/target/generated-sources/mule/org/mule/munit/config/SetNullPayloadMessageProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assert/target/generated-sources/mule/org/mule/munit/config/spring/AssertFalseDefinitionParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assert/target/generated-sources/mule/org/mule/munit/config/spring/AssertModuleConfigDefinitionParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assert/target/generated-sources/mule/org/mule/munit/config/spring/AssertModuleNamespaceHandler.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assert/target/generated-sources/mule/org/mule/munit/config/spring/AssertNotNullDefinitionParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assert/target/generated-sources/mule/org/mule/munit/config/spring/AssertNotSameDefinitionParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assert/target/generated-sources/mule/org/mule/munit/config/spring/AssertNullDefinitionParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assert/target/generated-sources/mule/org/mule/munit/config/spring/AssertOnEqualsDefinitionParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assert/target/generated-sources/mule/org/mule/munit/config/spring/AssertThatDefinitionParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assert/target/generated-sources/mule/org/mule/munit/config/spring/AssertTrueDefinitionParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assert/target/generated-sources/mule/org/mule/munit/config/spring/FailDefinitionParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assert/target/generated-sources/mule/org/mule/munit/config/spring/SetDefinitionParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assert/target/generated-sources/mule/org/mule/munit/config/spring/SetNullPayloadDefinitionParser.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/integration/src/test/java/org/mule/tests/DBServerTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/integration/src/test/resources/dbserver-test-config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assert/target/assert-1.0-javadoc.jar" afterPath="$PROJECT_DIR$/assert/target/assert-1.0-javadoc.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assert/target/assert-1.0-sources.jar" afterPath="$PROJECT_DIR$/assert/target/assert-1.0-sources.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assert/target/assert-1.0.jar" afterPath="$PROJECT_DIR$/assert/target/assert-1.0.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assert/target/assert-1.0.zip" afterPath="$PROJECT_DIR$/assert/target/assert-1.0.zip" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/dbserver-1.0-javadoc.jar" afterPath="$PROJECT_DIR$/dbserver/target/dbserver-1.0-javadoc.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/dbserver-1.0-sources.jar" afterPath="$PROJECT_DIR$/dbserver/target/dbserver-1.0-sources.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/dbserver-1.0.jar" afterPath="$PROJECT_DIR$/dbserver/target/dbserver-1.0.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/dbserver-1.0.zip" afterPath="$PROJECT_DIR$/dbserver/target/dbserver-1.0.zip" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ftpserver/target/ftpserver-1.0-javadoc.jar" afterPath="$PROJECT_DIR$/ftpserver/target/ftpserver-1.0-javadoc.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ftpserver/target/ftpserver-1.0-sources.jar" afterPath="$PROJECT_DIR$/ftpserver/target/ftpserver-1.0-sources.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ftpserver/target/ftpserver-1.0.jar" afterPath="$PROJECT_DIR$/ftpserver/target/ftpserver-1.0.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ftpserver/target/ftpserver-1.0.zip" afterPath="$PROJECT_DIR$/ftpserver/target/ftpserver-1.0.zip" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mock/target/mock-1.0-javadoc.jar" afterPath="$PROJECT_DIR$/mock/target/mock-1.0-javadoc.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mock/target/mock-1.0-sources.jar" afterPath="$PROJECT_DIR$/mock/target/mock-1.0-sources.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mock/target/mock-1.0.jar" afterPath="$PROJECT_DIR$/mock/target/mock-1.0.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mock/target/mock-1.0.zip" afterPath="$PROJECT_DIR$/mock/target/mock-1.0.zip" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/src/main/java/org/mule/munit/DBServerModule.java" afterPath="$PROJECT_DIR$/dbserver/src/main/java/org/mule/munit/DBServerModule.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/generated-sources/mule/META-INF/mule-dbserver.xsd" afterPath="$PROJECT_DIR$/dbserver/target/generated-sources/mule/META-INF/mule-dbserver.xsd" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dbserver/target/generated-sources/mule/org/mule/munit/config/spring/DBServerModuleNamespaceHandler.java" afterPath="$PROJECT_DIR$/dbserver/target/generated-sources/mule/org/mule/munit/config/spring/DBServerModuleNamespaceHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/FTPServerWrapper.java" afterPath="$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/FTPServerWrapper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/MockUser.java" afterPath="$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/MockUser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ftpserver/target/generated-sources/mule/META-INF/mule-ftpserver.xsd" afterPath="$PROJECT_DIR$/ftpserver/target/generated-sources/mule/META-INF/mule-ftpserver.xsd" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/pom.xml" afterPath="$PROJECT_DIR$/integration/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/src/main/app/mule-config.xml" afterPath="$PROJECT_DIR$/integration/src/main/app/mule-config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integration/src/test/resources/ftpserver-test-config.xml" afterPath="$PROJECT_DIR$/integration/src/test/resources/ftpserver-test-config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mclient/target/generated-sources/mule/org/mule/munit/config/MClientCapabilitiesAdapter.java" afterPath="$PROJECT_DIR$/mclient/target/generated-sources/mule/org/mule/munit/config/MClientCapabilitiesAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
     </list>
     <ignored path="munit.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -135,6 +141,84 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/MockUserManager.java" line="14" class="org.mule.munit.MockUserManager" package="org.mule.munit">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/MockUserManager.java" line="19" class="org.mule.munit.MockUserManager" package="org.mule.munit">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/MockUserManager.java" line="44" class="org.mule.munit.MockUserManager" package="org.mule.munit">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="jar://$MAVEN_REPOSITORY$/org/apache/ftpserver/ftpserver-core/1.0.2/ftpserver-core-1.0.2-sources.jar!/org/apache/ftpserver/impl/DefaultFtpHandler.java" line="176" class="org.apache.ftpserver.impl.DefaultFtpHandler" package="org.apache.ftpserver.impl">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="jar://$MAVEN_REPOSITORY$/org/apache/ftpserver/ftpserver-core/1.0.2/ftpserver-core-1.0.2-sources.jar!/org/apache/ftpserver/impl/IODataConnection.java" line="125" class="org.apache.ftpserver.impl.IODataConnection" package="org.apache.ftpserver.impl">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/dbserver/src/main/java/org/mule/munit/DBServerModule.java" line="68" class="org.mule.munit.DBServerModule" package="org.mule.munit">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
     </line_breakpoints>
     <breakpoint_any>
       <breakpoint>
@@ -176,55 +260,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MuleSuiteRunner.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assert/src/main/java/org/mule/munit/MuleSuiteRunner.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="131" column="34" selection-start="4775" selection-end="4775" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FTPServerModule.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/FTPServerModule.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="78" column="30" selection-start="1679" selection-end="1679" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ftpserver-test-config.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/integration/src/test/resources/ftpserver-test-config.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="69" column="9" selection-start="2674" selection-end="2764" vertical-scroll-proportion="0.0">
+            <state line="55" column="64" selection-start="2268" selection-end="2268" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SFTPServer-connector.xml.sample" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ftpserver/doc/SFTPServer-connector.xml.sample">
+      <file leaf-file-name="mule-config.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/integration/src/main/app/mule-config.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="119" selection-start="484" selection-end="484" vertical-scroll-proportion="0.48387095">
+            <state line="148" column="63" selection-start="6025" selection-end="6025" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FTPServer.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/FTPServer.java">
+      <file leaf-file-name="dbserver-test-config.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/integration/src/test/resources/dbserver-test-config.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="126" selection-start="542" selection-end="542" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pom.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dbserver/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="25" selection-start="569" selection-end="569" vertical-scroll-proportion="0.0">
+            <state line="43" column="239" selection-start="1680" selection-end="1680" vertical-scroll-proportion="0.87398374">
               <folding />
             </state>
           </provider>
@@ -233,35 +290,64 @@
       <file leaf-file-name="DBServerModule.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dbserver/src/main/java/org/mule/munit/DBServerModule.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="99" selection-start="1242" selection-end="1242" vertical-scroll-proportion="0.0">
+            <state line="73" column="0" selection-start="2015" selection-end="2015" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DBServer-connector.xml.sample" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dbserver/doc/DBServer-connector.xml.sample">
+      <file leaf-file-name="DBServerTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/integration/src/test/java/org/mule/tests/DBServerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="111" selection-start="420" selection-end="420" vertical-scroll-proportion="0.0">
+            <state line="9" column="52" selection-start="180" selection-end="206" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Runner.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.8.2/junit-4.8.2-sources.jar!/org/junit/runner/Runner.java">
+      <file leaf-file-name="MockUserManager.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/MockUserManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="22" selection-start="932" selection-end="932" vertical-scroll-proportion="0.0">
+            <state line="14" column="0" selection-start="357" selection-end="357" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AssertionsTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/integration/src/test/java/org/mule/tests/AssertionsTest.java">
+      <file leaf-file-name="DefaultFtpHandler.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/apache/ftpserver/ftpserver-core/1.0.2/ftpserver-core-1.0.2-sources.jar!/org/apache/ftpserver/impl/DefaultFtpHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="40" selection-start="194" selection-end="194" vertical-scroll-proportion="0.0">
+            <state line="176" column="0" selection-start="6779" selection-end="6779" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IODataConnection.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/apache/ftpserver/ftpserver-core/1.0.2/ftpserver-core-1.0.2-sources.jar!/org/apache/ftpserver/impl/IODataConnection.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="126" column="43" selection-start="4050" selection-end="4050" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TransferRateRequest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/apache/ftpserver/ftpserver-core/1.0.2/ftpserver-core-1.0.2-sources.jar!/org/apache/ftpserver/usermanager/impl/TransferRateRequest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="30" column="32" selection-start="1136" selection-end="1155" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MockUser.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/MockUser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="42" column="159" selection-start="1056" selection-end="1056" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -281,22 +367,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/integration/src/test/resources/ftpserver-config.xml" />
-        <option value="$PROJECT_DIR$/integration/src/test/java/org/mule/tests/FTPServerTest.java" />
-        <option value="$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/SFTPServerWrapper.java" />
-        <option value="$PROJECT_DIR$/ftpserver/pom.xml" />
-        <option value="$PROJECT_DIR$/integration/src/test/resources/ftpserver-test-config.xml" />
-        <option value="$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/FTPServerWrapper.java" />
-        <option value="$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/MockUser.java" />
-        <option value="$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/MockUserManager.java" />
-        <option value="$PROJECT_DIR$/integration/src/main/app/mule-config.xml" />
         <option value="$PROJECT_DIR$/assert/src/main/java/org/mule/munit/MuleSuiteRunner.java" />
         <option value="$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/FTPServer.java" />
         <option value="$PROJECT_DIR$/dbserver/pom.xml" />
         <option value="$PROJECT_DIR$/dbserver/doc/DBServer-connector.xml.sample" />
-        <option value="$PROJECT_DIR$/dbserver/src/main/java/org/mule/munit/DBServerModule.java" />
         <option value="$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/FTPServerModule.java" />
         <option value="$PROJECT_DIR$/ftpserver/doc/SFTPServer-connector.xml.sample" />
+        <option value="$PROJECT_DIR$/ftpserver/target/generated-sources/mule/org/mule/munit/config/StopServerMessageProcessor.java" />
+        <option value="$PROJECT_DIR$/integration/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/integration/src/test/java/org/mule/tests/DBServerTest.java" />
+        <option value="$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/FTPServerWrapper.java" />
+        <option value="$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/MockUser.java" />
+        <option value="$PROJECT_DIR$/integration/src/test/resources/ftpserver-test-config.xml" />
+        <option value="$PROJECT_DIR$/dbserver/src/main/java/org/mule/munit/DBServerModule.java" />
+        <option value="$PROJECT_DIR$/integration/src/main/app/mule-config.xml" />
+        <option value="$PROJECT_DIR$/integration/src/test/resources/dbserver-test-config.xml" />
       </list>
     </option>
   </component>
@@ -310,8 +396,8 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="22" />
-    <option name="width" value="1440" />
-    <option name="height" value="788" />
+    <option name="width" value="2560" />
+    <option name="height" value="1328" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -463,72 +549,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Maven: org.mule:mule-core:3.2.1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mule-core-3.2.1.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Maven: org.mule:mule-core:3.2.1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mule-core-3.2.1.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mule" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Maven: org.mule:mule-core:3.2.1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mule-core-3.2.1.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mule" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="context" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="munit" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="munit" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -658,6 +678,14 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -797,6 +825,172 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="target" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="munit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="munit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dbserver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="target" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="generated-sources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mule" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="munit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="munit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dbserver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="target" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="generated-sources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mule" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="META-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="munit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="munit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dbserver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="target" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="generated-sources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="munit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="munit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dbserver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="munit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="munit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dbserver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="munit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="munit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dbserver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="munit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="munit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="munit" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dbserver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="doc" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -829,35 +1023,7 @@
       <recent name="org.mule.munit" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.org.mule.tests in integration">
-    <configuration default="false" name="MClientTest" type="JUnit" factoryName="JUnit" temporary="true">
-      <module name="integration" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="org.mule.tests" />
-      <option name="MAIN_CLASS_NAME" value="org.mule.tests.MClientTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="JUnit.DBServerTest">
     <configuration default="false" name="org.mule.tests in integration" type="JUnit" factoryName="JUnit" temporary="true">
       <module name="integration" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -951,6 +1117,34 @@
       <envs />
       <patterns />
       <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="DBServerTest" type="JUnit" factoryName="JUnit" temporary="true">
+      <module name="integration" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="org.mule.tests" />
+      <option name="MAIN_CLASS_NAME" value="org.mule.tests.DBServerTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -1072,11 +1266,11 @@
       </method>
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.MClientTest" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.org.mule.tests in integration" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.FTPServerTest" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.AssertionsTest.getConfigResources" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.AssertionsTest" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.org.mule.tests in integration" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.FTPServerTest" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.AssertionsTest.getConfigResources" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.AssertionsTest" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.DBServerTest" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -1111,23 +1305,23 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1440" height="788" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="22" width="2560" height="1328" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.56213874" sideWeight="0.9941406" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5616883" sideWeight="0.9542969" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37905845" sideWeight="0.09101562" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32947975" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32080925" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32061687" sideWeight="0.4921875" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32291666" sideWeight="0.6849711" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3150289" sideWeight="0.96875" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18164062" sideWeight="0.6209416" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37905845" sideWeight="0.90625" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32792208" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1192,114 +1386,118 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mule/transports/mule-transport-ftp/3.2.1/mule-transport-ftp-3.2.1-sources.jar!/org/mule/transport/ftp/FtpConnectionFactory.java">
+    <entry file="file://$PROJECT_DIR$/integration/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="28" selection-start="1383" selection-end="1383" vertical-scroll-proportion="0.0">
+        <state line="490" column="0" selection-start="14846" selection-end="15015" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/integration/src/main/app/mule-config.xml">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="104" column="55" selection-start="4054" selection-end="4054" vertical-scroll-proportion="0.0">
+        <state line="26" column="53" selection-start="858" selection-end="858" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mule/mule-core/3.2.1/mule-core-3.2.1-test-sources.jar!/org/mule/tck/AbstractMuleTestCase.java">
+    <entry file="file://$PROJECT_DIR$/integration/src/test/resources/mclient-test-config.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="0" selection-start="2778" selection-end="2778" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mule/tests/mule-tests-functional/3.2.1/mule-tests-functional-3.2.1-sources.jar!/org/mule/tck/FunctionalTestCase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="64" selection-start="1617" selection-end="1618" vertical-scroll-proportion="3.6923077">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.8.2/junit-4.8.2-sources.jar!/junit/framework/TestSuite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="13" selection-start="1290" selection-end="1290" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assert/src/main/java/org/mule/munit/AbstractMuleSuite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="51" selection-start="177" selection-end="177" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/integration/src/test/java/org/mule/tests/AssertionsTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="40" selection-start="194" selection-end="194" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.8.2/junit-4.8.2-sources.jar!/org/junit/runner/Runner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="22" selection-start="932" selection-end="932" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assert/src/main/java/org/mule/munit/MuleSuiteRunner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="131" column="34" selection-start="4775" selection-end="4775" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dbserver/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="25" selection-start="569" selection-end="569" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dbserver/doc/DBServer-connector.xml.sample">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="111" selection-start="420" selection-end="420" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dbserver/src/main/java/org/mule/munit/DBServerModule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="99" selection-start="1242" selection-end="1242" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/FTPServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="126" selection-start="542" selection-end="542" vertical-scroll-proportion="0.0">
+        <state line="39" column="119" selection-start="934" selection-end="934" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/FTPServerModule.java">
+    <entry file="file://$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/FTPServerWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="30" selection-start="1679" selection-end="1679" vertical-scroll-proportion="0.0">
+        <state line="24" column="46" selection-start="693" selection-end="693" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/ftpserver/ftpserver-core/1.0.2/ftpserver-core-1.0.2-sources.jar!/org/apache/ftpserver/command/impl/USER.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="176" column="76" selection-start="7437" selection-end="7437" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/MockUserManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="0" selection-start="357" selection-end="357" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/ftpserver/ftpserver-core/1.0.2/ftpserver-core-1.0.2-sources.jar!/org/apache/ftpserver/impl/DefaultFtpHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="176" column="0" selection-start="6779" selection-end="6779" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/ftpserver/ftpserver-core/1.0.2/ftpserver-core-1.0.2-sources.jar!/org/apache/ftpserver/impl/IODataConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="126" column="43" selection-start="4050" selection-end="4050" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/ftpserver/ftpserver-core/1.0.2/ftpserver-core-1.0.2-sources.jar!/org/apache/ftpserver/usermanager/impl/TransferRateRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="32" selection-start="1136" selection-end="1155" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ftpserver/src/main/java/org/mule/munit/MockUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="159" selection-start="1056" selection-end="1056" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/integration/src/test/resources/ftpserver-test-config.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="9" selection-start="2674" selection-end="2764" vertical-scroll-proportion="0.0">
+        <state line="55" column="64" selection-start="2268" selection-end="2268" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ftpserver/doc/SFTPServer-connector.xml.sample">
+    <entry file="file://$PROJECT_DIR$/integration/src/main/app/mule-config.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="119" selection-start="484" selection-end="484" vertical-scroll-proportion="0.48387095">
+        <state line="148" column="63" selection-start="6025" selection-end="6025" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/integration/src/test/java/org/mule/tests/DBServerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="52" selection-start="180" selection-end="206" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dbserver/src/main/java/org/mule/munit/DBServerModule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="73" column="0" selection-start="2015" selection-end="2015" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/integration/src/test/resources/dbserver-test-config.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="239" selection-start="1680" selection-end="1680" vertical-scroll-proportion="0.87398374">
           <folding />
         </state>
       </provider>

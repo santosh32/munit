@@ -3,6 +3,7 @@ package org.mule.munit;
 import org.apache.ftpserver.ftplet.Authority;
 import org.apache.ftpserver.ftplet.AuthorizationRequest;
 import org.apache.ftpserver.ftplet.User;
+import org.apache.ftpserver.usermanager.impl.TransferRateRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ public class MockUser implements User {
 
     @Override
     public AuthorizationRequest authorize(AuthorizationRequest authorizationRequest) {
-        return new AuthorizationRequest() {
+        return new TransferRateRequest() {
         };
     }
 

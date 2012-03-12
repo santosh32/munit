@@ -20,6 +20,9 @@ public class DBServerModuleNamespaceHandler
      */
     public void init() {
         registerBeanDefinitionParser("config", new DBServerModuleConfigDefinitionParser());
+        registerBeanDefinitionParser("start-db-server", new StartDbServerDefinitionParser());
+        registerBeanDefinitionParser("execute", new ExecuteDefinitionParser());
+        registerBeanDefinitionParser("stop-db-server", new StopDbServerDefinitionParser());
     }
 
 }

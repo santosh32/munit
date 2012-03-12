@@ -22,7 +22,7 @@ public class FTPServerWrapper extends FTPServer{
         ListenerFactory factory = new ListenerFactory();
 
         factory.setPort(port);
-         serverFactory.setUserManager(new MockUserManager());
+        serverFactory.setUserManager(new MockUserManager());
         serverFactory.addListener("default", factory.createListener());
 
         server = serverFactory.createServer();

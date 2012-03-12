@@ -153,12 +153,12 @@
           </xs:attribute>
           <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/ftpserver" name="port" use="required" type="integerType">
             <xs:annotation>
-              <xs:documentation>port</xs:documentation>
+              <xs:documentation>&lt;p&gt;FTP server port.&lt;/p&gt;</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/ftpserver" name="secure" default="false" use="optional" type="booleanType">
             <xs:annotation>
-              <xs:documentation>secure</xs:documentation>
+              <xs:documentation>&lt;p&gt;Defines if is FTP over ssh.&lt;/p&gt;</xs:documentation>
             </xs:annotation>
           </xs:attribute>
         </xs:extension>
@@ -167,7 +167,7 @@
   </xs:element>
   <xs:element xmlns="http://www.mulesoft.org/schema/mule/ftpserver" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="start-server" substitutionGroup="mule:abstract-message-processor" type="StartServerType">
     <xs:annotation>
-      <xs:documentation>start the server</xs:documentation>
+      <xs:documentation>&lt;p&gt;Starts the server&lt;/p&gt;</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name="StartServerType">
@@ -183,7 +183,7 @@
   </xs:complexType>
   <xs:element xmlns="http://www.mulesoft.org/schema/mule/ftpserver" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="contains-files" substitutionGroup="mule:abstract-message-processor" type="ContainsFilesType">
     <xs:annotation>
-      <xs:documentation>check if file exists</xs:documentation>
+      <xs:documentation>&lt;p&gt;check if a file exists.&lt;/p</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name="ContainsFilesType">
@@ -209,7 +209,7 @@
   </xs:complexType>
   <xs:element xmlns="http://www.mulesoft.org/schema/mule/ftpserver" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="stop-server" substitutionGroup="mule:abstract-message-processor" type="StopServerType">
     <xs:annotation>
-      <xs:documentation>stop</xs:documentation>
+      <xs:documentation>&lt;p&gt;Stops the server&lt;/p&gt;</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name="StopServerType">
@@ -225,7 +225,7 @@
   </xs:complexType>
   <xs:element xmlns="http://www.mulesoft.org/schema/mule/ftpserver" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="remove" substitutionGroup="mule:abstract-message-processor" type="RemoveType">
     <xs:annotation>
-      <xs:documentation>stop</xs:documentation>
+      <xs:documentation>&lt;p&gt;Remove created files&lt;/p&gt;</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name="RemoveType">
@@ -238,7 +238,7 @@
         </xs:attribute>
         <xs:attribute name="path" use="required" type="xs:string">
           <xs:annotation>
-            <xs:documentation>to be removed</xs:documentation>
+            <xs:documentation>Path to be removed.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
