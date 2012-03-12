@@ -1,3 +1,0 @@
-<!-- BEGIN_INCLUDE(httpclient:execute) -->
-    <httpclient:execute parameters="expression" />
-<!-- END_INCLUDE(httpclient:execute) -->

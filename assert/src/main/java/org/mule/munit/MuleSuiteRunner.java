@@ -37,13 +37,13 @@ public class MuleSuiteRunner extends Runner implements Filterable, Sortable{
     public static final String CLASSNAME_ANNOTATIONS_CONFIG_BUILDER = "org.mule.config.AnnotationsConfigurationBuilder";
     private static QName BEFORE_SUITE = new QName("http://www.mulesoft.org/schema/mule/mtest", "before-suite");
     private static QName AFTER_SUITE = new QName("http://www.mulesoft.org/schema/mule/mtest", "after-suite");
-    private static QName BEFORE_TEST = new QName("http://www.mulesoft.org/schema/mule/mtest", "before-test");
-    private static QName AFTER_TEST = new QName("http://www.mulesoft.org/schema/mule/mtest", "after-test");
+    private static QName BEFORE_TEST = new QName("http://www.mulesoft.org/schema/mule/mtest", "before-tests");
+    private static QName AFTER_TEST = new QName("http://www.mulesoft.org/schema/mule/mtest", "after-tests");
     private static QName TEST = new QName("http://www.mulesoft.org/schema/mule/mtest", "test");
 
     private TestSuite testSuite;
-    MuleContext muleContext;
-    String resources;
+    private MuleContext muleContext;
+    private String resources;
 
     public MuleSuiteRunner(Class testClass) {
         try {
@@ -127,6 +127,10 @@ public class MuleSuiteRunner extends Runner implements Filterable, Sortable{
             testSuite.run(result);
 
             process(AFTER_SUITE, muleEvent());
+
+            muleContext.stop();
+            muleContext.dispose();
+
         }
         catch(Exception e)
         {

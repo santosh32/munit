@@ -1,0 +1,11 @@
+<!-- BEGIN_INCLUDE(dbserver:start) -->
+    <dbserver:my-processor content="#[map-payload:content]" />
+<!-- END_INCLUDE(dbserver:start) -->
+
+<!-- BEGIN_INCLUDE(dbserver:stop) -->
+    <dbserver:my-processor content="#[map-payload:content]" />
+<!-- END_INCLUDE(dbserver:stop) -->
+
+<!-- BEGIN_INCLUDE(dbserver:execute) -->
+    <dbserver:my-processor content="#[map-payload:content]" />
+<!-- END_INCLUDE(dbserver:execute) -->

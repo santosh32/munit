@@ -97,7 +97,11 @@
                         </inclusion>
                         <inclusion>
                             <groupId>org.mule.munit</groupId>
-                            <artifactId>sftpserver</artifactId>
+                            <artifactId>ftpserver</artifactId>
+                        </inclusion>
+                        <inclusion>
+                            <groupId>org.mule.munit</groupId>
+                            <artifactId>mclient</artifactId>
                         </inclusion>
 					</inclusions>
 				</configuration>
@@ -305,7 +309,12 @@
 			<version>${mule.version}</version>
 			<scope>provided</scope>
 		</dependency>
-
+        <dependency>
+            <groupId>org.mule.modules</groupId>
+            <artifactId>mule-module-scripting</artifactId>
+            <version>${mule.version}</version>
+            <scope>provided</scope>
+        </dependency>
 		<!-- Mule Transports -->
 		<dependency>
 			<groupId>org.mule.transports</groupId>
@@ -464,7 +473,13 @@
 
         <dependency>
             <groupId>org.mule.munit</groupId>
-            <artifactId>sftpserver</artifactId>
+            <artifactId>ftpserver</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mule.munit</groupId>
+            <artifactId>mclient</artifactId>
             <version>1.0</version>
         </dependency>
 

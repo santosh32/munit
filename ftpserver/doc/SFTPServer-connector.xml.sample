@@ -1,0 +1,18 @@
+<!-- BEGIN_INCLUDE(sftpserver:startServer) -->
+    <ftpserver:start-server config-ref="sftpServer"/>
+<!-- END_INCLUDE(sftpserver:startServer) -->
+
+
+<!-- BEGIN_INCLUDE(sftpserver:stopServer) -->
+    <ftpserver:stop-server config-ref="sftpServer"/>
+<!-- END_INCLUDE(sftpserver:stopServer) -->
+
+
+<!-- BEGIN_INCLUDE(sftpserver:containsFiles) -->
+    <ftpserver:contains-files file="sftp-jsonResult.txt" path="/tmp" config-ref="sftpServer"/>
+<!-- END_INCLUDE(sftpserver:containsFiles) -->
+
+
+<!-- BEGIN_INCLUDE(sftpserver:remove) -->
+    <ftpserver:remove path="/tmp/sftp-jsonResult.txt"/>
+<!-- END_INCLUDE(sftpserver:remove) -->

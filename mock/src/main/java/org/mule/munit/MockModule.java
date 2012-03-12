@@ -155,16 +155,28 @@ public class MockModule  implements MuleContextAware, BeanFactoryPostProcessor
      *
      * @param messageProcessor Message processor Id
      * @param parameters Message processor parameters.
+     * @param times Number of times the message processor has to be called
+     * @param atLeast Number of time the message processor has to be called at least.
+     * @param atMost Number of times the message processor has to be called at most.
      */
     @Processor
-    public void verifyCall(String messageProcessor,  List<Object> parameters )
+    public void verifyCall(String messageProcessor,  List<Object> parameters, @Optional Integer times, 
+                           @Optional Integer atLeast, @Optional Integer atMost )
     {
         try {
 
             Method method = getMockedMethod(messageProcessor);
 
             if ( method != null  ){
-                verify(mock);
+                if ( times != null  )
+                    verify(mock, times(times));
+                else if ( atLeast != null )
+                    verify(mock, atLeast(atLeast));
+                else if ( atMost != null )
+                    verify(mock, atMost(atMost));
+                else
+                    verify(mock);
+
                 method.invoke(mock, buildEquals(parameters));
             }
 
