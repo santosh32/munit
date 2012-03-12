@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/assert/assert.iml" filepath="$PROJECT_DIR$/assert/assert.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dbserver/dbserver.iml" filepath="$PROJECT_DIR$/dbserver/dbserver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ftpserver/ftpserver.iml" filepath="$PROJECT_DIR$/ftpserver/ftpserver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/integration/integration.iml" filepath="$PROJECT_DIR$/integration/integration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mclient/mclient.iml" filepath="$PROJECT_DIR$/mclient/mclient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mock/mock.iml" filepath="$PROJECT_DIR$/mock/mock.iml" />
+      <module fileurl="file://$PROJECT_DIR$/munit.iml" filepath="$PROJECT_DIR$/munit.iml" />
+    </modules>
+  </component>
+</project>
+

@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:mule="http://www.mulesoft.org/schema/mule/core" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" targetNamespace="http://www.mulesoft.org/schema/mule/mock">
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace"></xs:import>
+  <xs:import schemaLocation="http://www.springframework.org/schema/beans/spring-beans-3.0.xsd" namespace="http://www.springframework.org/schema/beans"></xs:import>
+  <xs:import schemaLocation="http://www.mulesoft.org/schema/mule/core/current/mule.xsd" namespace="http://www.mulesoft.org/schema/mule/core"></xs:import>
+  <xs:import schemaLocation="http://www.mulesoft.org/schema/mule/devkit/current/mule-devkit.xsd" namespace="http://www.mulesoft.org/schema/mule/devkit"></xs:import>
+  <xs:simpleType name="integerType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:integer"></xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:pattern value="(\#\[[^\]]+\]|\$\{[^\}]+\})"></xs:pattern>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="decimalType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal"></xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:pattern value="(\#\[[^\]]+\]|\$\{[^\}]+\})"></xs:pattern>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="floatType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:float"></xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:pattern value="(\#\[[^\]]+\]|\$\{[^\}]+\})"></xs:pattern>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="doubleType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:double"></xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:pattern value="(\#\[[^\]]+\]|\$\{[^\}]+\})"></xs:pattern>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="dateTimeType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:dateTime"></xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:pattern value="(\#\[[^\]]+\]|\$\{[^\}]+\})"></xs:pattern>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="longType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:long"></xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:pattern value="(\#\[[^\]]+\]|\$\{[^\}]+\})"></xs:pattern>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="byteType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:byte"></xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:pattern value="(\#\[[^\]]+\]|\$\{[^\}]+\})"></xs:pattern>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="booleanType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:boolean"></xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:pattern value="(\#\[[^\]]+\]|\$\{[^\}]+\})"></xs:pattern>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="anyUriType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:anyURI"></xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:pattern value="(\#\[[^\]]+\]|\$\{[^\}]+\})"></xs:pattern>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="charType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="1"></xs:minLength>
+          <xs:maxLength value="1"></xs:maxLength>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:pattern value="(\#\[[^\]]+\]|\$\{[^\}]+\})"></xs:pattern>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:complexType name="XmlType">
+    <xs:sequence>
+      <xs:any maxOccurs="unbounded" minOccurs="0" processContents="lax"></xs:any>
+    </xs:sequence>
+    <xs:attribute name="ref" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The reference object for this parameter</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:element xmlns:devkit="http://www.mulesoft.org/schema/mule/devkit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="config" substitutionGroup="mule:abstract-extension" devkit:javaClass="org.mule.munit.config.MockModuleLifecycleAdapter">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="mule:abstractExtensionType">
+          <xs:annotation>
+            <xs:documentation>&lt;p&gt;Module for Mocking devkit Modules.&lt;/p&gt;
+
+&lt;p&gt;With this module you can mock using mockito framework all the modules that are written with Mule Devkit.&lt;/p&gt;
+
+&lt;p&gt; In order to be able to mock a module it has to be declare with a reference name. For example:&lt;/p&gt;
+
+&lt;p&gt; &lt;sfdc:config name="Salesforce" username="" password="" securityToken="" /&gt;&lt;/p&gt;
+
+&lt;p&gt; Otherwise the module/connector will not be accessible by a reference name and will not be able to be mocked. &lt;/p&gt;</xs:documentation>
+          </xs:annotation>
+          <xs:attribute name="name" use="optional" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Give a name to this configuration so it can be later referenced by config-ref.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="of" use="required" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>&lt;p&gt;Component that we want to mock.&lt;/p&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/mock" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="expect" substitutionGroup="mule:abstract-message-processor" type="ExpectType">
+    <xs:annotation>
+      <xs:documentation>&lt;p&gt;Define what the mock must return on a message processor call.&lt;/p&gt;
+
+&lt;p&gt;If the message processor doesn't return any value then there is no need to define an expect.&lt;/p&gt;
+&lt;p&gt;You can define the message processor parameters in the same order they appear in the API documentation. In
+order to define the behaviour on that particular case.&lt;/p&gt;</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="ExpectType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:sequence>
+          <xs:element name="parameters" maxOccurs="1" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>Message processor parameters.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="parameter" maxOccurs="unbounded" minOccurs="0">
+                  <xs:complexType>
+                    <xs:attribute name="value-ref" use="required" type="xs:string"></xs:attribute>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+              <xs:attribute name="ref" use="optional" type="xs:string">
+                <xs:annotation>
+                  <xs:documentation>The reference object for this parameter</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="when" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Message processor name.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="mustReturn-ref" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Expected return value.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/mock" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="expect-fail" substitutionGroup="mule:abstract-message-processor" type="ExpectFailType">
+    <xs:annotation>
+      <xs:documentation>&lt;p&gt;Expect to throw an exception when message processor is called. &lt;/p&gt;</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="ExpectFailType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="when" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Message processor name.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="throwA" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Java Exception full qualified name.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/mock" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="verify-call" substitutionGroup="mule:abstract-message-processor" type="VerifyCallType">
+    <xs:annotation>
+      <xs:documentation>Check that the message processor was called with some specified parameters</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="VerifyCallType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:sequence>
+          <xs:element name="parameters" maxOccurs="1" minOccurs="1">
+            <xs:annotation>
+              <xs:documentation>Message processor parameters.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="parameter" maxOccurs="unbounded" minOccurs="0">
+                  <xs:complexType>
+                    <xs:attribute name="value-ref" use="required" type="xs:string"></xs:attribute>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+              <xs:attribute name="ref" use="optional" type="xs:string">
+                <xs:annotation>
+                  <xs:documentation>The reference object for this parameter</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="messageProcessor" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Message processor Id</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/mock" name="times" use="optional" type="integerType">
+          <xs:annotation>
+            <xs:documentation>Number of times the message processor has to be called</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/mock" name="atLeast" use="optional" type="integerType">
+          <xs:annotation>
+            <xs:documentation>Number of time the message processor has to be called at least.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/mock" name="atMost" use="optional" type="integerType">
+          <xs:annotation>
+            <xs:documentation>Number of times the message processor has to be called at most.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/mock" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="fail-on-connect" substitutionGroup="mule:abstract-message-processor" type="FailOnConnectType">
+    <xs:annotation>
+      <xs:documentation>Throw an Exception when a connector tries to connect.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="FailOnConnectType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/mock" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="reset" substitutionGroup="mule:abstract-message-processor" type="ResetType">
+    <xs:annotation>
+      <xs:documentation>Reset mock behaviour</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="ResetType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>

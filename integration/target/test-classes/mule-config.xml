@@ -1,0 +1,111 @@
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+      xmlns:http="http://www.mulesoft.org/schema/mule/http"
+      xmlns:sfdc="http://www.mulesoft.org/schema/mule/sfdc"
+      xmlns:json="http://www.mulesoft.org/schema/mule/json"
+      xmlns:script="http://www.mulesoft.org/schema/mule/scripting"
+      xmlns:sftp="http://www.mulesoft.org/schema/mule/sftp"
+      xmlns:ftp="http://www.mulesoft.org/schema/mule/ftp"
+
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/sfdc http://www.mulesoft.org/schema/mule/sfdc/4.0/mule-sfdc.xsd
+        http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/3.2/mule-scripting.xsd
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+        http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/3.2/mule-json.xsd
+        http://www.mulesoft.org/schema/mule/sftp http://www.mulesoft.org/schema/mule/sftp/3.2/mule-sftp.xsd
+        http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/3.2/mule-http.xsd
+         http://www.mulesoft.org/schema/mule/ftp http://www.mulesoft.org/schema/mule/ftp/3.2/mule-ftp.xsd">
+
+
+    <custom-transformer name="exceptionTransformer" class="org.mule.transformers.ExceptionTransformer"/>
+
+
+    <script:transformer name="genderMappingTransformer">
+        <script:script engine="groovy"><![CDATA[
+			if (payload == "Male")
+			{
+				return "M";
+			}
+			else if (payload == "Female")
+			{
+				return "F";
+			}
+			else {
+				return "0";
+			}
+         ]]></script:script>
+    </script:transformer>
+
+
+    <!-- Simples flow ever, echo the payload -->
+    <flow name="echoFlow">
+        <echo-component/>
+    </flow>
+
+    <!-- Our Subflow calls a transfomer that throws an exception -->
+    <sub-flow name="exceptionFlow">
+        <transformer ref="exceptionTransformer"/>
+    </sub-flow>
+
+
+
+    <sfdc:config name="Salesforce" username="username"
+                 password="password" securityToken="token" />
+
+
+    <custom-transformer name="httpToMapTransformer" class="org.mule.transport.http.transformers.HttpRequestBodyToParamMap" />
+
+
+    <flow name="campaignInfoFlow">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="10443" path="campaignInfo"/>
+
+        <sfdc:query query="SELECT Name, CreatedDate, EndDate, phone__c, cc_template__c FROM Campaign WHERE IsActive=true"
+                    config-ref="Salesforce" />
+
+        <json:object-to-json-transformer />
+    </flow>
+
+
+    <flow name="updateSalesforceTemplate">
+        <http:inbound-endpoint exchange-pattern="one-way" host="localhost" port="10443" path="updateSalesforceTemplate">
+            <http:body-to-parameter-map-transformer/>
+        </http:inbound-endpoint>
+
+        <sfdc:upsert type="Campaign" externalIdFieldName="Name">
+            <sfdc:objects>
+                <sfdc:object>
+                    <Name>#[map-payload:campaignName]</Name>
+                    <cc_template__c>#[map-payload:template]</cc_template__c>
+                </sfdc:object>
+            </sfdc:objects>
+        </sfdc:upsert>
+    </flow>
+
+    <flow name="sendToSFTP">
+
+        <sfdc:query query="SELECT Name, CreatedDate, EndDate, phone__c, cc_template__c FROM Campaign WHERE IsActive=true"
+                    config-ref="Salesforce" />
+
+        <json:object-to-json-transformer />
+
+        <sftp:outbound-endpoint host="localhost"
+                                port="3001" user="user" password="passwrd"
+                                outputPattern="sftp-jsonResult.txt" path="/tmp">
+        </sftp:outbound-endpoint>
+    </flow>
+
+    <flow name="sendToFTP">
+
+        <sfdc:query query="SELECT Name, CreatedDate, EndDate, phone__c, cc_template__c FROM Campaign WHERE IsActive=true"
+                    config-ref="Salesforce" />
+
+        <json:object-to-json-transformer />
+
+        <ftp:outbound-endpoint host="localhost"
+                                port="3002" user="mock2" password="mock"
+                                outputPattern="ftp-jsonResult.txt" path="/tmp">
+        </ftp:outbound-endpoint>
+    </flow>
+
+
+</mule>

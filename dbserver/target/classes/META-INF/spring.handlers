@@ -1,0 +1,2 @@
+http\://www.mulesoft.org/schema/mule/dbserver=org.mule.munit.config.spring.DBServerModuleNamespaceHandler
+http\://www.mulesoft.org/schema/mule/dbserver=org.mule.munit.config.spring.DBServerModuleNamespaceHandler

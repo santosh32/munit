@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: oro:oro:2.0.8-osgi">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/oro/oro/2.0.8-osgi/oro-2.0.8-osgi.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/oro/oro/2.0.8-osgi/oro-2.0.8-osgi-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/oro/oro/2.0.8-osgi/oro-2.0.8-osgi-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

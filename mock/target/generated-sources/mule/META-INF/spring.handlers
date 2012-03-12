@@ -1,0 +1,2 @@
+http\://www.mulesoft.org/schema/mule/mock=org.mule.munit.config.spring.MockModuleNamespaceHandler
+http\://www.mulesoft.org/schema/mule/mock=org.mule.munit.config.spring.MockModuleNamespaceHandler
