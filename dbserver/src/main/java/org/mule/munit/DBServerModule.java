@@ -80,16 +80,16 @@ public class DBServerModule
      *
      * {@sample.xml ../../../doc/DBServer-connector.xml.sample dbserver:execute}
      *
-     * @param query query to be executed
+     * @param sql query to be executed
      * @return result of the SQL query.
      */
     @Processor
-    public Object execute(String query)
+    public Object execute(String sql)
     {
         Statement statement = null;
         try {
             statement = connection.createStatement();
-            return statement.execute(query);
+            return statement.execute(sql);
         } catch (SQLException e) {
             return null;
         }

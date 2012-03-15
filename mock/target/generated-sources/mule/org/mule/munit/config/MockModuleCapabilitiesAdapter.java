@@ -3,14 +3,15 @@ package org.mule.munit.config;
 
 import org.mule.api.Capabilities;
 import org.mule.api.Capability;
+import org.mule.munit.MockModule;
 
 
 /**
- * A <code>MockModuleCapabilitiesAdapter</code> is a wrapper around {@link org.mule.munit.MockModule } that implements {@link org.mule.api.Capabilities} interface.
+ * A <code>MockModuleCapabilitiesAdapter</code> is a wrapper around {@link MockModule } that implements {@link org.mule.api.Capabilities} interface.
  * 
  */
 public class MockModuleCapabilitiesAdapter
-    extends org.mule.munit.MockModule
+    extends MockModule
     implements Capabilities
 {
 

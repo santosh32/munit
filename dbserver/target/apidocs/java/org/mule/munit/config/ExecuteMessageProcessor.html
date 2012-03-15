@@ -623,7 +623,7 @@ org.mule.api.lifecycle.Stoppable
           
           
           <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a></nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../org/mule/munit/config/ExecuteMessageProcessor.html#_queryType">_queryType</a></td>
+          <td class="jd-linkcol"><a href="../../../../../org/mule/munit/config/ExecuteMessageProcessor.html#_sqlType">_sqlType</a></td>
           <td class="jd-descrcol" width="100%"></td>
       </tr>
       
@@ -709,17 +709,6 @@ org.mule.api.lifecycle.Stoppable
           private
           
           
-          <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a></nobr></td>
-          <td class="jd-linkcol"><a href="../../../../../org/mule/munit/config/ExecuteMessageProcessor.html#query">query</a></td>
-          <td class="jd-descrcol" width="100%"></td>
-      </tr>
-      
-    
-      <tr class="alt-color api apilevel-" >
-          <td class="jd-typecol"><nobr>
-          private
-          
-          
           <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/concurrent/atomic/AtomicInteger.html">AtomicInteger</a></nobr></td>
           <td class="jd-linkcol"><a href="../../../../../org/mule/munit/config/ExecuteMessageProcessor.html#retryCount">retryCount</a></td>
           <td class="jd-descrcol" width="100%">Variable used to track how many retries we have attempted on this message processor
@@ -728,7 +717,7 @@ org.mule.api.lifecycle.Stoppable
       </tr>
       
     
-      <tr class=" api apilevel-" >
+      <tr class="alt-color api apilevel-" >
           <td class="jd-typecol"><nobr>
           private
           
@@ -736,6 +725,17 @@ org.mule.api.lifecycle.Stoppable
           int</nobr></td>
           <td class="jd-linkcol"><a href="../../../../../org/mule/munit/config/ExecuteMessageProcessor.html#retryMax">retryMax</a></td>
           <td class="jd-descrcol" width="100%">Maximum number of retries that can be attempted.</td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a></nobr></td>
+          <td class="jd-linkcol"><a href="../../../../../org/mule/munit/config/ExecuteMessageProcessor.html#sql">sql</a></td>
+          <td class="jd-descrcol" width="100%"></td>
       </tr>
       
     
@@ -899,9 +899,9 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/munit/config/ExecuteMessageProcessor.html#setQuery(java.lang.Object)">setQuery</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> value)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/munit/config/ExecuteMessageProcessor.html#setRetryMax(int)">setRetryMax</a></span>(int value)</nobr>
         
-        <div class="jd-descrdiv">Sets query</div>
+        <div class="jd-descrdiv">Sets retryMax</div>
   
   </td></tr>
 
@@ -917,9 +917,9 @@ org.mule.api.lifecycle.Stoppable
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
-        <span class="sympad"><a href="../../../../../org/mule/munit/config/ExecuteMessageProcessor.html#setRetryMax(int)">setRetryMax</a></span>(int value)</nobr>
+        <span class="sympad"><a href="../../../../../org/mule/munit/config/ExecuteMessageProcessor.html#setSql(java.lang.Object)">setSql</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> value)</nobr>
         
-        <div class="jd-descrdiv">Sets retryMax</div>
+        <div class="jd-descrdiv">Sets sql</div>
   
   </td></tr>
 
@@ -1498,7 +1498,7 @@ From interface
 
 
 
-<A NAME="_queryType"></A>
+<A NAME="_sqlType"></A>
 
 <div class="jd-details api apilevel-"> 
     <h4 class="jd-details-title">
@@ -1508,7 +1508,7 @@ From interface
          
         <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>
       </span>
-        _queryType
+        _sqlType
     </h4>
       <div class="api-level">
         
@@ -1718,36 +1718,6 @@ From interface
 
 
 
-<A NAME="query"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        private 
-         
-         
-        <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>
-      </span>
-        query
-    </h4>
-      <div class="api-level">
-        
-
-
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p></p></div>
-
-    
-    </div>
-</div>
-
-
-
 <A NAME="retryCount"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -1805,6 +1775,36 @@ From interface
   <div class="jd-tagdata jd-tagdescr"><p>Maximum number of retries that can be attempted.
  
 </p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="sql"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>
+      </span>
+        sql
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
 
     
     </div>
@@ -2110,47 +2110,6 @@ From interface
 </div>
 
 
-<A NAME="setQuery(java.lang.Object)"></A>
-
-<div class="jd-details api apilevel-"> 
-    <h4 class="jd-details-title">
-      <span class="normal">
-        public 
-         
-         
-         
-         
-        void
-      </span>
-      <span class="sympad">setQuery</span>
-      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> value)</span>
-    </h4>
-      <div class="api-level">
-        <div>
-
-</div>
-        
-  
-
-      </div>
-    <div class="jd-details-descr">
-      
-  <div class="jd-tagdata jd-tagdescr"><p>Sets query</p></div>
-  <div class="jd-tagdata">
-      <h5 class="jd-tagtitle">Parameters</h5>
-      <table class="jd-tagtable">
-        <tr>
-          <th>value</td>
-          <td>Value to set
-</td>
-        </tr>
-      </table>
-  </div>
-
-    </div>
-</div>
-
-
 <A NAME="setRetryMax(int)"></A>
 
 <div class="jd-details api apilevel-"> 
@@ -2177,6 +2136,47 @@ From interface
     <div class="jd-details-descr">
       
   <div class="jd-tagdata jd-tagdescr"><p>Sets retryMax</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>value</td>
+          <td>Value to set
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setSql(java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">setSql</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> value)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Sets sql</p></div>
   <div class="jd-tagdata">
       <h5 class="jd-tagtitle">Parameters</h5>
       <table class="jd-tagtable">

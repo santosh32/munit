@@ -36,8 +36,8 @@ public class ExecuteDefinitionParser
         if ((configRef!= null)&&(!StringUtils.isBlank(configRef))) {
             builder.addPropertyValue("moduleObject", configRef);
         }
-        if ((element.getAttribute("query")!= null)&&(!StringUtils.isBlank(element.getAttribute("query")))) {
-            builder.addPropertyValue("query", element.getAttribute("query"));
+        if ((element.getAttribute("sql")!= null)&&(!StringUtils.isBlank(element.getAttribute("sql")))) {
+            builder.addPropertyValue("sql", element.getAttribute("sql"));
         }
         BeanDefinition definition = builder.getBeanDefinition();
         definition.setAttribute(MuleHierarchicalBeanDefinitionParserDelegate.MULE_NO_RECURSE, Boolean.TRUE);

@@ -48,8 +48,8 @@ public class ExecuteMessageProcessor
     implements FlowConstructAware, MuleContextAware, Disposable, Initialisable, Startable, Stoppable, MessageProcessor
 {
 
-    private Object query;
-    private String _queryType;
+    private Object sql;
+    private String _sqlType;
     private static Logger logger = LoggerFactory.getLogger(ExecuteMessageProcessor.class);
     /**
      * Module object
@@ -166,12 +166,12 @@ public class ExecuteMessageProcessor
     }
 
     /**
-     * Sets query
+     * Sets sql
      * 
      * @param value Value to set
      */
-    public void setQuery(Object value) {
-        this.query = value;
+    public void setSql(Object value) {
+        this.sql = value;
     }
 
     /**
@@ -354,10 +354,10 @@ public class ExecuteMessageProcessor
             castedModuleObject = ((DBServerModuleLifecycleAdapter) moduleObject);
         }
         try {
-            String transformedQuery = ((String) evaluateAndTransform(_muleMessage, ExecuteMessageProcessor.class.getDeclaredField("_queryType").getGenericType(), null, query));
+            String transformedSql = ((String) evaluateAndTransform(_muleMessage, ExecuteMessageProcessor.class.getDeclaredField("_sqlType").getGenericType(), null, sql));
             retryCount.getAndIncrement();
             Object resultPayload;
-            resultPayload = castedModuleObject.execute(transformedQuery);
+            resultPayload = castedModuleObject.execute(transformedSql);
             TransformerTemplate.OverwitePayloadCallback overwritePayloadCallback = null;
             if (resultPayload == null) {
                 overwritePayloadCallback = new TransformerTemplate.OverwitePayloadCallback(NullPayload.getInstance());

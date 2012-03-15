@@ -3,14 +3,15 @@ package org.mule.munit.config;
 
 import org.mule.api.Capabilities;
 import org.mule.api.Capability;
+import org.mule.munit.AssertModule;
 
 
 /**
- * A <code>AssertModuleCapabilitiesAdapter</code> is a wrapper around {@link org.mule.munit.AssertModule } that implements {@link org.mule.api.Capabilities} interface.
+ * A <code>AssertModuleCapabilitiesAdapter</code> is a wrapper around {@link AssertModule } that implements {@link org.mule.api.Capabilities} interface.
  * 
  */
 public class AssertModuleCapabilitiesAdapter
-    extends org.mule.munit.AssertModule
+    extends AssertModule
     implements Capabilities
 {
 

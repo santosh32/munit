@@ -164,6 +164,14 @@
  deprecated="not deprecated"
  visibility="public"
 >
+</constructor>
+<constructor name="MockedMessageProcessor"
+ type="org.mule.munit.MockedMessageProcessor"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
 <parameter name="mpMockModule" type="org.mule.munit.MPMockModule">
 </parameter>
 </constructor>

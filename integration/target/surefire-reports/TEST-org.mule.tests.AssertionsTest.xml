@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="37.912" errors="0" skipped="0" tests="10" name="org.mule.tests.AssertionsTest">
+<testsuite failures="0" time="4.995" errors="0" skipped="0" tests="10" name="org.mule.tests.AssertionsTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Libraries"/>
@@ -64,14 +64,14 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="0.085" classname="org.mule.munit.MuleSuiteRunner$MuleTest" name="testingEchoFlow"/>
-  <testcase time="0.066" classname="org.mule.munit.MuleSuiteRunner$MuleTest" name="testingEchoWithANullPayload"/>
-  <testcase time="0.119" classname="org.mule.munit.MuleSuiteRunner$MuleTest" name="testSalesforceEmptyMap"/>
-  <testcase time="0.038" classname="org.mule.munit.MuleSuiteRunner$MuleTest" name="testThatSalesforceIsCorrectlyCalledWithVerify"/>
+  <testcase time="0.031" classname="org.mule.munit.MuleSuiteRunner$MuleTest" name="testingEchoFlow"/>
+  <testcase time="0.057" classname="org.mule.munit.MuleSuiteRunner$MuleTest" name="testingEchoWithANullPayload"/>
+  <testcase time="0.046" classname="org.mule.munit.MuleSuiteRunner$MuleTest" name="testSalesforceEmptyMap"/>
+  <testcase time="0.029" classname="org.mule.munit.MuleSuiteRunner$MuleTest" name="testThatSalesforceIsCorrectlyCalledWithVerify"/>
   <testcase time="0.022" classname="org.mule.munit.MuleSuiteRunner$MuleTest" name="testThatSalesforceIsCorrectlyCalled"/>
-  <testcase time="0.122" classname="org.mule.munit.MuleSuiteRunner$MuleTest" name="testThatNullPayloadIfFailsToConnect"/>
+  <testcase time="0.026" classname="org.mule.munit.MuleSuiteRunner$MuleTest" name="testThatNullPayloadIfFailsToConnect"/>
   <testcase time="0.025" classname="org.mule.munit.MuleSuiteRunner$MuleTest" name="testThatNullPayloadIfFailsWhenQuery"/>
-  <testcase time="3.494" classname="org.mule.munit.MuleSuiteRunner$MuleTest" name="testGroovyTransformerCaseMale"/>
-  <testcase time="0.025" classname="org.mule.munit.MuleSuiteRunner$MuleTest" name="testGroovyTransformerCaseFemale"/>
+  <testcase time="0.338" classname="org.mule.munit.MuleSuiteRunner$MuleTest" name="testGroovyTransformerCaseMale"/>
+  <testcase time="0.026" classname="org.mule.munit.MuleSuiteRunner$MuleTest" name="testGroovyTransformerCaseFemale"/>
   <testcase time="0.021" classname="org.mule.munit.MuleSuiteRunner$MuleTest" name="testGroovyTransformerWrongCase"/>
 </testsuite>

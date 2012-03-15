@@ -27,7 +27,7 @@
  deprecated="not deprecated"
  visibility="public"
 >
-<parameter name="query" type="java.lang.String">
+<parameter name="sql" type="java.lang.String">
 </parameter>
 </method>
 <method name="setCreationalScript"
@@ -307,19 +307,6 @@
 <parameter name="context" type="org.mule.api.MuleContext">
 </parameter>
 </method>
-<method name="setQuery"
- return="void"
- abstract="false"
- native="false"
- synchronized="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="public"
->
-<parameter name="value" type="java.lang.Object">
-</parameter>
-</method>
 <method name="setRetryMax"
  return="void"
  abstract="false"
@@ -331,6 +318,19 @@
  visibility="public"
 >
 <parameter name="value" type="int">
+</parameter>
+</method>
+<method name="setSql"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="value" type="java.lang.Object">
 </parameter>
 </method>
 <method name="start"
@@ -359,7 +359,7 @@
 <exception name="MuleException" type="org.mule.api.MuleException">
 </exception>
 </method>
-<field name="_queryType"
+<field name="_sqlType"
  type="java.lang.String"
  transient="false"
  volatile="false"
@@ -429,16 +429,6 @@
  visibility="private"
 >
 </field>
-<field name="query"
- type="java.lang.Object"
- transient="false"
- volatile="false"
- static="false"
- final="false"
- deprecated="not deprecated"
- visibility="private"
->
-</field>
 <field name="retryCount"
  type="java.util.concurrent.atomic.AtomicInteger"
  transient="false"
@@ -451,6 +441,16 @@
 </field>
 <field name="retryMax"
  type="int"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="private"
+>
+</field>
+<field name="sql"
+ type="java.lang.Object"
  transient="false"
  volatile="false"
  static="false"
