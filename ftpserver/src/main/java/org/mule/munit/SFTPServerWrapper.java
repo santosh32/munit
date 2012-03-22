@@ -32,8 +32,7 @@ public class SFTPServerWrapper extends FTPServer{
         Security.addProvider(new BouncyCastleProvider());
         sshd = SshServer.setUpDefaultServer();
         sshd.setPort(port);
-        FileKeyPairProvider fileKeyPairProvider = new FileKeyPairProvider(new String[]{getClass().getResource("SFTPServerWrapper.class").toString().replaceAll("org/mule/munit/SFTPServerWrapper.class", "hostkey.pem").replaceAll("file:","")});
-
+        FileKeyPairProvider fileKeyPairProvider = new FileKeyPairProvider(new String[]{getClass().getResource("/hostkey.pem").toString().replaceAll("file:","") });
         sshd.setKeyPairProvider(fileKeyPairProvider);
         SftpSubsystem.Factory factory = new SftpSubsystem.Factory();
 

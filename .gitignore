@@ -5,3 +5,10 @@
 /target
 .project
 .classpath
+.idea
+assert/target
+ftpserver/target
+dbserver/target
+mock/target
+mpmock/target
+integration/target

@@ -203,7 +203,19 @@
 					</execution>
 				</executions>
 			</plugin>
-
+            <plugin>
+                <groupId>org.mule</groupId>
+                <artifactId>munit</artifactId>
+                <version>1.0-SNAPSHOT</version>
+                <executions>
+                    <execution>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -213,6 +225,11 @@
 			</plugin>
 
 		</plugins>
+        <testResources>
+            <testResource>
+                <directory>src/test/munit</directory>
+            </testResource>
+        </testResources>
 	</build>
 
 	<!-- plugins for creating site reports -->
