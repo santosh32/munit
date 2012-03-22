@@ -6,11 +6,9 @@ import org.apache.ftpserver.ftplet.*;
 import org.apache.ftpserver.listener.ListenerFactory;
 
 /**
- * Created by IntelliJ IDEA.
- * User: fernandofederico
- * Date: 3/10/12
- * Time: 10:23 AM
- * To change this template use File | Settings | File Templates.
+ * <p>Wrapper of the FTP Server</p>
+ *
+ * @author Federico, Fernando
  */
 public class FTPServerWrapper extends FTPServer{
     private FtpServer server;

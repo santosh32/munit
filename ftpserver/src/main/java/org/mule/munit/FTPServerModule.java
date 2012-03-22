@@ -71,7 +71,13 @@ public class FTPServerModule
     @Processor
     public void stopServer()
     {
+       try
+       {
         server.stop();
+       }catch(Throwable t)
+       {
+
+       }
     }
 
 

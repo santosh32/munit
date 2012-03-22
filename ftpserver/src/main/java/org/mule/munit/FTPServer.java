@@ -6,11 +6,9 @@ import java.io.FilenameFilter;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by IntelliJ IDEA.
- * User: fernandofederico
- * Date: 3/9/12
- * Time: 4:46 PM
- * To change this template use File | Settings | File Templates.
+ * <p>Implementation of the FTP server</p>
+ *
+ * @author Federico, Fernando
  */
 public abstract class FTPServer {
 

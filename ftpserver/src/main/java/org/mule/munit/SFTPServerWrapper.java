@@ -2,7 +2,6 @@ package org.mule.munit;
 
 import org.apache.sshd.SshServer;
 import org.apache.sshd.common.NamedFactory;
-import org.apache.sshd.common.keyprovider.FileKeyPairProvider;
 import org.apache.sshd.server.Command;
 import org.apache.sshd.server.PasswordAuthenticator;
 import org.apache.sshd.server.command.ScpCommandFactory;
@@ -16,11 +15,9 @@ import java.security.Security;
 import java.util.Arrays;
 
 /**
- * Created by IntelliJ IDEA.
- * User: fernandofederico
- * Date: 3/9/12
- * Time: 4:46 PM
- * To change this template use File | Settings | File Templates.
+ * <p>SFTP Wrapper</p>
+ *
+ * @author Federico, Fernando
  */
 public class SFTPServerWrapper extends FTPServer{
 
@@ -32,7 +29,7 @@ public class SFTPServerWrapper extends FTPServer{
         Security.addProvider(new BouncyCastleProvider());
         sshd = SshServer.setUpDefaultServer();
         sshd.setPort(port);
-        FileKeyPairProvider fileKeyPairProvider = new FileKeyPairProvider(new String[]{getClass().getResource("/hostkey.pem").toString().replaceAll("file:","") });
+        StreamKeyPairProvider fileKeyPairProvider = new StreamKeyPairProvider();
         sshd.setKeyPairProvider(fileKeyPairProvider);
         SftpSubsystem.Factory factory = new SftpSubsystem.Factory();
 

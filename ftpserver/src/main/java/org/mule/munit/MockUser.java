@@ -9,11 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
- * User: fernandofederico
- * Date: 3/10/12
- * Time: 10:57 AM
- * To change this template use File | Settings | File Templates.
+ * <p>Mock User for testing</p>
+ *
+ * @author Federico, Fernando
  */
 public class MockUser implements User {
     @Override

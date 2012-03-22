@@ -3,11 +3,9 @@ package org.mule.munit;
 import org.apache.ftpserver.ftplet.*;
 
 /**
- * Created by IntelliJ IDEA.
- * User: fernandofederico
- * Date: 3/10/12
- * Time: 10:56 AM
- * To change this template use File | Settings | File Templates.
+ * <p>Mock user Manager for testing</p>
+ *
+ * @author Federico, Fernando
  */
 public class MockUserManager implements UserManager {
     @Override
