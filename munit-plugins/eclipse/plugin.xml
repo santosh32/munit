@@ -1,0 +1,38 @@
+<plugin>
+
+ <extension
+         point="org.eclipse.debug.ui.launchShortcuts">
+      <shortcut
+            label="MUnit"
+            icon="icons/studio16x16.png"
+            helpContextId="org.eclipse.jdt.junit.launch_shortcut"
+            class="munit_plugin.MunitLaunchShortcut"
+            modes="run, debug"
+            id="org.eclipse.jdt.junit.junitShortcut">
+         <contextualLaunch>
+            <enablement>
+               <with variable="selection">
+                  <count value="1"/>
+               	  <iterate>
+                     <adapt type="org.eclipse.core.resources.IResource">
+		             </adapt>
+		          </iterate>
+               </with>
+            </enablement>
+         </contextualLaunch>
+         <configurationType
+               id="org.eclipse.jdt.junit.launchconfig">
+         </configurationType>
+         <description
+               description="MUnit"
+               mode="debug">
+         </description>
+         <description
+               description="MUnit"
+               mode="run">
+         </description>
+      </shortcut>
+   </extension>
+   
+
+</plugin>
