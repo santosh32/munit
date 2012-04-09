@@ -112,7 +112,7 @@
                         <version>3.1.1-SNAPSHOT</version>
                     </docletArtifact>
                     <doclet>org.mule.devkit.doclet.Doclava</doclet>
-                    <bootclasspath>${sun.boot.class.path}</bootclasspath>
+                    <unotclasspath>${sun.boot.class.path}</bootclasspath>
                     <additionalparam>-quiet
                         -federate JDK http://download.oracle.com/javase/6/docs/api/index.html?
                         -federationxml JDK http://doclava.googlecode.com/svn/static/api/openjdk-6.xml

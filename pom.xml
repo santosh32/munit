@@ -12,6 +12,10 @@
         <mule.devkit.version>3.2</mule.devkit.version>
         <junit.version>4.8.2</junit.version>
         <mockito.version>1.8.2</mockito.version>
+        <eclipsePluginVersion>2.5</eclipsePluginVersion>
+        <vmtype>org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType</vmtype>
+        <jdk5Name>J2SE-1.6</jdk5Name>
+        <jdk.version>1.6</jdk.version>
     </properties>
 
     <modules>
@@ -20,7 +24,6 @@
     <module>ftpserver</module>
     <module>mclient</module>
     <module>dbserver</module>
-    <module>integration</module>
     <module>mpmock</module>
   </modules>
  <distributionManagement>

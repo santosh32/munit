@@ -16,6 +16,7 @@ package org.mule;
  * limitations under the License.
  */
 
+
 import org.apache.maven.model.Resource;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -64,50 +65,54 @@ public class MUnitMojo
     public void execute()
         throws MojoExecutionException
     {
-        List testResources = project.getTestResources();
-        for ( Object o : testResources )
+        if ( !"true".equals(System.getProperty("skipTests")) )
         {
-            Resource testResource = (Resource) o;
-            testResource.getTargetPath();
-        }
-
-        Thread t = Thread.currentThread();
-        ClassLoader old = t.getContextClassLoader();
-        try {
-            List<Result> results = new ArrayList<Result>();
-            t.setContextClassLoader(getClassPath(makeClassPath()));
-
-            File testFolder = new File(project.getBasedir(), "src/test/munit");
-            
-            for ( File file : testFolder.listFiles() )
+            List testResources = project.getTestResources();
+            for ( Object o : testResources )
             {
-
-                String fileName = file.getName();
-                if (fileName.endsWith(".xml"))
-                {
-                    System.out.println("Running " + fileName +" test");
-                    System.setProperty("munit.resource", fileName);
-
-                    MuleSuiteRunner muleSuiteRunner = new MuleSuiteRunner(MTest.class);
-                    JUnitCore core = new JUnitCore();
-                    core.addListener(new TextListener(new RealSystem()));
-                    results.add(core.run(muleSuiteRunner));
-                }
- 
+                Resource testResource = (Resource) o;
+                testResource.getTargetPath();
             }
-            
-           for ( Result run : results )
-           {
-               if ( !run.wasSuccessful() )
-                   throw new MojoExecutionException("MUnit Tests Failed");
-           }
+
+            Thread t = Thread.currentThread();
+            ClassLoader old = t.getContextClassLoader();
+            try {
+                List<Result> results = new ArrayList<Result>();
+                t.setContextClassLoader(getClassPath(makeClassPath()));
+
+                File testFolder = new File(project.getBasedir(), "src/test/munit");
+
+                for ( File file : testFolder.listFiles() )
+                {
+
+                    String fileName = file.getName();
+                    if (fileName.endsWith(".xml"))
+                    {
+                        System.out.println("Running " + fileName +" test");
+                        System.setProperty("munit.resource", fileName);
+
+                        MuleSuiteRunner muleSuiteRunner = new MuleSuiteRunner(MTest.class);
+                        JUnitCore core = new JUnitCore();
+                        core.addListener(new TextListener(new RealSystem()));
+                        results.add(core.run(muleSuiteRunner));
+                    }
+
+                }
+
+                for ( Result run : results )
+                {
+                    if ( !run.wasSuccessful() )
+                        throw new MojoExecutionException("MUnit Tests Failed");
+                }
 
 
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } finally {
-            t.setContextClassLoader(old);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } finally {
+                t.setContextClassLoader(old);
+            }
         }
+
     }
 
     public URLClassLoader getClassPath(List<URL> classpath) {
