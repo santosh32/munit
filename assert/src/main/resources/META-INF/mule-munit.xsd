@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:mule="http://www.mulesoft.org/schema/mule/core" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" targetNamespace="http://www.mulesoft.org/schema/mule/munit">
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace"></xs:import>
+  <xs:import schemaLocation="http://www.springframework.org/schema/beans/spring-beans-3.0.xsd" namespace="http://www.springframework.org/schema/beans"></xs:import>
+  <xs:import schemaLocation="http://www.mulesoft.org/schema/mule/core/current/mule.xsd" namespace="http://www.mulesoft.org/schema/mule/core"></xs:import>
+  <xs:import schemaLocation="http://www.mulesoft.org/schema/mule/devkit/current/mule-devkit.xsd" namespace="http://www.mulesoft.org/schema/mule/devkit"></xs:import>
+  <xs:simpleType name="integerType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:integer"></xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:pattern value="(\#\[[^\]]+\]|\$\{[^\}]+\})"></xs:pattern>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="decimalType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal"></xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:pattern value="(\#\[[^\]]+\]|\$\{[^\}]+\})"></xs:pattern>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="floatType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:float"></xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:pattern value="(\#\[[^\]]+\]|\$\{[^\}]+\})"></xs:pattern>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="doubleType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:double"></xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:pattern value="(\#\[[^\]]+\]|\$\{[^\}]+\})"></xs:pattern>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="dateTimeType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:dateTime"></xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:pattern value="(\#\[[^\]]+\]|\$\{[^\}]+\})"></xs:pattern>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="longType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:long"></xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:pattern value="(\#\[[^\]]+\]|\$\{[^\}]+\})"></xs:pattern>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="byteType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:byte"></xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:pattern value="(\#\[[^\]]+\]|\$\{[^\}]+\})"></xs:pattern>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="booleanType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:boolean"></xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:pattern value="(\#\[[^\]]+\]|\$\{[^\}]+\})"></xs:pattern>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="anyUriType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:anyURI"></xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:pattern value="(\#\[[^\]]+\]|\$\{[^\}]+\})"></xs:pattern>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="charType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="1"></xs:minLength>
+          <xs:maxLength value="1"></xs:maxLength>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:pattern value="(\#\[[^\]]+\]|\$\{[^\}]+\})"></xs:pattern>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:complexType name="XmlType">
+    <xs:sequence>
+      <xs:any maxOccurs="unbounded" minOccurs="0" processContents="lax"></xs:any>
+    </xs:sequence>
+    <xs:attribute name="ref" use="optional" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>The reference object for this parameter</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:element xmlns:devkit="http://www.mulesoft.org/schema/mule/devkit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="config" substitutionGroup="mule:abstract-extension" devkit:javaClass="org.mule.munit.config.AssertModuleLifecycleAdapter">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="mule:abstractExtensionType">
+          <xs:annotation>
+            <xs:documentation>&lt;p&gt;Module for asserting in Munit tests.&lt;/p&gt;</xs:documentation>
+          </xs:annotation>
+          <xs:attribute name="name" use="optional" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Give a name to this configuration so it can be later referenced by org.mule.munit.config-ref.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/munit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="assert-that" substitutionGroup="mule:abstract-message-processor" type="AssertThatType">
+    <xs:annotation>
+      <xs:documentation>&lt;p&gt;Assert that the payload is equal to an expected value.&lt;/p&gt;
+&lt;p&gt;The payloadIs-ref can be any Object/expression. &lt;/p&gt;
+&lt;p&gt;The assertion Fails if the payload is not equal to the payloadIs-ref&lt;/p&gt;</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="AssertThatType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="message" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Description message to be shown in case of failure.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="payloadIs-ref" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Expected Value</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/munit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="assert-true" substitutionGroup="mule:abstract-message-processor" type="AssertTrueType">
+    <xs:annotation>
+      <xs:documentation>&lt;p&gt;Assert for a true expression.&lt;/p&gt;</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="AssertTrueType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="message" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Description message to be shown in case of failure.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/munit" name="condition" use="required" type="booleanType">
+          <xs:annotation>
+            <xs:documentation>Boolean expression</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/munit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="assert-on-equals" substitutionGroup="mule:abstract-message-processor" type="AssertOnEqualsType">
+    <xs:annotation>
+      <xs:documentation>&lt;p&gt;Check that two objects are equal.&lt;/p&gt;</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="AssertOnEqualsType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="message" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Description message to be shown in case of failure.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="expected-ref" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Expected value</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="value-ref" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Real value</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/munit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="assert-not-same" substitutionGroup="mule:abstract-message-processor" type="AssertNotSameType">
+    <xs:annotation>
+      <xs:documentation>Assert two objects are not equal</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="AssertNotSameType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="message" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>description message</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="expected-ref" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>expected value</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="value-ref" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>real value</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/munit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="assert-false" substitutionGroup="mule:abstract-message-processor" type="AssertFalseType">
+    <xs:annotation>
+      <xs:documentation>&lt;p&gt;Check if an expression is false.&lt;/p&gt;</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="AssertFalseType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="message" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Description message to be shown in case of failure.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/munit" name="condition" use="required" type="booleanType">
+          <xs:annotation>
+            <xs:documentation>Boolean expression</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/munit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="assert-not-null" substitutionGroup="mule:abstract-message-processor" type="AssertNotNullType">
+    <xs:annotation>
+      <xs:documentation>&lt;p&gt;Assert for a Not Null payload. &lt;/p&gt;</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="AssertNotNullType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="message" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Description message to be shown in case of failure.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/munit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="assert-null" substitutionGroup="mule:abstract-message-processor" type="AssertNullType">
+    <xs:annotation>
+      <xs:documentation>&lt;p&gt;Assert Null Payload. &lt;/p&gt;</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="AssertNullType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="message" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Description message to be shown in case of failure.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/munit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="set" substitutionGroup="mule:abstract-message-processor" type="SetType">
+    <xs:annotation>
+      <xs:documentation>&lt;p&gt;Defines the payload for testing.&lt;/p&gt;</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="SetType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="payload-ref" use="required" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>payload</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/munit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="set-null-payload" substitutionGroup="mule:abstract-message-processor" type="SetNullPayloadType">
+    <xs:annotation>
+      <xs:documentation>&lt;p&gt;Defines a Null payload for testing.&lt;/p&gt;</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="SetNullPayloadType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/munit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="fail" substitutionGroup="mule:abstract-message-processor" type="FailType">
+    <xs:annotation>
+      <xs:documentation>&lt;p&gt;Fail assertion.&lt;/p&gt;</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="FailType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute name="config-ref" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="message" use="optional" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>Description message to be shown in case of failure.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+    <xs:complexType name="munitType">
+        <xs:complexContent>
+            <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:baseFlowConstructType">
+                <xs:sequence>
+                    <xs:group xmlns:mule="http://www.mulesoft.org/schema/mule/core" ref="mule:messageProcessorOrOutboundEndpoint" maxOccurs="unbounded" />
+                </xs:sequence>
+                <xs:attribute name="description" use="required" type="xs:string" >
+                    <xs:annotation>
+                        <xs:documentation>Description message to be shown in case of failure.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+   <xs:element xmlns="http://www.mulesoft.org/schema/mule/munit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" substitutionGroup="mule:abstract-flow-construct" name="test"  type="munitType">
+        <xs:annotation>
+            <xs:documentation>
+                The test flow of Munit
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element xmlns="http://www.mulesoft.org/schema/mule/munit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="before-test" substitutionGroup="mule:abstract-flow-construct" type="munitType">
+        <xs:annotation>
+            <xs:documentation>
+                Flow to be run before each test flow
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element xmlns="http://www.mulesoft.org/schema/mule/munit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="after-test"  substitutionGroup="mule:abstract-flow-construct" type="munitType">
+        <xs:annotation>
+            <xs:documentation>
+                Flow to be run after each test flow
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element xmlns="http://www.mulesoft.org/schema/mule/munit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="before-suite"  substitutionGroup="mule:abstract-flow-construct" type="munitType">
+        <xs:annotation>
+            <xs:documentation>
+                Flow to be run before a munit suite
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element xmlns="http://www.mulesoft.org/schema/mule/munit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="after-suite"  substitutionGroup="mule:abstract-flow-construct" type="munitType">
+        <xs:annotation>
+            <xs:documentation>
+                Flow to be run after a munit suite
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+</xs:schema>

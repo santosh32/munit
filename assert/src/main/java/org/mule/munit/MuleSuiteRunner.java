@@ -12,21 +12,18 @@ import org.mule.api.MuleContext;
 import org.mule.api.MuleEvent;
 import org.mule.api.MuleException;
 import org.mule.api.config.ConfigurationBuilder;
-import org.mule.api.construct.FlowConstruct;
 import org.mule.api.context.MuleContextBuilder;
 import org.mule.api.context.MuleContextFactory;
-import org.mule.api.registry.MuleRegistry;
 import org.mule.config.DefaultMuleConfiguration;
 import org.mule.config.builders.SimpleConfigurationBuilder;
 import org.mule.config.spring.SpringXmlConfigurationBuilder;
-import org.mule.construct.Flow;
 import org.mule.context.DefaultMuleContextBuilder;
 import org.mule.context.DefaultMuleContextFactory;
+import org.mule.munit.config.*;
 import org.mule.tck.MuleTestUtils;
 import org.mule.tck.TestingWorkListener;
 import org.mule.util.ClassUtils;
 
-import javax.xml.namespace.QName;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,12 +31,7 @@ import java.util.List;
 
 
 public class MuleSuiteRunner extends Runner implements Filterable, Sortable{
-    public static final String CLASSNAME_ANNOTATIONS_CONFIG_BUILDER = "org.mule.config.AnnotationsConfigurationBuilder";
-    private static QName BEFORE_SUITE = new QName("http://www.mulesoft.org/schema/mule/mtest", "before-suite");
-    private static QName AFTER_SUITE = new QName("http://www.mulesoft.org/schema/mule/mtest", "after-suite");
-    private static QName BEFORE_TEST = new QName("http://www.mulesoft.org/schema/mule/mtest", "before-tests");
-    private static QName AFTER_TEST = new QName("http://www.mulesoft.org/schema/mule/mtest", "after-tests");
-    private static QName TEST = new QName("http://www.mulesoft.org/schema/mule/mtest", "test");
+    public static final String CLASSNAME_ANNOTATIONS_CONFIG_BUILDER = "org.mule.org.mule.munit.config.AnnotationsConfigurationBuilder";
 
     private TestSuite testSuite;
     private MuleContext muleContext;
@@ -55,19 +47,13 @@ public class MuleSuiteRunner extends Runner implements Filterable, Sortable{
 
             testSuite = new TestSuite();
 
-            List<Flow> before = lookupFlows(BEFORE_TEST);
-            List<Flow> after = lookupFlows(AFTER_TEST);
-            MuleRegistry registry = muleContext.getRegistry();
-            Collection<FlowConstruct> flowConstructs = registry.lookupFlowConstructs();
-            for ( FlowConstruct flowConstruct : flowConstructs )
+            List<MunitFlow> before = lookupFlows(MunitBeforeTest.class);
+            List<MunitFlow> after = lookupFlows(MunitAfterTest.class);
+            Collection<MunitFlow> flowConstructs = lookupFlows(MunitTest.class);
+            for ( MunitFlow flowConstruct : flowConstructs )
             {
-                final Flow flow = (Flow) flowConstruct;
-
-                if ( ((Flow) flowConstruct).getAnnotation(TEST) != null )
-                {
-
-                    testSuite.addTest(new MuleTest(before,flow, after));
-                }
+                
+                testSuite.addTest(new MuleTest(before,flowConstruct, after));
             }
 
         } catch (Exception e) {
@@ -75,33 +61,17 @@ public class MuleSuiteRunner extends Runner implements Filterable, Sortable{
         }
     }
 
-    private List<Flow> lookupFlows(QName qName)
+    private List<MunitFlow> lookupFlows(Class munitClass)
     {
-        List<Flow> flows = new ArrayList<Flow>();
-        Collection<Flow> flowConstructs = muleContext.getRegistry().lookupObjects(Flow.class);
-        for ( Flow flowConstruct : flowConstructs )
-        {
-            String annotation = (String) (flowConstruct).getAnnotation(qName);
-            if ( annotation != null  )
-            {
-                flows.add(flowConstruct);
-            }
-        }
-
-        return flows;
+        return new ArrayList<MunitFlow>(muleContext.getRegistry().lookupObjects(munitClass));
     }
     
     
-    private void process(QName qName, MuleEvent event) throws MuleException {
-        Collection<Flow> flowConstructs = muleContext.getRegistry().lookupObjects(Flow.class);
-        for ( Flow flowConstruct : flowConstructs )
+    private void process(Collection<MunitFlow> flowConstructs, MuleEvent event) throws MuleException {
+        for ( MunitFlow flowConstruct : flowConstructs )
         {
-            String annotation = (String) (flowConstruct).getAnnotation(qName);
-            if ( annotation != null  )
-            {
-                System.out.printf("%n" + annotation + "%n");
-                (flowConstruct).process(event);
-            }
+             System.out.printf("%n" + flowConstruct.getDescription() + "%n");
+             (flowConstruct).process(event);
         }
     }
 
@@ -122,11 +92,11 @@ public class MuleSuiteRunner extends Runner implements Filterable, Sortable{
 
         try
         {
-            process(BEFORE_SUITE, muleEvent());
+            process(lookupFlows(MunitBeforeSuite.class), muleEvent());
 
             testSuite.run(result);
 
-            process(AFTER_SUITE, muleEvent());
+            process(lookupFlows(MunitAfterSuite.class), muleEvent());
 
             muleContext.stop();
             muleContext.dispose();
@@ -261,12 +231,12 @@ public class MuleSuiteRunner extends Runner implements Filterable, Sortable{
     public class MuleTest extends TestCase
     {
 
-        private List<Flow> before;
-        Flow flow;
-        private List<Flow> after;
+        private List<MunitFlow> before;
+        MunitFlow flow;
+        private List<MunitFlow> after;
 
 
-        public MuleTest(List<Flow> before, Flow flow, List<Flow> after) {
+        public MuleTest(List<MunitFlow> before, MunitFlow flow, List<MunitFlow> after) {
             this.before = before;
             this.flow = flow;
             this.after = after;
@@ -285,7 +255,7 @@ public class MuleSuiteRunner extends Runner implements Filterable, Sortable{
         @Override
         protected void runTest() throws Throwable {
             MuleEvent event = muleEvent();
-            run(event, before, BEFORE_TEST);
+            run(event, before);
 
             showDescription();
 
@@ -297,26 +267,23 @@ public class MuleSuiteRunner extends Runner implements Filterable, Sortable{
                 throw t;
             }
             finally {
-                run(event, after, AFTER_TEST);
+                run(event, after);
             }
         }
 
-        private void run(MuleEvent event, List<Flow> flows, QName qName) throws MuleException {
+        private void run(MuleEvent event, List<MunitFlow> flows) throws MuleException {
             if (flows != null)
             {
-                for ( Flow flow : flows )
+                for ( MunitFlow flow : flows )
                 {
-                    System.out.println(flow.getAnnotation(qName));
+                    System.out.printf(flow.getDescription() + "%n");
                     flow.process(event);
                 }
             }
         }
 
         private void showDescription() {
-            String annotation = (String) flow.getAnnotation(TEST);
-            if ( annotation != null )
-
-                System.out.printf("%nDescription:%n************%n" + annotation.replaceAll("\\.", "\\.%n") + "%n");
+           System.out.printf("%nDescription:%n************%n" + flow.getDescription().replaceAll("\\.", "\\.%n") + "%n");
         }
 
     }
