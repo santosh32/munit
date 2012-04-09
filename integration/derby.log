@@ -1,10 +1,10 @@
 ----------------------------------------------------------------
-Thu Mar 15 10:28:15 GMT-03:00 2012:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077): instance a816c00e-0136-168b-64b7-000003c4f8e0 
-on database directory memory:/Users/fernandofederico/Desktop/source/munit/integration/example  with class loader sun.misc.Launcher$AppClassLoader@1729854 
+Mon Apr 09 12:26:18 GMT-03:00 2012:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077): instance a816c00e-0136-97b6-74c4-00000262e880 
+on database directory memory:/Users/fernandofederico/Desktop/source/munit/integration/example  with class loader java.net.URLClassLoader@673ceab3 
 Loaded from file:/Users/fernandofederico/.m2/repository/org/apache/derby/derby/10.8.1.2/derby-10.8.1.2.jar
 java.vendor=Apple Inc.
-java.runtime.version=1.6.0_29-b11-402-11M3527
+java.runtime.version=1.6.0_29-b11-402-11D50d
 user.dir=/Users/fernandofederico/Desktop/source/munit/integration
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''

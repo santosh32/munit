@@ -33,13 +33,13 @@
     <mclient:config/>
     <mulemock:config of="Salesforce" name="salesforceMock"/>
 
-    <flow name="before.each.test"
-          mtest:before-tests="Reseting mocks...">
+    <munit:test name="before.each.test"
+         description="Reseting mocks...">
         <mulemock:reset config-ref="salesforceMock"/>
-    </flow>
+    </munit:test>
 
-    <flow name="testThatSalesforceUpsertIsCalledCorrectly"
-          mtest:test="
+    <munit:test name="testThatSalesforceUpsertIsCalledCorrectly"
+          description="
         Salesforce must be called with a correct query.
         We need to validate that Salesforce is called querying the correct objects.">
 
@@ -56,12 +56,12 @@
             </mulemock:parameters>
         </mulemock:verify-call>
 
-    </flow>
+    </munit:test>
 
 
-    <flow name="testThatSalesforceIsCorrectlyCalled"
+    <munit:test name="testThatSalesforceIsCorrectlyCalled"
 
-          mtest:test="
+          description="
         Salesforce must be called with a correct query.
         We need to validate that Salesforce is called querying the correct objects.">
 
@@ -80,7 +80,7 @@
 
         <munit:assert-not-null/>
         <munit:assert-that payloadIs-ref='#[string:["value 1","value 2"]]'/>
-    </flow>
+    </munit:test>
 
 
 </mule>

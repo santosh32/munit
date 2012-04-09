@@ -13,7 +13,6 @@
       xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
       xmlns:dbserver="http://www.mulesoft.org/schema/mule/dbserver"
       xmlns:spring="http://www.springframework.org/schema/beans"
-      xmlns:mtest="http://www.mulesoft.org/schema/mule/mtest"
       xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.2/mule.xsd
@@ -31,21 +30,18 @@
     INSERT INTO jobtitlelookup (jobtitle, eecsalaryorhourly, jobtitleid) VALUES ('Culinary Team Member', 'HOURLY',3);
     INSERT INTO jobtitlelookup (jobtitle, eecsalaryorhourly, jobtitleid) VALUES ('Other', 'SALARY',9);"/>
 
-    <flow name="before.suite"
-          mtest:before-suite="Starting DB server">
-
+    <munit:before-suite name="before.suite" description="Starting DB server">
         <dbserver:start-db-server />
-    </flow>
+    </munit:before-suite>
 
-
-    <flow name="after.suite"
-          mtest:after-suite="Stopping DB server">
+    <munit:after-suite name="after.suite" description="Stopping DB server">
         <dbserver:stop-db-server />
-    </flow>
+    </munit:after-suite>
 
-    <flow name="testEnricherWhenValueExists"
 
-          mtest:test="
+    <munit:test name="testEnricherWhenValueExists"
+
+          description="
         If the Job Id exist it must set the job property value with the database value">
 
         <message-properties-transformer scope="invocation">
@@ -56,12 +52,12 @@
 
         <munit:assert-on-equals expected-ref="#[string:Culinary Team Member]" value-ref="#[variable:job]" />
 
-    </flow>
+    </munit:test>
 
 
-    <flow name="testEnricherWhenValueDoesNotExists"
+    <munit:test name="testEnricherWhenValueDoesNotExists"
 
-          mtest:test="
+          description="
          If the Job Id doesn't exist it must set the job property value with HIR">
 
         <message-properties-transformer scope="invocation">
@@ -72,7 +68,7 @@
 
         <munit:assert-on-equals expected-ref="#[string:HIR]" value-ref="#[variable:job]" />
 
-    </flow>
+    </munit:test>
 
 
 </mule>

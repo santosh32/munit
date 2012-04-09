@@ -13,9 +13,7 @@
       xmlns:spring="http://www.springframework.org/schema/beans"
       xmlns:mulemock="http://www.mulesoft.org/schema/mule/mock"
       xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
-      xmlns:mclient="http://www.mulesoft.org/schema/mule/mclient"
       xmlns:ftpserver="http://www.mulesoft.org/schema/mule/ftpserver"
-      xmlns:mtest="http://www.mulesoft.org/schema/mule/mtest"
       xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 
@@ -35,27 +33,27 @@
     <ftpserver:config port="3002" name="ftpServer"/>
     <mulemock:config of="Salesforce" name="salesforceMock"/>
 
-    <flow name="before.suite"
-          mtest:before-suite="Starting FTP server">
+    <munit:before-suite name="before.suite"
+          description="Starting FTP server">
         <ftpserver:start-server config-ref="sftpServer"/>
         <ftpserver:start-server config-ref="ftpServer"/>
-    </flow>
+    </munit:before-suite>
 
-    <flow name="before.each.test"
-          mtest:before-tests="Reseting mocks...">
+    <munit:before-test name="before.each.test"
+         description="Reseting mocks...">
         <mulemock:reset config-ref="salesforceMock"/>
-    </flow>
+    </munit:before-test>
 
 
-    <flow name="after.suite"
-          mtest:after-suite="Stopping FTP server">
+    <munit:after-suite name="after.suite"
+          description="Stopping FTP server">
         <ftpserver:stop-server config-ref="sftpServer"/>
         <ftpserver:stop-server config-ref="ftpServer"/>
-    </flow>
+    </munit:after-suite>
 
-    <flow name="testThatSalesforceQueryIsStoredInTheSFTPServer"
+    <munit:test name="testThatSalesforceQueryIsStoredInTheSFTPServer"
 
-          mtest:test="
+          description="
         Salesforce query response must be stored in the sftp server">
 
         <mulemock:expect config-ref="salesforceMock" when="query" mustReturn-ref="nonEmptyList">
@@ -69,12 +67,12 @@
 
          <ftpserver:contains-files file="sftp-jsonResult.txt" path="/tmp" config-ref="sftpServer"/>
 
-    </flow>
+    </munit:test>
 
 
-    <flow name="testThatSalesforceQueryIsStoredInTheFTPServer"
+    <munit:test name="testThatSalesforceQueryIsStoredInTheFTPServer"
 
-          mtest:test="
+          description="
         Salesforce query response must be stored in the ftp server">
 
         <mulemock:expect config-ref="salesforceMock" when="query" mustReturn-ref="nonEmptyList"/>
@@ -84,6 +82,6 @@
 
         <ftpserver:contains-files file="ftp-jsonResult.txt" path="/tmp" config-ref="ftpServer"/>
 
-    </flow>
+    </munit:test>
 
 </mule>
