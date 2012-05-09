@@ -33,10 +33,10 @@
     <mclient:config/>
     <mulemock:config of="Salesforce" name="salesforceMock"/>
 
-    <munit:test name="before.each.test"
+    <munit:before-test name="before.each.test"
          description="Reseting mocks...">
         <mulemock:reset config-ref="salesforceMock"/>
-    </munit:test>
+    </munit:before-test>
 
     <munit:test name="testThatSalesforceUpsertIsCalledCorrectly"
           description="

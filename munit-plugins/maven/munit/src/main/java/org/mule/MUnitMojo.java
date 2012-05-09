@@ -17,23 +17,21 @@ package org.mule;
  */
 
 
-import org.apache.maven.model.Resource;
-import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.project.MavenProject;
-import org.junit.internal.RealSystem;
-import org.junit.internal.TextListener;
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-import org.mule.munit.MTest;
-import org.mule.munit.MuleSuiteRunner;
-
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.maven.model.Resource;
+import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.project.MavenProject;
+import org.mule.munit.test.MunitTestRunner;
+import org.mule.munit.test.result.MunitResult;
+import org.mule.munit.test.result.SuiteResult;
+import org.mule.munit.test.result.notification.StreamNotificationListener;
 
 /**
  * Runs tests
@@ -52,6 +50,11 @@ public class MUnitMojo
      */
     protected MavenProject project;
 
+    /**
+     * @parameter expression="${munit.test}"
+     */
+    protected String munittest;
+    
     /**
      * The classpath elements of the project being tested.
      *
@@ -77,7 +80,7 @@ public class MUnitMojo
             Thread t = Thread.currentThread();
             ClassLoader old = t.getContextClassLoader();
             try {
-                List<Result> results = new ArrayList<Result>();
+                List<SuiteResult> results = new ArrayList<SuiteResult>();
                 t.setContextClassLoader(getClassPath(makeClassPath()));
 
                 File testFolder = new File(project.getBasedir(), "src/test/munit");
@@ -86,25 +89,17 @@ public class MUnitMojo
                 {
 
                     String fileName = file.getName();
-                    if (fileName.endsWith(".xml"))
+                    if (fileName.endsWith(".xml") && validateFilter(fileName))
                     {
-                        System.out.println("Running " + fileName +" test");
-                        System.setProperty("munit.resource", fileName);
-
-                        MuleSuiteRunner muleSuiteRunner = new MuleSuiteRunner(MTest.class);
-                        JUnitCore core = new JUnitCore();
-                        core.addListener(new TextListener(new RealSystem()));
-                        results.add(core.run(muleSuiteRunner));
+                    	System.out.println();
+                        System.out.println("===========  Running " + fileName +" test ===========");
+                        System.out.println();
+                        results.add(buildRunnerFor(fileName).run());
                     }
 
                 }
 
-                for ( Result run : results )
-                {
-                    if ( !run.wasSuccessful() )
-                        throw new MojoExecutionException("MUnit Tests Failed");
-                }
-
+                show(results);
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -115,6 +110,70 @@ public class MUnitMojo
 
     }
 
+	private void show(List<SuiteResult> results) throws MojoExecutionException {
+		boolean success = true;
+		
+		System.out.println();
+		System.out.println("\t=====================================");
+		System.out.println("\t  Munit Summary                      ");
+		System.out.println("\t=====================================");
+		
+		for ( SuiteResult run : results )
+		{
+			List<MunitResult> failingTests = run.getFailingTests();
+			List<MunitResult> errorTests = run.getErrorTests();
+			System.out.println("\t >> " + run.getTestName() + " test result: Errors: " + errorTests.size() + ", Failures:" + failingTests.size());
+			
+			showFailures(failingTests);
+			showError(errorTests);
+
+		    if ( !failingTests.isEmpty() || !errorTests.isEmpty() )
+		    {
+		    	success = false;
+		    }
+		}
+		
+		if ( !success )
+		{
+		  	throw new MojoExecutionException("MUnit Tests Failed!!!");
+		}
+	}
+
+	private void showFailures(List<MunitResult> failingTests) {
+		if ( !failingTests.isEmpty() )
+		{
+			for ( MunitResult result : failingTests )
+			{
+				System.out.println("\t\t ---" + result.getTestName() + " <<< FAILED");
+			}
+		}
+	}
+
+	private void showError(List<MunitResult> errorTests) {
+		if ( !errorTests.isEmpty() )
+		{
+			for ( MunitResult result : errorTests )
+			{
+				System.out.println("\t\t ---" + result.getTestName() + " <<< ERROR");
+			}
+		}
+	}
+
+	private MunitTestRunner buildRunnerFor(String fileName) {
+		MunitTestRunner runner = new MunitTestRunner(fileName);
+		runner.setNotificationListener(new StreamNotificationListener(System.out));
+		return runner;
+	}
+
+    private boolean validateFilter(String fileName) {
+        if ( munittest == null )
+        {
+            return true;
+        }
+
+        return fileName.matches(munittest);
+    }
+
     public URLClassLoader getClassPath(List<URL> classpath) {
        return new URLClassLoader(classpath.toArray(new URL[classpath.size()]), getClass().getClassLoader());
     }
@@ -123,7 +182,7 @@ public class MUnitMojo
      * Creates a classloader for loading tests.
      *
      * <p>
-     * We need to be able to see the same JUnit classes between this code and the test code,
+     * We need to be able to see the same JUnit classes between this code and the mtest code,
      * but everything else should be isolated.
      */
     private List<URL> makeClassPath() throws MalformedURLException {

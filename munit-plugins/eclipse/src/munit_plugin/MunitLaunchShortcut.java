@@ -162,7 +162,7 @@ public class MunitLaunchShortcut extends JUnitLaunchShortcut{
 	}
 
 	private Shell getShell() {
-		return JUnitPlugin.getActiveWorkbenchShell();
+		return MunitPlugin.getActiveWorkbenchShell();
 	}
 
 	private ILaunchManager getLaunchManager() {
@@ -204,7 +204,7 @@ public class MunitLaunchShortcut extends JUnitLaunchShortcut{
 	 * @return the launch configuration type id of the launch configuration this shortcut will create
 	 */
 	protected String getLaunchConfigurationTypeId() {
-		return JUnitLaunchConfigurationConstants.ID_JUNIT_APPLICATION;
+		return "org.eclipse.jdt.munit.launchconfig";
 	}
 
 	/**
@@ -226,20 +226,21 @@ public class MunitLaunchShortcut extends JUnitLaunchShortcut{
 		containerHandleId= EMPTY_STRING;
 		testName= resource.getName();
 		String resources = testName;
-		String testKindId= TestKindRegistry.JUNIT4_TEST_KIND_ID;
 
 		ILaunchConfigurationType configType= getLaunchManager().getLaunchConfigurationType(getLaunchConfigurationTypeId());
 		ILaunchConfigurationWorkingCopy wc= configType.newInstance(null, getLaunchManager().generateLaunchConfigurationName(testName));
 
-		wc.setAttribute(IJavaLaunchConfigurationConstants.ATTR_MAIN_TYPE_NAME, mainTypeQualifiedName);
-		wc.setAttribute(IJavaLaunchConfigurationConstants.ATTR_PROJECT_NAME, resource.getProject().getName());
-		wc.setAttribute(JUnitLaunchConfigurationConstants.ATTR_KEEPRUNNING, false);
-		wc.setAttribute(JUnitLaunchConfigurationConstants.ATTR_TEST_CONTAINER, containerHandleId);
-		wc.setAttribute(JUnitLaunchConfigurationConstants.ATTR_TEST_RUNNER_KIND, testKindId);
+		
+		wc.setAttribute("resource", resources);
+		wc.setAttribute("Mpath", resource.getFullPath().toString());
+//		wc.setAttribute(IJavaLaunchConfigurationConstants.ATTR_PROJECT_NAME, resource.getProject().getName());
+//		wc.setAttribute(JUnitLaunchConfigurationConstants.ATTR_KEEPRUNNING, false);
+//		wc.setAttribute(JUnitLaunchConfigurationConstants.ATTR_TEST_CONTAINER, containerHandleId);
+//		wc.setAttribute(JUnitLaunchConfigurationConstants.ATTR_TEST_RUNNER_KIND, testKindId);
 //		System.setProperty("munit.resource", resources);
 		
 
-		wc.setAttribute(IJavaLaunchConfigurationConstants.ATTR_PROJECT_NAME, "integration");
+		wc.setAttribute(IJavaLaunchConfigurationConstants.ATTR_PROJECT_NAME, resource.getProject().getName());
 		JUnitMigrationDelegate.mapResources(wc);
 		String userVm = AssertionVMArg.getEnableAssertionsPreference() ? "-ea" : "";
 		wc.setAttribute(IJavaLaunchConfigurationConstants.ATTR_VM_ARGUMENTS, userVm + " -Dmunit.resource=" + resources);

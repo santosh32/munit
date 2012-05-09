@@ -25,10 +25,9 @@
     </spring:beans>
 
     <munit:config/>
-    <dbserver:config jdbcUrl="jdbc:derby:memory:example;create=true"  creationalScript="
-    CREATE TABLE jobtitlelookup (jobtitle varchar(100) NOT NULL, eecsalaryorhourly varchar(20) DEFAULT NULL, jobtitleid int NOT NULL);
+    <dbserver:config jdbcUrl="jdbc:h2:~/test"  creationalScript="
     INSERT INTO jobtitlelookup (jobtitle, eecsalaryorhourly, jobtitleid) VALUES ('Culinary Team Member', 'HOURLY',3);
-    INSERT INTO jobtitlelookup (jobtitle, eecsalaryorhourly, jobtitleid) VALUES ('Other', 'SALARY',9);"/>
+    INSERT INTO jobtitlelookup (jobtitle, eecsalaryorhourly, jobtitleid) VALUES ('Other', 'SALARY',9);" />
 
     <munit:before-suite name="before.suite" description="Starting DB server">
         <dbserver:start-db-server />

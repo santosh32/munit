@@ -51,6 +51,7 @@
         description="
         We want to test that the flow always returns the same payload as we had before calling it.">
 
+<logger level="ERROR" message="dentro del test test ${mule.version}"></logger>
         <munit:set payload-ref="#[string: Hello world!]"/>
 
         <flow-ref name="echoFlow"/>

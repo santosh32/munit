@@ -23,6 +23,7 @@ package org.mule.munit;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
+import org.mule.api.annotations.param.Optional;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -47,7 +48,10 @@ public class DBServerModule
      * <p>Script to create the database.</p>
      */
     @Configurable
+    @Optional
     private String creationalScript;
+
+
     private Connection connection;
 
 
@@ -65,13 +69,21 @@ public class DBServerModule
             addJdbcToClassLoader();
             connection = DriverManager.getConnection(jdbcUrl);
             Statement stmt = connection.createStatement();
+            createTablesFromExpressions(stmt);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Could not start the database server", e);
+        }
+    }
+
+    private void createTablesFromExpressions(Statement stmt) throws SQLException {
+        if ( creationalScript != null )
+        {
             String[] expressions = creationalScript.split(";");
             for ( String expression : expressions)
             {
                 stmt.execute(expression);
             }
-        } catch (Exception e) {
-            throw new RuntimeException("Could not start the database server", e);
         }
     }
 
@@ -111,7 +123,7 @@ public class DBServerModule
 
     private void addJdbcToClassLoader() throws InstantiationException,
             IllegalAccessException, ClassNotFoundException {
-        Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
+        Class.forName("org.h2.Driver").newInstance();
     }
 
     public void setJdbcUrl(String jdbcUrl) {
@@ -121,4 +133,5 @@ public class DBServerModule
     public void setCreationalScript(String creationalScript) {
         this.creationalScript = creationalScript;
     }
+
 }
