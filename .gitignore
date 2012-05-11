@@ -6,9 +6,16 @@
 .project
 .classpath
 .idea
+.settings
 assert/target
+assert/.settings
 ftpserver/target
+ftpserver/.settings
 dbserver/target
+dbserver/.settings
 mock/target
+mock/.settings
 mpmock/target
+mpmock/.settings
 integration/target
+integration/.settings
