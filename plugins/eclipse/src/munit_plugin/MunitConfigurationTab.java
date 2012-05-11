@@ -14,6 +14,7 @@ public class MunitConfigurationTab  extends AbstractLaunchConfigurationTabGroup 
 	 */
 	public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
 		ILaunchConfigurationTab[] tabs= new ILaunchConfigurationTab[] {
+			new	LaunchConfigurationTab(),
 			new EnvironmentTab()
 		};
 		setTabs(tabs);
