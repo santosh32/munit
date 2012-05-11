@@ -57,6 +57,8 @@ public class MuleSuiteRunner extends Runner implements Filterable, Sortable{
             }
 
         } catch (Exception e) {
+
+            killMule();
             throw new RuntimeException(e);
         }
     }
@@ -98,15 +100,24 @@ public class MuleSuiteRunner extends Runner implements Filterable, Sortable{
 
             process(lookupFlows(MunitAfterSuite.class), muleEvent());
 
-            muleContext.stop();
-            muleContext.dispose();
+            killMule();
 
         }
         catch(Exception e)
         {
+            killMule();
             throw new RuntimeException("Could not Run the suite", e);
         }
 
+    }
+
+    private void killMule() {
+        try {
+            muleContext.stop();
+        } catch (MuleException e1) {
+
+        }
+        muleContext.dispose();
     }
 
     private static Description makeDescription(Test test) {
