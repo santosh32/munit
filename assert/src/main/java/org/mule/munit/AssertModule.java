@@ -7,6 +7,9 @@ import org.mule.api.annotations.param.Optional;
 import org.mule.api.annotations.param.Payload;
 import org.mule.transport.NullPayload;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 import static junit.framework.Assert.assertEquals;
 
 /**
@@ -17,6 +20,8 @@ import static junit.framework.Assert.assertEquals;
 @Module(name="munit", schemaVersion="1.0")
 public class AssertModule
 {
+    private Queue<Object> expectedPayload = new LinkedList<Object>();
+
     private static String wrapMessage(String message)
     {
         return message == null ? "" : message;
@@ -61,29 +66,40 @@ public class AssertModule
      *
      * {@sample.xml ../../../doc/Assert-connector.xml.sample assert:assertOnEquals}
      *
-     * @param expected Expected value
+     * @param expected Expected value.  If not provided the expected value is taken from the expected value Queue.
      * @param value Real value
      * @param message Description message to be shown in case of failure.
      */
     @Processor
-    public void assertOnEquals(@Optional String message, Object expected, Object value)
+    public void assertOnEquals(@Optional String message, @Optional Object expected, Object value)
     {
+        if ( expected == null )
+        {
+            expected = expectedPayload.poll();
+        }
+        
         assertEquals(wrapMessage(message), expected, value);
     }
 
+    
 
     /**
      * Assert two objects are not equal
      *
      * {@sample.xml ../../../doc/Assert-connector.xml.sample assert:assertNotSame}
      *
-     * @param expected expected value
+     * @param expected expected value. If not provided the expected value is taken from the expected value Queue.
      * @param value real value
      * @param message description message
      */
     @Processor
-    public void assertNotSame(@Optional String message, Object expected, Object value)
+    public void assertNotSame(@Optional String message, @Optional Object expected, Object value)
     {
+        if ( expected == null )
+        {
+            expected = expectedPayload.peek();
+        }
+        
         junit.framework.Assert.assertNotSame(wrapMessage(message), expected, value);
     }
 
@@ -169,4 +185,42 @@ public class AssertModule
         junit.framework.Assert.fail(wrapMessage(message));
     }
 
+
+    /**
+     * <p>Assert module keeps a queue of expected payloads, so you can call assertNotSame and assertOnEquals</p>
+     * <p>inside a inbound flow you created for your tests. The expected payload is taken from the peek of the
+     * queue</p>
+     *
+     * {@sample.xml ../../../doc/Assert-connector.xml.sample assert:addExpectedValue}
+     *
+     * @param value  Description message to be shown in case of failure.
+     */
+
+    @Processor
+    public void addExpected(Object value)
+    {
+        expectedPayload.add(value);
+    }
+
+    /**
+     * <p>Resets the module</p>
+     *
+     * {@sample.xml ../../../doc/Assert-connector.xml.sample assert:reset}
+     */
+    @Processor
+    public void resetCalls()
+    {
+        expectedPayload = new LinkedList<Object>();
+    }
+
+    /**
+     * <p>Checks that all the expected calls to assert has been done</p>
+     *
+     * {@sample.xml ../../../doc/Assert-connector.xml.sample assert:reset}
+     */
+    @Processor
+    public void validateCalls()
+    {
+        junit.framework.Assert.assertTrue(expectedPayload.isEmpty());
+    }
 }

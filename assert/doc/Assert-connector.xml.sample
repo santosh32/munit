@@ -37,3 +37,11 @@
 <!-- BEGIN_INCLUDE(assert:fail) -->
     <munit:fail message="This should not happen"/>
 <!-- END_INCLUDE(assert:fail) -->
+
+<!-- BEGIN_INCLUDE(assert:addExpectedValue) -->
+    <munit:fail message="This should not happen"/>
+<!-- END_INCLUDE(assert:addExpectedValue) -->
+
+<!-- BEGIN_INCLUDE(assert:reset) -->
+    <munit:fail message="This should not happen"/>
+<!-- END_INCLUDE(assert:reset) -->

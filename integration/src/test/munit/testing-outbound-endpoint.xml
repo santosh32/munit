@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Mule Development Kit
+    Copyright 2010-2011 (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:spring="http://www.springframework.org/schema/beans"
+      xmlns:http="http://www.mulesoft.org/schema/mule/http"
+      xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+      xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.2/mule.xsd
+        http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/3.2/mule-http.xsd
+        http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/1.0/mule-munit.xsd ">
+
+
+    <spring:beans>
+        <spring:import resource="mule-config.xml"/>
+        <spring:import resource="common-definitions.xml" />
+    </spring:beans>
+
+
+    <munit:config/>
+
+
+    <munit:before-test name="before.each.test"
+                       description="Reseting mocks...">
+        <munit:reset-calls />
+    </munit:before-test>
+
+
+    <munit:test name="testingOutboundEndpoint"
+
+                description="
+        We want to test that the flow always returns the same payload as we had before calling it.">
+
+        <munit:add-expected value-ref="#[string:AJSon]" />
+        <munit:add-expected value-ref="#[string:AnotherJSon]" />
+
+
+        <flow-ref name="outboundEndPointFlow"/>
+
+        <munit:assert-not-null/>
+        <munit:validate-calls />
+    </munit:test>
+
+    <flow name="mockHttpInbound">
+        <composite-source>
+            <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="10443" path="test">
+                <http:body-to-parameter-map-transformer/>
+            </http:inbound-endpoint>
+            <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="10443" path="test2">
+                <http:body-to-parameter-map-transformer/>
+            </http:inbound-endpoint>
+        </composite-source>
+
+        <munit:assert-on-equals value-ref="#[map-payload:json]"/>
+    </flow>
+
+</mule>

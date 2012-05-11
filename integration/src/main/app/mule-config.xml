@@ -62,7 +62,6 @@
 
     <!-- Simples flow ever, echo the payload -->
     <flow name="echoFlow">
-    <logger level="ERROR" message="Fuera del test ${mule.version}"></logger>
         <echo-component/>
     </flow>
 
@@ -157,6 +156,22 @@
 
         <pm:secure-event-message-filter key="secure_key" />
         <pm:event-to-xml-transformer />
+
+
+    </flow>
+
+
+    <flow name="outboundEndPointFlow">
+
+        <!-- Do some processing here -->
+
+        <http:outbound-endpoint method="GET"
+                                host="localhost" port="10443" path="test?json=AJSon"
+                                exchange-pattern="request-response" />
+
+        <!--<http:outbound-endpoint method="GET"-->
+                                <!--host="localhost" port="10443" path="test2?json=AnotherJSon"-->
+                                <!--exchange-pattern="request-response" />-->
 
 
     </flow>

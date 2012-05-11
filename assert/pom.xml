@@ -4,11 +4,11 @@
     <parent>
     <artifactId>munit</artifactId>
     <groupId>org.mule</groupId>
-    <version>1.0</version>
+    <version>1.0-SNAPSHOT</version>
   </parent>
     <groupId>org.mule.munit</groupId>
     <artifactId>assert</artifactId>
-    <version>1.0</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Mule Module for Asserting</name>
 
@@ -113,41 +113,4 @@
         </dependency>
     </dependencies>
 
-    <repositories>
-        <repository>
-            <id>mulesoft-releases</id>
-            <name>MuleSoft Releases Repository</name>
-            <url>http://repository.mulesoft.org/releases/</url>
-            <layout>default</layout>
-        </repository>
-        <repository>
-            <id>mulesoft-snapshots</id>
-            <name>MuleSoft Snapshots Repository</name>
-            <url>http://repository.mulesoft.org/snapshots/</url>
-            <layout>default</layout>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>mulesoft-plugin-releases</id>
-            <name>MuleSoft Release Repository</name>
-            <url>http://repository.mulesoft.org/releases/</url>
-            <releases>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-        <pluginRepository>
-            <id>mulesoft-plugin-snapshots</id>
-            <name>MuleSoft Snapshot Repository</name>
-            <url>http://repository.mulesoft.org/snapshots/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
 </project>

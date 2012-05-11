@@ -226,7 +226,7 @@
             <xs:documentation>Description message to be shown in case of failure.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
-        <xs:attribute name="expected-ref" use="required" type="xs:string">
+        <xs:attribute name="expected-ref" use="optional" type="xs:string">
           <xs:annotation>
             <xs:documentation>Expected value</xs:documentation>
           </xs:annotation>
@@ -239,6 +239,59 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+    <xs:element xmlns="http://www.mulesoft.org/schema/mule/munit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="add-expected" substitutionGroup="mule:abstract-message-processor" type="AddExpectedType">
+    <xs:annotation>
+        <xs:documentation>&lt;p&gt;Check that two objects are equal.&lt;/p&gt;</xs:documentation>
+    </xs:annotation>
+</xs:element>
+    <xs:complexType name="AddExpectedType">
+        <xs:complexContent>
+            <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+                <xs:attribute name="config-ref" use="optional" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="value-ref" use="required" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>Expected value</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element xmlns="http://www.mulesoft.org/schema/mule/munit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="reset-calls" substitutionGroup="mule:abstract-message-processor" type="ResetCallsType">
+        <xs:annotation>
+            <xs:documentation>&lt;p&gt;Reset assert component.&lt;/p&gt;</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:complexType name="ResetCallsType">
+        <xs:complexContent>
+            <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+                <xs:attribute name="config-ref" use="optional" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element xmlns="http://www.mulesoft.org/schema/mule/munit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="validate-calls" substitutionGroup="mule:abstract-message-processor" type="ValidateCallsType">
+        <xs:annotation>
+            <xs:documentation>&lt;p&gt;Validate all expected calls were called.&lt;/p&gt;</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:complexType name="ValidateCallsType">
+        <xs:complexContent>
+            <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+                <xs:attribute name="config-ref" use="optional" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
   <xs:element xmlns="http://www.mulesoft.org/schema/mule/munit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="assert-not-same" substitutionGroup="mule:abstract-message-processor" type="AssertNotSameType">
     <xs:annotation>
       <xs:documentation>Assert two objects are not equal</xs:documentation>
@@ -257,7 +310,7 @@
             <xs:documentation>description message</xs:documentation>
           </xs:annotation>
         </xs:attribute>
-        <xs:attribute name="expected-ref" use="required" type="xs:string">
+        <xs:attribute name="expected-ref" use="optional" type="xs:string">
           <xs:annotation>
             <xs:documentation>expected value</xs:documentation>
           </xs:annotation>

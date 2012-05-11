@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
+    <parent>
+        <artifactId>munit</artifactId>
+        <groupId>org.mule</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.mule.munit</groupId>
 	<artifactId>integration</artifactId>
 	<packaging>mule</packaging>
 	<name>integration</name>
-    <version>1.0</version>
+    <version>1.0-SNAPSHOT</version>
 	<description>Integration Test for Munit Project</description>
 
 	<properties>
@@ -141,50 +145,6 @@
 					<downloadSources>true</downloadSources>
 					<jdkName>${jdk.version}</jdkName>
 				</configuration>
-			</plugin>
-			<!-- make sure that MULE_HOME is set when building (required below when 
-				copying the artifact to Mule's apps directory -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-enforcer-plugin</artifactId>
-				<version>1.0-beta-1</version>
-				<executions>
-					<execution>
-						<phase>install</phase>
-						<goals>
-							<goal>enforce</goal>
-						</goals>
-						<configuration>
-							<rules>
-								<requireProperty>
-									<property>env.MULE_HOME</property>
-									<message>You must set MULE_HOME before installing the example.</message>
-								</requireProperty>
-							</rules>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<!-- automatically deploy the artifact after it has been built -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.4</version>
-				<executions>
-					<execution>
-						<id>package-example</id>
-						<phase>install</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<configuration>
-							<tasks>
-								<copy file="${project.build.directory}/${build.finalName}.zip"
-									todir="${env.MULE_HOME}/apps" overwrite="true" />
-							</tasks>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
                 <groupId>org.mule.munit</groupId>
@@ -497,13 +457,13 @@
         <dependency>
             <groupId>org.mule.munit</groupId>
             <artifactId>mpmock</artifactId>
-            <version>1.0</version>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>org.mule.munit</groupId>
             <artifactId>ftpserver</artifactId>
-            <version>1.0</version>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.mulesoft.muleesb.transports</groupId>
@@ -516,25 +476,25 @@
         <dependency>
             <groupId>org.mule.munit</groupId>
             <artifactId>dbserver</artifactId>
-            <version>1.0</version>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>org.mule.munit</groupId>
             <artifactId>mclient</artifactId>
-            <version>1.0</version>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>org.mule.munit</groupId>
             <artifactId>assert</artifactId>
-            <version>1.0</version>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>org.mule.munit</groupId>
             <artifactId>mock</artifactId>
-            <version>1.0</version>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
 
