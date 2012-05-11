@@ -3,7 +3,7 @@
     <parent>
         <artifactId>munit</artifactId>
         <groupId>org.mule</groupId>
-        <version>1.0</version>
+        <version>1.1-SNAPSHOT</version>
     </parent>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -11,7 +11,7 @@
 	<artifactId>integration</artifactId>
 	<packaging>mule</packaging>
 	<name>integration</name>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
 	<description>Integration Test for Munit Project</description>
 
 	<properties>
@@ -456,13 +456,13 @@
         <dependency>
             <groupId>org.mule.munit</groupId>
             <artifactId>mpmock</artifactId>
-            <version>1.0</version>
+            <version>1.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>org.mule.munit</groupId>
             <artifactId>ftpserver</artifactId>
-            <version>1.0</version>
+            <version>1.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.mulesoft.muleesb.transports</groupId>
@@ -475,25 +475,25 @@
         <dependency>
             <groupId>org.mule.munit</groupId>
             <artifactId>dbserver</artifactId>
-            <version>1.0</version>
+            <version>1.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>org.mule.munit</groupId>
             <artifactId>mclient</artifactId>
-            <version>1.0</version>
+            <version>1.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>org.mule.munit</groupId>
             <artifactId>assert</artifactId>
-            <version>1.0</version>
+            <version>1.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>org.mule.munit</groupId>
             <artifactId>mock</artifactId>
-            <version>1.0</version>
+            <version>1.1-SNAPSHOT</version>
         </dependency>
 
 
