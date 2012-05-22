@@ -252,7 +252,28 @@ public class MockModule  implements MuleContextAware, BeanFactoryPostProcessor
         Object[] parameters = new Object[parameterNumber];
         for ( int i=0; i<parameterNumber; i++)
         {
-            parameters[i] = any(parameterTypes[i]);
+            if ( parameterTypes[i].isPrimitive() )
+            {
+                if (parameterTypes[i].getName().equals("int") )
+                    parameters[i] = anyInt();
+                if (parameterTypes[i].getName().equals("short") )
+                    parameters[i] = anyShort();
+                if (parameterTypes[i].getName().equals("boolean") )
+                    parameters[i] = anyBoolean();
+                if (parameterTypes[i].getName().equals("byte") )
+                    parameters[i] = anyByte();
+                if (parameterTypes[i].getName().equals("long") )
+                    parameters[i] = anyLong();
+                if (parameterTypes[i].getName().equals("float") )
+                    parameters[i] = anyFloat();
+                if (parameterTypes[i].getName().equals("double") )
+                    parameters[i] = anyDouble();
+                if (parameterTypes[i].getName().equals("char") )
+                    parameters[i] = anyChar();
+            }
+            else{
+                parameters[i] = any(parameterTypes[i]);
+            }
         }
         return parameters;
     }
