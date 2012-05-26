@@ -113,11 +113,17 @@ public class MuleSuiteRunner extends Runner implements Filterable, Sortable{
 
     private void killMule() {
         try {
-            muleContext.stop();
+            if ( muleContext != null )
+            {
+                muleContext.stop();
+            }
         } catch (MuleException e1) {
 
         }
-        muleContext.dispose();
+        if (muleContext != null )
+        {
+            muleContext.dispose();
+        }
     }
 
     private static Description makeDescription(Test test) {

@@ -224,7 +224,9 @@ public class MockModule  implements MuleContextAware, BeanFactoryPostProcessor
         Method[] declaredMethods = mock.getClass().getDeclaredMethods();
         for ( Method method : declaredMethods )
         {
-            if (method.getName().equalsIgnoreCase(removeSlashes(messageProcessor)) )
+            String processor = method.getAnnotation(Processor.class).name();
+
+            if (method.getName().equalsIgnoreCase(removeSlashes(messageProcessor)) || messageProcessor.equals(processor) )
             {
                 return method;
             }
