@@ -20,15 +20,19 @@
  */
 package org.mule.munit;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.param.Optional;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.net.URISyntaxException;
+import java.sql.*;
+
+import static junit.framework.Assert.assertEquals;
 
 /**
  * <p>Module to test database connections</p>
@@ -42,7 +46,7 @@ public class DBServerModule
      * <p>JBDC url</p>
      */
     @Configurable
-    private String jdbcUrl;
+    private String database;
 
     /**
      * <p>Script to create the database.</p>
@@ -50,6 +54,13 @@ public class DBServerModule
     @Configurable
     @Optional
     private String creationalScript;
+
+    /**
+     * <p>Cvs files to create the tables in a JSON string</p>
+     */
+    @Configurable
+    @Optional
+    private String csv;
 
 
     private Connection connection;
@@ -67,12 +78,31 @@ public class DBServerModule
         try {
 
             addJdbcToClassLoader();
-            connection = DriverManager.getConnection(jdbcUrl);
+            connection = DriverManager.getConnection("jdbc:h2:~/"+ database);
             Statement stmt = connection.createStatement();
             createTablesFromExpressions(stmt);
+            createTablesFromCsv(stmt);
 
         } catch (Exception e) {
             throw new RuntimeException("Could not start the database server", e);
+        }
+    }
+
+    private void createTablesFromCsv(Statement stmt) {
+        if ( csv != null )
+        {
+            String[] tables = csv.split(";");
+            for ( String table : tables )
+            {
+                String tableName = table.replaceAll(".csv", "");
+                try {
+                    stmt.execute("CREATE TABLE "+tableName+" AS SELECT * FROM CSVREAD(\'" + getClass().getResource("/"+table).toURI().toASCIIString()  + "\');");
+                } catch (SQLException e) {
+                    throw new RuntimeException("Invalid SQL, could not create table " + tableName + " from " + table);
+                } catch (URISyntaxException e) {
+                    throw new RuntimeException("Could not read file " + table);
+                }
+            }
         }
     }
 
@@ -108,6 +138,63 @@ public class DBServerModule
     }
 
     /**
+     * <p>Executes a SQL query</p>
+     *
+     * {@sample.xml ../../../doc/DBServer-connector.xml.sample dbserver:executeQuery}
+     *
+     * @param sql query to be executed
+     * @return result of the SQL query in a JSON format.
+     */
+    @Processor
+    public Object executeQuery(String sql) {
+        Statement statement = null;
+        try {
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            JSONArray jsonArray = new JSONArray();
+            ResultSetMetaData metaData = resultSet.getMetaData();
+            while (resultSet.next()) {
+                JSONObject jsonObject = new JSONObject();
+                for (int i = 1; i <= metaData.getColumnCount(); i++) {
+                    String columnName = metaData.getColumnName(i);
+                    jsonObject.put(columnName, resultSet.getObject(columnName));
+                }
+                jsonArray.add(jsonObject);
+            }
+
+            return jsonArray.toJSONString();
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+    /**
+     * <p>Executes a SQL query</p>
+     *
+     * {@sample.xml ../../../doc/DBServer-connector.xml.sample dbserver:validateThat}
+     *
+     * @param query query to be executed
+     * @param returns Expected value
+     */
+    @Processor
+    public void validateThat(String query, String returns) {
+
+        try {
+            JSONArray jsonArray = (JSONArray) new JSONParser().parse((String) this.executeQuery(query));
+            JSONArray parser = (JSONArray) new JSONParser().parse(returns);
+
+            assertEquals(jsonArray, parser);
+        } catch (ParseException e) {
+            throw new RuntimeException("Invalid JSON Object");
+        }
+        catch (ClassCastException ccException)
+        {
+            throw new RuntimeException("The JSON String must always be an array");
+        }
+
+    }
+
+    /**
      * <p>Stops the server.</p>
      *
      * {@sample.xml ../../../doc/DBServer-connector.xml.sample dbserver:stop}
@@ -126,12 +213,15 @@ public class DBServerModule
         Class.forName("org.h2.Driver").newInstance();
     }
 
-    public void setJdbcUrl(String jdbcUrl) {
-        this.jdbcUrl = jdbcUrl;
+    public void setDatabase(String database) {
+        this.database = database;
     }
 
     public void setCreationalScript(String creationalScript) {
         this.creationalScript = creationalScript;
     }
 
+    public void setCsv(String csv) {
+        this.csv = csv;
+    }
 }
