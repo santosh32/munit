@@ -25,7 +25,9 @@
     </spring:beans>
 
     <munit:config/>
-    <dbserver:config jdbcUrl="jdbc:h2:~/test"  creationalScript="
+    <dbserver:config database="test" csv="test.csv"
+                     creationalScript="
+    CREATE TABLE jobtitlelookup ( jobtitle VARCHAR(255), eecsalaryorhourly VARCHAR(255), jobtitleid VARCHAR(255));
     INSERT INTO jobtitlelookup (jobtitle, eecsalaryorhourly, jobtitleid) VALUES ('Culinary Team Member', 'HOURLY',3);
     INSERT INTO jobtitlelookup (jobtitle, eecsalaryorhourly, jobtitleid) VALUES ('Other', 'SALARY',9);" />
 
@@ -33,10 +35,12 @@
         <dbserver:start-db-server />
     </munit:before-suite>
 
+
     <munit:after-suite name="after.suite" description="Stopping DB server">
+        <dbserver:execute sql="drop table jobtitlelookup;"/>
+        <dbserver:execute sql="drop table test;"/>
         <dbserver:stop-db-server />
     </munit:after-suite>
-
 
     <munit:test name="testEnricherWhenValueExists"
 
@@ -66,6 +70,27 @@
         <flow-ref name="enrichMessageFlow" />
 
         <munit:assert-on-equals expected-ref="#[string:HIR]" value-ref="#[variable:job]" />
+
+    </munit:test>
+
+    <munit:test name="databaseResult"
+                description="Testing database result">
+
+        <message-properties-transformer scope="invocation">
+            <add-message-property key="jobid" value="11" />
+        </message-properties-transformer>
+
+        <flow-ref name="enrichMessageFlow" />
+
+        <dbserver:execute-query sql="SELECT * FROM jobtitlelookup;"/>
+
+        <dbserver:validate-that query="SELECT * FROM jobtitlelookup;"
+                                returns='[{"EECSALARYORHOURLY":"HOURLY","JOBTITLE":"Culinary Team Member","JOBTITLEID":"3"},
+                                          {"EECSALARYORHOURLY":"SALARY","JOBTITLE":"Other","JOBTITLEID":"9"}]'/>
+
+        <dbserver:validate-that query="SELECT * FROM test;"
+                                returns='[{"NAME":"test1","ZIP_CODE":"1001"},
+                                          {"NAME":"test2","ZIP_CODE":"1002"}]'/>
 
     </munit:test>
 
