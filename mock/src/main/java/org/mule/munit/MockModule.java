@@ -4,8 +4,10 @@ import org.mockito.Mockito;
 import org.mockito.internal.stubbing.answers.Returns;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.mule.MessageExchangePattern;
 import org.mule.api.ConnectionManager;
 import org.mule.api.MuleContext;
+import org.mule.api.MuleEvent;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
@@ -13,6 +15,8 @@ import org.mule.api.annotations.param.Optional;
 import org.mule.api.context.MuleContextAware;
 import org.mule.api.registry.MuleRegistry;
 import org.mule.api.registry.RegistrationException;
+import org.mule.construct.Flow;
+import org.mule.tck.MuleTestUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -97,21 +101,25 @@ public class MockModule  implements MuleContextAware, BeanFactoryPostProcessor
      *
      * @param when Message processor name.
      * @param mustReturn Expected return value.
+     * @param mustReturnResponseFrom The flow name that creates the expected result
      * @param parameters Message processor parameters.
      */
     @Processor
-    public void expect(String when, @Optional List<Object> parameters, final Object mustReturn)
+    public void expect(String when, @Optional List<Object> parameters, @Optional final Object mustReturn, 
+                       @Optional String mustReturnResponseFrom)
     {
         try {
 
             Method method = getMockedMethod(when);
+            
+            final Object expectedObject = mustReturn != null ? mustReturn : getResultOf(mustReturnResponseFrom);
 
             if ( method != null  ){
                 Object[] expectedParams = parameters != null ? parameters.toArray() : getAnyParametersOf(method);
                 when(method.invoke(mock, expectedParams)).thenAnswer(new Answer<Object>() {
                     @Override
                     public Object answer(InvocationOnMock invocationOnMock) throws Throwable {
-                        return mustReturn;
+                        return expectedObject;
                     }
                 });
             }
@@ -119,7 +127,6 @@ public class MockModule  implements MuleContextAware, BeanFactoryPostProcessor
             throw new RuntimeException(e);
         }
     }
-
 
     /**
      * <p>Expect to throw an exception when message processor is called. </p>
@@ -224,12 +231,10 @@ public class MockModule  implements MuleContextAware, BeanFactoryPostProcessor
         Method[] declaredMethods = mock.getClass().getDeclaredMethods();
         for ( Method method : declaredMethods )
         {
-            String processor = method.getAnnotation(Processor.class).name();
-
-            if (method.getName().equalsIgnoreCase(removeSlashes(messageProcessor)) || messageProcessor.equals(processor) )
-            {
-                return method;
-            }
+                if (method.getName().equalsIgnoreCase(removeSlashes(messageProcessor)))
+                {
+                    return method;
+                }
         }
 
         throw new Exception("Method that want to be mocked does not exist");
@@ -351,5 +356,24 @@ public class MockModule  implements MuleContextAware, BeanFactoryPostProcessor
             i++       ;
         }
         return matchers;
+    }
+
+    private Object getResultOf(String mustReturnResponseFrom) {
+
+        try {
+            Flow flow = (Flow) muleContext.getRegistry().lookupFlowConstruct(mustReturnResponseFrom);
+            if ( flow == null ){
+                throw new RuntimeException("Flow " + mustReturnResponseFrom + " does not exist");
+            }
+
+            MuleEvent process = flow.process(testEvent());
+            return process.getMessage().getPayload();
+        } catch (Exception e) {
+            throw new RuntimeException("Could not call flow " + mustReturnResponseFrom + " to get the expected result");
+        }
+    }
+
+    private MuleEvent testEvent() throws Exception {
+        return MuleTestUtils.getTestEvent(null, MessageExchangePattern.REQUEST_RESPONSE, muleContext);
     }
 }

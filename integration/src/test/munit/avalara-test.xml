@@ -19,16 +19,6 @@
     <munit:config/>
     <mulemock:config of="avaconf" name="avaconfmock"/>
 
-    <munit:before-test name="before.each.test" description="creating expected objects...">
-
-        <script:component>
-            <script:script engine="groovy">
-                result = new com.avalara.avatax.services.ValidateResult();
-                message.setSessionProperty("mock.avalara.result", result);
-            </script:script>
-        </script:component>
-
-    </munit:before-test>
 
 
     <munit:test name="TestAvalara"
@@ -36,12 +26,22 @@
                 description="
         We want to test that the flow always returns the same payload as we had before calling it.">
 
-        <mulemock:expect config-ref="avaconfmock" when="validateAddress" mustReturn-ref="#[header:session:mock.avalara.result]"/>
+        <mulemock:expect config-ref="avaconfmock" when="validateAddress" mustReturnResponseFrom="createAvalaraExpectedResult"/>
         <flow-ref name="main"/>
 
         <logger message="#[groovy: payload.getClass()]" level="ERROR"/>
         <munit:assert-not-null/>
         <!--<munit:assert-true condition="#[groovy: payload == 'abc']"/>-->
     </munit:test>
+
+    <flow name="createAvalaraExpectedResult">
+        <script:component>
+            <script:script engine="groovy">
+                new com.avalara.avatax.services.ValidateResult();
+            </script:script>
+        </script:component>
+     </flow>
+
+
 
 </mule>
