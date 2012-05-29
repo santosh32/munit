@@ -40,8 +40,10 @@ public class MockedMessageProcessor implements MessageProcessor{
             }
         }
 
-
-        event.getMessage().setPayload(mockModule.getResponse());
+        if ( mockModule.getResponse() != null )
+        {
+            event.getMessage().setPayload(mockModule.getResponse());
+        }
         return event;
     }
 }

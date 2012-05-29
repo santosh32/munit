@@ -111,7 +111,7 @@ public class MockModule  implements MuleContextAware, BeanFactoryPostProcessor
         try {
 
             Method method = getMockedMethod(when);
-            
+
             final Object expectedObject = mustReturn != null ? mustReturn : getResultOf(mustReturnResponseFrom);
 
             if ( method != null  ){

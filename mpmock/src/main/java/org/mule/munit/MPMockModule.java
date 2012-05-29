@@ -59,7 +59,6 @@ public class MPMockModule implements BeanFactoryPostProcessor, MuleContextAware
 
 
     public void setOf(String of) {
-        
         this.of = of;
     }
 
@@ -109,41 +108,47 @@ public class MPMockModule implements BeanFactoryPostProcessor, MuleContextAware
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+//        if ( EEMuleContainerBootstrap.isEval() )
+//        {
 
-        String[] messageProcessorNames = beanFactory.getBeanNamesForType(MessageProcessor.class);
-        for ( String mgProcessorName : messageProcessorNames)
-        {
-            if ( mgProcessorName.startsWith("." + of) )
+            String[] messageProcessorNames = beanFactory.getBeanNamesForType(MessageProcessor.class);
+            for ( String mgProcessorName : messageProcessorNames)
             {
-                String mpClass = beanFactory.getBean(mgProcessorName).getClass().getCanonicalName();
-                String flowName = of.split(":")[0];
-                BeanDefinition productionFlow = beanFactory.getBeanDefinition(flowName);
-                ManagedList messageProcessors = messageProcessorsOf(productionFlow);
-
-                for ( int i=0; i<messageProcessors.size(); i++ )
+                if ( mgProcessorName.matches("^\\." + of + ".*") )
                 {
-                    Object mp = messageProcessors.get(i);
+                    String mpClass = beanFactory.getBean(mgProcessorName).getClass().getCanonicalName();
+                    String flowName = mgProcessorName.split(":")[0].substring(1);
+                    BeanDefinition productionFlow = beanFactory.getBeanDefinition(flowName);
+                    ManagedList messageProcessors = messageProcessorsOf(productionFlow);
 
-                    if ( mp instanceof RootBeanDefinition)
+                    for ( int i=0; i<messageProcessors.size(); i++ )
                     {
-                        BeanDefinition beanDefinition = (BeanDefinition) mp;
-                        if ( beanDefinition.getBeanClassName().equals(mpClass) )
+                        Object mp = messageProcessors.get(i);
+
+                        if ( mp instanceof RootBeanDefinition)
                         {
-                            messageProcessors.set(i, new MockedMessageProcessor(this));
+                            BeanDefinition beanDefinition = (BeanDefinition) mp;
+                            if ( beanDefinition.getBeanClassName().equals(mpClass) )
+                            {
+                                messageProcessors.set(i, new MockedMessageProcessor(this));
+                            }
+                        }
+                        if ( mp instanceof RuntimeBeanReference)
+                        {
+                            RuntimeBeanReference reference = (RuntimeBeanReference) mp;
+                            if ( reference.getBeanName().startsWith(mgProcessorName))
+                            {
+                                messageProcessors.set(i, new MockedMessageProcessor(this));
+                            }
                         }
                     }
-                    if ( mp instanceof RuntimeBeanReference)
-                    {
-                        RuntimeBeanReference reference = (RuntimeBeanReference) mp;
-                        if ( reference.getBeanName().startsWith(mgProcessorName))
-                        {
-                            messageProcessors.set(i, new MockedMessageProcessor(this));
-                        }
-                    }
+
                 }
-               
             }
-        }
+//        }
+//        else{
+//            throw new RuntimeException("PAGA MULE RATON!");
+//        }
 
     }
 

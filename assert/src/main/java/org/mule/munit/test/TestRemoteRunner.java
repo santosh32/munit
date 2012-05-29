@@ -84,6 +84,7 @@ public class TestRemoteRunner {
 				ioException.printStackTrace();
 			}
 		}
+		System.exit(0);
 	}
  	
 	public static void main(String args[])

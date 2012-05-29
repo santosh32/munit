@@ -31,6 +31,10 @@ import org.mule.api.annotations.param.Optional;
 
 import java.net.URISyntaxException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -78,7 +82,7 @@ public class DBServerModule
         try {
 
             addJdbcToClassLoader();
-            connection = DriverManager.getConnection("jdbc:h2:~/"+ database);
+            connection = DriverManager.getConnection("jdbc:h2:mem:"+ database);
             Statement stmt = connection.createStatement();
             createTablesFromExpressions(stmt);
             createTablesFromCsv(stmt);
@@ -149,23 +153,44 @@ public class DBServerModule
     public Object executeQuery(String sql) {
         Statement statement = null;
         try {
-            statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
-            JSONArray jsonArray = new JSONArray();
-            ResultSetMetaData metaData = resultSet.getMetaData();
-            while (resultSet.next()) {
-                JSONObject jsonObject = new JSONObject();
-                for (int i = 1; i <= metaData.getColumnCount(); i++) {
-                    String columnName = metaData.getColumnName(i);
-                    jsonObject.put(columnName, resultSet.getObject(columnName));
-                }
-                jsonArray.add(jsonObject);
-            }
-
-            return jsonArray.toJSONString();
+            return getMap(sql);
         } catch (SQLException e) {
             return null;
         }
+    }
+
+    private List<Map<String, String>> getMap(String sql) throws SQLException {
+        Statement statement;
+        statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+       List<Map<String, String>> jsonArray = new ArrayList<Map<String,String>>();
+        ResultSetMetaData metaData = resultSet.getMetaData();
+        while (resultSet.next()) {
+            HashMap<String, String> jsonObject = new HashMap<String,String>();
+            for (int i = 1; i <= metaData.getColumnCount(); i++) {
+                String columnName = metaData.getColumnName(i);
+                jsonObject.put(columnName, String.valueOf(resultSet.getObject(columnName)));
+            }
+            jsonArray.add(jsonObject);
+        }
+        return jsonArray;
+    }
+    
+    private JSONArray getJSON(String sql) throws SQLException {
+        Statement statement;
+        statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+        JSONArray jsonArray = new JSONArray();
+        ResultSetMetaData metaData = resultSet.getMetaData();
+        while (resultSet.next()) {
+            JSONObject jsonObject = new JSONObject();
+            for (int i = 1; i <= metaData.getColumnCount(); i++) {
+                String columnName = metaData.getColumnName(i);
+                jsonObject.put(columnName, resultSet.getObject(columnName));
+            }
+            jsonArray.add(jsonObject);
+        }
+        return jsonArray;
     }
 
     /**
@@ -180,7 +205,7 @@ public class DBServerModule
     public void validateThat(String query, String returns) {
 
         try {
-            JSONArray jsonArray = (JSONArray) new JSONParser().parse((String) this.executeQuery(query));
+            JSONArray jsonArray = getJSON(query);
             JSONArray parser = (JSONArray) new JSONParser().parse(returns);
 
             assertEquals(jsonArray, parser);
@@ -190,6 +215,8 @@ public class DBServerModule
         catch (ClassCastException ccException)
         {
             throw new RuntimeException("The JSON String must always be an array");
+        } catch (SQLException e) {
+            throw new RuntimeException("Invalid Query");
         }
 
     }

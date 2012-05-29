@@ -17,13 +17,6 @@ package org.mule;
  */
 
 
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.maven.model.Resource;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -32,6 +25,13 @@ import org.mule.munit.test.MunitTestRunner;
 import org.mule.munit.test.result.MunitResult;
 import org.mule.munit.test.result.SuiteResult;
 import org.mule.munit.test.result.notification.StreamNotificationListener;
+
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Runs tests
@@ -54,7 +54,7 @@ public class MUnitMojo
      * @parameter expression="${munit.test}"
      */
     protected String munittest;
-    
+
     /**
      * The classpath elements of the project being tested.
      *
@@ -68,6 +68,7 @@ public class MUnitMojo
     public void execute()
         throws MojoExecutionException
     {
+        
         if ( !"true".equals(System.getProperty("skipTests")) )
         {
             List testResources = project.getTestResources();
@@ -110,7 +111,7 @@ public class MUnitMojo
 
     }
 
-	private void show(List<SuiteResult> results) throws MojoExecutionException {
+    private void show(List<SuiteResult> results) throws MojoExecutionException {
 		boolean success = true;
 		
 		System.out.println();
