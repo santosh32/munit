@@ -1,0 +1,78 @@
+<api>
+<package name="org.mule"
+>
+<class name="MUnitMojo"
+ extends="org.apache.maven.plugin.AbstractMojo"
+ abstract="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="MUnitMojo"
+ type="org.mule.MUnitMojo"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="execute"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<exception name="MojoExecutionException" type="org.apache.maven.plugin.MojoExecutionException">
+</exception>
+</method>
+<method name="getClassPath"
+ return="java.net.URLClassLoader"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="classpath" type="java.util.List&lt;java.net.URL&gt;">
+</parameter>
+</method>
+<field name="classpathElements"
+ type="java.util.List"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="protected"
+>
+</field>
+<field name="munittest"
+ type="java.lang.String"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="protected"
+>
+</field>
+<field name="project"
+ type="org.apache.maven.project.MavenProject"
+ transient="false"
+ volatile="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="protected"
+>
+</field>
+</class>
+</package>
+</api>

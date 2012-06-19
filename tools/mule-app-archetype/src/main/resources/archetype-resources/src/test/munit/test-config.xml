@@ -1,0 +1,28 @@
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:spring="http://www.springframework.org/schema/beans"
+      xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+      xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.2/mule.xsd
+        http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/1.0/mule-munit.xsd ">
+
+    <spring:beans>
+        <spring:import resource="mule-config.xml"/>
+    </spring:beans>
+
+    <munit:config/>
+
+
+    <munit:test name="test"
+
+                description="
+        Create your test here">
+
+
+        <munit:set payload-ref="#[string: Hello world!]"/>
+
+        <munit:assert-not-null/>
+    </munit:test>
+
+</mule>

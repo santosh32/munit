@@ -8,8 +8,8 @@
     <packaging>pom</packaging>
 
     <properties>
-        <mule.version>3.2.1</mule.version>
-        <mule.devkit.version>3.3.0-EA</mule.devkit.version>
+        <mule.version>3.3.0</mule.version>
+        <mule.devkit.version>3.2</mule.devkit.version>
         <junit.version>4.8.2</junit.version>
         <mockito.version>1.8.2</mockito.version>
         <eclipsePluginVersion>2.5</eclipsePluginVersion>
@@ -26,6 +26,7 @@
     <module>dbserver</module>
     <module>mpmock</module>
     <module>integration</module>
+    <module>tools</module>
   </modules>
 
     <build>
