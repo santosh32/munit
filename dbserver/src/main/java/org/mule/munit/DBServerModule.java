@@ -208,7 +208,7 @@ public class DBServerModule
             JSONArray jsonArray = getJSON(query);
             JSONArray parser = (JSONArray) new JSONParser().parse(returns);
 
-            assertEquals(jsonArray, parser);
+            assertEquals(jsonArray.toJSONString(), parser.toJSONString());
         } catch (ParseException e) {
             throw new RuntimeException("Invalid JSON Object");
         }

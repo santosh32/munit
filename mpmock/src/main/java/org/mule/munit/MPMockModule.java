@@ -108,8 +108,6 @@ public class MPMockModule implements BeanFactoryPostProcessor, MuleContextAware
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-//        if ( EEMuleContainerBootstrap.isEval() )
-//        {
 
             String[] messageProcessorNames = beanFactory.getBeanNamesForType(MessageProcessor.class);
             for ( String mgProcessorName : messageProcessorNames)
@@ -145,10 +143,6 @@ public class MPMockModule implements BeanFactoryPostProcessor, MuleContextAware
 
                 }
             }
-//        }
-//        else{
-//            throw new RuntimeException("PAGA MULE RATON!");
-//        }
 
     }
 
