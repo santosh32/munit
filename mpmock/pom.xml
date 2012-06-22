@@ -4,11 +4,11 @@
     <parent>
     <artifactId>munit</artifactId>
     <groupId>org.mule</groupId>
-    <version>1.0.1</version>
+    <version>1.2-SNAPSHOT</version>
   </parent>
     <groupId>org.mule.munit</groupId>
     <artifactId>mpmock</artifactId>
-    <version>1.0.1</version>
+    <version>1.2-SNAPSHOT</version>
     <packaging>mule-module</packaging>
     <name>Mdoule for Message Processors Mocking</name>
 
