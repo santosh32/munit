@@ -3,7 +3,7 @@
     <parent>
         <artifactId>tools</artifactId>
         <groupId>org.mule.munit</groupId>
-        <version>1.0.1-SNAPSHOT</version>
+        <version>1.0.1</version>
     </parent>
     <groupId>org.mule.munit</groupId>
 	<artifactId>mule-munit-archetype-mule-app</artifactId>
