@@ -68,20 +68,18 @@
         </spring:property>
     </spring:bean>
 
-    <spring:bean name="upsertHttpParameters" class="org.springframework.beans.factory.config.MapFactoryBean">
-        <spring:property name="sourceMap">
-            <spring:map>
-                <spring:entry key="campaignName" value="nameOfTheCampaign"/>
-                <spring:entry key="template" value="theTemplate"/>
-            </spring:map>
-        </spring:property>
+    <spring:bean name="upsertHttpParameters" class="java.lang.String">
+        <spring:constructor-arg>
+            <spring:value>campaignName=nameOfTheCampaign&amp;template=theTemplate</spring:value>
+            </spring:constructor-arg>
     </spring:bean>
 
 
     <spring:bean name="httpParameteres" class="org.springframework.beans.factory.config.MapFactoryBean">
         <spring:property name="sourceMap">
             <spring:map>
-                <spring:entry key="http.method" value="get"/>
+                <spring:entry key="http.method" value="post"/>
+                <spring:entry key="Content-Type" value="application/x-www-form-urlencoded"/>
             </spring:map>
         </spring:property>
     </spring:bean>

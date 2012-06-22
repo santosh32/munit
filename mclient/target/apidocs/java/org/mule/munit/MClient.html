@@ -551,6 +551,42 @@ Summary:
             void</nobr>
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../org/mule/munit/MClient.html#dispatch(java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.lang.Object)">dispatch</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> path, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt; parameters, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> payload)</nobr>
+        
+        <div class="jd-descrdiv"><p>Dispatches an event asynchronously to a endpointUri via a Mule server.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a></nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../org/mule/munit/MClient.html#request(java.lang.String, java.lang.Long, java.util.List<org.mule.api.NestedProcessor>)">request</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> url, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Long.html">Long</a> timeout, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/List.html">List</a>&lt;NestedProcessor&gt; responseProcessing)</nobr>
+        
+        <div class="jd-descrdiv"><p>Do a real call to your inbound flows.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../org/mule/munit/MClient.html#setMuleContext(org.mule.api.MuleContext)">setMuleContext</a></span>(MuleContext context)</nobr>
         
   </td></tr>
@@ -973,6 +1009,134 @@ From interface
         <tr>
           <th>payload</td>
           <td>Message payload</td>
+        </tr>
+        <tr>
+          <th>responseProcessing</td>
+          <td>Add any processing of the client response</td>
+        </tr>
+      </table>
+  </div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Returns</h5>
+      <ul class="nolist"><li>Response call
+</li></ul>
+  </div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Throws</h5>
+      <table class="jd-tagtable">  
+        <tr>
+            <th><a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Exception.html">Exception</a></td>
+            <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="dispatch(java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.lang.Object)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">dispatch</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> path, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt; parameters, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> payload)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p><p>Dispatches an event asynchronously to a endpointUri via a Mule server.</p>
+
+ </p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>path</td>
+          <td>Path to call the transport, example: http://localhost:8081/tests</td>
+        </tr>
+        <tr>
+          <th>parameters</td>
+          <td>Connection parameters</td>
+        </tr>
+        <tr>
+          <th>payload</td>
+          <td>Message payload</td>
+        </tr>
+      </table>
+  </div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Returns</h5>
+      <ul class="nolist"><li>Response call
+</li></ul>
+  </div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Throws</h5>
+      <table class="jd-tagtable">  
+        <tr>
+            <th><a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Exception.html">Exception</a></td>
+            <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="request(java.lang.String, java.lang.Long, java.util.List<org.mule.api.NestedProcessor>)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>
+      </span>
+      <span class="sympad">request</span>
+      <span class="normal">(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> url, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Long.html">Long</a> timeout, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/List.html">List</a>&lt;NestedProcessor&gt; responseProcessing)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p><p>Do a real call to your inbound flows.</p>
+
+ </p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>url</td>
+          <td>Path to call the transport, example: http://localhost:8081/tests</td>
+        </tr>
+        <tr>
+          <th>timeout</td>
+          <td>Time out processing</td>
         </tr>
         <tr>
           <th>responseProcessing</td>

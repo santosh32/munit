@@ -194,8 +194,10 @@
     <li><h2>Classes</h2>
       <ul>
           <li class="api apilevel-"><a href="../../../../../java/org/mule/munit/config/CallMessageProcessor.html">CallMessageProcessor</a></li>
+          <li class="api apilevel-"><a href="../../../../../java/org/mule/munit/config/DispatchMessageProcessor.html">DispatchMessageProcessor</a></li>
           <li class="api apilevel-"><a href="../../../../../java/org/mule/munit/config/MClientCapabilitiesAdapter.html">MClientCapabilitiesAdapter</a></li>
           <li class="selected api apilevel-"><a href="../../../../../java/org/mule/munit/config/MClientLifecycleAdapter.html">MClientLifecycleAdapter</a></li>
+          <li class="api apilevel-"><a href="../../../../../java/org/mule/munit/config/RequestMessageProcessor.html">RequestMessageProcessor</a></li>
       </ul>
     </li>
               
@@ -899,6 +901,42 @@ From class
         </td>
         <td class="jd-linkcol" width="100%"><nobr>
         <span class="sympad"><a href="../../../../../org/mule/munit/MClient.html#call(java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.lang.Object, java.util.List<org.mule.api.NestedProcessor>)">call</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> path, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt; parameters, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> payload, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/List.html">List</a>&lt;NestedProcessor&gt; responseProcessing)</nobr>
+        
+        <div class="jd-descrdiv"><p>Do a real call to your inbound flows.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/munit/MClient.html#dispatch(java.lang.String, java.util.Map<java.lang.String, java.lang.Object>, java.lang.Object)">dispatch</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> path, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/Map.html">Map</a>&lt;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a>,&nbsp;<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a>&gt; parameters, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a> payload)</nobr>
+        
+        <div class="jd-descrdiv"><p>Dispatches an event asynchronously to a endpointUri via a Mule server.</div>
+  
+  </td></tr>
+
+
+	 
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Object.html">Object</a></nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../../org/mule/munit/MClient.html#request(java.lang.String, java.lang.Long, java.util.List<org.mule.api.NestedProcessor>)">request</a></span>(<a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/String.html">String</a> url, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/lang/Long.html">Long</a> timeout, <a href="http://download.oracle.com/javase/6/docs/api/index.html?java/util/List.html">List</a>&lt;NestedProcessor&gt; responseProcessing)</nobr>
         
         <div class="jd-descrdiv"><p>Do a real call to your inbound flows.</div>
   

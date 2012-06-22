@@ -1,3 +1,19 @@
 <!-- BEGIN_INCLUDE(mclient:call) -->
-    <transportclient:my-processor content="#[map-payload:content]" />
+    <mclient:call path="http://localhost:10443/updateSalesforceTemplate" payload-ref="upsertHttpParameters">
+       <mclient:parameters ref="httpParameteres"/>
+    </mclient:call>
 <!-- END_INCLUDE(mclient:call) -->
+
+<!-- BEGIN_INCLUDE(mclient:dispatch) -->
+    <mclient:dispatch path="http://localhost:10443/updateSalesforceTemplate" payload-ref="upsertHttpParameters" >
+        <mclient:parameters ref="httpParameteres"/>
+     </mclient:dispatch>
+<!-- END_INCLUDE(mclient:dispatch) -->
+
+<!-- BEGIN_INCLUDE(mclient:request) -->
+            <mclient:request path="http://localhost:10443/campaignInfo">
+                <mclient:response-processing>
+                    <object-to-string-transformer/>
+                </mclient:response-processing>
+            </mclient:request>
+<!-- END_INCLUDE(mclient:request) -->

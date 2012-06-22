@@ -21,6 +21,8 @@ public class MClientNamespaceHandler
     public void init() {
         registerBeanDefinitionParser("config", new MClientConfigDefinitionParser());
         registerBeanDefinitionParser("call", new CallDefinitionParser());
+        registerBeanDefinitionParser("dispatch", new DispatchDefinitionParser());
+        registerBeanDefinitionParser("request", new RequestDefinitionParser());
     }
 
 }

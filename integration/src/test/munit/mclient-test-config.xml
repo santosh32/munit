@@ -45,7 +45,9 @@
 
         <mulemock:expect config-ref="salesforceMock" when="upsert" mustReturn-ref="nonEmptyList"/>
 
-        <mclient:call path="http://localhost:10443/updateSalesforceTemplate" payload-ref="upsertHttpParameters"/>
+        <mclient:call path="http://localhost:10443/updateSalesforceTemplate" payload-ref="upsertHttpParameters">
+            <mclient:parameters ref="httpParameteres"/>
+        </mclient:call>
 
 
         <mulemock:verify-call config-ref="salesforceMock" messageProcessor="upsert" >

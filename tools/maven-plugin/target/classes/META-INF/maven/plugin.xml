@@ -66,13 +66,13 @@
       <groupId>org.mule.munit</groupId>
       <artifactId>assert</artifactId>
       <type>jar</type>
-      <version>1.0</version>
+      <version>1.0.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.mule</groupId>
       <artifactId>mule-core</artifactId>
       <type>jar</type>
-      <version>3.2.1</version>
+      <version>3.3.0</version>
     </dependency>
     <dependency>
       <groupId>commons-beanutils</groupId>
@@ -162,7 +162,7 @@
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
       <type>jar</type>
-      <version>1.2.14</version>
+      <version>1.2.16</version>
     </dependency>
     <dependency>
       <groupId>asm</groupId>
@@ -183,16 +183,28 @@
       <version>3.1</version>
     </dependency>
     <dependency>
+      <groupId>org.mvel</groupId>
+      <artifactId>mvel2</artifactId>
+      <type>jar</type>
+      <version>2.0.19</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jgrapht</groupId>
+      <artifactId>jgrapht-jdk1.5</artifactId>
+      <type>jar</type>
+      <version>0.7.3</version>
+    </dependency>
+    <dependency>
       <groupId>org.mule.modules</groupId>
       <artifactId>mule-module-spring-config</artifactId>
       <type>jar</type>
-      <version>3.2.1</version>
+      <version>3.3.0</version>
     </dependency>
     <dependency>
       <groupId>org.mule.modules</groupId>
       <artifactId>mule-module-annotations</artifactId>
       <type>jar</type>
-      <version>3.2.1</version>
+      <version>3.3.0</version>
     </dependency>
     <dependency>
       <groupId>cglib</groupId>
@@ -204,31 +216,31 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
       <type>jar</type>
-      <version>3.0.3.RELEASE</version>
+      <version>3.1.1.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-aop</artifactId>
       <type>jar</type>
-      <version>3.0.3.RELEASE</version>
+      <version>3.1.1.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
       <type>jar</type>
-      <version>3.0.3.RELEASE</version>
+      <version>3.1.1.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-expression</artifactId>
       <type>jar</type>
-      <version>3.0.3.RELEASE</version>
+      <version>3.1.1.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-asm</artifactId>
       <type>jar</type>
-      <version>3.0.3.RELEASE</version>
+      <version>3.1.1.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>dom4j</groupId>
@@ -282,19 +294,19 @@
       <groupId>org.mule.tests</groupId>
       <artifactId>mule-tests-functional</artifactId>
       <type>jar</type>
-      <version>3.2.1</version>
+      <version>3.3.0</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
       <type>jar</type>
-      <version>3.0.3.RELEASE</version>
+      <version>3.1.1.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.mule</groupId>
       <artifactId>mule-core</artifactId>
       <type>test-jar</type>
-      <version>3.2.1</version>
+      <version>3.3.0</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

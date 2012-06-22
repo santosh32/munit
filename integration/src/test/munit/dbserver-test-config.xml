@@ -37,8 +37,6 @@
 
 
     <munit:after-suite name="after.suite" description="Stopping DB server">
-        <dbserver:execute sql="drop table jobtitlelookup;"/>
-        <dbserver:execute sql="drop table test;"/>
         <dbserver:stop-db-server />
     </munit:after-suite>
 

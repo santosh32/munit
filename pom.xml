@@ -25,8 +25,8 @@
     <module>mclient</module>
     <module>dbserver</module>
     <module>mpmock</module>
-    <module>integration</module>
     <module>tools</module>
+    <module>integration</module>
   </modules>
 
     <build>
