@@ -170,8 +170,7 @@
         <snapshotRepository>
             <id>mulesoft-snapshots</id>
             <name>MuleForge Repository</name>
-            <url>http://repository.mulesoft.org/snapshots/</url>
-            <uniqueVersion>false</uniqueVersion>
+            <url>https://repository.mulesoft.org/nexus/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 
@@ -185,8 +184,12 @@
         <repository>
             <id>mulesoft-snapshots</id>
             <name>MuleSoft Snapshots Repository</name>
-            <url>http://repository.mulesoft.org/snapshots/</url>
+            <url>https://repository.mulesoft.org/nexus/content/repositories/snapshots/</url>
             <layout>default</layout>
+        </repository>
+        <repository>
+            <id>mule-ee-releases</id>
+            <url>http://dev.ee.mulesource.com/repository/content/repositories/releases/</url>
         </repository>
     </repositories>
 

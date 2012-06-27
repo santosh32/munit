@@ -15,7 +15,7 @@
 	<description>Integration Test for Munit Project</description>
 
 	<properties>
-		<mule.version>3.2.1</mule.version>
+		<mule.version>3.3.0</mule.version>
 		<eclipsePluginVersion>2.5</eclipsePluginVersion>
 		<vmtype>org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType</vmtype>
 		<jdk5Name>J2SE-1.6</jdk5Name>
