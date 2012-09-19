@@ -28,7 +28,7 @@
     </spring:beans>
 
 
-    <munit:config/>
+    <munit:config mock-inbounds="false"/>
     <ftpserver:config port="3001" secure="true" name="sftpServer"/>
     <ftpserver:config port="3002" name="ftpServer"/>
     <mulemock:config of="Salesforce" name="salesforceMock"/>

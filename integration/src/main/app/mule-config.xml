@@ -80,7 +80,12 @@
 
 
     <flow name="campaignInfoFlow">
-        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="10443" path="campaignInfo"/>
+        <composite-source>
+            <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="10443" path="campaignInfo"/>
+            <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="10443" path="otherInbound"/>
+
+        </composite-source>
+
 
         <sfdc:query query="SELECT Name, CreatedDate, EndDate, phone__c, cc_template__c FROM Campaign WHERE IsActive=true"
                     config-ref="Salesforce" />

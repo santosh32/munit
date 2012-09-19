@@ -145,11 +145,34 @@
           <xs:annotation>
             <xs:documentation>&lt;p&gt;Module for asserting in Munit tests.&lt;/p&gt;</xs:documentation>
           </xs:annotation>
+            <xs:sequence>
+                <xs:element name="exclude-inbound-mocking" maxOccurs="1" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation></xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="flow-name" maxOccurs="unbounded" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string"/>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
           <xs:attribute name="name" use="optional" type="xs:string">
             <xs:annotation>
               <xs:documentation>Give a name to this configuration so it can be later referenced by org.mule.munit.config-ref.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
+            <xs:attribute name="mock-inbounds" use="optional" type="xs:boolean" default="true">
+                <xs:annotation>
+                    <xs:documentation>Defines if the tests are integration tests or not.</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>

@@ -5,9 +5,15 @@ import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.param.Optional;
 import org.mule.api.annotations.param.Payload;
+import org.mule.construct.Flow;
 import org.mule.transport.NullPayload;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 import static junit.framework.Assert.assertEquals;
@@ -18,8 +24,11 @@ import static junit.framework.Assert.assertEquals;
  * @author Federico, Fernando
  */
 @Module(name="munit", schemaVersion="1.0")
-public class AssertModule
+public class AssertModule  implements BeanFactoryPostProcessor
 {
+    private boolean mockInbounds;
+    private List<String> mockingExcludedFlows;
+
     private Queue<Object> expectedPayload = new LinkedList<Object>();
 
     private static String wrapMessage(String message)
@@ -222,5 +231,35 @@ public class AssertModule
     public void validateCalls()
     {
         junit.framework.Assert.assertTrue(expectedPayload.isEmpty());
+    }
+
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+        if (isMockInbounds() ){
+            String[] beanDefinitionNames = beanFactory.getBeanDefinitionNames();
+            for ( String name : beanDefinitionNames ){
+                BeanDefinition beanDefinition = beanFactory.getBeanDefinition(name);
+                if ( Flow.class.getName().equals(beanDefinition.getBeanClassName()) ){
+                    if ( !mockingExcludedFlows.contains(name) ){
+                        beanDefinition.getPropertyValues().removePropertyValue("messageSource");
+                    }
+                }
+            }
+        }
+    }
+
+    public boolean isMockInbounds() {
+        return mockInbounds;
+    }
+
+    public void setMockInbounds(boolean mockInbounds) {
+        this.mockInbounds = mockInbounds;
+    }
+
+    public List<String> getMockingExcludedFlows() {
+        return mockingExcludedFlows;
+    }
+
+    public void setMockingExcludedFlows(List<String> mockingExcludedFlows) {
+        this.mockingExcludedFlows = mockingExcludedFlows;
     }
 }

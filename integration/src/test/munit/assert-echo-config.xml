@@ -36,7 +36,8 @@
     </spring:beans>
 
 
-    <munit:config/>
+    <munit:config />
+
     <mulemock:config of="Salesforce" name="salesforceMock"/>
 
 

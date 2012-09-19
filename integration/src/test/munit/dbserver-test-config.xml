@@ -24,7 +24,7 @@
         <spring:import resource="mule-config.xml"/>
     </spring:beans>
 
-    <munit:config/>
+    <munit:config mock-inbounds="false"/>
     <dbserver:config database="test" csv="test.csv"
                      creationalScript="
     CREATE TABLE jobtitlelookup ( jobtitle VARCHAR(255), eecsalaryorhourly VARCHAR(255), jobtitleid VARCHAR(255));

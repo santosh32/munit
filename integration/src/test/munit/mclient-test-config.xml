@@ -29,7 +29,14 @@
     </spring:beans>
 
 
-    <munit:config/>
+    <munit:config>
+        <munit:exclude-inbound-mocking>
+            <munit:flow-name>updateSalesforceTemplate</munit:flow-name>
+            <munit:flow-name>campaignInfoFlow</munit:flow-name>
+        </munit:exclude-inbound-mocking>
+    </munit:config>
+
+
     <mclient:config/>
     <mulemock:config of="Salesforce" name="salesforceMock"/>
 
