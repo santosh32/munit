@@ -59,9 +59,9 @@
 
         <mulemock:verify-call config-ref="salesforceMock" messageProcessor="upsert" >
             <mulemock:parameters>
-                <mulemock:parameter value-ref="externalIdFieldName"/>
-                <mulemock:parameter value-ref="upsertType"/>
-                <mulemock:parameter value-ref="upsertExpectedObjects"/>
+                <mulemock:parameter key="externalIdFieldName" value-ref="externalIdFieldName"/>
+                <mulemock:parameter key="type" value-ref="upsertType"/>
+                <mulemock:parameter key="objects" value-ref="upsertExpectedObjects"/>
             </mulemock:parameters>
         </mulemock:verify-call>
 
@@ -76,7 +76,7 @@
 
         <mulemock:expect config-ref="salesforceMock" when="query" mustReturn-ref="nonEmptyList">
             <mulemock:parameters>
-                <mulemock:parameter value-ref="salesforceQuery"/>
+                <mulemock:parameter key="query" value-ref="salesforceQuery"/>
             </mulemock:parameters>
         </mulemock:expect>
 

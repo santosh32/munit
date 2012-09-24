@@ -1,9 +1,12 @@
 package org.mule.munit;
 
+import org.apache.commons.lang.StringUtils;
 import org.mockito.Mockito;
+import org.mockito.asm.ClassReader;
+import org.mockito.asm.tree.ClassNode;
+import org.mockito.asm.tree.LocalVariableNode;
+import org.mockito.asm.tree.MethodNode;
 import org.mockito.internal.stubbing.answers.Returns;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 import org.mule.MessageExchangePattern;
 import org.mule.api.ConnectionManager;
 import org.mule.api.MuleContext;
@@ -21,6 +24,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -28,7 +32,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.fail;
 import static org.mockito.Matchers.any;
@@ -60,7 +66,7 @@ public class MockModule  implements MuleContextAware, BeanFactoryPostProcessor
 
     private MuleContext muleContext;
 
-
+    private Class<? extends Object> mockedClass;
     private Object mock;
     private ConnectionManager connectionManagerMock;
     private Class<? extends Object> connectionKeyClass;
@@ -105,23 +111,19 @@ public class MockModule  implements MuleContextAware, BeanFactoryPostProcessor
      * @param parameters Message processor parameters.
      */
     @Processor
-    public void expect(String when, @Optional List<Object> parameters, @Optional final Object mustReturn, 
+    public void expect(String when, @Optional Map<String,Object> parameters, @Optional final Object mustReturn, 
                        @Optional String mustReturnResponseFrom)
     {
         try {
 
-            Method method = getMockedMethod(when);
-
+            MockedMethod mockedMethod = getMockedMethod(when);
+            Method method = mockedMethod.getMethod();
             final Object expectedObject = mustReturn != null ? mustReturn : getResultOf(mustReturnResponseFrom);
 
             if ( method != null  ){
-                Object[] expectedParams = parameters != null ? parameters.toArray() : getAnyParametersOf(method);
-                when(method.invoke(mock, expectedParams)).thenAnswer(new Answer<Object>() {
-                    @Override
-                    public Object answer(InvocationOnMock invocationOnMock) throws Throwable {
-                        return expectedObject;
-                    }
-                });
+                Map<Integer, Object> paramIndex = mockedMethod.getParameters(parameters);
+                Object[] expectedParams = mockedMethod.getAnyParameters(paramIndex);
+                when(method.invoke(mock, expectedParams)).thenReturn(expectedObject);
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -142,10 +144,11 @@ public class MockModule  implements MuleContextAware, BeanFactoryPostProcessor
     {
         try {
 
-            Method method = getMockedMethod(when);
+            MockedMethod mockedMethod = getMockedMethod(when);
+            Method method = mockedMethod.getMethod();
 
             if ( method != null  ){
-                when(method.invoke(mock, getAnyParametersOf(method)))
+                when(method.invoke(mock, mockedMethod.getAnyParameters(new HashMap<Integer, Object>())))
                         .thenThrow((Throwable) Class.forName(throwA).newInstance());
             }
 
@@ -167,12 +170,13 @@ public class MockModule  implements MuleContextAware, BeanFactoryPostProcessor
      * @param atMost Number of times the message processor has to be called at most.
      */
     @Processor
-    public void verifyCall(String messageProcessor,  List<Object> parameters, @Optional Integer times, 
+    public void verifyCall(String messageProcessor,  Map<String,Object> parameters, @Optional Integer times,
                            @Optional Integer atLeast, @Optional Integer atMost )
     {
         try {
 
-            Method method = getMockedMethod(messageProcessor);
+            MockedMethod mockedMethod = getMockedMethod(messageProcessor);
+            Method method = mockedMethod.getMethod();
 
             if ( method != null  ){
                 if ( times != null  )
@@ -184,7 +188,10 @@ public class MockModule  implements MuleContextAware, BeanFactoryPostProcessor
                 else
                     verify(mock);
 
-                method.invoke(mock, buildEquals(parameters));
+
+                Map<Integer, Object> parameterIndex = mockedMethod.getParameters(parameters);
+
+                method.invoke(mock, mockedMethod.getAnyParameters(parameterIndex));
             }
 
         } catch (InvocationTargetException e) {
@@ -226,15 +233,41 @@ public class MockModule  implements MuleContextAware, BeanFactoryPostProcessor
 
         Mockito.reset(mock);
     }
+    
+    private boolean matchFriendlyName(Method method, String messageProcessor){
+        Processor annotation = method.getAnnotation(Processor.class);
+        return (annotation != null && !StringUtils.isEmpty(annotation.friendlyName()) && annotation.friendlyName().equalsIgnoreCase(messageProcessor));
+        
+    }
 
-    private Method getMockedMethod(String messageProcessor) throws Exception {
-        Method[] declaredMethods = mock.getClass().getDeclaredMethods();
+    private MockedMethod getMockedMethod(String messageProcessor) throws Exception {
+        Method[] declaredMethods = mockedClass.getMethods();
         for ( Method method : declaredMethods )
         {
-                if (method.getName().equalsIgnoreCase(removeSlashes(messageProcessor)))
+                if (method.getName().equalsIgnoreCase(removeSlashes(messageProcessor)) || matchFriendlyName(method, messageProcessor) )
                 {
-                    return method;
+                    ClassNode classNode = null;
+                    try {
+                        classNode = new ClassNode();
+                        Class<?> declaringClass = method.getDeclaringClass();
+                        ClassReader classReader = new ClassReader(declaringClass.getClassLoader().getResourceAsStream(org.mockito.asm.Type.getInternalName(declaringClass) + ".class"));
+                        classReader.accept(classNode, 0);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                    }
+
+                    List<MethodNode> methods = classNode.methods;
+                    List<LocalVariableNode> localVariableNodes = null;
+                    for ( MethodNode methodNode : methods ){
+                        if ( methodNode.name.equals(method.getName())){
+                            localVariableNodes = methodNode.localVariables;
+                            break;
+                        }
+                    }
+                    return new MockedMethod(method, localVariableNodes);
                 }
+
         }
 
         throw new Exception("Method that want to be mocked does not exist");
@@ -253,38 +286,7 @@ public class MockModule  implements MuleContextAware, BeanFactoryPostProcessor
     }
 
 
-    private Object[] getAnyParametersOf(Method method) {
-        Class<?>[] parameterTypes = method.getParameterTypes();
-        int parameterNumber = parameterTypes.length;
-        Object[] parameters = new Object[parameterNumber];
-        for ( int i=0; i<parameterNumber; i++)
-        {
-            if ( parameterTypes[i].isPrimitive() )
-            {
-                if (parameterTypes[i].getName().equals("int") )
-                    parameters[i] = anyInt();
-                if (parameterTypes[i].getName().equals("short") )
-                    parameters[i] = anyShort();
-                if (parameterTypes[i].getName().equals("boolean") )
-                    parameters[i] = anyBoolean();
-                if (parameterTypes[i].getName().equals("byte") )
-                    parameters[i] = anyByte();
-                if (parameterTypes[i].getName().equals("long") )
-                    parameters[i] = anyLong();
-                if (parameterTypes[i].getName().equals("float") )
-                    parameters[i] = anyFloat();
-                if (parameterTypes[i].getName().equals("double") )
-                    parameters[i] = anyDouble();
-                if (parameterTypes[i].getName().equals("char") )
-                    parameters[i] = anyChar();
-            }
-            else{
-                parameters[i] = any(parameterTypes[i]);
-            }
-        }
-        return parameters;
-    }
-
+   
 
 
     private Object buildMock(MuleRegistry registry) {
@@ -331,9 +333,14 @@ public class MockModule  implements MuleContextAware, BeanFactoryPostProcessor
     }
 
     private void buildConnectionMocks(Class<? extends Object> connectionManagerClass, Type[] typeArguments) {
+        mockedClass = (Class<Object>) typeArguments[1];
         mock = mock((Class<Object>) typeArguments[1]);
         connectionKeyClass =(Class<Object>) typeArguments[0];
         connectionManagerMock = (ConnectionManager) mock(connectionManagerClass, new Returns(""));
+
+
+
+
 
         setConnectionManagerDefaultBehaviour();
     }
@@ -346,17 +353,7 @@ public class MockModule  implements MuleContextAware, BeanFactoryPostProcessor
         }
     }
 
-    private Object[] buildEquals(List<Object> parameters) {
-        Object[] matchers = new Object[parameters.size()];
-        int i=0;
 
-        for ( Object parameter : parameters )
-        {
-            matchers[i] = eq(parameter);
-            i++       ;
-        }
-        return matchers;
-    }
 
     private Object getResultOf(String mustReturnResponseFrom) {
 
@@ -376,4 +373,8 @@ public class MockModule  implements MuleContextAware, BeanFactoryPostProcessor
     private MuleEvent testEvent() throws Exception {
         return MuleTestUtils.getTestEvent(null, MessageExchangePattern.REQUEST_RESPONSE, muleContext);
     }
+
+
 }
+
+

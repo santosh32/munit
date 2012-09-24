@@ -42,6 +42,15 @@
         </spring:property>
     </spring:bean>
 
+    <spring:bean name="listOfMaps" class="org.springframework.beans.factory.config.ListFactoryBean">
+        <spring:property name="sourceList">
+            <spring:list>
+                <spring:ref bean="nonEmptyMap"/>
+            </spring:list>
+
+        </spring:property>
+    </spring:bean>
+
     <spring:bean name="nonEmptyMap" class="org.springframework.beans.factory.config.MapFactoryBean">
         <spring:property name="sourceMap">
             <spring:map>

@@ -91,8 +91,26 @@
                     config-ref="Salesforce" />
 
         <json:object-to-json-transformer />
+
+        <default-exception-strategy>
+            <logger message="Something failed"/>
+        </default-exception-strategy>
     </flow>
 
+    <flow name="getUpdatedSalesforce">
+        <http:inbound-endpoint exchange-pattern="one-way" host="localhost" port="10443" path="getUpdatedSalesforce">
+            <http:body-to-parameter-map-transformer/>
+        </http:inbound-endpoint>
+
+        <sfdc:get-updated-objects type="Campaign" initialTimeWindow="3" >
+            <sfdc:fields>
+                <sfdc:field>test</sfdc:field>
+            </sfdc:fields>
+        </sfdc:get-updated-objects>
+
+
+        <json:object-to-json-transformer />
+    </flow>
 
 
     <flow name="updateSalesforceTemplate">

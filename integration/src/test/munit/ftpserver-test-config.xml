@@ -58,7 +58,7 @@
 
         <mulemock:expect config-ref="salesforceMock" when="query" mustReturn-ref="nonEmptyList">
             <mulemock:parameters>
-                <mulemock:parameter value-ref="salesforceQuery"/>
+                <mulemock:parameter key="query" value-ref="salesforceQuery"/>
             </mulemock:parameters>
         </mulemock:expect>
 
