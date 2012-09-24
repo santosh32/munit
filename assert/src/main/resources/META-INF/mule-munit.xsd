@@ -488,8 +488,27 @@
         </xs:complexContent>
     </xs:complexType>
 
+    <xs:complexType name="munitTestType">
+        <xs:complexContent>
+            <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:baseFlowConstructType">
+                <xs:sequence>
+                    <xs:group xmlns:mule="http://www.mulesoft.org/schema/mule/core" ref="mule:messageProcessorOrOutboundEndpoint" maxOccurs="unbounded" />
+                </xs:sequence>
+                <xs:attribute name="description" use="required" type="xs:string" >
+                    <xs:annotation>
+                        <xs:documentation>Description message to be shown in case of failure.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="ignore" use="optional" type="xs:boolean" default="false" >
+                    <xs:annotation>
+                        <xs:documentation>Defines if the test must be ignored.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 
-   <xs:element xmlns="http://www.mulesoft.org/schema/mule/munit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" substitutionGroup="mule:abstract-flow-construct" name="test"  type="munitType">
+   <xs:element xmlns="http://www.mulesoft.org/schema/mule/munit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" substitutionGroup="mule:abstract-flow-construct" name="test"  type="munitTestType">
         <xs:annotation>
             <xs:documentation>
                 The test flow of Munit

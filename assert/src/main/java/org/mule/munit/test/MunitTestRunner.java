@@ -1,9 +1,5 @@
 package org.mule.munit.test;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import org.mule.MessageExchangePattern;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleEvent;
@@ -16,17 +12,16 @@ import org.mule.config.builders.SimpleConfigurationBuilder;
 import org.mule.config.spring.SpringXmlConfigurationBuilder;
 import org.mule.context.DefaultMuleContextBuilder;
 import org.mule.context.DefaultMuleContextFactory;
-import org.mule.munit.config.MunitAfterSuite;
-import org.mule.munit.config.MunitAfterTest;
-import org.mule.munit.config.MunitBeforeSuite;
-import org.mule.munit.config.MunitBeforeTest;
-import org.mule.munit.config.MunitFlow;
-import org.mule.munit.config.MunitTest;
+import org.mule.munit.config.*;
 import org.mule.munit.test.result.SuiteResult;
 import org.mule.munit.test.result.notification.NotificationListener;
 import org.mule.tck.MuleTestUtils;
 import org.mule.tck.TestingWorkListener;
 import org.mule.util.ClassUtils;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class MunitTestRunner {
 	public static final String CLASSNAME_ANNOTATIONS_CONFIG_BUILDER = "org.mule.org.mule.munit.config.AnnotationsConfigurationBuilder";
@@ -46,10 +41,11 @@ public class MunitTestRunner {
 
 			List<MunitFlow> before = lookupFlows(MunitBeforeTest.class);
 			List<MunitFlow> after = lookupFlows(MunitAfterTest.class);
-			Collection<MunitFlow> flowConstructs = lookupFlows(MunitTest.class);
-			for (MunitFlow flowConstruct : flowConstructs) {
-
-				suite.add(new Test(before, flowConstruct, after));
+			Collection<MunitTest> flowConstructs = lookupTests();
+			for (MunitTest flowConstruct : flowConstructs) {
+                 if ( !flowConstruct.isIgnore() ){
+                     suite.add(new Test(before, flowConstruct, after));
+                 }
 			}
 
 		} catch (Exception e) {
@@ -58,7 +54,12 @@ public class MunitTestRunner {
 
 	}
 
-	protected MuleContext createMuleContext() throws Exception {
+    private Collection<MunitTest> lookupTests() {
+        return new ArrayList<MunitTest>(muleContext.getRegistry()
+                .lookupObjects(MunitTest.class));
+    }
+
+    protected MuleContext createMuleContext() throws Exception {
 		// Should we set up the manager for every method?
 		MuleContext context;
 

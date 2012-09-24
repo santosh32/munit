@@ -128,34 +128,34 @@
 
 
 
-    <!--<munit:test name="testThatNullPayloadIfFailsToConnect"-->
+    <munit:test name="testThatNullPayloadIfFailsToConnect"
 
-        <!--description="-->
-        <!--Salesforce tries to connect but fails.">-->
+        description="
+        Salesforce tries to connect but fails." ignore="true">
 
-        <!--<mulemock:fail-on-connect config-ref="salesforceMock"/>-->
+        <mulemock:fail-on-connect config-ref="salesforceMock"/>
 
-        <!--<flow-ref name="campaignInfoFlow"/>-->
-
-
-        <!--<munit:assert-null/>-->
+        <flow-ref name="campaignInfoFlow"/>
 
 
-    <!--</munit:test>-->
+        <munit:assert-null/>
 
 
-    <!--<munit:test name="testThatNullPayloadIfFailsWhenQuery"-->
+    </munit:test>
 
-        <!--description="-->
-        <!--Salesforce fails when it tries to execute the query.-->
-        <!--If the query fails then we return null payload.">-->
 
-        <!--<mulemock:expect-fail config-ref="salesforceMock" when="query" throwA="java.lang.Exception"/>-->
+    <munit:test name="testThatNullPayloadIfFailsWhenQuery"
 
-        <!--<flow-ref name="campaignInfoFlow"/>-->
+        description="
+        Salesforce fails when it tries to execute the query.
+        If the query fails then we return null payload." ignore="true" >
 
-        <!--<munit:assert-null/>-->
-    <!--</munit:test>-->
+        <mulemock:expect-fail config-ref="salesforceMock" when="query" throwA="java.lang.Exception"/>
+
+        <flow-ref name="campaignInfoFlow"/>
+
+        <munit:assert-null/>
+    </munit:test>
 
 
     <munit:test name="testGroovyTransformerCaseMale"

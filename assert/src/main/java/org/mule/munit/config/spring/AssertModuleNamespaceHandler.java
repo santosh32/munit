@@ -33,7 +33,7 @@ public class AssertModuleNamespaceHandler
         registerBeanDefinitionParser("add-expected", new AddExpectedDefinitionParser());
         registerBeanDefinitionParser("reset-calls", new ResetCallsDefinitionParser());
         registerBeanDefinitionParser("validate-calls", new ResetCallsDefinitionParser());
-        registerBeanDefinitionParser("test", new MUnitFlowDefinitionParser(MunitTest.class));
+        registerBeanDefinitionParser("test", new MunitTestDefinitionParser(MunitTest.class));
         registerBeanDefinitionParser("before-test", new MUnitFlowDefinitionParser(MunitBeforeTest.class));
         registerBeanDefinitionParser("after-test", new MUnitFlowDefinitionParser(MunitAfterTest.class));
         registerBeanDefinitionParser("before-suite", new MUnitFlowDefinitionParser(MunitBeforeSuite.class));
