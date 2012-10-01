@@ -30,7 +30,7 @@ public class AssertModuleNamespaceHandler
         registerBeanDefinitionParser("set", new MunitDefinitionParser(SetMessageProcessor.class, new ArrayList<String>(),asList("payload")));
         registerBeanDefinitionParser("set-null-payload",  new MunitDefinitionParser(SetNullPayloadMessageProcessor.class));
         registerBeanDefinitionParser("fail", new MunitDefinitionParser(FailMessageProcessor.class, asList("message")));
-        registerBeanDefinitionParser("test", new MunitTestDefinitionParser(MunitTest.class));
+        registerBeanDefinitionParser("test", new MunitTestDefinitionParser(MunitTestFlow.class));
         registerBeanDefinitionParser("before-test", new MUnitFlowDefinitionParser(MunitBeforeTest.class));
         registerBeanDefinitionParser("after-test", new MUnitFlowDefinitionParser(MunitAfterTest.class));
         registerBeanDefinitionParser("before-suite", new MUnitFlowDefinitionParser(MunitBeforeSuite.class));

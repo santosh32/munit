@@ -5,7 +5,7 @@ import org.mule.api.MuleContext;
 import org.mule.munit.config.MunitAfterTest;
 import org.mule.munit.config.MunitBeforeTest;
 import org.mule.munit.config.MunitFlow;
-import org.mule.munit.config.MunitTest;
+import org.mule.munit.config.MunitTestFlow;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -44,7 +44,7 @@ public abstract class SuiteBuilder<T,E> {
      * @param afterTest Munit flows to be run after the test
      * @return The Test Object
      */
-    protected abstract E test(List<MunitFlow> beforeTest, MunitFlow test, List<MunitFlow> afterTest);
+    protected abstract E test(List<MunitFlow> beforeTest, MunitTestFlow test, List<MunitFlow> afterTest);
 
     /**
      * @param muleContext Used to create the tests and pre/post proccessors.
@@ -61,8 +61,8 @@ public abstract class SuiteBuilder<T,E> {
     public T build(String suiteName){
         List<MunitFlow> before = lookupFlows(MunitBeforeTest.class);
         List<MunitFlow> after = lookupFlows(MunitAfterTest.class);
-        Collection<MunitTest> flowConstructs = lookupTests();
-        for (MunitTest flowConstruct : flowConstructs) {
+        Collection<MunitTestFlow> flowConstructs = lookupTests();
+        for (MunitTestFlow flowConstruct : flowConstructs) {
             if ( !flowConstruct.isIgnore() ){
                tests.add(test(before, flowConstruct, after));
             }
@@ -76,8 +76,8 @@ public abstract class SuiteBuilder<T,E> {
                 .lookupObjects(munitClass));
     }
 
-    private Collection<MunitTest> lookupTests() {
-        return new ArrayList<MunitTest>(muleContext.getRegistry()
-                .lookupObjects(MunitTest.class));
+    private Collection<MunitTestFlow> lookupTests() {
+        return new ArrayList<MunitTestFlow>(muleContext.getRegistry()
+                .lookupObjects(MunitTestFlow.class));
     }
 }

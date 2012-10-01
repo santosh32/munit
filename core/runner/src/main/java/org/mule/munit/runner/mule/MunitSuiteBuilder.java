@@ -2,6 +2,7 @@ package org.mule.munit.runner.mule;
 
 import org.mule.api.MuleContext;
 import org.mule.munit.config.MunitFlow;
+import org.mule.munit.config.MunitTestFlow;
 import org.mule.munit.runner.SuiteBuilder;
 import org.mule.munit.runner.mule.result.output.TestOutputHandler;
 
@@ -47,7 +48,7 @@ public class MunitSuiteBuilder extends SuiteBuilder<MunitSuite, MunitTest> {
      * @see SuiteBuilder
      */
     @Override
-    protected MunitTest test(List<MunitFlow> beforeTest, MunitFlow test, List<MunitFlow> afterTest) {
+    protected MunitTest test(List<MunitFlow> beforeTest, MunitTestFlow test, List<MunitFlow> afterTest) {
         return new MunitTest(beforeTest, test, afterTest, handler);
     }
 }

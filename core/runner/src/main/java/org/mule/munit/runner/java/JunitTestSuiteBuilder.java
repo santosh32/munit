@@ -4,6 +4,7 @@ package org.mule.munit.runner.java;
 import junit.framework.TestSuite;
 import org.mule.api.MuleContext;
 import org.mule.munit.config.MunitFlow;
+import org.mule.munit.config.MunitTestFlow;
 import org.mule.munit.runner.SuiteBuilder;
 
 import java.util.List;
@@ -23,11 +24,15 @@ public class JunitTestSuiteBuilder extends SuiteBuilder<TestSuite, MunitTest> {
 
     @Override
     protected TestSuite createSuite(String name) {
-        return new TestSuite(name);
+        TestSuite testSuite = new TestSuite(name);
+        for ( MunitTest test : tests ){
+            testSuite.addTest(test);
+        }
+        return testSuite;
     }
 
     @Override
-    protected MunitTest test(List<MunitFlow> beforeTest, MunitFlow test, List<MunitFlow> afterTest) {
+    protected MunitTest test(List<MunitFlow> beforeTest, MunitTestFlow test, List<MunitFlow> afterTest) {
         return new MunitTest(beforeTest,test, afterTest);
     }
 }

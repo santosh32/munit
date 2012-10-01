@@ -9,7 +9,7 @@ import org.mule.api.registry.RegistrationException;
 import org.mule.munit.config.MunitAfterTest;
 import org.mule.munit.config.MunitBeforeTest;
 import org.mule.munit.config.MunitFlow;
-import org.mule.munit.config.MunitTest;
+import org.mule.munit.config.MunitTestFlow;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,13 +27,13 @@ public class SuiteBuilderTest {
     private MuleRegistry registry;
     private List<MunitAfterTest> afterTestFlows = new ArrayList<MunitAfterTest>();
     private List<MunitBeforeTest> beforeTestFlows = new ArrayList<MunitBeforeTest>();
-    private MunitTest munitTest;
+    private MunitTestFlow munitTest;
     
     @Before
     public void setUp(){
         muleContext = mock(MuleContext.class);
         registry = mock(MuleRegistry.class);
-        munitTest = mock(MunitTest.class);
+        munitTest = mock(MunitTestFlow.class);
         
         when(muleContext.getRegistry()).thenReturn(registry);
     }
@@ -63,13 +63,13 @@ public class SuiteBuilderTest {
     private void runTest(MockSuiteBuilder builder) {
         when(registry.lookupObjects(MunitBeforeTest.class)).thenReturn(beforeTestFlows);
         when(registry.lookupObjects(MunitAfterTest.class)).thenReturn(afterTestFlows);
-        when(registry.lookupObjects(MunitTest.class)).thenReturn(Arrays.asList(new MunitTest[]{munitTest}));
+        when(registry.lookupObjects(MunitTestFlow.class)).thenReturn(Arrays.asList(new MunitTestFlow[]{munitTest}));
 
         builder.build("test");
 
         verify(registry, times(1)).lookupObjects(MunitBeforeTest.class);
         verify(registry, times(1)).lookupObjects(MunitAfterTest.class);
-        verify(registry, times(1)).lookupObjects(MunitTest.class);
+        verify(registry, times(1)).lookupObjects(MunitTestFlow.class);
     }
 
     private class MockSuiteBuilder extends SuiteBuilder<MockSuite, MockTest>{
@@ -91,7 +91,7 @@ public class SuiteBuilderTest {
         }
 
         @Override
-        protected MockTest test(List<MunitFlow> beforeTest, MunitFlow test, List<MunitFlow> afterTest) {
+        protected MockTest test(List<MunitFlow> beforeTest, MunitTestFlow test, List<MunitFlow> afterTest) {
             assertEquals(afterTestFlows, afterTest);
             assertEquals(beforeTestFlows,beforeTest);
             assertEquals(munitTest, test);

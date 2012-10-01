@@ -8,7 +8,7 @@ import org.mule.api.MuleException;
 import org.mule.api.registry.MuleRegistry;
 import org.mule.munit.config.MunitAfterSuite;
 import org.mule.munit.config.MunitBeforeSuite;
-import org.mule.munit.config.MunitTest;
+import org.mule.munit.config.MunitTestFlow;
 import org.mule.munit.runner.mule.result.output.TestOutputHandler;
 
 import java.util.Arrays;
@@ -30,7 +30,7 @@ public class MunitRunnerTest {
     private MuleRegistry registry;
     private List<MunitAfterSuite> afterTestFlows;
     private List<MunitBeforeSuite> beforeTestFlows;
-    private MunitTest munitTest;
+    private MunitTestFlow munitTest;
     private MunitAfterSuite afterTest;
     private MunitBeforeSuite beforeTest;
 
@@ -43,7 +43,7 @@ public class MunitRunnerTest {
     public void setUp(){
         muleContext = mock(MuleContext.class);
         registry = mock(MuleRegistry.class);
-        munitTest = mock(MunitTest.class);
+        munitTest = mock(MunitTestFlow.class);
         manager = mock(MuleContextManager.class);
         afterTest = mock(MunitAfterSuite.class);
         beforeTest = mock(MunitBeforeSuite.class);
@@ -106,7 +106,7 @@ public class MunitRunnerTest {
     private void setBehavior() {
         when(registry.lookupObjects(MunitBeforeSuite.class)).thenReturn(beforeTestFlows);
         when(registry.lookupObjects(MunitAfterSuite.class)).thenReturn(afterTestFlows);
-        when(registry.lookupObjects(MunitTest.class)).thenReturn(Arrays.asList(new MunitTest[]{munitTest}));
+        when(registry.lookupObjects(MunitTestFlow.class)).thenReturn(Arrays.asList(new MunitTestFlow[]{munitTest}));
 
         when(afterTest.getDescription()).thenReturn(AFTER_TEST_DESCRIPTION);
         when(afterTest.getName()).thenReturn(AFTER_TEST_NAME);

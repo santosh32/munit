@@ -4,6 +4,7 @@ import org.mule.MessageExchangePattern;
 import org.mule.api.MuleEvent;
 import org.mule.api.MuleException;
 import org.mule.munit.config.MunitFlow;
+import org.mule.munit.config.MunitTestFlow;
 import org.mule.munit.runner.mule.result.TestResult;
 import org.mule.munit.runner.mule.result.notification.Notification;
 import org.mule.munit.runner.mule.result.output.TestOutputHandler;
@@ -33,7 +34,7 @@ public class MunitTest {
     /**
      * <p>The MUnit test.</p>
      */
-    private MunitFlow test;
+    private MunitTestFlow test;
 
     /**
      * <p>The Output handler to be use.</p>
@@ -52,7 +53,7 @@ public class MunitTest {
     }
 
     public MunitTest(List<MunitFlow> before,
-                     MunitFlow test,
+                     MunitTestFlow test,
                      List<MunitFlow> after,
                      TestOutputHandler outputHandler) {
         this.before = before;
@@ -78,7 +79,13 @@ public class MunitTest {
         } catch (AssertionError t) {
             result.setFailure(buildNotifcationFrom(t));
         } catch (MuleException e) {
-            result.setError(buildNotifcationFrom(e));
+            try {
+                if ( !test.expectException(e) ){
+                    result.setError(buildNotifcationFrom(e));
+                }
+            }catch (AssertionError t) {
+                result.setFailure(buildNotifcationFrom(t));
+            }
         } finally {
             runAfter(result, event);
         }

@@ -1,6 +1,5 @@
 package org.mule.munit.config.spring;
 
-import org.apache.commons.lang.StringUtils;
 import org.mule.api.config.MuleProperties;
 import org.mule.config.spring.parsers.generic.OrphanDefinitionParser;
 import org.mule.config.spring.util.ProcessingStrategyUtils;
@@ -26,12 +25,8 @@ public class MunitTestDefinitionParser extends OrphanDefinitionParser {
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         builder.addConstructorArgValue(element.getAttribute(ATTRIBUTE_NAME));
         builder.addConstructorArgReference(MuleProperties.OBJECT_MULE_CONTEXT);
-        String ignore = element.getAttribute("ignore");
-        if (StringUtils.isEmpty(ignore)) {
-            ignore = "false";
-        }
-
-        builder.addPropertyValue("ignore", Boolean.getBoolean(ignore));
+        builder.addPropertyValue("expected", element.getAttribute("expected"));
+        builder.addPropertyValue("ignore", Boolean.getBoolean(element.getAttribute("ignore")));
         ProcessingStrategyUtils.configureProcessingStrategy(element, builder,
                 ProcessingStrategyUtils.QUEUED_ASYNC_PROCESSING_STRATEGY);
         super.doParse(element, parserContext, builder);

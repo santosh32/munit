@@ -6,22 +6,20 @@ import org.mule.api.DefaultMuleException;
 import org.mule.api.MuleEvent;
 import org.mule.api.MuleException;
 import org.mule.munit.config.MunitFlow;
-import org.mule.munit.runner.mule.MunitTest;
+import org.mule.munit.config.MunitTestFlow;
 import org.mule.munit.runner.mule.result.TestResult;
 import org.mule.munit.runner.mule.result.output.TestOutputHandler;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 public class MunitTestTest {
     private MunitFlow before;
     private MunitFlow after;
-    private MunitFlow testFlow;
+    private MunitTestFlow testFlow;
     private TestOutputHandler handler;
     private MuleEvent muleEvent;
 
@@ -29,7 +27,7 @@ public class MunitTestTest {
     public void setUpMocks(){
         before = mock(MunitFlow.class);
         after = mock(MunitFlow.class);
-        testFlow = mock(MunitFlow.class);
+        testFlow = mock(MunitTestFlow.class);
         handler = mock(TestOutputHandler.class);
         muleEvent = mock(MuleEvent.class);
 
@@ -93,7 +91,7 @@ public class MunitTestTest {
     }
 
     private class MockedTest extends MunitTest {
-        public MockedTest(List<MunitFlow> before, MunitFlow test, List<MunitFlow> after, TestOutputHandler outputHandler) {
+        public MockedTest(List<MunitFlow> before, MunitTestFlow test, List<MunitFlow> after, TestOutputHandler outputHandler) {
             super(before, test, after, outputHandler);
         }
 

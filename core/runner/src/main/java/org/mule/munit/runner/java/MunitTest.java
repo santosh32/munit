@@ -6,6 +6,7 @@ import org.mule.api.MuleContext;
 import org.mule.api.MuleEvent;
 import org.mule.api.MuleException;
 import org.mule.munit.config.MunitFlow;
+import org.mule.munit.config.MunitTestFlow;
 import org.mule.tck.MuleTestUtils;
 
 import java.util.List;
@@ -15,12 +16,12 @@ public class MunitTest extends TestCase
 {
 
     private List<MunitFlow> before;
-    MunitFlow flow;
+    MunitTestFlow flow;
     private List<MunitFlow> after;
     private MuleContext muleContext;
 
 
-    public MunitTest(List<MunitFlow> before, MunitFlow flow, List<MunitFlow> after) {
+    public MunitTest(List<MunitFlow> before, MunitTestFlow flow, List<MunitFlow> after) {
         this.before = before;
         this.flow = flow;
         this.after = after;
@@ -49,7 +50,9 @@ public class MunitTest extends TestCase
         }
         catch(Throwable t)
         {
-            throw t;
+            if ( !flow.expectException(t) ){
+                throw t;
+            }
         }
         finally {
             run(event, after);

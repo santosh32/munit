@@ -12,16 +12,14 @@
 
     <spring:beans>
         <spring:import resource="mule-config.xml"/>
-        <spring:import resource="common-definitions.xml" />
+        <spring:import resource="common-definitions.xml"/>
     </spring:beans>
 
 
     <munit:config/>
 
-
     <munit:test name="testingEchoFlow"
-
-        description="
+                description="
         We want to test that the flow always returns the same payload as we had before calling it.">
 
 
@@ -47,7 +45,7 @@
 
 
     <munit:test name="testThatTwoThingsAreEqual"
-        description="
+                description="
         Testing that two things are equal">
 
         <munit:assert-on-equals expected-ref="#[string: Hello world!]" value-ref="#[string: Hello world!]"/>
@@ -81,5 +79,9 @@
         Testing that a test is ignored" ignore="true">
 
         <munit:fail/>
+    </munit:test>
+
+    <munit:test name="testExceptions" description="Test Exceptions" expected="org.mule.api.transformer.TransformerMessagingException">
+        <flow-ref name="exceptionFlow"/>
     </munit:test>
 </mule>

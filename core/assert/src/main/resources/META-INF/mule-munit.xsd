@@ -445,6 +445,11 @@
                         <xs:documentation>Defines if the test must be ignored.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
+                <xs:attribute name="expected" use="optional" type="xs:string"  >
+                    <xs:annotation>
+                        <xs:documentation>Exception name to be expected</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
