@@ -111,7 +111,9 @@ public class MockModule  implements MuleContextAware, BeanFactoryPostProcessor
      * @param parameters Message processor parameters.
      */
     @Processor
-    public void expect(String when, @Optional Map<String,Object> parameters, @Optional final Object mustReturn, 
+    public void expect(String when,
+                       @Optional Map<String,Object> parameters,
+                       @Optional final Object mustReturn,
                        @Optional String mustReturnResponseFrom)
     {
         try {
@@ -374,7 +376,9 @@ public class MockModule  implements MuleContextAware, BeanFactoryPostProcessor
         return MuleTestUtils.getTestEvent(null, MessageExchangePattern.REQUEST_RESPONSE, muleContext);
     }
 
-
+    public String getOf() {
+        return of;
+    }
 }
 
 

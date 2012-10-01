@@ -24,7 +24,6 @@ import org.apache.maven.project.MavenProject;
 import org.mule.munit.test.MunitTestRunner;
 import org.mule.munit.test.result.MunitResult;
 import org.mule.munit.test.result.SuiteResult;
-import org.mule.munit.test.result.notification.StreamNotificationListener;
 
 import java.io.File;
 import java.net.MalformedURLException;

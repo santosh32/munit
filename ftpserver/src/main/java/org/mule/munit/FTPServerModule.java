@@ -104,7 +104,7 @@ public class FTPServerModule
     }
 
     @PostConstruct
-    public void initialise() throws InitialisationException {
+    public void buildServer() throws InitialisationException {
         if ( secure )
             server = new SFTPServerWrapper();
         else
@@ -115,6 +115,11 @@ public class FTPServerModule
 
     }
 
+    public int getPort() {
+        return port;
+    }
 
-
+    public boolean isSecure() {
+        return secure;
+    }
 }

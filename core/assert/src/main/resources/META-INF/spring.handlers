@@ -1,0 +1,2 @@
+http\://www.mulesoft.org/schema/mule/munit=org.mule.munit.config.spring.AssertModuleNamespaceHandler
+http\://www.mulesoft.org/schema/mule/munit=org.mule.munit.config.spring.AssertModuleNamespaceHandler

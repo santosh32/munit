@@ -251,4 +251,16 @@ public class DBServerModule
     public void setCsv(String csv) {
         this.csv = csv;
     }
+
+    public String getDatabase() {
+        return database;
+    }
+
+    public String getCreationalScript() {
+        return creationalScript;
+    }
+
+    public String getCsv() {
+        return csv;
+    }
 }

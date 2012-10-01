@@ -154,4 +154,8 @@ public class MPMockModule implements BeanFactoryPostProcessor, MuleContextAware
     public void setMuleContext(MuleContext context) {
         this.context = context;
     }
+
+    public String getOf() {
+        return of;
+    }
 }
