@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.mule</groupId>
@@ -19,10 +20,10 @@
     </properties>
 
     <modules>
-    <module>core</module>
-    <module>tools</module>
-    <module>it</module>
-  </modules>
+        <module>core</module>
+        <module>tools</module>
+        <module>it</module>
+    </modules>
 
     <build>
         <pluginManagement>
@@ -52,7 +53,7 @@
                                         </goals>
                                     </pluginExecutionFilter>
                                     <action>
-                                        <ignore />
+                                        <ignore/>
                                     </action>
                                 </pluginExecution>
                             </pluginExecutions>
@@ -140,7 +141,8 @@
                         -hdf project.snapshotRepo.name "${project.distributionManagement.snapshotRepository.name}"
                         -hdf project.snapshotRepo.id "${project.distributionManagement.snapshotRepository.id}"
                         -hdf project.snapshotRepo.url "${project.distributionManagement.snapshotRepository.url}"
-                        -d ${project.build.directory}/apidocs</additionalparam>
+                        -d ${project.build.directory}/apidocs
+                    </additionalparam>
                     <useStandardDocletOptions>false</useStandardDocletOptions>
                     <additionalJOption>-J-Xmx1024m</additionalJOption>
                 </configuration>
@@ -158,7 +160,7 @@
     </build>
 
 
- <distributionManagement>
+    <distributionManagement>
         <repository>
             <id>mulesoft-releases</id>
             <name>MuleForge Snapshot Repository</name>

@@ -18,4 +18,34 @@
    <module>runner</module>
    </modules>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.mule</groupId>
+                <artifactId>mule-core</artifactId>
+                <version>${mule.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mule.modules</groupId>
+                <artifactId>mule-module-spring-config</artifactId>
+                <version>${mule.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>${mockito.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mule.tests</groupId>
+                <artifactId>mule-tests-functional</artifactId>
+                <version>${mule.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
 </project>
