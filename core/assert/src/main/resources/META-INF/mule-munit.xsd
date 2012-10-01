@@ -4,7 +4,6 @@
   <xs:import namespace="http://www.w3.org/XML/1998/namespace"></xs:import>
   <xs:import schemaLocation="http://www.springframework.org/schema/beans/spring-beans-3.0.xsd" namespace="http://www.springframework.org/schema/beans"></xs:import>
   <xs:import schemaLocation="http://www.mulesoft.org/schema/mule/core/current/mule.xsd" namespace="http://www.mulesoft.org/schema/mule/core"></xs:import>
-  <xs:import schemaLocation="http://www.mulesoft.org/schema/mule/devkit/current/mule-devkit.xsd" namespace="http://www.mulesoft.org/schema/mule/devkit"></xs:import>
   <xs:simpleType name="integerType">
     <xs:union>
       <xs:simpleType>
@@ -138,7 +137,7 @@
       </xs:annotation>
     </xs:attribute>
   </xs:complexType>
-  <xs:element xmlns:devkit="http://www.mulesoft.org/schema/mule/devkit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="config" substitutionGroup="mule:abstract-extension" devkit:javaClass="org.mule.munit.AssertModule">
+  <xs:element  xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="config" substitutionGroup="mule:abstract-extension">
     <xs:complexType>
       <xs:complexContent>
         <xs:extension base="mule:abstractExtensionType">

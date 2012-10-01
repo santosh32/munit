@@ -26,10 +26,13 @@ import org.mule.munit.runner.mule.result.MunitResult;
 import org.mule.munit.runner.mule.result.SuiteResult;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -77,12 +80,9 @@ public class MUnitMojo
                 testResource.getTargetPath();
             }
 
-            Thread t = Thread.currentThread();
-            ClassLoader old = t.getContextClassLoader();
             try {
                 List<SuiteResult> results = new ArrayList<SuiteResult>();
-                t.setContextClassLoader(getClassPath(makeClassPath()));
-
+                addUrlsToClassPath(makeClassPath());
                 File testFolder = new File(project.getBasedir(), "src/test/munit");
 
                 for ( File file : testFolder.listFiles() )
@@ -103,8 +103,13 @@ public class MUnitMojo
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
             } finally {
-                t.setContextClassLoader(old);
             }
         }
 
@@ -175,7 +180,7 @@ public class MUnitMojo
     }
 
     public URLClassLoader getClassPath(List<URL> classpath) {
-       return new URLClassLoader(classpath.toArray(new URL[classpath.size()]), getClass().getClassLoader());
+        return new URLClassLoader(classpath.toArray(new URL[classpath.size()]), getClass().getClassLoader());
     }
 
     /**
@@ -192,5 +197,17 @@ public class MUnitMojo
         for (String e : classpathElements)
             urls.add(new File(e).toURL());
         return urls;
+    }
+    
+    private void addUrlsToClassPath(List<URL> urls) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        ClassLoader sysCl = Thread.currentThread().getContextClassLoader();
+        Class refClass = URLClassLoader.class;
+        Method methodAddUrl = refClass.getDeclaredMethod("addURL", new Class[]{URL.class});
+        methodAddUrl.setAccessible(true);
+        for (Iterator it = urls.iterator(); it.hasNext();)
+        {
+            URL url = (URL) it.next();
+            methodAddUrl.invoke(sysCl, url);
+        }
     }
 }

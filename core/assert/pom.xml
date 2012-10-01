@@ -85,34 +85,7 @@
             <artifactId>mule-module-spring-config</artifactId>
             <version>${mule.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.mule.tools.devkit</groupId>
-            <artifactId>mule-devkit-annotations</artifactId>
-            <version>${mule.devkit.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>oauth.signpost</groupId>
-            <artifactId>signpost-core</artifactId>
-            <version>1.2.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse</groupId>
-            <artifactId>eclipse-workbench</artifactId>
-            <version>3.6.1.M20100826-1330</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse</groupId>
-            <artifactId>eclipse-runtime</artifactId>
-            <version>3.6.0.v20100505</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>core</artifactId>
-            <version>4.3.0</version>
-            <scope>provided</scope>
-        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -128,21 +101,21 @@
             <artifactId>mule-tests-functional</artifactId>
             <version>${mule.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.mule.transports</groupId>
-            <artifactId>mule-transport-vm</artifactId>
-            <version>${mule.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.mule.transports</groupId>
-            <artifactId>mule-transport-jdbc</artifactId>
-            <version>${mule.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.mule.transports</groupId>
-            <artifactId>mule-transport-jms</artifactId>
-            <version>${mule.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.mule.transports</groupId>-->
+            <!--<artifactId>mule-transport-vm</artifactId>-->
+            <!--<version>${mule.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.mule.transports</groupId>-->
+            <!--<artifactId>mule-transport-jdbc</artifactId>-->
+            <!--<version>${mule.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.mule.transports</groupId>-->
+            <!--<artifactId>mule-transport-jms</artifactId>-->
+            <!--<version>${mule.version}</version>-->
+        <!--</dependency>-->
     </dependencies>
 
 </project>

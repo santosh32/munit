@@ -10,7 +10,7 @@
     <artifactId>core</artifactId>
     <version>3.3.2-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>Mule Module for Asserting</name>
+    <name>Munit core</name>
 
 
    <modules>

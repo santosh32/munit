@@ -8,7 +8,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.mule.munit</groupId>
-	<artifactId>integration</artifactId>
+	<artifactId>it</artifactId>
 	<packaging>mule</packaging>
 	<name>it</name>
     <version>3.3.2-SNAPSHOT</version>
@@ -327,11 +327,11 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.mule.modules</groupId>
-			<artifactId>mule-module-sfdc</artifactId>
-			<version>4.2</version>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.mule.modules</groupId>-->
+			<!--<artifactId>mule-module-sfdc</artifactId>-->
+			<!--<version></version>-->
+		<!--</dependency>-->
 		<dependency>
 			<groupId>org.mule.transports</groupId>
 			<artifactId>mule-transport-ftp</artifactId>
@@ -445,7 +445,7 @@
 		<dependency>
 			<groupId>com.mulesoft.muleesb.transports</groupId>
 			<artifactId>mule-transport-jdbc-ee</artifactId>
-			<version>${mule.version}</version>
+			<version>3.3.0</version>
 			<scope>provided</scope>
 		</dependency>
 
