@@ -66,7 +66,7 @@
       <groupId>org.mule.munit</groupId>
       <artifactId>assert</artifactId>
       <type>jar</type>
-      <version>1.2-SNAPSHOT</version>
+      <version>3.3.2-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.mule</groupId>
@@ -439,6 +439,12 @@
       <artifactId>geronimo-j2ee-management_1.0_spec</artifactId>
       <type>jar</type>
       <version>1.1-osgi</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mule.munit</groupId>
+      <artifactId>runner</artifactId>
+      <type>jar</type>
+      <version>3.3.2-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

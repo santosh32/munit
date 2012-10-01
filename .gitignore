@@ -7,6 +7,10 @@
 .classpath
 .idea
 .settings
+core/target
+core/assert/target
+core/runner/target
+it-test/target
 assert/target
 assert/.settings
 ftpserver/target

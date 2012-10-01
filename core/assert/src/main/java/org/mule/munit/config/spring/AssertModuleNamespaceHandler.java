@@ -3,6 +3,10 @@ package org.mule.munit.config.spring;
 import org.mule.munit.config.*;
 import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 
 /**
  * <p>Assert Module Namespace Handler</p>
@@ -16,22 +20,27 @@ public class AssertModuleNamespaceHandler
 
     public void init() {
         registerBeanDefinitionParser("config", new AssertModuleConfigDefinitionParser());
-        registerBeanDefinitionParser("assert-that", new AssertThatDefinitionParser());
-        registerBeanDefinitionParser("assert-true", new AssertTrueDefinitionParser());
-        registerBeanDefinitionParser("assert-on-equals", new AssertOnEqualsDefinitionParser());
-        registerBeanDefinitionParser("assert-not-same", new AssertNotSameDefinitionParser());
-        registerBeanDefinitionParser("assert-false", new AssertFalseDefinitionParser());
-        registerBeanDefinitionParser("assert-not-null", new AssertNotNullDefinitionParser());
-        registerBeanDefinitionParser("assert-null", new AssertNullDefinitionParser());
-        registerBeanDefinitionParser("set", new SetDefinitionParser());
-        registerBeanDefinitionParser("set-null-payload", new SetNullPayloadDefinitionParser());
-        registerBeanDefinitionParser("fail", new FailDefinitionParser());
+        registerBeanDefinitionParser("assert-that", new MunitDefinitionParser(AssertThatMessageProcessor.class, asList("message"), asList("payloadIs")));
+        registerBeanDefinitionParser("assert-true", new MunitDefinitionParser(AssertTrueMessageProcessor.class, asList("message", "condition")));
+        registerBeanDefinitionParser("assert-on-equals", new MunitDefinitionParser(AssertOnEqualsMessageProcessor.class, asList("message"), asList("expected", "value")));
+        registerBeanDefinitionParser("assert-not-same", new MunitDefinitionParser(AssertNotSameMessageProcessor.class, asList("message"), asList("expected", "value")));
+        registerBeanDefinitionParser("assert-false", new MunitDefinitionParser(AssertFalseMessageProcessor.class, asList("message", "condition")));
+        registerBeanDefinitionParser("assert-not-null", new MunitDefinitionParser(AssertNotNullMessageProcessor.class, asList("message")));
+        registerBeanDefinitionParser("assert-null", new MunitDefinitionParser(AssertNullMessageProcessor.class, asList("message")));
+        registerBeanDefinitionParser("set", new MunitDefinitionParser(SetMessageProcessor.class, new ArrayList<String>(),asList("payload")));
+        registerBeanDefinitionParser("set-null-payload",  new MunitDefinitionParser(SetNullPayloadMessageProcessor.class));
+        registerBeanDefinitionParser("fail", new MunitDefinitionParser(FailMessageProcessor.class, asList("message")));
         registerBeanDefinitionParser("test", new MunitTestDefinitionParser(MunitTest.class));
         registerBeanDefinitionParser("before-test", new MUnitFlowDefinitionParser(MunitBeforeTest.class));
         registerBeanDefinitionParser("after-test", new MUnitFlowDefinitionParser(MunitAfterTest.class));
         registerBeanDefinitionParser("before-suite", new MUnitFlowDefinitionParser(MunitBeforeSuite.class));
         registerBeanDefinitionParser("after-suite", new MUnitFlowDefinitionParser(MunitAfterSuite.class));
 
+    }
+    
+    
+    private static List<String> asList(String ... attrs){
+       return Arrays.asList(attrs);
     }
 
 }
