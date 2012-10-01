@@ -138,7 +138,7 @@
       </xs:annotation>
     </xs:attribute>
   </xs:complexType>
-  <xs:element xmlns:devkit="http://www.mulesoft.org/schema/mule/devkit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="config" substitutionGroup="mule:abstract-extension" devkit:javaClass="org.mule.munit.config.AssertModuleLifecycleAdapter">
+  <xs:element xmlns:devkit="http://www.mulesoft.org/schema/mule/devkit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="config" substitutionGroup="mule:abstract-extension" devkit:javaClass="org.mule.munit.AssertModule">
     <xs:complexType>
       <xs:complexContent>
         <xs:extension base="mule:abstractExtensionType">
@@ -187,11 +187,6 @@
   <xs:complexType name="AssertThatType">
     <xs:complexContent>
       <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
-        <xs:attribute name="config-ref" use="optional" type="xs:string">
-          <xs:annotation>
-            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
         <xs:attribute name="message" use="optional" type="xs:string">
           <xs:annotation>
             <xs:documentation>Description message to be shown in case of failure.</xs:documentation>
@@ -213,11 +208,7 @@
   <xs:complexType name="AssertTrueType">
     <xs:complexContent>
       <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
-        <xs:attribute name="config-ref" use="optional" type="xs:string">
-          <xs:annotation>
-            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
+
         <xs:attribute name="message" use="optional" type="xs:string">
           <xs:annotation>
             <xs:documentation>Description message to be shown in case of failure.</xs:documentation>
@@ -239,11 +230,7 @@
   <xs:complexType name="AssertOnEqualsType">
     <xs:complexContent>
       <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
-        <xs:attribute name="config-ref" use="optional" type="xs:string">
-          <xs:annotation>
-            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
+
         <xs:attribute name="message" use="optional" type="xs:string">
           <xs:annotation>
             <xs:documentation>Description message to be shown in case of failure.</xs:documentation>
@@ -270,11 +257,7 @@
     <xs:complexType name="AddExpectedType">
         <xs:complexContent>
             <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
-                <xs:attribute name="config-ref" use="optional" type="xs:string">
-                    <xs:annotation>
-                        <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
+
                 <xs:attribute name="value-ref" use="required" type="xs:string">
                     <xs:annotation>
                         <xs:documentation>Expected value</xs:documentation>
@@ -291,11 +274,7 @@
     <xs:complexType name="ResetCallsType">
         <xs:complexContent>
             <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
-                <xs:attribute name="config-ref" use="optional" type="xs:string">
-                    <xs:annotation>
-                        <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
+
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -307,11 +286,7 @@
     <xs:complexType name="ValidateCallsType">
         <xs:complexContent>
             <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
-                <xs:attribute name="config-ref" use="optional" type="xs:string">
-                    <xs:annotation>
-                        <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
+
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -323,11 +298,6 @@
   <xs:complexType name="AssertNotSameType">
     <xs:complexContent>
       <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
-        <xs:attribute name="config-ref" use="optional" type="xs:string">
-          <xs:annotation>
-            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
         <xs:attribute name="message" use="optional" type="xs:string">
           <xs:annotation>
             <xs:documentation>description message</xs:documentation>
@@ -354,11 +324,7 @@
   <xs:complexType name="AssertFalseType">
     <xs:complexContent>
       <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
-        <xs:attribute name="config-ref" use="optional" type="xs:string">
-          <xs:annotation>
-            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
+
         <xs:attribute name="message" use="optional" type="xs:string">
           <xs:annotation>
             <xs:documentation>Description message to be shown in case of failure.</xs:documentation>
@@ -380,11 +346,7 @@
   <xs:complexType name="AssertNotNullType">
     <xs:complexContent>
       <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
-        <xs:attribute name="config-ref" use="optional" type="xs:string">
-          <xs:annotation>
-            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
+
         <xs:attribute name="message" use="optional" type="xs:string">
           <xs:annotation>
             <xs:documentation>Description message to be shown in case of failure.</xs:documentation>
@@ -401,11 +363,6 @@
   <xs:complexType name="AssertNullType">
     <xs:complexContent>
       <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
-        <xs:attribute name="config-ref" use="optional" type="xs:string">
-          <xs:annotation>
-            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
         <xs:attribute name="message" use="optional" type="xs:string">
           <xs:annotation>
             <xs:documentation>Description message to be shown in case of failure.</xs:documentation>
@@ -422,11 +379,6 @@
   <xs:complexType name="SetType">
     <xs:complexContent>
       <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
-        <xs:attribute name="config-ref" use="optional" type="xs:string">
-          <xs:annotation>
-            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
         <xs:attribute name="payload-ref" use="required" type="xs:string">
           <xs:annotation>
             <xs:documentation>payload</xs:documentation>
@@ -443,11 +395,6 @@
   <xs:complexType name="SetNullPayloadType">
     <xs:complexContent>
       <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
-        <xs:attribute name="config-ref" use="optional" type="xs:string">
-          <xs:annotation>
-            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -459,11 +406,6 @@
   <xs:complexType name="FailType">
     <xs:complexContent>
       <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
-        <xs:attribute name="config-ref" use="optional" type="xs:string">
-          <xs:annotation>
-            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
-          </xs:annotation>
-        </xs:attribute>
         <xs:attribute name="message" use="optional" type="xs:string">
           <xs:annotation>
             <xs:documentation>Description message to be shown in case of failure.</xs:documentation>

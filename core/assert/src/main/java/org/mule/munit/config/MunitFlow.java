@@ -3,12 +3,12 @@ package org.mule.munit.config;
 import org.mule.api.MuleContext;
 import org.mule.construct.Flow;
 
+
 /**
- * Created by IntelliJ IDEA.
- * User: fernandofederico
- * Date: 3/27/12
- * Time: 12:21 PM
- * To change this template use File | Settings | File Templates.
+ * <p>Generic Munit Flow</p>
+ *
+ * @author Federico, Fernando
+ * @version since 3.3.2
  */
 public class MunitFlow extends Flow {
     private String description;

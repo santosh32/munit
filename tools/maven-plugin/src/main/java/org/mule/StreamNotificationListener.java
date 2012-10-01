@@ -1,9 +1,10 @@
 package org.mule;
 
-import org.mule.munit.test.Test;
-import org.mule.munit.test.result.TestResult;
-import org.mule.munit.test.result.notification.Notification;
-import org.mule.munit.test.result.notification.NotificationListener;
+
+import org.mule.munit.runner.mule.MunitTest;
+import org.mule.munit.runner.mule.result.TestResult;
+import org.mule.munit.runner.mule.result.notification.Notification;
+import org.mule.munit.runner.mule.result.notification.NotificationListener;
 
 import java.io.PrintStream;
 
@@ -15,7 +16,7 @@ public class StreamNotificationListener implements NotificationListener {
         this.out = out;
     }
 
-    public void notifyStartOf(Test test) {
+    public void notifyStartOf(MunitTest test) {
         out.println("RUNNIG " + test.getName());
     }
 

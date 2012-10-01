@@ -3,6 +3,12 @@ package org.mule.munit.config;
 import org.mule.api.MuleContext;
 
 
+/**
+ * <p>The Test Flow</p>
+ *
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class MunitTest extends MunitFlow{
     private boolean ignore;
 

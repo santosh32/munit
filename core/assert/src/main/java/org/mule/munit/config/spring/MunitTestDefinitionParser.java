@@ -9,15 +9,13 @@ import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
 /**
- * Created by IntelliJ IDEA.
- * User: fernandofederico
- * Date: 9/24/12
- * Time: 7:50 PM
- * To change this template use File | Settings | File Templates.
+ * <p>Munit Test Definition Parser</p>
+ *
+ * @author Federico, Fernando
+ * @version since 3.3.2
  */
 public class MunitTestDefinitionParser extends OrphanDefinitionParser {
-    public MunitTestDefinitionParser(Class munitClass)
-    {
+    public MunitTestDefinitionParser(Class munitClass) {
         super(munitClass, true);
         addIgnored("abstract");
         addIgnored("name");
@@ -25,12 +23,11 @@ public class MunitTestDefinitionParser extends OrphanDefinitionParser {
     }
 
     @java.lang.Override
-    protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder)
-    {
+    protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         builder.addConstructorArgValue(element.getAttribute(ATTRIBUTE_NAME));
         builder.addConstructorArgReference(MuleProperties.OBJECT_MULE_CONTEXT);
         String ignore = element.getAttribute("ignore");
-        if (StringUtils.isEmpty(ignore)){
+        if (StringUtils.isEmpty(ignore)) {
             ignore = "false";
         }
 

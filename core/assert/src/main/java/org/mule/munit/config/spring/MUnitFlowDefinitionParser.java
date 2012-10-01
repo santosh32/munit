@@ -8,15 +8,13 @@ import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
 /**
- * Created by IntelliJ IDEA.
- * User: fernandofederico
- * Date: 3/27/12
- * Time: 12:24 PM
- * To change this template use File | Settings | File Templates.
+ * <p>Munit Flow Definition Parser</p>
+ *
+ * @author Federico, Fernando
+ * @version since 3.3.2
  */
-public class MUnitFlowDefinitionParser extends OrphanDefinitionParser{
-    public MUnitFlowDefinitionParser(Class munitClass)
-    {
+public class MUnitFlowDefinitionParser extends OrphanDefinitionParser {
+    public MUnitFlowDefinitionParser(Class munitClass) {
         super(munitClass, true);
         addIgnored("abstract");
         addIgnored("name");
@@ -24,8 +22,7 @@ public class MUnitFlowDefinitionParser extends OrphanDefinitionParser{
     }
 
     @java.lang.Override
-    protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder)
-    {
+    protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         builder.addConstructorArgValue(element.getAttribute(ATTRIBUTE_NAME));
         builder.addConstructorArgReference(MuleProperties.OBJECT_MULE_CONTEXT);
         ProcessingStrategyUtils.configureProcessingStrategy(element, builder,

@@ -15,6 +15,12 @@ import org.mule.munit.runner.mule.result.output.DefaultOutputHandler;
 import java.lang.reflect.Method;
 
 
+/**
+ * <p>Mule for Junit Runners</p>
+ *
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class MuleSuiteRunner extends Runner implements Filterable, Sortable {
 
     private TestSuite testSuite;

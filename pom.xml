@@ -4,7 +4,7 @@
 
     <groupId>org.mule</groupId>
     <artifactId>munit</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>3.3.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -19,14 +19,9 @@
     </properties>
 
     <modules>
-    <module>assert</module>
-    <module>mock</module>
-    <module>ftpserver</module>
-    <module>mclient</module>
-    <module>dbserver</module>
-    <module>mpmock</module>
+    <module>core</module>
     <module>tools</module>
-    <module>integration</module>
+    <module>it-test</module>
   </modules>
 
     <build>

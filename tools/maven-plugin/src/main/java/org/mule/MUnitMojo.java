@@ -21,9 +21,9 @@ import org.apache.maven.model.Resource;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
-import org.mule.munit.test.MunitTestRunner;
-import org.mule.munit.test.result.MunitResult;
-import org.mule.munit.test.result.SuiteResult;
+import org.mule.munit.runner.mule.MunitSuiteRunner;
+import org.mule.munit.runner.mule.result.MunitResult;
+import org.mule.munit.runner.mule.result.SuiteResult;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -159,8 +159,8 @@ public class MUnitMojo
 		}
 	}
 
-	private MunitTestRunner buildRunnerFor(String fileName) {
-		MunitTestRunner runner = new MunitTestRunner(fileName);
+	private MunitSuiteRunner buildRunnerFor(String fileName) {
+        MunitSuiteRunner runner = new MunitSuiteRunner(fileName);
 		runner.setNotificationListener(new StreamNotificationListener(System.out));
 		return runner;
 	}

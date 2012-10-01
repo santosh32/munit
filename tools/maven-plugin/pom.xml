@@ -22,7 +22,12 @@
       <dependency>
           <groupId>org.mule.munit</groupId>
           <artifactId>assert</artifactId>
-          <version>1.2-SNAPSHOT</version>
+          <version>3.3.2-SNAPSHOT</version>
+      </dependency>
+<dependency>
+          <groupId>org.mule.munit</groupId>
+          <artifactId>runner</artifactId>
+          <version>3.3.2-SNAPSHOT</version>
       </dependency>
       <dependency>
           <groupId>junit</groupId>
