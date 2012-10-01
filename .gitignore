@@ -10,9 +10,7 @@
 core/target
 core/assert/target
 core/runner/target
-it-test/target
-assert/target
-assert/.settings
+it/target
 ftpserver/target
 ftpserver/.settings
 dbserver/target
@@ -23,3 +21,6 @@ mpmock/target
 mpmock/.settings
 integration/target
 integration/.settings
+tools/maven-plugin/target
+tools/mule-app-archetype/target
+

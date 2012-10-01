@@ -21,7 +21,7 @@
     <modules>
     <module>core</module>
     <module>tools</module>
-    <module>it-test</module>
+    <module>it</module>
   </modules>
 
     <build>
