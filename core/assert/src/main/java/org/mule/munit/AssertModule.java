@@ -1,6 +1,7 @@
 package org.mule.munit;
 
 
+import org.mule.api.config.MuleProperties;
 import org.mule.construct.Flow;
 import org.mule.transport.NullPayload;
 import org.springframework.beans.BeansException;
@@ -118,8 +119,6 @@ public class AssertModule  implements BeanFactoryPostProcessor
     /**
      * <p>Fail assertion.</p>
      *
-     * {@sample.xml ../../../doc/Assert-connector.xml.sample assert:fail}
-     *
      * @param message  Description message to be shown in case of failure.
      */
     public void fail(String message)
@@ -140,7 +139,7 @@ public class AssertModule  implements BeanFactoryPostProcessor
                 }
             }
 
-//            BeanDefinition endpointFactory = beanFactory.getBeanDefinition(MuleProperties.OBJECT_MULE_ENDPOINT_FACTORY);
+            BeanDefinition endpointFactory = beanFactory.getBeanDefinition(MuleProperties.OBJECT_MULE_ENDPOINT_FACTORY);
 //            endpointFactory.setBeanClassName(MockEndpointFactory.class.getCanonicalName());
 
         }

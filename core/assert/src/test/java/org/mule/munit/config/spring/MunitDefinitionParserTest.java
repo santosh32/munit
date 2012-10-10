@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.mule.munit.config.AssertOnEqualsMessageProcessor;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.w3c.dom.Element;
 
 import java.util.Arrays;
@@ -12,6 +13,7 @@ import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -42,7 +44,7 @@ public class MunitDefinitionParserTest {
         assertEquals(AssertOnEqualsMessageProcessor.class.getName(), beanDefinition.getBeanClassName());
         assertEquals(A_MESSAGE, propertyValues.getPropertyValue("message").getValue());
         assertEquals(EXPRESSION, propertyValues.getPropertyValue("value").getValue());
-        assertEquals("#[registry:" + NON_EXPRESSION + "]", propertyValues.getPropertyValue("expected").getValue());
+        assertTrue(propertyValues.getPropertyValue("expected").getValue() instanceof  RuntimeBeanReference );
 
     }
 

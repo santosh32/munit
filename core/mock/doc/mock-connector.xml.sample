@@ -1,0 +1,27 @@
+<!-- BEGIN_INCLUDE(mock:expect) -->
+    <mulemock:expect config-ref="salesforceMock" when="query" mustReturn-ref="nonEmptyList"/>
+<!-- END_INCLUDE(mock:expect) -->
+
+<!-- BEGIN_INCLUDE(mock:expectWithParameters) -->
+    <mock:expect on="something" to-return="something" />
+<!-- END_INCLUDE(mock:expectWithParameters) -->
+
+<!-- BEGIN_INCLUDE(mock:run) -->
+    <mock:expect on="something" to-return="something" />
+<!-- END_INCLUDE(mock:run) -->
+
+<!-- BEGIN_INCLUDE(mock:failOnConnect) -->
+    <mock:expect on="something" to-return="something" />
+<!-- END_INCLUDE(mock:failOnConnect) -->
+
+<!-- BEGIN_INCLUDE(mock:expectFail) -->
+    <mulemock:expect-fail config-ref="salesforceMock" when="query" throwA="java.lang.Exception"/>
+<!-- END_INCLUDE(mock:expectFail) -->
+
+<!-- BEGIN_INCLUDE(mock:verifyCall) -->
+    <mock:expect on="something" to-return="something" />
+<!-- END_INCLUDE(mock:verifyCall) -->
+
+<!-- BEGIN_INCLUDE(mock:reset) -->
+    <mock:expect on="something" to-return="something" />
+<!-- END_INCLUDE(mock:reset) -->

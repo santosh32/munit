@@ -15,6 +15,7 @@
 
    <modules>
    <module>assert</module>
+   <module>mock</module>
    <module>runner</module>
    </modules>
 

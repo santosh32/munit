@@ -3,6 +3,7 @@ package org.mule.munit.config.spring;
 import org.apache.commons.lang.StringUtils;
 import org.mule.config.spring.MuleHierarchicalBeanDefinitionParserDelegate;
 import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.BeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
@@ -52,7 +53,7 @@ public class MunitDefinitionParser implements BeanDefinitionParser {
                 if (element.getAttribute(attrWithRefAttached).startsWith("#")) {
                     builder.addPropertyValue(refAttribute, element.getAttribute(attrWithRefAttached));
                 } else {
-                    builder.addPropertyValue(refAttribute, (("#[registry:" + element.getAttribute(attrWithRefAttached)) + "]"));
+                    builder.addPropertyValue(refAttribute, new RuntimeBeanReference(element.getAttribute(attrWithRefAttached)));
                 }
             }
         }
