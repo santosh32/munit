@@ -3,11 +3,15 @@ package org.mule.munit;
 
 import org.mule.api.config.MuleProperties;
 import org.mule.construct.Flow;
+import org.mule.munit.endpoint.MockEndpointManager;
 import org.mule.transport.NullPayload;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.beans.factory.support.AbstractBeanDefinition;
+import org.springframework.beans.factory.support.GenericBeanDefinition;
 
 import java.util.List;
 
@@ -139,10 +143,19 @@ public class AssertModule  implements BeanFactoryPostProcessor
                 }
             }
 
-            BeanDefinition endpointFactory = beanFactory.getBeanDefinition(MuleProperties.OBJECT_MULE_ENDPOINT_FACTORY);
-//            endpointFactory.setBeanClassName(MockEndpointFactory.class.getCanonicalName());
-
+            wrapFactory(beanFactory);
         }
+    }
+
+    private void wrapFactory(ConfigurableListableBeanFactory beanFactory) {
+        GenericBeanDefinition endpointFactory = (GenericBeanDefinition) beanFactory.getBeanDefinition(MuleProperties.OBJECT_MULE_ENDPOINT_FACTORY);
+
+        AbstractBeanDefinition abstractBeanDefinition = endpointFactory.cloneBeanDefinition();
+
+        MutablePropertyValues propertyValues = new MutablePropertyValues();
+        propertyValues.add("defaultFactory", abstractBeanDefinition);
+        endpointFactory.setPropertyValues(propertyValues);
+        endpointFactory.setBeanClassName(MockEndpointManager.class.getCanonicalName());
     }
 
     public boolean isMockInbounds() {
