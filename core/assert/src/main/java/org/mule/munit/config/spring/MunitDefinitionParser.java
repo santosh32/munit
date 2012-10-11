@@ -2,9 +2,12 @@ package org.mule.munit.config.spring;
 
 import org.apache.commons.lang.StringUtils;
 import org.mule.config.spring.MuleHierarchicalBeanDefinitionParserDelegate;
+import org.springframework.beans.MutablePropertyValues;
+import org.springframework.beans.PropertyValue;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.support.ManagedList;
 import org.springframework.beans.factory.xml.BeanDefinitionParser;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
@@ -39,8 +42,31 @@ public class MunitDefinitionParser implements BeanDefinitionParser {
         this(mpClass, new ArrayList<String>(), new ArrayList<String>());
     }
 
+    protected void attachProcessorDefinition(ParserContext parserContext, BeanDefinition definition) {
+        MutablePropertyValues propertyValues = parserContext.getContainingBeanDefinition().getPropertyValues();
+        if (parserContext.getContainingBeanDefinition().getBeanClassName().equals("org.mule.config.spring.factories.PollingMessageSourceFactoryBean")) {
+            propertyValues.addPropertyValue("messageProcessor", definition);
+        } else {
+            if (parserContext.getContainingBeanDefinition().getBeanClassName().equals("org.mule.enricher.MessageEnricher")) {
+                propertyValues.addPropertyValue("enrichmentMessageProcessor", definition);
+            } else {
+                PropertyValue messageProcessors = propertyValues.getPropertyValue("messageProcessors");
+                if ((messageProcessors == null)||(messageProcessors.getValue() == null)) {
+                    propertyValues.addPropertyValue("messageProcessors", new ManagedList());
+                }
+                List listMessageProcessors = ((List) propertyValues.getPropertyValue("messageProcessors").getValue());
+                listMessageProcessors.add(definition);
+            }
+        }
+    }
+
+    protected void setNoRecurseOnDefinition(BeanDefinition definition) {
+        definition.setAttribute(MuleHierarchicalBeanDefinitionParserDelegate.MULE_NO_RECURSE, Boolean.TRUE);
+    }
+
     public BeanDefinition parse(Element element, ParserContext parserContent) {
         BeanDefinitionBuilder builder = BeanDefinitionBuilder.rootBeanDefinition(mpClass.getName());
+        builder.setScope(BeanDefinition.SCOPE_PROTOTYPE);
         for ( String attribute : attributes ){
             if ((element.getAttribute(attribute) != null) && (!StringUtils.isBlank(element.getAttribute(attribute)))) {
                 builder.addPropertyValue(attribute, element.getAttribute(attribute));
@@ -58,9 +84,10 @@ public class MunitDefinitionParser implements BeanDefinitionParser {
             }
         }
 
-        
+
         BeanDefinition definition = builder.getBeanDefinition();
-        definition.setAttribute(MuleHierarchicalBeanDefinitionParserDelegate.MULE_NO_RECURSE, Boolean.TRUE);
+        setNoRecurseOnDefinition(definition);
+        attachProcessorDefinition(parserContent, definition);
 
         return definition;
     }

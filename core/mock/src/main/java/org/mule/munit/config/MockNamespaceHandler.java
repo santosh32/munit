@@ -27,6 +27,7 @@ public class MockNamespaceHandler
         registerBeanDefinitionParser("verify-call", new VerifyCallDefinitionParser());
         registerBeanDefinitionParser("fail-on-connect", new FailOnConnectDefinitionParser());
         registerBeanDefinitionParser("reset", new ResetDefinitionParser());
+        registerBeanDefinitionParser("outbound-endpoint-behavior", new OutboundEndpointDefinitionParser());
     }
 
 }

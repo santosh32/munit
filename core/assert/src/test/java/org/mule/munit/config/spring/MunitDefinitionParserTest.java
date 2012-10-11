@@ -6,14 +6,13 @@ import org.mule.munit.config.AssertOnEqualsMessageProcessor;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
+import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -23,6 +22,8 @@ public class MunitDefinitionParserTest {
     public static final String EXPRESSION = "#[expression]";
     public static final String NON_EXPRESSION = "Non expression";
     Element element;
+    ParserContext parserContext;
+
 
     @Before
     public void setUp(){
@@ -31,7 +32,7 @@ public class MunitDefinitionParserTest {
 
     @Test
     public void test(){
-        MunitDefinitionParser parser = new MunitDefinitionParser(AssertOnEqualsMessageProcessor.class, asList("message"), asList("expected", "value"));
+        MunitDefinitionParser parser = new MockMunitDefinitionParser(AssertOnEqualsMessageProcessor.class, asList("message"), asList("expected", "value"));
 
         when(element.getAttribute("message")).thenReturn(A_MESSAGE);
         when(element.getAttribute("expected-ref")).thenReturn(NON_EXPRESSION);
@@ -40,6 +41,7 @@ public class MunitDefinitionParserTest {
         BeanDefinition beanDefinition = parser.parse(element, null);
 
         MutablePropertyValues propertyValues = beanDefinition.getPropertyValues();
+
         assertNotNull(beanDefinition);
         assertEquals(AssertOnEqualsMessageProcessor.class.getName(), beanDefinition.getBeanClassName());
         assertEquals(A_MESSAGE, propertyValues.getPropertyValue("message").getValue());
@@ -50,5 +52,17 @@ public class MunitDefinitionParserTest {
 
     private static List<String> asList(String ... attrs){
         return Arrays.asList(attrs);
+    }
+
+    private class MockMunitDefinitionParser extends MunitDefinitionParser {
+
+        public MockMunitDefinitionParser(Class mpClass, List<String> attributes, List<String> refAttributes) {
+            super(mpClass, attributes, refAttributes);
+        }
+
+        @Override
+        protected void attachProcessorDefinition(ParserContext parserContext, BeanDefinition definition) {
+
+        }
     }
 }

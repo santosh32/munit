@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:spring="http://www.springframework.org/schema/beans"
+      xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+      xmlns:mock="http://www.mulesoft.org/schema/mule/mock"
+      xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.2/mule.xsd
+        http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/3.3/mule-munit.xsd
+        http://www.mulesoft.org/schema/mule/mock http://www.mulesoft.org/schema/mule/mock/3.3/mule-mock.xsd">
+
+
+    <spring:beans>
+        <spring:import resource="mule-config.xml"/>
+        <spring:import resource="common-definitions.xml"/>
+    </spring:beans>
+
+
+    <munit:config/>
+
+    <munit:test name="testingOutboundEndpointMocking"
+                description="
+        We want to validate that the payload is the same as the mocked endpoint">
+
+        <munit:set payload-ref="#[string: Hello world!]"/>
+
+
+        <mock:outbound-endpoint-behavior address="http://localhost:10443/test" returnPayload-ref="#[string:test]">
+            <mock:assertions>
+                <munit:assert-that payloadIs-ref="#[string: Hello world!]"/>
+            </mock:assertions>
+        </mock:outbound-endpoint-behavior>
+
+        <flow-ref name="outboundEndPointFlow"/>
+
+        <munit:assert-not-null/>
+
+        <munit:assert-that payloadIs-ref="#[string:test]"/>
+    </munit:test>
+
+
+    <munit:test name="testingOutboundEndpointMockingWithProperties"
+                description="
+        We want to validate that the payload is the same as the mocked endpoint">
+
+        <munit:set payload-ref="#[string: Hello world!]"/>
+
+        <mock:outbound-endpoint-behavior address="http://localhost:10443/test" returnPayload-ref="#[string:test]">
+
+
+            <mock:return-invocation-properties>
+                <mock:return-invocation-property key="invocationTest" value-ref="#[string:invocationValue]"/>
+            </mock:return-invocation-properties>
+
+            <mock:return-inbound-properties>
+                <mock:return-inbound-property key="inboundTest" value-ref="#[string:inboundValue]"/>
+            </mock:return-inbound-properties>
+
+            <mock:return-outbound-properties>
+                <mock:return-outbound-property key="outboundTest" value-ref="#[string:outboundValue]"/>
+            </mock:return-outbound-properties>
+
+            <mock:assertions>
+                <munit:assert-that payloadIs-ref="#[string: Hello world!]"/>
+            </mock:assertions>
+
+        </mock:outbound-endpoint-behavior>
+
+        <flow-ref name="outboundEndPointFlow"/>
+
+        <munit:assert-not-null/>
+
+        <munit:assert-that payloadIs-ref="#[string:test]"/>
+        <munit:assert-on-equals value-ref="#[header:invocation:invocationTest]" expected-ref="#[string:invocationValue]"/>
+        <munit:assert-on-equals value-ref="#[header:inbound:inboundTest]" expected-ref="#[string:inboundValue]"/>
+        <munit:assert-on-equals value-ref="#[header:outbound:outboundTest]" expected-ref="#[string:outboundValue]"/>
+    </munit:test>
+
+
+    <munit:test name="testingOutboundEndpointMockingOneWayWithProperties"
+                description="
+        We want to validate that the payload is the same as the mocked endpoint">
+
+
+        <mock:outbound-endpoint-behavior address="http://localhost:1033/one-way">
+            <mock:assertions>
+                <munit:assert-that payloadIs-ref="#[string:localhost]"/>
+            </mock:assertions>
+
+        </mock:outbound-endpoint-behavior>
+
+        <munit:set payload-ref="#[string:localhost]"/>
+
+
+        <flow-ref name="outboundEndPointFlowOneWay"/>
+
+        <munit:assert-not-null/>
+
+        <munit:assert-that payloadIs-ref="#[string:localhost]"/>
+
+    </munit:test>
+
+</mule>

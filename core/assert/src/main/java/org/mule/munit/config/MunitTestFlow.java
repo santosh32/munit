@@ -1,6 +1,11 @@
 package org.mule.munit.config;
 
+import org.apache.commons.lang.StringUtils;
 import org.mule.api.MuleContext;
+import org.mule.api.MuleEvent;
+import org.mule.api.MuleException;
+import org.mule.api.config.MuleProperties;
+import org.mule.munit.endpoint.MockEndpointManager;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -36,12 +41,22 @@ public class MunitTestFlow extends MunitFlow{
     }
     
     public boolean expectException(Throwable t){
-        if ( expected != null ){
+        if ( !StringUtils.isEmpty(expected)){
             assertEquals(expected, t.getClass().getName());
             return true;
         }
         return false;
     }
 
+
+    @Override
+    public MuleEvent process(MuleEvent event) throws MuleException {
+        MuleEvent process = super.process(event);
+
+        MockEndpointManager factory = (MockEndpointManager) muleContext.getRegistry().lookupObject(MuleProperties.OBJECT_MULE_ENDPOINT_FACTORY);
+        factory.resetBehaviors();
+
+        return process;
+    }
 
 }

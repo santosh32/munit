@@ -10,11 +10,16 @@ import org.mockito.internal.stubbing.answers.Returns;
 import org.mule.MessageExchangePattern;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleEvent;
+import org.mule.api.NestedProcessor;
 import org.mule.api.annotations.Processor;
+import org.mule.api.config.MuleProperties;
 import org.mule.api.context.MuleContextAware;
+import org.mule.api.processor.MessageProcessor;
 import org.mule.api.registry.MuleRegistry;
 import org.mule.api.registry.RegistrationException;
 import org.mule.construct.Flow;
+import org.mule.munit.endpoint.MockEndpointManager;
+import org.mule.munit.endpoint.OutboundBehavior;
 import org.mule.tck.MuleTestUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
@@ -29,6 +34,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -346,6 +352,40 @@ public class MockModule  implements MuleContextAware, BeanFactoryPostProcessor
         }
     }
 
+
+    public void outboundEndpoint(String address, Object returnPayload,
+                                 Map<String, Object> returnInvocationProperties,
+                                 Map<String, Object> returnInboundProperties,
+                                 Map<String, Object> returnSessionProperties,
+                                 Map<String, Object> returnOutboundProperties,
+                                 List<NestedProcessor> assertions)
+    {
+
+        MockEndpointManager factory = (MockEndpointManager) muleContext.getRegistry().lookupObject(MuleProperties.OBJECT_MULE_ENDPOINT_FACTORY);
+
+        OutboundBehavior behavior = new OutboundBehavior(returnPayload, createMessageProcessorsFrom(assertions));
+
+        behavior.setInboundProperties(returnInboundProperties);
+        behavior.setInvocationProperties(returnInvocationProperties);
+        behavior.setOutboundProperties(returnOutboundProperties);
+        behavior.setSessionProperties(returnSessionProperties);
+
+        factory.addExpect(address, behavior);
+    }
+
+    private List<MessageProcessor> createMessageProcessorsFrom(List<NestedProcessor> assertions) {
+        if  ( assertions == null ){
+            return null;
+        }
+
+
+        List<MessageProcessor> mps = new ArrayList<MessageProcessor>();
+        for ( NestedProcessor nestedProcessor : assertions ){
+            mps.add(new NestedMessageProcessor(nestedProcessor));
+        }
+
+        return mps;
+    }
 
 
     private Object getResultOf(String mustReturnResponseFrom) {

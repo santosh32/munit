@@ -66,8 +66,15 @@
 
     <flow name="outboundEndPointFlow">
         <http:outbound-endpoint method="GET"
-                                host="localhost" port="10443" path="test?json=AJSon"
+                                host="localhost" port="10443" path="test"
                                 exchange-pattern="request-response" />
+
+    </flow>
+
+    <flow name="outboundEndPointFlowOneWay">
+        <http:outbound-endpoint method="GET"
+                                host="#[payload]" port="1033" path="one-way"
+                                exchange-pattern="one-way" />
 
     </flow>
 

@@ -12,7 +12,7 @@ import java.util.Map;
  * @author Federico, Fernando
  * @version since 3.3.2
  */
-public class OutboundBehaviour {
+public class OutboundBehavior {
     
     private Map<String, Object> outboundProperties;
     private Map<String, Object> inboundProperties;
@@ -29,7 +29,7 @@ public class OutboundBehaviour {
      */
     private List<MessageProcessor> assertions;
 
-    public OutboundBehaviour(Object payload, List<MessageProcessor> assertions) {
+    public OutboundBehavior(Object payload, List<MessageProcessor> assertions) {
         this.payload = payload;
         this.assertions = assertions;
     }

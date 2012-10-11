@@ -185,36 +185,45 @@ public class MockOutboundEndpoint implements OutboundEndpoint{
         ExpressionManager expressionManager = event.getMuleContext().getExpressionManager();
         if ( expressionManager.isValidExpression(address) ){
             String realAddress = (String) expressionManager.evaluate(address, event);
-            OutboundBehaviour behaviour = manager.getBehaviorFor(realAddress);
+            OutboundBehavior behavior = manager.getBehaviorFor(realAddress);
 
-            if ( behaviour == null ){
+            if ( behavior == null ){
                 return realEndpoint.process(event);
             }
 
-            verifyAssertions(event, behaviour.getAssertions());
-            overrideMessage(event, behaviour);
+            verifyAssertions(event, behavior.getAssertions());
+            overrideMessage(event, behavior);
         }
 
         return event;
     }
 
-    private void overrideMessage(MuleEvent event, OutboundBehaviour behaviour) {
-        MuleMessage message = new DefaultMuleMessage(behaviour.getPayload(), event.getMuleContext());
+    private void overrideMessage(MuleEvent event, OutboundBehavior behavior) {
+        Object payload;
+        if ( behavior.getPayload() == null ){
+           payload = event.getMessage().getPayload();
+        }
+        else
+        {
+            payload = behavior.getPayload();
 
-        if ( behaviour.getInboundProperties() != null ){
-            message.addProperties(behaviour.getInboundProperties(), PropertyScope.INVOCATION);
+        }
+        MuleMessage message = new DefaultMuleMessage(payload, event.getMuleContext());
+
+        if ( behavior.getInboundProperties() != null ){
+            message.addProperties(behavior.getInboundProperties(), PropertyScope.INBOUND);
         }
 
-        if ( behaviour.getOutboundProperties() != null ){
-            message.addProperties(behaviour.getOutboundProperties(), PropertyScope.OUTBOUND);
+        if ( behavior.getOutboundProperties() != null ){
+            message.addProperties(behavior.getOutboundProperties(), PropertyScope.OUTBOUND);
         }
 
-        if ( behaviour.getSessionProperties() != null ){
-            message.addProperties(behaviour.getSessionProperties(), PropertyScope.SESSION);
+        if ( behavior.getSessionProperties() != null ){
+            message.addProperties(behavior.getSessionProperties(), PropertyScope.SESSION);
         }
 
-        if ( behaviour.getInvocationProperties() != null ){
-            message.addProperties(behaviour.getInvocationProperties(), PropertyScope.INVOCATION);
+        if ( behavior.getInvocationProperties() != null ){
+            message.addProperties(behavior.getInvocationProperties(), PropertyScope.INVOCATION);
         }
 
         event.setMessage(message);

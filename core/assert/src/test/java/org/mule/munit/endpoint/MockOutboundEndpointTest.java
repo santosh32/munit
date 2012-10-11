@@ -61,7 +61,7 @@ public class MockOutboundEndpointTest {
     
     @Test
     public void testVerifyAssertionIsCalled() throws MuleException {
-        when(endpointManager.getBehaviorFor(ADDRESS)).thenReturn(new OutboundBehaviour("payload", buildMessageAssertions()));
+        when(endpointManager.getBehaviorFor(ADDRESS)).thenReturn(new OutboundBehavior("payload", buildMessageAssertions()));
 
         new MockOutboundEndpoint(realEndpoint).process(event);
 
@@ -72,7 +72,7 @@ public class MockOutboundEndpointTest {
 
     @Test
     public void testVerifyNotAssert() throws MuleException {
-        when(endpointManager.getBehaviorFor(ADDRESS)).thenReturn(new OutboundBehaviour("payload", null));
+        when(endpointManager.getBehaviorFor(ADDRESS)).thenReturn(new OutboundBehavior("payload", null));
 
         new MockOutboundEndpoint(realEndpoint).process(event);
 

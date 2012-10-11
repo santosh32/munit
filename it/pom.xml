@@ -443,7 +443,7 @@
         <dependency>
             <groupId>org.mule.munit</groupId>
             <artifactId>mock</artifactId>
-            <version>1.2-SNAPSHOT</version>
+            <version>3.3.2-SNAPSHOT</version>
         </dependency>
 
 

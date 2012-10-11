@@ -16,7 +16,7 @@ import java.util.Map;
 public class MockEndpointManager implements EndpointFactory {
 
     private EndpointFactory defaultFactory;
-    private Map<String,OutboundBehaviour> behaviors = new HashMap<String, OutboundBehaviour>();
+    private Map<String,OutboundBehavior> behaviors = new HashMap<String, OutboundBehavior>();
 
     @Override
     public InboundEndpoint getInboundEndpoint(String uri) throws MuleException {
@@ -61,11 +61,15 @@ public class MockEndpointManager implements EndpointFactory {
         this.defaultFactory = defaultFactory;
     }
     
-    public void addExpect(String address, OutboundBehaviour payload){
+    public void addExpect(String address, OutboundBehavior payload){
         behaviors.put(address, payload);
     }
 
-    public OutboundBehaviour getBehaviorFor(String address){
+    public OutboundBehavior getBehaviorFor(String address){
         return this.behaviors.get(address);
+    }
+
+    public void resetBehaviors() {
+        this.behaviors.clear();
     }
 }

@@ -40,6 +40,11 @@
             <groupId>org.mule.tests</groupId>
             <artifactId>mule-tests-functional</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.mule.munit</groupId>
+            <artifactId>assert</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
 
