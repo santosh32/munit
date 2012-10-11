@@ -1,3 +1,0 @@
-<!-- BEGIN_INCLUDE(mock:my-processor) -->
-    <mock:my-processor content="#[map-payload:content]" />
-<!-- END_INCLUDE(mock:my-processor) -->
