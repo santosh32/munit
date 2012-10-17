@@ -5,7 +5,10 @@ import org.mule.api.MuleContext;
 import org.mule.api.MuleEvent;
 import org.mule.api.MuleException;
 import org.mule.api.config.MuleProperties;
+import org.mule.api.registry.MuleRegistry;
+import org.mule.api.registry.RegistrationException;
 import org.mule.munit.endpoint.MockEndpointManager;
+import org.mule.munit.mp.MockMpManager;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -22,7 +25,11 @@ public class MunitTestFlow extends MunitFlow{
 
     public MunitTestFlow(String name, MuleContext muleContext) {
         super(name, muleContext);
+
+        registerMpManager(muleContext);
     }
+
+
 
     public String getExpected() {
         return expected;
@@ -48,15 +55,29 @@ public class MunitTestFlow extends MunitFlow{
         return false;
     }
 
-
     @Override
     public MuleEvent process(MuleEvent event) throws MuleException {
         MuleEvent process = super.process(event);
 
         MockEndpointManager factory = (MockEndpointManager) muleContext.getRegistry().lookupObject(MuleProperties.OBJECT_MULE_ENDPOINT_FACTORY);
+        MockMpManager mpManager = (MockMpManager) muleContext.getRegistry().lookupObject(MockMpManager.ID);
         factory.resetBehaviors();
+        mpManager.resetBehaviors();
 
         return process;
     }
+
+
+    private void registerMpManager(MuleContext muleContext) {
+        try {
+            MuleRegistry registry = muleContext.getRegistry();
+            if ( registry.lookupObject(MockMpManager.ID) == null) {
+                registry.registerObject(MockMpManager.ID, new MockMpManager());
+            }
+        } catch (RegistrationException e) {
+
+        }
+    }
+
 
 }

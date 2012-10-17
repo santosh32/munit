@@ -6,9 +6,9 @@ import org.mule.api.config.ConfigurationBuilder;
 import org.mule.api.context.MuleContextBuilder;
 import org.mule.config.DefaultMuleConfiguration;
 import org.mule.config.builders.SimpleConfigurationBuilder;
-import org.mule.config.spring.SpringXmlConfigurationBuilder;
 import org.mule.context.DefaultMuleContextBuilder;
 import org.mule.context.DefaultMuleContextFactory;
+import org.mule.munit.runner.mule.context.MunitSpringXmlConfigurationBuilder;
 import org.mule.tck.TestingWorkListener;
 import org.mule.util.ClassUtils;
 
@@ -73,7 +73,7 @@ public class MuleContextManager {
 
 
     protected ConfigurationBuilder getBuilder(String resources) throws Exception {
-        return new SpringXmlConfigurationBuilder(resources);
+        return new MunitSpringXmlConfigurationBuilder(resources);
     }
 
     protected void configureMuleContext(MuleContextBuilder contextBuilder) {

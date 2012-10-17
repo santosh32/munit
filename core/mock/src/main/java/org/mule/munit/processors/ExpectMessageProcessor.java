@@ -125,7 +125,7 @@ public class ExpectMessageProcessor
         throws MuleException
     {
         try {
-            findOrCreate(MockModuleProcessAdapter.class, false, event);
+            findOrCreate(MockModuleProcessAdapter.class, true, event);
             final String _transformedWhen = ((String) evaluateAndTransform(getMuleContext(), event, ExpectMessageProcessor.class.getDeclaredField("_whenType").getGenericType(), null, when));
             final Map<String, Object> _transformedParameters = ((Map<String, Object> ) evaluateAndTransform(getMuleContext(), event, ExpectMessageProcessor.class.getDeclaredField("_parametersType").getGenericType(), null, parameters));
             final Object _transformedMustReturn = ((Object) evaluateAndTransform(getMuleContext(), event, ExpectMessageProcessor.class.getDeclaredField("_mustReturnType").getGenericType(), null, mustReturn));

@@ -10,7 +10,7 @@
 	<groupId>org.mule.munit</groupId>
 	<artifactId>it</artifactId>
 	<packaging>mule</packaging>
-	<name>it</name>
+	<name>Integration Tests</name>
     <version>3.3.2-SNAPSHOT</version>
 	<description>Integration Test for Munit Project</description>
 

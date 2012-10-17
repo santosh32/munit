@@ -20,6 +20,8 @@ import org.mule.api.registry.RegistrationException;
 import org.mule.construct.Flow;
 import org.mule.munit.endpoint.MockEndpointManager;
 import org.mule.munit.endpoint.OutboundBehavior;
+import org.mule.munit.mp.MockMpManager;
+import org.mule.munit.mp.MpBehavior;
 import org.mule.tck.MuleTestUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
@@ -118,19 +120,30 @@ public class MockModule  implements MuleContextAware, BeanFactoryPostProcessor
                        String mustReturnResponseFrom)
     {
         try {
-
-            MockedMethod mockedMethod = getMockedMethod(when);
-            Method method = mockedMethod.getMethod();
             final Object expectedObject = mustReturn != null ? mustReturn : getResultOf(mustReturnResponseFrom);
-
-            if ( method != null  ){
-                Map<Integer, Object> paramIndex = mockedMethod.getParameters(parameters);
-                Object[] expectedParams = mockedMethod.getAnyParameters(paramIndex);
-                when(method.invoke(mock, expectedParams)).thenReturn(expectedObject);
-            }
+            MockMpManager manager = (MockMpManager) muleContext.getRegistry().lookupObject(MockMpManager.ID);
+            manager.addBehavior(new MpBehavior(getName(when),getNamespace(when), parameters, expectedObject ));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private String getNamespace(String when) {
+        String[] split = when.split(":");
+        if ( split.length > 1 ) {
+            return split[0];
+        }
+
+        return "mule";
+    }
+
+    private String getName(String when) {
+        String[] split = when.split(":");
+        if ( split.length > 1 ) {
+            return split[1];
+        }
+
+        return split[0];
     }
 
     /**
