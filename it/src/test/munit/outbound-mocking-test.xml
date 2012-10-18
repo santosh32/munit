@@ -24,11 +24,11 @@
                 description="
         We want to validate that the payload is the same as the mocked endpoint">
 
-        <mock:outbound-endpoint-behavior address="http://localhost:10443/test" returnPayload-ref="#[string:test]">
+        <mock:outbound-endpoint address="http://localhost:10443/test" returnPayload-ref="#[string:test]">
             <mock:assertions>
                 <munit:assert-that payloadIs-ref="#[string: Hello world!]"/>
             </mock:assertions>
-        </mock:outbound-endpoint-behavior>
+        </mock:outbound-endpoint>
 
         <munit:set payload-ref="#[string: Hello world!]"/>
 
@@ -46,7 +46,7 @@
 
         <munit:set payload-ref="#[string: Hello world!]"/>
 
-        <mock:outbound-endpoint-behavior address="http://localhost:10443/test" returnPayload-ref="#[string:test]">
+        <mock:outbound-endpoint address="http://localhost:10443/test" returnPayload-ref="#[string:test]">
 
 
             <mock:return-invocation-properties>
@@ -65,7 +65,7 @@
                 <munit:assert-that payloadIs-ref="#[string: Hello world!]"/>
             </mock:assertions>
 
-        </mock:outbound-endpoint-behavior>
+        </mock:outbound-endpoint>
 
         <flow-ref name="outboundEndPointFlow"/>
 
@@ -83,12 +83,12 @@
         We want to validate that the payload is the same as the mocked endpoint">
 
 
-        <mock:outbound-endpoint-behavior address="http://localhost:1033/one-way">
+        <mock:outbound-endpoint address="http://localhost:1033/one-way" >
             <mock:assertions>
                 <munit:assert-that payloadIs-ref="#[string:localhost]"/>
             </mock:assertions>
 
-        </mock:outbound-endpoint-behavior>
+        </mock:outbound-endpoint>
 
         <munit:set payload-ref="#[string:localhost]"/>
 
@@ -99,26 +99,6 @@
 
         <munit:assert-that payloadIs-ref="#[string:localhost]"/>
 
-    </munit:test>
-
-    <munit:test name="testMockMp" description="">
-
-        <mock:expect when="echo-component" mustReturn-ref="#[string:hola]"/>
-
-        <munit:set payload-ref="#[string:localhost]"/>
-
-        <flow-ref name="echoFlow"/>
-
-        <munit:assert-that payloadIs-ref="#[string:hola]"/>
-    </munit:test>
-
-    <munit:test name="testMockMp2" description="">
-
-        <munit:set payload-ref="#[string:localhost]"/>
-
-        <flow-ref name="echoFlow"/>
-
-        <munit:assert-that payloadIs-ref="#[string:localhost]"/>
     </munit:test>
 
 </mule>

@@ -181,6 +181,7 @@ public class MockOutboundEndpoint implements OutboundEndpoint{
     @Override
     public MuleEvent process(MuleEvent event) throws MuleException {
         MockEndpointManager manager = (MockEndpointManager) getEndpointManager(event);
+
         String address = realAddressAsExpression();
         ExpressionManager expressionManager = event.getMuleContext().getExpressionManager();
         if ( expressionManager.isValidExpression(address) ){

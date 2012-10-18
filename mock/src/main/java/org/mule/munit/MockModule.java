@@ -11,14 +11,20 @@ import org.mule.MessageExchangePattern;
 import org.mule.api.ConnectionManager;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleEvent;
-import org.mule.api.annotations.Configurable;
+import org.mule.api.NestedProcessor;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.param.Optional;
+import org.mule.api.config.MuleProperties;
 import org.mule.api.context.MuleContextAware;
+import org.mule.api.processor.MessageProcessor;
 import org.mule.api.registry.MuleRegistry;
 import org.mule.api.registry.RegistrationException;
 import org.mule.construct.Flow;
+import org.mule.munit.endpoint.MockEndpointManager;
+import org.mule.munit.endpoint.OutboundBehavior;
+import org.mule.munit.mp.MockMpManager;
+import org.mule.munit.mp.MpBehavior;
 import org.mule.tck.MuleTestUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
@@ -32,6 +38,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,20 +64,7 @@ import static org.mockito.Mockito.*;
 @Module(name="mock", schemaVersion="1.0")
 public class MockModule  implements MuleContextAware, BeanFactoryPostProcessor
     
-{
-    /**
-     * <p>Component that we want to mock.</p>
-     */
-    @Configurable
-    private String of;
-
     private MuleContext muleContext;
-
-    private Class<? extends Object> mockedClass;
-    private Object mock;
-    private ConnectionManager connectionManagerMock;
-    private Class<? extends Object> connectionKeyClass;
-
 
     private static String getStackTrace(Throwable throwable) {
         Writer writer = new StringWriter();
@@ -84,16 +78,6 @@ public class MockModule  implements MuleContextAware, BeanFactoryPostProcessor
         return messageProcessor.replaceAll("-", "");
     }
 
-    /**
-     * <p>Set The name of the bean to be mocked.</p>
-     *
-     * @param of The name of the bean to be mocked
-     */
-    public void setOf(String of)
-    {
-        this.of = of;
-    }
-
 
     /**
      * <p>Define what the mock must return on a message processor call.</p>
@@ -105,32 +89,44 @@ public class MockModule  implements MuleContextAware, BeanFactoryPostProcessor
      *
      * {@sample.xml ../../../doc/mock-connector.xml.sample mock:expect}
      *
-     * @param when Message processor name.
-     * @param mustReturn Expected return value.
-     * @param mustReturnResponseFrom The flow name that creates the expected result
+     * @param thatMessageProcessor Message processor name.
+     * @param toReturn Expected return value.
+     * @param toReturnResponseFrom The flow name that creates the expected result
      * @param parameters Message processor parameters.
      */
     @Processor
-    public void expect(String when,
+    public void expect(String thatMessageProcessor,
                        @Optional Map<String,Object> parameters,
-                       @Optional final Object mustReturn,
-                       @Optional String mustReturnResponseFrom)
+                       @Optional final Object toReturn,
+                       @Optional String toReturnResponseFrom)
     {
         try {
-
-            MockedMethod mockedMethod = getMockedMethod(when);
-            Method method = mockedMethod.getMethod();
-            final Object expectedObject = mustReturn != null ? mustReturn : getResultOf(mustReturnResponseFrom);
-
-            if ( method != null  ){
-                Map<Integer, Object> paramIndex = mockedMethod.getParameters(parameters);
-                Object[] expectedParams = mockedMethod.getAnyParameters(paramIndex);
-                when(method.invoke(mock, expectedParams)).thenReturn(expectedObject);
-            }
+            final Object expectedObject = toReturn != null ? toReturn : getResultOf(toReturnResponseFrom);
+            MockMpManager manager = (MockMpManager) muleContext.getRegistry().lookupObject(MockMpManager.ID);
+            manager.addBehavior(new MpBehavior(getName(thatMessageProcessor),getNamespace(thatMessageProcessor), parameters, expectedObject ));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
+        private String getNamespace(String when) {
+            String[] split = when.split(":");
+            if ( split.length > 1 ) {
+                return split[0];
+            }
+
+            return "mule";
+        }
+
+        private String getName(String when) {
+            String[] split = when.split(":");
+            if ( split.length > 1 ) {
+                return split[1];
+            }
+
+            return split[0];
+        }
+
 
     /**
      * <p>Expect to throw an exception when message processor is called. </p>
@@ -355,6 +351,39 @@ public class MockModule  implements MuleContextAware, BeanFactoryPostProcessor
         }
     }
 
+        public void outboundEndpoint(String address, Object returnPayload,
+                                     Map<String, Object> returnInvocationProperties,
+                                     Map<String, Object> returnInboundProperties,
+                                     Map<String, Object> returnSessionProperties,
+                                     Map<String, Object> returnOutboundProperties,
+                                     List<NestedProcessor> assertions)
+        {
+
+            MockEndpointManager factory = (MockEndpointManager) muleContext.getRegistry().lookupObject(MuleProperties.OBJECT_MULE_ENDPOINT_FACTORY);
+
+            OutboundBehavior behavior = new OutboundBehavior(returnPayload, createMessageProcessorsFrom(assertions));
+
+            behavior.setInboundProperties(returnInboundProperties);
+            behavior.setInvocationProperties(returnInvocationProperties);
+            behavior.setOutboundProperties(returnOutboundProperties);
+            behavior.setSessionProperties(returnSessionProperties);
+
+            factory.addExpect(address, behavior);
+        }
+
+        private List<MessageProcessor> createMessageProcessorsFrom(List<NestedProcessor> assertions) {
+            if  ( assertions == null ){
+                return null;
+            }
+
+
+            List<MessageProcessor> mps = new ArrayList<MessageProcessor>();
+            for ( NestedProcessor nestedProcessor : assertions ){
+                mps.add(new NestedMessageProcessor(nestedProcessor));
+            }
+
+            return mps;
+        }
 
 
     private Object getResultOf(String mustReturnResponseFrom) {

@@ -17,13 +17,19 @@
         <spring:import resource="common-definitions.xml"/>
     </spring:beans>
 
-
     <munit:config/>
+    <mock:config/>
 
      <munit:test name="testMockMp" description="
      We are testing here that the Message processor can be mocked with an expected value to return.">
 
-        <mock:expect when="echo-component" mustReturn-ref="#[string:expectedPayload]"/>
+
+        <mock:expect thatMessageProcessor="echo-component" toReturn-ref="#[string:expectedPayload]" >
+            <!--<mock:expects>-->
+                <!--<mock:expect valueOfAttribute="" condition="is('epepepe')"/>-->
+                <!--<mock:expect valueOfElement="" condition="containsAny('epepepe')"/>-->
+            <!--</mock:parameters>-->
+         </mock:expect>
 
         <munit:set payload-ref="#[string:anotherString]"/>
 

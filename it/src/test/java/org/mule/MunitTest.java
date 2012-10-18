@@ -8,5 +8,4 @@ public class MunitTest extends AbstractMuleSuite {
     public String getConfigResources() {
         return "mp-mocking-test.xml";
     }
-
-}
+  }

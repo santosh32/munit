@@ -72,6 +72,12 @@
             <artifactId>mule-tests-functional</artifactId>
             <version>${mule.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.mule.munit</groupId>
+            <artifactId>assert</artifactId>
+            <version>3.3.2-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 

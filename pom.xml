@@ -16,6 +16,7 @@
         <eclipsePluginVersion>2.5</eclipsePluginVersion>
         <vmtype>org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType</vmtype>
         <jdk5Name>J2SE-1.6</jdk5Name>
+        <maven.javadoc.skip>true</maven.javadoc.skip>
         <jdk.version>1.6</jdk.version>
     </properties>
 
