@@ -3,9 +3,11 @@
 <mule xmlns="http://www.mulesoft.org/schema/mule/core"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xmlns:spring="http://www.springframework.org/schema/beans"
+      xmlns:script="http://www.mulesoft.org/schema/mule/scripting"
       xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
       xmlns:mock="http://www.mulesoft.org/schema/mule/mock"
       xsi:schemaLocation="
+        http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.2/mule.xsd
         http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/3.3/mule-munit.xsd
@@ -20,15 +22,17 @@
     <munit:config/>
     <mock:config/>
 
+    <script:script name="mockPayload" engine="groovy"><![CDATA[
+			return new String("anotherString");
+		]]>
+    </script:script>
+
      <munit:test name="testMockMp" description="
      We are testing here that the Message processor can be mocked with an expected value to return.">
 
 
-        <mock:expect thatMessageProcessor="echo-component" toReturn-ref="#[string:expectedPayload]" >
-            <!--<mock:expects>-->
-                <!--<mock:expect valueOfAttribute="" condition="is('epepepe')"/>-->
-                <!--<mock:expect valueOfElement="" condition="containsAny('epepepe')"/>-->
-            <!--</mock:parameters>-->
+        <mock:expect messageProcessor="echo-component" >
+         <mock:to-return payload-ref="#[string:expectedPayload]"/>
          </mock:expect>
 
         <munit:set payload-ref="#[string:anotherString]"/>
@@ -45,6 +49,73 @@
 
         <flow-ref name="echoFlow"/>
 
+        <munit:assert-that payloadIs-ref="#[string:expectedPayload]"/>
+    </munit:test>
+
+    <munit:test name="testMpWithParameters" description="
+    If the Message Processor is not mocked then do not change its behavior">
+
+        <mock:expect messageProcessor="jira:create-group" >
+            <mock:to-return payload-ref="#[string:expectedPayload]"/>
+            <mock:attributes>
+                <mock:attribute name="groupName" whereValue-ref="#[string:someGroupName]"/>
+                <mock:attribute name="userName" whereValue-ref='#[anyString()]'/>
+            </mock:attributes>
+        </mock:expect>
+
+        <munit:set payload-ref="#[string:anotherString]"/>
+
+        <flow-ref name="callingJira"/>
+
+        <mock:verify-call messageProcessor="jira:create-group" atLeast="1">
+            <mock:attributes>
+                <mock:attribute name="groupName" whereValue-ref="#[string:someGroupName]"/>
+                <mock:attribute name="userName" whereValue-ref='#[anyString()]'/>
+            </mock:attributes>
+        </mock:verify-call>
+
+        <mock:verify-call messageProcessor="jira:create-group" times="1"/>
+        <mock:verify-call messageProcessor="jira:create-group" atMost="1"/>
+        <munit:assert-that payloadIs-ref="#[string:expectedPayload]"/>
+    </munit:test>
+
+
+    <munit:test name="testMpWithParametersAndSpy" description="
+    If the Message Processor is not mocked then do not change its behavior">
+
+        <mock:expect messageProcessor="jira:create-group">
+            <mock:to-return payload-ref="#[string:expectedPayload]"/>
+            <mock:attributes>
+                <mock:attribute name="groupName" whereValue-ref="#[string:someGroupName]"/>
+                <mock:attribute name="userName" whereValue-ref='#[anyString()]'/>
+            </mock:attributes>
+        </mock:expect>
+
+        <mock:spy messageProcessor="jira:create-group">
+            <mock:assertions-before-call>
+                <munit:assert-not-null/>
+                <munit:assert-that payloadIs-ref='#[resultOfScript("mockPayload")]'/>
+            </mock:assertions-before-call>
+
+            <mock:assertions-after-call>
+                <munit:assert-not-null/>
+                <munit:assert-that payloadIs-ref="#[string:expectedPayload]" />
+            </mock:assertions-after-call>
+        </mock:spy>
+
+        <munit:set payload-ref="#[string:anotherString]"/>
+
+        <flow-ref name="callingJira"/>
+
+        <mock:verify-call messageProcessor="jira:create-group" atLeast="1">
+            <mock:attributes>
+                <mock:attribute name="groupName" whereValue-ref="#[string:someGroupName]"/>
+                <mock:attribute name="userName" whereValue-ref='#[anyString()]'/>
+            </mock:attributes>
+        </mock:verify-call>
+
+        <mock:verify-call messageProcessor="jira:create-group" times="1"/>
+        <mock:verify-call messageProcessor="jira:create-group" atMost="1"/>
         <munit:assert-that payloadIs-ref="#[string:expectedPayload]"/>
     </munit:test>
 

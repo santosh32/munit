@@ -2,7 +2,6 @@
 package org.mule.munit.processors;
 
 import java.util.List;
-import java.util.Map;
 import javax.annotation.Generated;
 import org.mule.api.MessagingException;
 import org.mule.api.MuleContext;
@@ -19,28 +18,28 @@ import org.mule.api.process.ProcessCallback;
 import org.mule.api.process.ProcessTemplate;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.config.i18n.CoreMessages;
+import org.mule.munit.Attribute;
 import org.mule.munit.MockModule;
+import org.mule.munit.MunitMuleMessage;
 import org.mule.munit.adapters.MockModuleProcessAdapter;
 
 
 /**
- * ExpectMessageProcessor invokes the {@link org.mule.munit.MockModule#expect(java.lang.String, java.util.Map, java.lang.Object, java.lang.String)} method in {@link MockModule }. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
+ * ExpectMessageProcessor invokes the {@link org.mule.munit.MockModule#expect(java.lang.String, org.mule.munit.MunitMuleMessage, java.util.List)} method in {@link MockModule }. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.3.1", date = "2012-10-18T01:17:40-03:00", comments = "Build UNNAMED.1297.150f2c9")
+@Generated(value = "Mule DevKit Version 3.3.1", date = "2012-10-20T12:55:18-03:00", comments = "Build UNNAMED.1297.150f2c9")
 public class ExpectMessageProcessor
     extends AbstractMessageProcessor<Object>
     implements Disposable, Initialisable, Startable, Stoppable, MessageProcessor
 {
 
-    protected Object thatMessageProcessor;
-    protected String _thatMessageProcessorType;
-    protected Object parameters;
-    protected Map<String, Object> _parametersType;
+    protected Object messageProcessor;
+    protected String _messageProcessorType;
     protected Object toReturn;
-    protected Object _toReturnType;
-    protected Object toReturnResponseFrom;
-    protected String _toReturnResponseFromType;
+    protected MunitMuleMessage _toReturnType;
+    protected Object attributes;
+    protected List<Attribute> _attributesType;
 
     /**
      * Obtains the expression manager from the Mule context and initialises the connector. If a target object  has not been set already it will search the Mule registry for a default one.
@@ -84,15 +83,6 @@ public class ExpectMessageProcessor
     }
 
     /**
-     * Sets thatMessageProcessor
-     * 
-     * @param value Value to set
-     */
-    public void setThatMessageProcessor(Object value) {
-        this.thatMessageProcessor = value;
-    }
-
-    /**
      * Sets toReturn
      * 
      * @param value Value to set
@@ -102,21 +92,21 @@ public class ExpectMessageProcessor
     }
 
     /**
-     * Sets parameters
+     * Sets attributes
      * 
      * @param value Value to set
      */
-    public void setParameters(Object value) {
-        this.parameters = value;
+    public void setAttributes(Object value) {
+        this.attributes = value;
     }
 
     /**
-     * Sets toReturnResponseFrom
+     * Sets messageProcessor
      * 
      * @param value Value to set
      */
-    public void setToReturnResponseFrom(Object value) {
-        this.toReturnResponseFrom = value;
+    public void setMessageProcessor(Object value) {
+        this.messageProcessor = value;
     }
 
     /**
@@ -130,10 +120,9 @@ public class ExpectMessageProcessor
     {
         try {
             findOrCreate(MockModuleProcessAdapter.class, true, event);
-            final String _transformedThatMessageProcessor = ((String) evaluateAndTransform(getMuleContext(), event, ExpectMessageProcessor.class.getDeclaredField("_thatMessageProcessorType").getGenericType(), null, thatMessageProcessor));
-            final Map<String, Object> _transformedParameters = ((Map<String, Object> ) evaluateAndTransform(getMuleContext(), event, ExpectMessageProcessor.class.getDeclaredField("_parametersType").getGenericType(), null, parameters));
-            final Object _transformedToReturn = ((Object) evaluateAndTransform(getMuleContext(), event, ExpectMessageProcessor.class.getDeclaredField("_toReturnType").getGenericType(), null, toReturn));
-            final String _transformedToReturnResponseFrom = ((String) evaluateAndTransform(getMuleContext(), event, ExpectMessageProcessor.class.getDeclaredField("_toReturnResponseFromType").getGenericType(), null, toReturnResponseFrom));
+            final String _transformedMessageProcessor = ((String) evaluateAndTransform(getMuleContext(), event, ExpectMessageProcessor.class.getDeclaredField("_messageProcessorType").getGenericType(), null, messageProcessor));
+            final MunitMuleMessage _transformedToReturn = ((MunitMuleMessage) evaluateAndTransform(getMuleContext(), event, ExpectMessageProcessor.class.getDeclaredField("_toReturnType").getGenericType(), null, toReturn));
+            final List<Attribute> _transformedAttributes = ((List<Attribute> ) evaluateAndTransform(getMuleContext(), event, ExpectMessageProcessor.class.getDeclaredField("_attributesType").getGenericType(), null, attributes));
             ProcessTemplate<Object, Object> processTemplate = ((ProcessAdapter<Object> ) getModuleObject()).getProcessTemplate();
             processTemplate.execute(new ProcessCallback<Object,Object>() {
 
@@ -149,7 +138,7 @@ public class ExpectMessageProcessor
                 public Object process(Object object)
                     throws Exception
                 {
-                    ((MockModule) object).expect(_transformedThatMessageProcessor, _transformedParameters, _transformedToReturn, _transformedToReturnResponseFrom);
+                    ((MockModule) object).expect(_transformedMessageProcessor, _transformedToReturn, _transformedAttributes);
                     return null;
                 }
 

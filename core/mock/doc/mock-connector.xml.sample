@@ -1,5 +1,7 @@
 <!-- BEGIN_INCLUDE(mock:expect) -->
-    <mock:expect thatMessageProcessor="#[map-payload:content]" />
+ <mock:expect messageProcessor="echo-component" >
+         <mock:to-return payload-ref="#[string:expectedPayload]"/>
+         </mock:expect>
 <!-- END_INCLUDE(mock:expect) -->
 
 
@@ -7,19 +9,21 @@
 
         <mock:outbound-endpoint address="http://localhost:10443/test" returnPayload-ref="#[string:test]">
 
-
-            <mock:return-invocation-properties>
-                <mock:return-invocation-property key="invocationTest" value-ref="#[string:invocationValue]"/>
-            </mock:return-invocation-properties>
-
-            <mock:return-inbound-properties>
-                <mock:return-inbound-property key="inboundTest" value-ref="#[string:inboundValue]"/>
-            </mock:return-inbound-properties>
-
-            <mock:return-outbound-properties>
-                <mock:return-outbound-property key="outboundTest" value-ref="#[string:outboundValue]"/>
-            </mock:return-outbound-properties>
-
         </mock:outbound-endpoint>
 
 <!-- END_INCLUDE(mock:outboundEndpoint) -->
+
+<!-- BEGIN_INCLUDE(mock:verifyCall) -->
+
+        <mock:verify-call messageProcessor="test"/>
+
+
+<!-- END_INCLUDE(mock:verifyCall) -->
+
+
+<!-- BEGIN_INCLUDE(mock:spy) -->
+
+        <mock:spy messageProcessor="test"/>
+
+
+<!-- END_INCLUDE(mock:spy) -->

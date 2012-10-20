@@ -12,7 +12,7 @@ import org.mule.api.NestedProcessor;
 import org.mule.api.context.MuleContextAware;
 import org.mule.api.processor.MessageProcessor;
 
-@Generated(value = "Mule DevKit Version 3.3.1", date = "2012-10-18T01:17:40-03:00", comments = "Build UNNAMED.1297.150f2c9")
+@Generated(value = "Mule DevKit Version 3.3.1", date = "2012-10-20T12:55:18-03:00", comments = "Build UNNAMED.1297.150f2c9")
 public class NestedProcessorChain implements NestedProcessor, MuleContextAware
 {
 

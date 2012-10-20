@@ -12,20 +12,22 @@ import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.param.Optional;
 import org.mule.api.config.MuleProperties;
 import org.mule.api.context.MuleContextAware;
+import org.mule.api.el.ExpressionLanguageContext;
+import org.mule.api.el.ExpressionLanguageExtension;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.construct.Flow;
 import org.mule.munit.endpoint.MockEndpointManager;
 import org.mule.munit.endpoint.OutboundBehavior;
-import org.mule.munit.mp.MockMpManager;
-import org.mule.munit.mp.MpBehavior;
+import org.mule.munit.functions.*;
+import org.mule.munit.mp.MessageProcessorCall;
+import org.mule.munit.mp.MockedMessageProcessorBehavior;
+import org.mule.munit.mp.MockedMessageProcessorManager;
+import org.mule.munit.mp.SpyAssertion;
 import org.mule.tck.MuleTestUtils;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+import static junit.framework.Assert.fail;
 
 /**
  * Generic module
@@ -33,16 +35,9 @@ import java.util.Map;
  * @author MuleSoft, Inc.
  */
 @Module(name="mock", schemaVersion="3.3")
-public class MockModule implements MuleContextAware
+public class MockModule implements MuleContextAware, ExpressionLanguageExtension
 {
     private MuleContext muleContext;
-
-    private static String getStackTrace(Throwable throwable) {
-        Writer writer = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(writer);
-        throwable.printStackTrace(printWriter);
-        return writer.toString();
-    }
 
 
     /**
@@ -55,23 +50,58 @@ public class MockModule implements MuleContextAware
      * <p/>
      * {@sample.xml ../../../doc/mock-connector.xml.sample mock:expect}
      *
-     * @param thatMessageProcessor Message processor name.
+     * @param messageProcessor Message processor name.
      * @param toReturn             Expected return value.
-     * @param toReturnResponseFrom The flow name that creates the expected result
-     * @param parameters           Message processor parameters.
+     * @param attributes           Message processor parameters.
      */
     @Processor
-    public void expect(String thatMessageProcessor,
-                       @Optional Map<String, Object> parameters,
-                       @Optional final Object toReturn,
-                       @Optional String toReturnResponseFrom) {
+    public void expect(String messageProcessor,
+                       MunitMuleMessage toReturn,
+                       @Optional List<Attribute> attributes) {
         try {
-            final Object expectedObject = toReturn != null ? toReturn : getResultOf(toReturnResponseFrom);
-            MockMpManager manager = (MockMpManager) muleContext.getRegistry().lookupObject(MockMpManager.ID);
-            manager.addBehavior(new MpBehavior(getName(thatMessageProcessor), getNamespace(thatMessageProcessor), parameters, expectedObject));
+            MockedMessageProcessorManager manager = getManager();
+            manager.addBehavior(new MockedMessageProcessorBehavior(getName(messageProcessor),
+                    getNamespace(messageProcessor), createAttributes(attributes), toReturn.getPayload()));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * <p>Define what the mock must return on a message processor call.</p>
+     * <p/>
+     * <p>If the message processor doesn't return any value then there is no need to define an expect.</p>
+     * <p/>
+     * <p>You can define the message processor parameters in the same order they appear in the API documentation. In
+     * order to define the behaviour on that particular case.</p>
+     * <p/>
+     * {@sample.xml ../../../doc/mock-connector.xml.sample mock:spy}
+     *
+     * @param messageProcessor Message processor name.
+     * @param assertionsBeforeCall Expected return value.
+     * @param assertionsAfterCall  Message processor parameters.
+     */
+    @Processor
+    public void spy(String messageProcessor,
+                    @Optional List<NestedProcessor> assertionsBeforeCall,
+                    @Optional List<NestedProcessor> assertionsAfterCall) {
+            getManager().addSpyAssertion(messageProcessor,
+                    new SpyAssertion(createMessageProcessorsFrom(assertionsBeforeCall),
+                            createMessageProcessorsFrom(assertionsAfterCall)));
+    }
+
+
+    private Map<String, Object> createAttributes(List<Attribute> attributes) {
+        Map<String, Object> attrs = new HashMap<String, Object>();
+        if ( attributes == null ){
+            return attrs;
+        }
+
+        for ( Attribute attr : attributes ){
+            attrs.put(attr.getName(), attr.getWhereValue());
+        }
+
+        return attrs;
     }
 
     private String getNamespace(String when) {
@@ -103,19 +133,6 @@ public class MockModule implements MuleContextAware
      */
 //    @Processor
     public void expectFail(String when, String throwA) {
-//        try {
-//
-//            MockedMethod mockedMethod = getMockedMethod(when);
-//            Method method = mockedMethod.getMethod();
-//
-//            if ( method != null  ){
-//                when(method.invoke(mock, mockedMethod.getAnyParameters(new HashMap<Integer, Object>())))
-//                        .thenThrow((Throwable) Class.forName(throwA).newInstance());
-//            }
-//
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
     }
 
 
@@ -125,69 +142,37 @@ public class MockModule implements MuleContextAware
      * {@sample.xml ../../../doc/mock-connector.xml.sample mock:verifyCall}
      *
      * @param messageProcessor Message processor Id
-     * @param parameters       Message processor parameters.
+     * @param attributes       Message processor parameters.
      * @param times            Number of times the message processor has to be called
      * @param atLeast          Number of time the message processor has to be called at least.
      * @param atMost           Number of times the message processor has to be called at most.
      */
-//    @Processor
-    public void verifyCall(String messageProcessor, Map<String, Object> parameters, @Optional Integer times,
+    @Processor
+    public void verifyCall(String messageProcessor, @Optional List<Attribute> attributes,
+                           @Optional Integer times,
                            @Optional Integer atLeast, @Optional Integer atMost) {
-//        try {
-//
-//            MockedMethod mockedMethod = getMockedMethod(messageProcessor);
-//            Method method = mockedMethod.getMethod();
-//
-//            if ( method != null  ){
-//                if ( times != null  )
-//                    verify(mock, times(times));
-//                else if ( atLeast != null )
-//                    verify(mock, atLeast(atLeast));
-//                else if ( atMost != null )
-//                    verify(mock, atMost(atMost));
-//                else
-//                    verify(mock);
-//
-//
-//                Map<Integer, Object> parameterIndex = mockedMethod.getParameters(parameters);
-//
-//                method.invoke(mock, mockedMethod.getAnyParameters(parameterIndex));
-//            }
-//
-//        } catch (InvocationTargetException e) {
-//            fail("Verification Error:" + getStackTrace(e));
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-    }
+        List<MessageProcessorCall> executedCalls = getManager().findCallsFor(getName(messageProcessor), getNamespace(messageProcessor), createAttributes(attributes));
 
 
-    /**
-     * Throw an Exception when a connector tries to connect.
-     * <p/>
-     * {@sample.xml ../../../doc/mock-connector.xml.sample mock:failOnConnect}
-     */
-//    @Processor
-    public void failOnConnect() {
-//        try {
-//            doThrow(new Exception()).when(connectionManagerMock).acquireConnection(any());
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-    }
+        if (times != null) {
+            if (executedCalls.size() != times) {
+                fail("On " + messageProcessor + ".Expected " + times + " but got " + executedCalls.size() + " calls");
+            }
+        } else if (atLeast != null) {
+            if (executedCalls.size() < atLeast) {
+                fail("On " + messageProcessor + ".Expected at least " + atLeast + " but got " + executedCalls.size() + " calls");
+            }
+        } else if (atMost != null) {
+            if (executedCalls.size() > atMost) {
+                fail("On " + messageProcessor + ".Expected at least " + atMost + " but got " + executedCalls.size() + " calls");
+            }
+        } else {
 
-    /**
-     * Reset mock behaviour
-     * <p/>
-     * {@sample.xml ../../../doc/mock-connector.xml.sample mock:reset}
-     */
-//    @Processor
-    public void reset() {
-//        if (connectionManagerMock != null && connectionKeyClass !=null){
-//            setConnectionManagerDefaultBehaviour();
-//        }
-//
-//        Mockito.reset(mock);
+            if (executedCalls.isEmpty()) {
+                fail("On " + messageProcessor + ".It was never called");
+            }
+        }
+
     }
 
 
@@ -264,6 +249,31 @@ public class MockModule implements MuleContextAware
 
     private MuleEvent testEvent() throws Exception {
         return MuleTestUtils.getTestEvent(null, MessageExchangePattern.REQUEST_RESPONSE, muleContext);
+    }
+
+    @Override
+    public void configureContext(ExpressionLanguageContext context) {
+        context.declareFunction("eq", new EqMatcherFunction());
+        context.declareFunction("anyBoolean", new AnyMatcherFunction(Boolean.class));
+        context.declareFunction("anyByte", new AnyMatcherFunction(Byte.class));
+        context.declareFunction("anyInt", new AnyMatcherFunction(Integer.class));
+        context.declareFunction("anyDouble", new AnyMatcherFunction(Double.class));
+        context.declareFunction("anyFloat", new AnyMatcherFunction(Float.class));
+        context.declareFunction("anyShort", new AnyMatcherFunction(Short.class));
+        context.declareFunction("anyObject", new AnyMatcherFunction(Object.class));
+        context.declareFunction("anyString", new AnyMatcherFunction(String.class));
+        context.declareFunction("anyList", new AnyMatcherFunction(List.class));
+        context.declareFunction("anySet", new AnyMatcherFunction(Set.class));
+        context.declareFunction("anyMap", new AnyMatcherFunction(Map.class));
+        context.declareFunction("anyCollection", new AnyMatcherFunction(Collection.class));
+        context.declareFunction("isNull", new NullMatcherFunction());
+        context.declareFunction("isNotNull", new NotNullMatcherFunction());
+        context.declareFunction("any", new AnyClassMatcherFunction());
+        context.declareFunction("resultOfScript", new FlowResultFunction(muleContext));
+    }
+
+    private MockedMessageProcessorManager getManager() {
+        return (MockedMessageProcessorManager) muleContext.getRegistry().lookupObject(MockedMessageProcessorManager.ID);
     }
 
 }

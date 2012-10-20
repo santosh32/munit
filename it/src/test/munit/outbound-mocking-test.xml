@@ -18,7 +18,7 @@
     </spring:beans>
 
 
-    <munit:config/>
+    <munit:config />
 
     <munit:test name="testingOutboundEndpointMocking"
                 description="

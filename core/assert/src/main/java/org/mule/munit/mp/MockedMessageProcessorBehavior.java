@@ -2,13 +2,13 @@ package org.mule.munit.mp;
 
 import java.util.Map;
 
-public class MpBehavior {
+public class MockedMessageProcessorBehavior {
     private String name;
     private String namespace;
     private Map<String,Object> parameters;
     private Object returnValue;
 
-    public MpBehavior(String name, String namespace, Map<String, Object> parameters, Object returnValue) {
+    public MockedMessageProcessorBehavior(String name, String namespace, Map<String, Object> parameters, Object returnValue) {
         this.name = name;
         this.namespace = namespace;
         this.parameters = parameters;

@@ -98,10 +98,10 @@
                             <groupId>org.mule.modules</groupId>
                             <artifactId>mule-module-peoplematter</artifactId>
                         </inclusion>
-						<inclusion>
-							<groupId>org.mule.modules</groupId>
-							<artifactId>mule-module-sfdc</artifactId>
-						</inclusion>
+                        <inclusion>
+                            <groupId>org.mule.modules</groupId>
+                            <artifactId>mule-module-jira</artifactId>
+                        </inclusion>
 					</inclusions>
 				</configuration>
 			</plugin>
@@ -328,11 +328,11 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!--<dependency>-->
-			<!--<groupId>org.mule.modules</groupId>-->
-			<!--<artifactId>mule-module-sfdc</artifactId>-->
-			<!--<version></version>-->
-		<!--</dependency>-->
+        <dependency>
+            <groupId>org.mule.modules</groupId>
+            <artifactId>mule-module-jira</artifactId>
+            <version>2.3.1</version>
+        </dependency>
 		<dependency>
 			<groupId>org.mule.transports</groupId>
 			<artifactId>mule-transport-ftp</artifactId>
@@ -405,46 +405,19 @@
 			<version>5.1.13</version>
 		</dependency>
 
-        <dependency>
-            <groupId>org.mule.munit</groupId>
-            <artifactId>mpmock</artifactId>
-            <version>1.2-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mule.munit</groupId>
-            <artifactId>ftpserver</artifactId>
-            <version>1.2-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mule.munit</groupId>
-            <artifactId>dbserver</artifactId>
-            <version>1.2-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mule.munit</groupId>
-            <artifactId>mclient</artifactId>
-            <version>1.2-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mule.munit</groupId>
-            <artifactId>assert</artifactId>
-            <version>3.3.2-SNAPSHOT</version>
-        </dependency>
 
         <dependency>
             <groupId>org.mule.munit</groupId>
             <artifactId>runner</artifactId>
             <version>3.3.2-SNAPSHOT</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.mule.munit</groupId>
             <artifactId>mock</artifactId>
             <version>3.3.2-SNAPSHOT</version>
+            <scope>test</scope>
         </dependency>
 
 
@@ -452,7 +425,7 @@
 		<dependency>
 			<groupId>com.mulesoft.muleesb.transports</groupId>
 			<artifactId>mule-transport-jdbc-ee</artifactId>
-			<version>3.3.0</version>
+			<version>3.3.1</version>
 			<scope>provided</scope>
 		</dependency>
 

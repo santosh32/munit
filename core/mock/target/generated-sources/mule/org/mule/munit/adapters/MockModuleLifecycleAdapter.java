@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
  * A <code>MockModuleLifecycleAdapter</code> is a wrapper around {@link MockModule } that adds lifecycle methods to the pojo.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.3.1", date = "2012-10-18T01:17:40-03:00", comments = "Build UNNAMED.1297.150f2c9")
+@Generated(value = "Mule DevKit Version 3.3.1", date = "2012-10-20T12:55:18-03:00", comments = "Build UNNAMED.1297.150f2c9")
 public class MockModuleLifecycleAdapter
     extends MockModuleMetadataAdapater
     implements Disposable, Initialisable, Startable, Stoppable
