@@ -1,4 +1,4 @@
-package org.mule.munit.endpoint;
+package org.mule.munit.common.endpoint;
 
 import org.mule.api.processor.MessageProcessor;
 

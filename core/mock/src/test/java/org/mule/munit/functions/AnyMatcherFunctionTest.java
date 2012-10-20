@@ -1,7 +1,7 @@
 package org.mule.munit.functions;
 
 import org.junit.Test;
-import org.mule.munit.mp.Matcher;
+import org.mule.munit.common.matchers.Matcher;
 
 import java.util.*;
 

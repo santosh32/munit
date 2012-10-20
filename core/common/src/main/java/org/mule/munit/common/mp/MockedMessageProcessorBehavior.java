@@ -1,4 +1,4 @@
-package org.mule.munit.mp;
+package org.mule.munit.common.mp;
 
 import java.util.Map;
 

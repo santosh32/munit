@@ -41,6 +41,11 @@
             <artifactId>reflections</artifactId>
             <version>0.9.8</version>
         </dependency>
+        <dependency>
+            <groupId>org.mule.munit</groupId>
+            <artifactId>common</artifactId>
+            <version>3.3.2-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>

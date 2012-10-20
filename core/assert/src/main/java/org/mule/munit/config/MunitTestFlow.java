@@ -7,8 +7,8 @@ import org.mule.api.MuleException;
 import org.mule.api.config.MuleProperties;
 import org.mule.api.registry.MuleRegistry;
 import org.mule.api.registry.RegistrationException;
-import org.mule.munit.endpoint.MockEndpointManager;
-import org.mule.munit.mp.MockedMessageProcessorManager;
+import org.mule.munit.common.endpoint.MockEndpointManager;
+import org.mule.munit.common.mp.MockedMessageProcessorManager;
 
 import static junit.framework.Assert.assertEquals;
 

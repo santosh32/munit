@@ -1,4 +1,4 @@
-package org.mule.munit.endpoint;
+package org.mule.munit.common.endpoint;
 
 import org.junit.Before;
 import org.junit.Test;

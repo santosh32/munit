@@ -22,7 +22,7 @@ import org.springframework.beans.factory.xml.ParserContext;
 import org.springframework.util.xml.DomUtils;
 import org.w3c.dom.Element;
 
-@Generated(value = "Mule DevKit Version 3.3.1", date = "2012-10-20T12:55:18-03:00", comments = "Build UNNAMED.1297.150f2c9")
+@Generated(value = "Mule DevKit Version 3.3.1", date = "2012-10-20T04:33:25-03:00", comments = "Build UNNAMED.1297.150f2c9")
 public abstract class AbstractDefinitionParser implements BeanDefinitionParser
 {
 

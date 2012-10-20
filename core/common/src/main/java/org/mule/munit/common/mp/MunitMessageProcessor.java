@@ -1,4 +1,4 @@
-package org.mule.munit.mp;
+package org.mule.munit.common.mp;
 
 import org.mule.api.MuleContext;
 import org.mule.api.MuleEvent;
@@ -9,6 +9,7 @@ import org.mule.api.context.MuleContextAware;
 import org.mule.api.expression.ExpressionManager;
 import org.mule.api.lifecycle.*;
 import org.mule.api.processor.MessageProcessor;
+import org.mule.munit.common.matchers.Matcher;
 
 import java.util.HashMap;
 import java.util.List;
@@ -110,7 +111,7 @@ public class MunitMessageProcessor implements MessageProcessor, Startable,Initia
     private boolean isDesired(Object matcher, String elementValue, MuleEvent event) {
         Object compareTo = evaluate(elementValue, event);
 
-        if ( matcher instanceof Matcher ) {
+        if ( matcher instanceof Matcher) {
             return ((Matcher) matcher).match(compareTo);
         }
 

@@ -1,4 +1,4 @@
-package org.mule.munit.mp;
+package org.mule.munit.common.matchers;
 
 public interface Matcher {
     

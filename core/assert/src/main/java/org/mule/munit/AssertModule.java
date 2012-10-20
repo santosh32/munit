@@ -3,7 +3,7 @@ package org.mule.munit;
 
 import org.mule.api.config.MuleProperties;
 import org.mule.construct.Flow;
-import org.mule.munit.endpoint.MockEndpointManager;
+import org.mule.munit.common.endpoint.MockEndpointManager;
 import org.mule.transport.NullPayload;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.MutablePropertyValues;

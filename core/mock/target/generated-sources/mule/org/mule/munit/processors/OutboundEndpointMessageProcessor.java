@@ -32,7 +32,7 @@ import org.mule.munit.process.NestedProcessorChain;
  * OutboundEndpointMessageProcessor invokes the {@link org.mule.munit.MockModule#outboundEndpoint(java.lang.String, java.lang.Object, java.util.Map, java.util.Map, java.util.Map, java.util.Map, java.util.List)} method in {@link MockModule }. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.3.1", date = "2012-10-20T12:55:18-03:00", comments = "Build UNNAMED.1297.150f2c9")
+@Generated(value = "Mule DevKit Version 3.3.1", date = "2012-10-20T04:33:25-03:00", comments = "Build UNNAMED.1297.150f2c9")
 public class OutboundEndpointMessageProcessor
     extends AbstractMessageProcessor<Object>
     implements Disposable, Initialisable, Startable, Stoppable, MessageProcessor

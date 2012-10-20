@@ -1,6 +1,7 @@
-package org.mule.munit.mp;
+package org.mule.munit.common.mp;
 
 import org.apache.commons.lang.StringUtils;
+import org.mule.munit.common.matchers.Matcher;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -4,7 +4,7 @@ import org.apache.commons.lang.StringUtils;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.config.spring.MuleHierarchicalBeanDefinitionParserDelegate;
 import org.mule.construct.Flow;
-import org.mule.munit.mp.MunitMessageProcessor;
+import org.mule.munit.common.mp.MunitMessageProcessor;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.PropertyValue;
 import org.springframework.beans.factory.config.BeanDefinition;
