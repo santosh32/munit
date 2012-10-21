@@ -4,8 +4,9 @@ import org.mule.api.MuleContext;
 import org.mule.config.ConfigResource;
 import org.mule.config.spring.MissingParserProblemReporter;
 import org.mule.config.spring.MuleApplicationContext;
-import org.mule.config.spring.MuleBeanDefinitionDocumentReader;
+import org.mule.munit.common.endpoint.EndpointFactorySwapperPostProcessor;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.core.io.Resource;
@@ -14,12 +15,16 @@ import java.io.IOException;
 
 
 public class MunitApplicationContext extends MuleApplicationContext{
-    public MunitApplicationContext(MuleContext muleContext, ConfigResource[] configResources) throws BeansException {
+    private MockingConfiguration configuration;
+
+    public MunitApplicationContext(MuleContext muleContext, ConfigResource[] configResources, MockingConfiguration configuration) throws BeansException {
         super(muleContext, configResources);
+        this.configuration = configuration;
     }
 
-    public MunitApplicationContext(MuleContext muleContext, Resource[] springResources) throws BeansException {
+    public MunitApplicationContext(MuleContext muleContext, Resource[] springResources, MockingConfiguration configuration) throws BeansException {
         super(muleContext, springResources);
+        this.configuration = configuration;
     }
 
     @Override
@@ -29,7 +34,9 @@ public class MunitApplicationContext extends MuleApplicationContext{
         beanDefinitionReader.setDocumentReaderClass(MunitBeanDefinitionDocumentReader.class);
         //add error reporting
         beanDefinitionReader.setProblemReporter(new MissingParserProblemReporter());
-
+        if ( configuration != null ){
+            this.addBeanFactoryPostProcessor(createPostProcessorFromConfiguration());
+        }
         // Communicate mule context to parsers
         try
         {
@@ -40,5 +47,12 @@ public class MunitApplicationContext extends MuleApplicationContext{
         {
             getCurrentMuleContext().remove();
         }
+    }
+
+    private BeanFactoryPostProcessor createPostProcessorFromConfiguration() {
+        EndpointFactorySwapperPostProcessor postProcessor = new EndpointFactorySwapperPostProcessor();
+        postProcessor.setMockInbounds(configuration.isMockInbounds());
+        postProcessor.setMockingExcludedFlows(configuration.getMockingExcludedFlows());
+        return postProcessor;
     }
 }

@@ -25,7 +25,7 @@ public class MuleSuiteRunner extends Runner implements Filterable, Sortable {
 
     private TestSuite testSuite;
     private MuleContext muleContext;
-    private MuleContextManager muleContextManager = new MuleContextManager();
+    private MuleContextManager muleContextManager = new MuleContextManager(null);
 
     public MuleSuiteRunner(Class testClass) {
         try {

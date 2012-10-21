@@ -8,6 +8,7 @@ import org.mule.config.DefaultMuleConfiguration;
 import org.mule.config.builders.SimpleConfigurationBuilder;
 import org.mule.context.DefaultMuleContextBuilder;
 import org.mule.context.DefaultMuleContextFactory;
+import org.mule.munit.runner.mule.context.MockingConfiguration;
 import org.mule.munit.runner.mule.context.MunitSpringXmlConfigurationBuilder;
 import org.mule.tck.TestingWorkListener;
 import org.mule.util.ClassUtils;
@@ -27,6 +28,11 @@ public class MuleContextManager {
 
     public static final String CLASSNAME_ANNOTATIONS_CONFIG_BUILDER = "org.mule.org.mule.munit.config.AnnotationsConfigurationBuilder";
 
+    private MockingConfiguration configuration;
+
+    public MuleContextManager(MockingConfiguration configuration) {
+        this.configuration = configuration;
+    }
 
     public MuleContext startMule(String resources) throws Exception {
         MuleContext context = createMule(resources);
@@ -52,6 +58,7 @@ public class MuleContextManager {
     private MuleContext createMule(String resources) throws Exception {
         MuleContext context;
         org.mule.api.context.MuleContextFactory muleContextFactory = new DefaultMuleContextFactory();
+
         List<ConfigurationBuilder> builders = new ArrayList<ConfigurationBuilder>();
         builders.add(new SimpleConfigurationBuilder(null));
         if (ClassUtils.isClassOnPath(CLASSNAME_ANNOTATIONS_CONFIG_BUILDER,
@@ -73,7 +80,7 @@ public class MuleContextManager {
 
 
     protected ConfigurationBuilder getBuilder(String resources) throws Exception {
-        return new MunitSpringXmlConfigurationBuilder(resources);
+        return new MunitSpringXmlConfigurationBuilder(resources, configuration);
     }
 
     protected void configureMuleContext(MuleContextBuilder contextBuilder) {

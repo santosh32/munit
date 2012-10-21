@@ -20,7 +20,7 @@ public class MunitSuiteRunner  {
 	private MuleContext muleContext;
 	private MunitSuite suite;
     private TestOutputHandler handler = new DefaultOutputHandler();
-    private MuleContextManager muleContextManager = new MuleContextManager();
+    private MuleContextManager muleContextManager = new MuleContextManager(null);
 
 
 	public MunitSuiteRunner(String resources) {

@@ -9,12 +9,15 @@ import org.springframework.context.ApplicationContext;
 public class MunitSpringXmlConfigurationBuilder extends SpringXmlConfigurationBuilder{
 
 
-    public MunitSpringXmlConfigurationBuilder(String configResources) throws ConfigurationException {
+    private MockingConfiguration configuration;
+
+    public MunitSpringXmlConfigurationBuilder(String configResources, MockingConfiguration configuration) throws ConfigurationException {
         super(configResources);
+        this.configuration = configuration;
     }
 
     @Override
     protected ApplicationContext createApplicationContext(MuleContext muleContext, ConfigResource[] configResources) throws Exception {
-        return new MunitApplicationContext( muleContext, configResources);
+        return new MunitApplicationContext( muleContext, configResources, configuration);
     }
 }

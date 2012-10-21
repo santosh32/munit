@@ -3,9 +3,9 @@
  */
 package org.mule.munit;
 
-import org.mule.MessageExchangePattern;
+import org.mule.DefaultMuleMessage;
 import org.mule.api.MuleContext;
-import org.mule.api.MuleEvent;
+import org.mule.api.MuleMessage;
 import org.mule.api.NestedProcessor;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
@@ -15,19 +15,14 @@ import org.mule.api.context.MuleContextAware;
 import org.mule.api.el.ExpressionLanguageContext;
 import org.mule.api.el.ExpressionLanguageExtension;
 import org.mule.api.processor.MessageProcessor;
-import org.mule.construct.Flow;
 import org.mule.munit.common.endpoint.MockEndpointManager;
 import org.mule.munit.common.endpoint.OutboundBehavior;
-import org.mule.munit.common.mp.MessageProcessorCall;
-import org.mule.munit.common.mp.MockedMessageProcessorBehavior;
-import org.mule.munit.common.mp.MockedMessageProcessorManager;
-import org.mule.munit.common.mp.SpyAssertion;
+import org.mule.munit.common.mocking.MunitMocker;
+import org.mule.munit.common.mocking.MunitSpier;
+import org.mule.munit.common.mocking.MunitVerifier;
 import org.mule.munit.functions.*;
-import org.mule.tck.MuleTestUtils;
 
 import java.util.*;
-
-import static junit.framework.Assert.fail;
 
 /**
  * Generic module
@@ -51,20 +46,18 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
      * {@sample.xml ../../../doc/mock-connector.xml.sample mock:expect}
      *
      * @param messageProcessor Message processor name.
-     * @param toReturn             Expected return value.
-     * @param attributes           Message processor parameters.
+     * @param toReturn         Expected return value.
+     * @param attributes       Message processor parameters.
      */
     @Processor
     public void expect(String messageProcessor,
                        MunitMuleMessage toReturn,
                        @Optional List<Attribute> attributes) {
-        try {
-            MockedMessageProcessorManager manager = getManager();
-            manager.addBehavior(new MockedMessageProcessorBehavior(getName(messageProcessor),
-                    getNamespace(messageProcessor), createAttributes(attributes), toReturn.getPayload()));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+
+        new MunitMocker(muleContext).expectMessageProcessor(getName(messageProcessor))
+                .ofNamespace(getNamespace(messageProcessor))
+                .WithAttributes(createAttributes(attributes))
+                .toReturn(createMuleMessageFrom(toReturn));
     }
 
     /**
@@ -85,41 +78,11 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
     public void spy(String messageProcessor,
                     @Optional List<NestedProcessor> assertionsBeforeCall,
                     @Optional List<NestedProcessor> assertionsAfterCall) {
-            getManager().addSpyAssertion(messageProcessor,
-                    new SpyAssertion(createMessageProcessorsFrom(assertionsBeforeCall),
-                            createMessageProcessorsFrom(assertionsAfterCall)));
-    }
 
-
-    private Map<String, Object> createAttributes(List<Attribute> attributes) {
-        Map<String, Object> attrs = new HashMap<String, Object>();
-        if ( attributes == null ){
-            return attrs;
-        }
-
-        for ( Attribute attr : attributes ){
-            attrs.put(attr.getName(), attr.getWhereValue());
-        }
-
-        return attrs;
-    }
-
-    private String getNamespace(String when) {
-        String[] split = when.split(":");
-        if (split.length > 1) {
-            return split[0];
-        }
-
-        return "mule";
-    }
-
-    private String getName(String when) {
-        String[] split = when.split(":");
-        if (split.length > 1) {
-            return split[1];
-        }
-
-        return split[0];
+            new MunitSpier(muleContext).spyMessageProcessor(getName(messageProcessor))
+                    .ofNamespace(getNamespace(messageProcessor))
+                    .running(createMessageProcessorsFrom(assertionsBeforeCall),
+                            createMessageProcessorsFrom(assertionsAfterCall));
     }
 
 
@@ -151,37 +114,24 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
     public void verifyCall(String messageProcessor, @Optional List<Attribute> attributes,
                            @Optional Integer times,
                            @Optional Integer atLeast, @Optional Integer atMost) {
-        List<MessageProcessorCall> executedCalls = getManager().findCallsFor(getName(messageProcessor), getNamespace(messageProcessor), createAttributes(attributes));
 
+        MunitVerifier mockVerifier =
+        new MunitVerifier(muleContext).verifyCallOfMessageProcessor(getName(messageProcessor))
+                .ofNamespace(getNamespace(messageProcessor))
+                .withAttributes(createAttributes(attributes));
 
         if (times != null) {
-            if (executedCalls.size() != times) {
-                fail("On " + messageProcessor + ".Expected " + times + " but got " + executedCalls.size() + " calls");
-            }
-        } else if (atLeast != null) {
-            if (executedCalls.size() < atLeast) {
-                fail("On " + messageProcessor + ".Expected at least " + atLeast + " but got " + executedCalls.size() + " calls");
-            }
-        } else if (atMost != null) {
-            if (executedCalls.size() > atMost) {
-                fail("On " + messageProcessor + ".Expected at least " + atMost + " but got " + executedCalls.size() + " calls");
-            }
-        } else {
+            mockVerifier.times(times);
 
-            if (executedCalls.isEmpty()) {
-                fail("On " + messageProcessor + ".It was never called");
-            }
+        } else if (atLeast != null) {
+            mockVerifier.atLeast(atLeast);
+        } else if (atMost != null) {
+            mockVerifier.atMost(atMost);
+        } else {
+            mockVerifier.atLeastOnce();
         }
 
     }
-
-
-    @Override
-    public void setMuleContext(MuleContext muleContext) {
-        this.muleContext = muleContext;
-    }
-
-
 
     /**
      * Reset mock behaviour
@@ -217,38 +167,11 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
         factory.addExpect(address, behavior);
     }
 
-    private List<MessageProcessor> createMessageProcessorsFrom(List<NestedProcessor> assertions) {
-        if (assertions == null) {
-            return null;
-        }
 
 
-        List<MessageProcessor> mps = new ArrayList<MessageProcessor>();
-        for (NestedProcessor nestedProcessor : assertions) {
-            mps.add(new NestedMessageProcessor(nestedProcessor));
-        }
-
-        return mps;
-    }
-
-
-    private Object getResultOf(String mustReturnResponseFrom) {
-
-        try {
-            Flow flow = (Flow) muleContext.getRegistry().lookupFlowConstruct(mustReturnResponseFrom);
-            if (flow == null) {
-                throw new RuntimeException("Flow " + mustReturnResponseFrom + " does not exist");
-            }
-
-            MuleEvent process = flow.process(testEvent());
-            return process.getMessage().getPayload();
-        } catch (Exception e) {
-            throw new RuntimeException("Could not call flow " + mustReturnResponseFrom + " to get the expected result");
-        }
-    }
-
-    private MuleEvent testEvent() throws Exception {
-        return MuleTestUtils.getTestEvent(null, MessageExchangePattern.REQUEST_RESPONSE, muleContext);
+    @Override
+    public void setMuleContext(MuleContext muleContext) {
+        this.muleContext = muleContext;
     }
 
     @Override
@@ -272,8 +195,84 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
         context.declareFunction("resultOfScript", new FlowResultFunction(muleContext));
     }
 
-    private MockedMessageProcessorManager getManager() {
-        return (MockedMessageProcessorManager) muleContext.getRegistry().lookupObject(MockedMessageProcessorManager.ID);
+
+    private MuleMessage createMuleMessageFrom(MunitMuleMessage toReturn) {
+        DefaultMuleMessage message = new DefaultMuleMessage(toReturn.getPayload(), muleContext);
+        if ( toReturn.getInboundProperties() != null ){
+            Map<String, Object> inboundProperties = toReturn.getInboundProperties();
+            for (String property : inboundProperties.keySet() ){
+                message.setInboundProperty(property, inboundProperties.get(property));
+            }
+        }
+
+        if ( toReturn.getOutboundProperties() != null ){
+            Map<String, Object> outboundProperties = toReturn.getOutboundProperties();
+            for (String property : outboundProperties.keySet() ){
+                message.setOutboundProperty(property, outboundProperties.get(property));
+            }
+        }
+
+        if ( toReturn.getInvocationProperties() != null ){
+            Map<String, Object> invocationProperties = toReturn.getInvocationProperties();
+            for (String property : invocationProperties.keySet() ){
+                message.setInvocationProperty(property, invocationProperties.get(property));
+            }
+        }
+
+        if ( toReturn.getSessionProperties() != null ){
+            Map<String, Object> sessionProperties = toReturn.getSessionProperties();
+            for (String property : sessionProperties.keySet() ){
+                message.setSessionProperty(property, sessionProperties.get(property));
+            }
+        }
+        return message;
     }
+
+
+    private List<MessageProcessor> createMessageProcessorsFrom(List<NestedProcessor> assertions) {
+        if (assertions == null) {
+            return null;
+        }
+
+
+        List<MessageProcessor> mps = new ArrayList<MessageProcessor>();
+        for (NestedProcessor nestedProcessor : assertions) {
+            mps.add(new NestedMessageProcessor(nestedProcessor));
+        }
+
+        return mps;
+    }
+
+    private Map<String, Object> createAttributes(List<Attribute> attributes) {
+        Map<String, Object> attrs = new HashMap<String, Object>();
+        if ( attributes == null ){
+            return attrs;
+        }
+
+        for ( Attribute attr : attributes ){
+            attrs.put(attr.getName(), attr.getWhereValue());
+        }
+
+        return attrs;
+    }
+
+    private String getNamespace(String when) {
+        String[] split = when.split(":");
+        if (split.length > 1) {
+            return split[0];
+        }
+
+        return "mule";
+    }
+
+    private String getName(String when) {
+        String[] split = when.split(":");
+        if (split.length > 1) {
+            return split[1];
+        }
+
+        return split[0];
+    }
+
 
 }

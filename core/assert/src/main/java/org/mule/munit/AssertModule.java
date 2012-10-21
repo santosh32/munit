@@ -1,17 +1,8 @@
 package org.mule.munit;
 
 
-import org.mule.api.config.MuleProperties;
-import org.mule.construct.Flow;
-import org.mule.munit.common.endpoint.MockEndpointManager;
+import org.mule.munit.common.endpoint.EndpointFactorySwapperPostProcessor;
 import org.mule.transport.NullPayload;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.MutablePropertyValues;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
-import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.beans.factory.support.AbstractBeanDefinition;
-import org.springframework.beans.factory.support.GenericBeanDefinition;
 
 import java.util.List;
 
@@ -23,11 +14,8 @@ import static junit.framework.Assert.assertEquals;
  * @author Federico, Fernando
  * @version since 3.3.2
  */
-public class AssertModule  implements BeanFactoryPostProcessor
+public class AssertModule extends EndpointFactorySwapperPostProcessor
 {
-    private boolean mockInbounds;
-    private List<String> mockingExcludedFlows;
-
     private static String wrapMessage(String message)
     {
         return message == null ? "" : message;
@@ -131,46 +119,7 @@ public class AssertModule  implements BeanFactoryPostProcessor
     }
 
 
-    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        if (isMockInbounds() ){
-            String[] beanDefinitionNames = beanFactory.getBeanDefinitionNames();
-            for ( String name : beanDefinitionNames ){
-                BeanDefinition beanDefinition = beanFactory.getBeanDefinition(name);
-                if ( Flow.class.getName().equals(beanDefinition.getBeanClassName()) ){
-                    if ( !mockingExcludedFlows.contains(name) ){
-                        beanDefinition.getPropertyValues().removePropertyValue("messageSource");
-                    }
-                }
-            }
 
-            wrapFactory(beanFactory);
-        }
-    }
 
-    private void wrapFactory(ConfigurableListableBeanFactory beanFactory) {
-        GenericBeanDefinition endpointFactory = (GenericBeanDefinition) beanFactory.getBeanDefinition(MuleProperties.OBJECT_MULE_ENDPOINT_FACTORY);
 
-        AbstractBeanDefinition abstractBeanDefinition = endpointFactory.cloneBeanDefinition();
-
-        MutablePropertyValues propertyValues = new MutablePropertyValues();
-        propertyValues.add("defaultFactory", abstractBeanDefinition);
-        endpointFactory.setPropertyValues(propertyValues);
-        endpointFactory.setBeanClassName(MockEndpointManager.class.getCanonicalName());
-    }
-
-    public boolean isMockInbounds() {
-        return mockInbounds;
-    }
-
-    public void setMockInbounds(boolean mockInbounds) {
-        this.mockInbounds = mockInbounds;
-    }
-
-    public List<String> getMockingExcludedFlows() {
-        return mockingExcludedFlows;
-    }
-
-    public void setMockingExcludedFlows(List<String> mockingExcludedFlows) {
-        this.mockingExcludedFlows = mockingExcludedFlows;
-    }
 }
