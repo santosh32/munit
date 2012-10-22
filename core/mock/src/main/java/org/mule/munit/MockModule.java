@@ -18,7 +18,7 @@ import org.mule.api.processor.MessageProcessor;
 import org.mule.munit.common.endpoint.MockEndpointManager;
 import org.mule.munit.common.endpoint.OutboundBehavior;
 import org.mule.munit.common.mocking.MunitMocker;
-import org.mule.munit.common.mocking.MunitSpier;
+import org.mule.munit.common.mocking.MunitSpy;
 import org.mule.munit.common.mocking.MunitVerifier;
 import org.mule.munit.functions.*;
 
@@ -79,7 +79,7 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
                     @Optional List<NestedProcessor> assertionsBeforeCall,
                     @Optional List<NestedProcessor> assertionsAfterCall) {
 
-            new MunitSpier(muleContext).spyMessageProcessor(getName(messageProcessor))
+            new MunitSpy(muleContext).spyMessageProcessor(getName(messageProcessor))
                     .ofNamespace(getNamespace(messageProcessor))
                     .running(createMessageProcessorsFrom(assertionsBeforeCall),
                             createMessageProcessorsFrom(assertionsAfterCall));
@@ -164,7 +164,7 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
         behavior.setOutboundProperties(returnOutboundProperties);
         behavior.setSessionProperties(returnSessionProperties);
 
-        factory.addExpect(address, behavior);
+        factory.addBehavior(address, behavior);
     }
 
 

@@ -13,7 +13,11 @@ import org.mule.api.processor.MessageProcessor;
 import org.mule.api.registry.MuleRegistry;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNull;
+import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.*;
 
 public class MockOutboundEndpointTest {
@@ -54,11 +58,31 @@ public class MockOutboundEndpointTest {
     public void testNotMockedEndpoint() throws MuleException {
         when(endpointManager.getBehaviorFor(ADDRESS)).thenReturn(null);
 
+
         new MockOutboundEndpoint(realEndpoint).process(event);
 
         verify(realEndpoint, times(1)).process(event);
     }
-    
+
+    @Test
+    public void testCloneMessage() throws MuleException {
+        OutboundBehavior behavior = new OutboundBehavior("payload", buildMessageAssertions());
+        behavior.setInboundProperties( properties());
+        behavior.setOutboundProperties( properties());
+        behavior.setInvocationProperties( properties());
+        when(endpointManager.getBehaviorFor(ADDRESS)).thenReturn(behavior);
+
+
+        new MockOutboundEndpoint(realEndpoint).process(event);
+
+    }
+
+    private HashMap<String, Object> properties() {
+        HashMap<String, Object> prop = new HashMap<String, Object>();
+        prop.put("any", "any");
+        return prop;
+    }
+
     @Test
     public void testVerifyAssertionIsCalled() throws MuleException {
         when(endpointManager.getBehaviorFor(ADDRESS)).thenReturn(new OutboundBehavior("payload", buildMessageAssertions()));
@@ -78,6 +102,39 @@ public class MockOutboundEndpointTest {
 
         verify(messageProcessor, never()).process(event);
         verify(event,times(1)).setMessage(any(MuleMessage.class));
+    }
+
+    @Test
+    public void testNotDefinedMethods(){
+        MockOutboundEndpoint endpoint = new MockOutboundEndpoint(null);
+
+        assertNull(endpoint.getResponseProperties());
+        assertNull(endpoint.getEndpointURI());
+        assertNull(endpoint.getAddress());
+        assertNull(endpoint.getEncoding());
+        assertNull(endpoint.getConnector());
+        assertNull(endpoint.getTransformers());
+        assertNull(endpoint.getResponseTransformers());
+        assertNull(endpoint.getProperties());
+        assertNull(endpoint.getProperty(null));
+        assertNull(endpoint.getProtocol());
+        assertNull(endpoint.getFilter());
+        assertNull(endpoint.getTransactionConfig());
+        assertNull(endpoint.getSecurityFilter());
+        assertNull(endpoint.getMessageProcessorsFactory());
+        assertNull(endpoint.getMessageProcessors());
+        assertNull(endpoint.getResponseMessageProcessors());
+        assertNull(endpoint.getExchangePattern());
+        assertNull(endpoint.getInitialState());
+        assertNull(endpoint.getMuleContext());
+        assertNull(endpoint.getRetryPolicyTemplate());
+        assertNull(endpoint.getRetryPolicyTemplate());
+        assertNull(endpoint.getMimeType());
+        assertNull(endpoint.getRedeliveryPolicy());
+        assertFalse(endpoint.isReadOnly());
+        assertFalse(endpoint.isDisableTransportTransformer());
+        assertFalse(endpoint.isProtocolSupported(""));
+        assertEquals(0, endpoint.getResponseTimeout());
     }
 
     private ArrayList<MessageProcessor> buildMessageAssertions() {

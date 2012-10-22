@@ -13,6 +13,13 @@ import org.springframework.beans.factory.support.GenericBeanDefinition;
 
 import java.util.List;
 
+
+/**
+ * <p>This class changes the endpoint factory and inject the mock manager</p>
+ *
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class EndpointFactorySwapperPostProcessor implements BeanFactoryPostProcessor {
 
     protected boolean mockInbounds;

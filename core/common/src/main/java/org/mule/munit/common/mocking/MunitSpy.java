@@ -14,18 +14,18 @@ import java.util.List;
  * @author Federico, Fernando
  * @version since 3.3.2
  */
-public class MunitSpier extends MunitTool{
+public class MunitSpy extends MunitTool{
 
-    public MunitSpier(MuleContext muleContext) {
+    public MunitSpy(MuleContext muleContext) {
         super(muleContext);
     }
 
-    public MunitSpier spyMessageProcessor(String name) {
+    public MunitSpy spyMessageProcessor(String name) {
         this.messageProcessorName = name;
         return this;
     }
 
-    public MunitSpier ofNamespace(String namespace) {
+    public MunitSpy ofNamespace(String namespace) {
         this.messageProcessorNamespace = namespace;
         return this;
     }

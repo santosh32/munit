@@ -12,7 +12,7 @@ import org.mule.construct.Flow;
 import org.mule.munit.common.MunitCore;
 import org.mule.munit.common.matchers.*;
 import org.mule.munit.common.mocking.MunitMocker;
-import org.mule.munit.common.mocking.MunitSpier;
+import org.mule.munit.common.mocking.MunitSpy;
 import org.mule.munit.common.mocking.MunitVerifier;
 import org.mule.munit.runner.MuleContextManager;
 import org.mule.munit.runner.mule.context.MockingConfiguration;
@@ -78,8 +78,8 @@ public abstract class FunctionalMunitSuite {
         return new MunitVerifier(muleContext).verifyCallOfMessageProcessor(name);
     }
     
-    protected final MunitSpier spyMessageProcessor(String name){
-        return new MunitSpier(muleContext).spyMessageProcessor(name);
+    protected final MunitSpy spyMessageProcessor(String name){
+        return new MunitSpy(muleContext).spyMessageProcessor(name);
     }
     
     protected final MuleEvent runFlow(String name, MuleEvent event) throws MuleException {

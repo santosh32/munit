@@ -210,6 +210,7 @@ public class MockOutboundEndpoint implements OutboundEndpoint{
 
         }
         MuleMessage message = new DefaultMuleMessage(payload, event.getMuleContext());
+        event.setMessage(message);
 
         if ( behavior.getInboundProperties() != null ){
             message.addProperties(behavior.getInboundProperties(), PropertyScope.INBOUND);
@@ -226,8 +227,6 @@ public class MockOutboundEndpoint implements OutboundEndpoint{
         if ( behavior.getInvocationProperties() != null ){
             message.addProperties(behavior.getInvocationProperties(), PropertyScope.INVOCATION);
         }
-
-        event.setMessage(message);
     }
 
     private void verifyAssertions(MuleEvent event, List<MessageProcessor> assertions) {

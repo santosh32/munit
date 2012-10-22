@@ -66,7 +66,7 @@ public class MunitVerifier extends MunitTool{
         List<MessageProcessorCall> executedCalls = getExecutedCalls();
 
         if (executedCalls.size() > atMost) {
-            fail("On " + getFullName() + ".Expected at least " + atMost + " but got " + executedCalls.size() + " calls");
+            fail("On " + getFullName() + ".Expected at most " + atMost + " but got " + executedCalls.size() + " calls");
         }
     }
 

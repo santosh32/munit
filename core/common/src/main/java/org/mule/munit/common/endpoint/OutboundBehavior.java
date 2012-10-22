@@ -13,10 +13,25 @@ import java.util.Map;
  * @version since 3.3.2
  */
 public class OutboundBehavior {
-    
+
+    /**
+     * <p>The Mule message Outbound properties</p>
+     */
     private Map<String, Object> outboundProperties;
+
+    /**
+     * <p>The Mule message Inbound properties</p>
+     */
     private Map<String, Object> inboundProperties;
+
+    /**
+     * <p>The Mule message Invocation properties</p>
+     */
     private Map<String, Object> invocationProperties;
+
+    /**
+     * <p>The Mule message Session properties</p>
+     */
     private Map<String, Object> sessionProperties;
     
     /**

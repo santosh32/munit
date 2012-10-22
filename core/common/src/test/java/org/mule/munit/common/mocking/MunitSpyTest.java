@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
-public class MunitSpierTest {
+public class MunitSpyTest {
 
     private MuleContext muleContext;
     private MuleRegistry muleRegistry;
@@ -33,10 +33,10 @@ public class MunitSpierTest {
     
     @Test
     public void testAddSpy(){
-        new MunitSpier(muleContext).spyMessageProcessor("test")
+        new MunitSpy(muleContext).spyMessageProcessor("test")
                 .ofNamespace("testNamespace")
                 .running(new ArrayList<MessageProcessor>(), new ArrayList<MessageProcessor>());
         
-        verify(manager).addSpyAssertion(any(MessageProcessorId.class),any(SpyAssertion.class));
+        verify(manager).addSpyAssertion(any(MessageProcessorId.class), any(SpyAssertion.class));
     }
 }
