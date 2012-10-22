@@ -56,7 +56,7 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
 
         new MunitMocker(muleContext).expectMessageProcessor(getName(messageProcessor))
                 .ofNamespace(getNamespace(messageProcessor))
-                .WithAttributes(createAttributes(attributes))
+                .withAttributes(createAttributes(attributes))
                 .toReturn(createMuleMessageFrom(toReturn));
     }
 

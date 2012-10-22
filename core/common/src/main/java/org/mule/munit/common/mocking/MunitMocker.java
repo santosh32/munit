@@ -9,6 +9,12 @@ import org.mule.munit.common.mp.MockedMessageProcessorManager;
 
 import java.util.Map;
 
+/**
+ * <p>This class is a Munit Tool to create Message processor mocks</p>
+ *
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class MunitMocker extends MunitTool{
 
 
@@ -26,7 +32,7 @@ public class MunitMocker extends MunitTool{
         return this;
     }
 
-    public MunitMocker WithAttributes(Map<String, Object> attributes) {
+    public MunitMocker withAttributes(Map<String, Object> attributes) {
         this.messageProcessorAttributes = attributes;
         return this;
     }

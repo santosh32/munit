@@ -7,6 +7,12 @@ import org.mule.munit.common.mp.MockedMessageProcessorManager;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * <p>This is the general Munit Tool</p>
+ *
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class MunitTool {
 
     protected MuleContext muleContext;

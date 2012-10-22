@@ -9,6 +9,12 @@ import java.util.Map;
 
 import static junit.framework.Assert.fail;
 
+/**
+ * <p>This is the general Munit Tool</p>
+ *
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class MunitVerifier extends MunitTool{
 
     public MunitVerifier(MuleContext muleContext) {
