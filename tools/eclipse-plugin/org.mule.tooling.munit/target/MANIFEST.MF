@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.core.runtime,org.
+ eclipse.ui;bundle-version="3.6.0",org.eclipse.jdt.core;bundle-version
+ ="3.6.0",org.eclipse.jdt.ui;bundle-version="3.6.0",org.eclipse.jdt.la
+ unching;bundle-version="3.5.100",org.eclipse.jdt.junit;bundle-version
+ ="3.6.1",org.eclipse.debug.ui;bundle-version="3.6.1"
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: lib/,lib/runner.jar,.,lib/assert.jar,lib/mock.jar
+Bundle-Version: 1.0.0.201210222049
+Bundle-Name: org.mule.tooling.munit
+Bundle-Activator: org.mule.munit.plugin.MunitPlugin
+Bundle-ManifestVersion: 2
+Import-Package: org.eclipse.core.internal.resources,org.eclipse.core.r
+ esources,org.eclipse.debug.core,org.eclipse.debug.ui,org.eclipse.ui.i
+ de,org.eclipse.jdt.core,org.eclipse.jdt.internal.junit.launcher,org.e
+ clipse.jdt.internal.junit.ui,org.eclipse.jdt.internal.junit.util,org.
+ eclipse.jdt.junit.launcher,org.eclipse.jdt.launching,org.eclipse.jdt.
+ ui,org.eclipse.jface.dialogs,org.eclipse.jface.viewers,org.eclipse.jf
+ ace.window,org.eclipse.swt.widgets,org.eclipse.ui,org.eclipse.ui.dial
+ ogs,org.eclipse.ui.part,org.eclipse.wst.xml.ui.internal.tabletree
+Bundle-SymbolicName: org.mule.tooling.munit;singleton:=true
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+

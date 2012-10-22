@@ -1,6 +1,8 @@
-package org.mule.munit.runner;
+package org.mule.munit.plugin;
 
 
+import org.mule.munit.runner.mule.MunitSuiteRunner;
+import org.mule.munit.runner.mule.MunitTest;
 import org.mule.munit.runner.mule.result.TestResult;
 import org.mule.munit.runner.mule.result.notification.NotificationListener;
 
@@ -9,7 +11,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-// TODO: MOVE TO ANOTHER project
 public class TestRemoteRunner {
 	Socket requestSocket;
 	ObjectOutputStream out;
@@ -25,12 +26,12 @@ public class TestRemoteRunner {
 			System.out.println("Connected to localhost in port "+ port);
 			out = new ObjectOutputStream(requestSocket.getOutputStream());
 			out.flush();
-			
-			MunitTestRunner runner = new MunitTestRunner(resource);
+
+            MunitSuiteRunner runner = new MunitSuiteRunner(resource);
 			
 			runner.setNotificationListener(new NotificationListener() {
 				
-				public void notifyStartOf(Test test) {
+				public void notifyStartOf(MunitTest test) {
 					try {
 						out.writeObject("1;"+test.getName());
 						out.flush();

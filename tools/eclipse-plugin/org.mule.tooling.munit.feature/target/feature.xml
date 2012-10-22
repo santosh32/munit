@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.mule.tooling.munit.feature"
+      label="Eclipse Munit Plugin"
+      version="1.0.0.201210222049"
+      provider-name="MuleSoft Inc."
+      plugin="org.mule.tooling.munit"
+      exclusive="true">
+
+   <description url="http://www.mulesoft.org/">
+      Mule Studio Properties Editor Plugin
+   </description>
+
+   <copyright url="http://www.mulesoft.org">
+      Copyright 2011 Mulesoft Inc.
+   </copyright>
+
+   <license>
+       (c) 2003-2012 MuleSoft, Inc. This software is protected under international
+       copyright law. All use of this software is subject to MuleSoft's Master
+       Subscription Agreement (or other Terms of Service) separately entered
+       into between you and MuleSoft. If such an agreement is not in
+       place, you may not use the software.
+   </license>
+
+   <plugin
+         id="org.mule.tooling.munit"
+         download-size="649"
+         install-size="796"
+		 unpack="true"
+         version="1.0.0.201210222049"/>
+     
+</feature>

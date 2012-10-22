@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<site>
+    <feature id="org.mule.tooling.munit.feature">
+      <category name="org.mule.tooling.munit"/>
+    </feature>
+   <category-def name="org.mule.tooling.munit" label="Premium"/>
+
+</site>

@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<units size='1'>
+  <unit id='201210222049.org.mule.tooling.munit' version='1.0.0.2--cKNG3677357537773AK'>
+    <properties size='2'>
+      <property name='org.eclipse.equinox.p2.name' value='Premium'/>
+      <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+    </properties>
+    <provides size='1'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='201210222049.org.mule.tooling.munit' version='1.0.0.2--cKNG3677357537773AK'/>
+    </provides>
+    <requires size='1'>
+      <required namespace='org.eclipse.equinox.p2.iu' name='org.mule.tooling.munit.feature.feature.group' range='[1.0.0.201210222049,1.0.0.201210222049]'/>
+    </requires>
+    <touchpoint id='null' version='0.0.0'/>
+  </unit>
+</units>
