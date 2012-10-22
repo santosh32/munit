@@ -413,14 +413,6 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.mule.munit</groupId>
-            <artifactId>mock</artifactId>
-            <version>3.3.2-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
-
-
 
 		<dependency>
 			<groupId>com.mulesoft.muleesb.transports</groupId>

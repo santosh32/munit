@@ -4,11 +4,10 @@
     <parent>
         <artifactId>munit</artifactId>
         <groupId>org.mule</groupId>
-        <version>1.2-SNAPSHOT</version>
+        <version>3.3.2-SNAPSHOT</version>
     </parent>
     <groupId>org.mule.munit</groupId>
     <artifactId>tools</artifactId>
-    <version>1.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Tools for Munit project</name>
 

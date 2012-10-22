@@ -8,6 +8,8 @@
     <version>3.3.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <name>The Munit Project</name>
+
     <properties>
         <mule.version>3.3.1</mule.version>
         <mule.devkit.version>3.3.1</mule.devkit.version>

@@ -35,7 +35,7 @@
 
         <dependency>
             <groupId>org.mule.munit</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>mock</artifactId>
             <version>3.3.2-SNAPSHOT</version>
         </dependency>
 
