@@ -14,7 +14,7 @@
     <mock:config />
 
     <flow name="testFlow">
-        <mock:outbound-endpoint address="http://localhost:8080/test" returnValue-ref="#[string:Fer]">
+        <mock:outbound-endpoint address="http://localhost:8080/test" returnMuleMessage-ref="#[string:Fer]">
             <logger level="ERROR" message="#[payload]"/>
 
         </mock:outbound-endpoint>

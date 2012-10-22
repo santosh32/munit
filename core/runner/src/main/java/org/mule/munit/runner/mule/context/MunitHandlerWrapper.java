@@ -4,6 +4,7 @@ import org.apache.commons.lang.StringUtils;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.config.spring.MuleHierarchicalBeanDefinitionParserDelegate;
 import org.mule.construct.Flow;
+import org.mule.munit.common.mp.MessageProcessorId;
 import org.mule.munit.common.mp.MunitMessageProcessor;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.PropertyValue;
@@ -50,8 +51,7 @@ public class MunitHandlerWrapper implements NamespaceHandler {
                     BeanDefinitionBuilder builder = BeanDefinitionBuilder.rootBeanDefinition(MunitMessageProcessor.class.getName());
                     builder.setScope(beanDefinition.getScope());
                     builder.addPropertyValue("realMp", beanDefinition);
-                    builder.addPropertyValue("namespace", getNamespaceFrom(tagName));
-                    builder.addPropertyValue("name", getNameFrom(tagName));
+                    builder.addPropertyValue("id", new MessageProcessorId(getNameFrom(tagName), getNamespaceFrom(tagName)));
                     builder.addPropertyValue("attributes", getAttributes(element));
                     AbstractBeanDefinition mocked = builder.getBeanDefinition();
                     setNoRecurseOnDefinition(mocked);

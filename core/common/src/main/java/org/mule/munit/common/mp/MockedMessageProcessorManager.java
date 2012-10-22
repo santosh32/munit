@@ -1,38 +1,80 @@
 package org.mule.munit.common.mp;
 
-import org.apache.commons.lang.StringUtils;
-import org.mule.munit.common.matchers.Matcher;
+import java.util.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+/**
+ * <p>The Class that manages the mocking process. Gets the behaviors, stores the message processor calls and stores
+ * the spy process</p>
+ *
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class MockedMessageProcessorManager {
     public static String ID = "_muleMockMpManager";
 
-    private List<MockedMessageProcessorBehavior> behaviors = new ArrayList<MockedMessageProcessorBehavior>();
-    private List<MessageProcessorCall> calls = new ArrayList<MessageProcessorCall>();
-    private Map<String, SpyAssertion> spyAssertions = new HashMap<String, SpyAssertion>();
-    
-    public List<MockedMessageProcessorBehavior> getBehaviorsFor(String namespace, String name){
-        List<MockedMessageProcessorBehavior> expected = new ArrayList<MockedMessageProcessorBehavior>();
-        for ( MockedMessageProcessorBehavior behavior : behaviors){
+    /**
+     * <p>These are the behaviors expected for different message processor mocks</p>
+     */
+    protected List<MockedMessageProcessorBehavior> behaviors = new ArrayList<MockedMessageProcessorBehavior>();
 
-            if (isExpected(namespace, name, behavior.getName(), behavior.getNamespace())){
-                expected.add(behavior);
+    /**
+     * <p>These are the real calls of the message processors.</p>
+     */
+    protected List<MessageProcessorCall> calls = new ArrayList<MessageProcessorCall>();
+
+    /**
+     * <p>The spy process per message processor</p>
+     */
+    protected Map<MessageProcessorId, SpyAssertion> spyAssertions = new HashMap<MessageProcessorId, SpyAssertion>();
+
+
+    /**
+     * <p>Reset all the status</p>
+     */
+    public void reset(){
+        behaviors.clear();
+        calls.clear();
+        spyAssertions.clear();
+    }
+
+    /**
+     * <p>Retrieve all the execute calls for a message processor that satisfies the attribute matchers</p>
+     * @param mpId The Message processor Id
+     * @param attributesMatchers The attributes that the message processor must match
+     * @return The List of message processor calls
+     */
+    public List<MessageProcessorCall> findCallsFor(MessageProcessorId mpId, Map<String,Object> attributesMatchers) {
+        List<MessageProcessorCall> expected = new ArrayList<MessageProcessorCall>();
+        MessageProcessorCall matchingCall = new MessageProcessorCall(mpId);
+        matchingCall.setAttributes(attributesMatchers);
+        for ( MessageProcessorCall call : calls){
+            if (matchingCall.matchingWeight(call) >= 0){
+                expected.add(call);
             }
         }
         return expected;
     }
 
-    private boolean isExpected(String namespace, String name, String behaviorName, String behaviorNamespace) {
-        return behaviorName.equals(name) && ( !StringUtils.isEmpty(namespace) && namespace.equals(behaviorNamespace) );
+    /**
+     * <p>Gets the best matching Behavior. The best matching behavior is the one that mostly matches the attributes</p>
+     * @param messageProcessorCall The comparing call
+     * @return The best matching behavior
+     */
+    public MockedMessageProcessorBehavior getBetterMatchingBehavior(MessageProcessorCall messageProcessorCall) {
+        Map.Entry<Integer, MockedMessageProcessorBehavior> bestMatchingBehavior = new AbstractMap.SimpleEntry<Integer, MockedMessageProcessorBehavior>(0, null);
+        for ( MockedMessageProcessorBehavior behavior : behaviors ){
+            int matchingWeight = behavior.getMessageProcessorCall().matchingWeight(messageProcessorCall);
+            if ( matchingWeight >= 0 && matchingWeight>=bestMatchingBehavior.getKey()){
+                bestMatchingBehavior.setValue(behavior);
+            }
+        }
+
+        return bestMatchingBehavior.getValue();
     }
 
-    public void reset(){
-        behaviors.clear();
-        calls.clear();
+
+    public Map<MessageProcessorId, SpyAssertion> getSpyAssertions() {
+        return spyAssertions;
     }
 
     public synchronized void addBehavior(MockedMessageProcessorBehavior behavior) {
@@ -43,46 +85,7 @@ public class MockedMessageProcessorManager {
         calls.add(call);
     }
 
-    public synchronized void addSpyAssertion(String messageProcessor, SpyAssertion assertionMessageProcessor){
+    public synchronized void addSpyAssertion(MessageProcessorId messageProcessor, SpyAssertion assertionMessageProcessor){
         spyAssertions.put(messageProcessor, assertionMessageProcessor);
-    }
-    
-    public List<MessageProcessorCall> findCallsFor(String name, String namespace, Map<String,Object> attributesMatchers) {
-        List<MessageProcessorCall> expected = new ArrayList<MessageProcessorCall>();
-        for ( MessageProcessorCall call : calls){
-
-            if (isExpected(namespace, name, call.getName(), call.getNamespace())){
-                if ( attributesMatchers == null ){
-                    expected.add(call);
-                }
-                else{
-                    int totalMatching = 0;
-                    for (Map.Entry<String,Object> matchers : attributesMatchers.entrySet() ){
-                       Map<String, Object> attributes = call.getAttributes();
-                       if ( attributes.containsKey(matchers.getKey()) ){
-                           totalMatching += matches( matchers.getValue(), attributes.get(matchers.getKey())) ? 1 :0 ;
-                       }
-
-                   }
-                    if ( totalMatching == attributesMatchers.size()){
-                        expected.add(call);
-                    }
-                }
-            }
-        }
-        return expected;
-    }
-
-    private boolean matches(Object matcher, Object value) {
-        if ( matcher instanceof Matcher ){
-            return ((Matcher) matcher).match(value);
-        }
-        else{
-            return  matcher.equals(value);
-        }
-    }
-
-    public Map<String, SpyAssertion> getSpyAssertions() {
-        return spyAssertions;
     }
 }

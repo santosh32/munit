@@ -2,6 +2,7 @@ package org.mule.munit.common.mocking;
 
 import org.mule.api.MuleContext;
 import org.mule.munit.common.mp.MessageProcessorCall;
+import org.mule.munit.common.mp.MessageProcessorId;
 
 import java.util.List;
 import java.util.Map;
@@ -35,8 +36,8 @@ public class MunitVerifier extends MunitTool{
     }
 
     private List<MessageProcessorCall> getExecutedCalls() {
-        return getManager().findCallsFor(messageProcessorName, 
-                messageProcessorNamespace, messageProcessorAttributes);
+        return getManager().findCallsFor(new MessageProcessorId(messageProcessorName,
+                messageProcessorNamespace), messageProcessorAttributes);
     }
 
     public MunitVerifier withAttributes(Map<String, Object> attributes) {

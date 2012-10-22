@@ -3,6 +3,7 @@ package org.mule.munit.common.mocking;
 
 import org.mule.api.MuleContext;
 import org.mule.api.processor.MessageProcessor;
+import org.mule.munit.common.mp.MessageProcessorId;
 import org.mule.munit.common.mp.SpyAssertion;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class MunitSpier extends MunitTool{
     }
 
     public void running(List<MessageProcessor> beforeCall, List<MessageProcessor> afterCall){
-        getManager().addSpyAssertion(getFullName(),
+        getManager().addSpyAssertion(new MessageProcessorId(messageProcessorName, messageProcessorNamespace),
                 new SpyAssertion(beforeCall,afterCall));
     }
 

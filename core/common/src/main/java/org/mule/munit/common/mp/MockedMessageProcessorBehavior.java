@@ -1,33 +1,35 @@
 package org.mule.munit.common.mp;
 
-import java.util.Map;
+import org.mule.api.MuleMessage;
 
+/**
+ * <p>The representation of a Message Processor mocked behavior.</p>
+ * <p>We use this in order to know that the Message processor must return</p>
+ *
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class MockedMessageProcessorBehavior {
-    private String name;
-    private String namespace;
-    private Map<String,Object> parameters;
-    private Object returnValue;
+    /**
+     * <p>The message processor call representation. When this call is executed then return returnMessage</p>
+     */
+    private MessageProcessorCall messageProcessorCall;
 
-    public MockedMessageProcessorBehavior(String name, String namespace, Map<String, Object> parameters, Object returnValue) {
-        this.name = name;
-        this.namespace = namespace;
-        this.parameters = parameters;
-        this.returnValue = returnValue;
+    /**
+     * <p>The Mule message information that will be replaced in the flow Message</p>
+     */
+    private MuleMessage returnMuleMessage;
+
+    public MockedMessageProcessorBehavior(MessageProcessorCall messageProcessorCall, MuleMessage returnMuleMessage) {
+        this.messageProcessorCall = messageProcessorCall;
+        this.returnMuleMessage = returnMuleMessage;
     }
 
-    public String getName() {
-        return name;
+    public MuleMessage getReturnMuleMessage() {
+        return returnMuleMessage;
     }
 
-    public String getNamespace() {
-        return namespace;
-    }
-
-    public Map<String, Object> getParameters() {
-        return parameters;
-    }
-
-    public Object getReturnValue() {
-        return returnValue;
+    public MessageProcessorCall getMessageProcessorCall() {
+        return messageProcessorCall;
     }
 }

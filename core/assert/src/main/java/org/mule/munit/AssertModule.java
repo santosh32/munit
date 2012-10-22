@@ -4,8 +4,6 @@ package org.mule.munit;
 import org.mule.munit.common.endpoint.EndpointFactorySwapperPostProcessor;
 import org.mule.transport.NullPayload;
 
-import java.util.List;
-
 import static junit.framework.Assert.assertEquals;
 
 /**
@@ -117,9 +115,6 @@ public class AssertModule extends EndpointFactorySwapperPostProcessor
     {
         junit.framework.Assert.fail(wrapMessage(message));
     }
-
-
-
 
 
 }

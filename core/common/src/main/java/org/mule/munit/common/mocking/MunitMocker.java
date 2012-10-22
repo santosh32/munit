@@ -2,6 +2,8 @@ package org.mule.munit.common.mocking;
 
 import org.mule.api.MuleContext;
 import org.mule.api.MuleMessage;
+import org.mule.munit.common.mp.MessageProcessorCall;
+import org.mule.munit.common.mp.MessageProcessorId;
 import org.mule.munit.common.mp.MockedMessageProcessorBehavior;
 import org.mule.munit.common.mp.MockedMessageProcessorManager;
 
@@ -35,7 +37,8 @@ public class MunitMocker extends MunitTool{
         }
 
         MockedMessageProcessorManager manager = getManager();
-        manager.addBehavior(new MockedMessageProcessorBehavior(messageProcessorName,
-                messageProcessorNamespace, messageProcessorAttributes, message.getPayload()));
+        MessageProcessorCall messageProcessorCall = new MessageProcessorCall(new MessageProcessorId(messageProcessorName, messageProcessorNamespace));
+        messageProcessorCall.setAttributes(messageProcessorAttributes);
+        manager.addBehavior(new MockedMessageProcessorBehavior(messageProcessorCall, message));
     }
 }

@@ -9,7 +9,6 @@ import org.mule.api.context.MuleContextAware;
 import org.mule.api.expression.ExpressionManager;
 import org.mule.api.lifecycle.*;
 import org.mule.api.processor.MessageProcessor;
-import org.mule.munit.common.matchers.Matcher;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,49 +17,48 @@ import java.util.Map;
 import static junit.framework.Assert.fail;
 
 
+/**
+ * <p>This is the Message processor Wrapper.</p>
+ *
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class MunitMessageProcessor implements MessageProcessor, Startable,Initialisable, Disposable, MuleContextAware, FlowConstructAware, Stoppable {
     private MessageProcessor realMp;
-    private String namespace;
-    private String name;
+    private MessageProcessorId id;
     private Map<String,String> attributes;
     private MuleContext muleContext;
 
     @Override
     public MuleEvent process(MuleEvent event) throws MuleException {
-        MockedMessageProcessorManager manager = getMockMpProcessor();
+        MockedMessageProcessorManager manager = getMockedMessageProcessorManager();
 
         runSpyBeforeAssertions(manager, event);
+        MessageProcessorCall messageProcessorCall = buildCall(event);
+        MockedMessageProcessorBehavior behavior = manager.getBetterMatchingBehavior(messageProcessorCall);
+        if ( behavior != null ){
+            event.getMessage().setPayload(behavior.getReturnMuleMessage().getPayload());
 
-        List<MockedMessageProcessorBehavior> behaviors = manager.getBehaviorsFor(namespace, name);
-        for ( MockedMessageProcessorBehavior behavior  : behaviors ){
-            int matchedCount = 0;
-            for ( Map.Entry<String,String> entry: attributes.entrySet() ){
-               Map<String, Object> parameters = behavior.getParameters();
-               if ( parameters.containsKey(entry.getKey()) ){
-                  matchedCount += isDesired(parameters.get(entry.getKey()), entry.getValue(),event) ? 1 : 0;
-               }
-           }
-            if ( matchedCount == behavior.getParameters().size()){
-                manager.addCall(buildCall(event));
-                event.getMessage().setPayload(behavior.getReturnValue());
-
-                runSpyAfterAssertions(manager, event);
-                return event;
-            }
+            registerCall(event, manager, messageProcessorCall);
+            return event;
         }
 
-        manager.addCall(buildCall(event));
-        runSpyAfterAssertions(manager, event);
+        registerCall(event, manager, messageProcessorCall);
         return realMp.process(event);
     }
 
+    private void registerCall(MuleEvent event, MockedMessageProcessorManager manager, MessageProcessorCall messageProcessorCall) {
+        manager.addCall(messageProcessorCall);
+        runSpyAfterAssertions(manager, event);
+    }
+
     private void runSpyAfterAssertions(MockedMessageProcessorManager manager, MuleEvent event) {
-        Map<String, SpyAssertion> assertions = manager.getSpyAssertions();
+        Map<MessageProcessorId, SpyAssertion> assertions = manager.getSpyAssertions();
         if ( assertions.isEmpty() ){
             return;
         }
 
-        SpyAssertion spyAssertion = assertions.get(getFullName());
+        SpyAssertion spyAssertion = assertions.get(id);
         if ( spyAssertion == null ){
             return;
         }
@@ -74,16 +72,12 @@ public class MunitMessageProcessor implements MessageProcessor, Startable,Initia
         }
     }
 
-    private String getFullName() {
-        return namespace + ":" + name;
-    }
-
     private void runSpyBeforeAssertions(MockedMessageProcessorManager manager, MuleEvent event) {
-        Map<String, SpyAssertion> assertions = manager.getSpyAssertions();
+        Map<MessageProcessorId, SpyAssertion> assertions = manager.getSpyAssertions();
         if ( assertions.isEmpty() ){
             return;
         }
-        SpyAssertion spyAssertion = assertions.get(getFullName());
+        SpyAssertion spyAssertion = assertions.get(id);
         if ( spyAssertion == null ){
             return;
         }
@@ -98,7 +92,7 @@ public class MunitMessageProcessor implements MessageProcessor, Startable,Initia
     }
 
     private MessageProcessorCall buildCall(MuleEvent event) {
-        MessageProcessorCall call = new MessageProcessorCall(name, namespace);
+        MessageProcessorCall call = new MessageProcessorCall(id);
         Map<String, Object> processed = new HashMap<String, Object>();
         for (Map.Entry<String,String> attrs : attributes.entrySet() ){
             Object evaluate = evaluate(attrs.getValue(), event);
@@ -108,15 +102,6 @@ public class MunitMessageProcessor implements MessageProcessor, Startable,Initia
         return call;
     }
 
-    private boolean isDesired(Object matcher, String elementValue, MuleEvent event) {
-        Object compareTo = evaluate(elementValue, event);
-
-        if ( matcher instanceof Matcher) {
-            return ((Matcher) matcher).match(compareTo);
-        }
-
-        return matcher.equals(compareTo);
-    }
 
     private Object evaluate(String elementValue, MuleEvent event) {
         Object compareTo;
@@ -136,30 +121,8 @@ public class MunitMessageProcessor implements MessageProcessor, Startable,Initia
         return compareTo;
     }
 
-    public String getNamespace() {
-        return namespace;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setRealMp(MessageProcessor realMp) {
-        this.realMp = realMp;
-    }
-
-    public void setNamespace(String namespace) {
-        this.namespace = namespace;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
 
-    public void setAttributes(Map<String, String> attributes) {
-        this.attributes = attributes;
-    }
 
     @Override
     public void dispose() {
@@ -205,8 +168,20 @@ public class MunitMessageProcessor implements MessageProcessor, Startable,Initia
 
     }
 
-    private MockedMessageProcessorManager getMockMpProcessor() {
+    protected MockedMessageProcessorManager getMockedMessageProcessorManager() {
         return ((MockedMessageProcessorManager) muleContext.getRegistry().lookupObject(MockedMessageProcessorManager.ID));
+    }
+
+    public void setRealMp(MessageProcessor realMp) {
+        this.realMp = realMp;
+    }
+
+    public void setId(MessageProcessorId id) {
+        this.id = id;
+    }
+
+    public void setAttributes(Map<String, String> attributes) {
+        this.attributes = attributes;
     }
 
 }
