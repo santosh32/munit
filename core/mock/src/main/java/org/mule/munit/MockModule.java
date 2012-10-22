@@ -4,9 +4,7 @@
 package org.mule.munit;
 
 import org.mule.DefaultMuleMessage;
-import org.mule.api.MuleContext;
-import org.mule.api.MuleMessage;
-import org.mule.api.NestedProcessor;
+import org.mule.api.*;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.param.Optional;
@@ -20,6 +18,7 @@ import org.mule.munit.common.endpoint.OutboundBehavior;
 import org.mule.munit.common.mocking.MunitMocker;
 import org.mule.munit.common.mocking.MunitSpy;
 import org.mule.munit.common.mocking.MunitVerifier;
+import org.mule.munit.common.mocking.SpyProcess;
 import org.mule.munit.functions.*;
 
 import java.util.*;
@@ -81,9 +80,10 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
 
             new MunitSpy(muleContext).spyMessageProcessor(getName(messageProcessor))
                     .ofNamespace(getNamespace(messageProcessor))
-                    .running(createMessageProcessorsFrom(assertionsBeforeCall),
-                            createMessageProcessorsFrom(assertionsAfterCall));
+                    .running(createSpyAssertion(createMessageProcessorsFrom(assertionsBeforeCall)),
+                            createSpyAssertion(createMessageProcessorsFrom(assertionsAfterCall)));
     }
+
 
 
     /**
@@ -272,6 +272,24 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
         }
 
         return split[0];
+    }
+
+    private List<SpyProcess> createSpyAssertion(final List<MessageProcessor> messageProcessorsFrom) {
+        List<SpyProcess> mps = new ArrayList<SpyProcess>();
+        mps.add(createSpy(messageProcessorsFrom));
+        return mps;
+    }
+
+    private SpyProcess createSpy(final List<MessageProcessor> messageProcessorsFrom) {
+        return new SpyProcess(){
+
+            @Override
+            public void spy(MuleEvent event) throws MuleException {
+                for ( MessageProcessor mp : messageProcessorsFrom ){
+                    mp.process(event);
+                }
+            }
+        };
     }
 
 
