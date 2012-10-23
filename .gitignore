@@ -16,10 +16,8 @@ ftpserver/target
 ftpserver/.settings
 dbserver/target
 dbserver/.settings
-mock/target
-mock/.settings
-mpmock/target
-mpmock/.settings
+core/mock/target
+core/mock/.settings
 integration/target
 integration/.settings
 maven/maven-plugin/target
