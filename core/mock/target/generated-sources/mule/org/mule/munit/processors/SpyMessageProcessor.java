@@ -31,7 +31,7 @@ import org.mule.munit.process.NestedProcessorChain;
  * SpyMessageProcessor invokes the {@link org.mule.munit.MockModule#spy(java.lang.String, java.util.List, java.util.List)} method in {@link MockModule }. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.3.1", date = "2012-10-22T05:47:49-03:00", comments = "Build UNNAMED.1297.150f2c9")
+@Generated(value = "Mule DevKit Version 3.3.1", date = "2012-10-23T01:00:50-03:00", comments = "Build UNNAMED.1297.150f2c9")
 public class SpyMessageProcessor
     extends AbstractMessageProcessor<Object>
     implements Disposable, Initialisable, Startable, Stoppable, MessageProcessor

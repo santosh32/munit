@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.102" errors="0" skipped="0" tests="2" name="org.mule.munit.functions.AnyClassMatcherFunctionTest">
+<testsuite failures="0" time="0.099" errors="0" skipped="0" tests="2" name="org.mule.munit.functions.AnyClassMatcherFunctionTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Libraries"/>
@@ -22,7 +22,7 @@
     <property name="basedir" value="/Users/fernandofederico/Desktop/source/munit/core/mock"/>
     <property name="java.endorsed.dirs" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/endorsed"/>
     <property name="os.arch" value="x86_64"/>
-    <property name="surefire.real.class.path" value="/var/folders/p0/wp1hrtw10fb906mswkrg2jh80000gn/T/surefirebooter7448977208206961882.jar"/>
+    <property name="surefire.real.class.path" value="/var/folders/p0/wp1hrtw10fb906mswkrg2jh80000gn/T/surefirebooter5206976438500441387.jar"/>
     <property name="java.io.tmpdir" value="/var/folders/p0/wp1hrtw10fb906mswkrg2jh80000gn/T/"/>
     <property name="line.separator" value="
 "/>
@@ -46,7 +46,7 @@
     <property name="java.vm.specification.version" value="1.0"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home"/>
-    <property name="sun.java.command" value="/var/folders/p0/wp1hrtw10fb906mswkrg2jh80000gn/T/surefirebooter7448977208206961882.jar /var/folders/p0/wp1hrtw10fb906mswkrg2jh80000gn/T/surefire1374567989540727864tmp /var/folders/p0/wp1hrtw10fb906mswkrg2jh80000gn/T/surefire926401685463502144tmp"/>
+    <property name="sun.java.command" value="/var/folders/p0/wp1hrtw10fb906mswkrg2jh80000gn/T/surefirebooter5206976438500441387.jar /var/folders/p0/wp1hrtw10fb906mswkrg2jh80000gn/T/surefire3510294850531649673tmp /var/folders/p0/wp1hrtw10fb906mswkrg2jh80000gn/T/surefire416296757659476620tmp"/>
     <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
     <property name="user.language" value="en"/>
     <property name="awt.toolkit" value="apple.awt.CToolkit"/>
@@ -65,6 +65,6 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="0.007" classname="org.mule.munit.functions.AnyClassMatcherFunctionTest" name="testWithBoolean"/>
+  <testcase time="0.01" classname="org.mule.munit.functions.AnyClassMatcherFunctionTest" name="testWithBoolean"/>
   <testcase time="0" classname="org.mule.munit.functions.AnyClassMatcherFunctionTest" name="testWithstring"/>
 </testsuite>

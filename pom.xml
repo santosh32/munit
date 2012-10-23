@@ -24,7 +24,7 @@
 
     <modules>
         <module>core</module>
-        <module>tools</module>
+        <module>maven</module>
         <module>it</module>
     </modules>
 

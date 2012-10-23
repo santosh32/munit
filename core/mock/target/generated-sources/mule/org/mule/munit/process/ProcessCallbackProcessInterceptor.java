@@ -7,7 +7,7 @@ import org.mule.api.process.ProcessCallback;
 import org.mule.api.process.ProcessInterceptor;
 import org.mule.api.processor.MessageProcessor;
 
-@Generated(value = "Mule DevKit Version 3.3.1", date = "2012-10-22T05:47:49-03:00", comments = "Build UNNAMED.1297.150f2c9")
+@Generated(value = "Mule DevKit Version 3.3.1", date = "2012-10-23T01:00:50-03:00", comments = "Build UNNAMED.1297.150f2c9")
 public class ProcessCallbackProcessInterceptor<T, O >implements ProcessInterceptor<T, O>
 {
 
