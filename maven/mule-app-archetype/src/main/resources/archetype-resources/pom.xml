@@ -20,6 +20,7 @@
 		<jdkName>JavaSE-1.6</jdkName>
 		<jdk.version>1.6</jdk.version>
 		<junit.version>4.9</junit.version>
+        <munit.version>3.3.2-SNAPSHOT</munit.version>
 	</properties>
 
 	<build>
@@ -147,7 +148,7 @@
             <plugin>
                 <groupId>org.mule.munit</groupId>
                 <artifactId>munit-plugin</artifactId>
-                <version>1.2-SNAPSHOT</version>
+                <version>${munit.version}</version>
                 <executions>
                     <execution>
                         <phase>test</phase>
@@ -287,16 +288,7 @@
 			<version>${symbol_dollar}{mule.version}</version>
 			<scope>provided</scope>
 		</dependency>
-#if($EE == 'true')
-#if($transport == 'ftp' || $transport == 'jdbc' ||$transport == 'jms')
-		<dependency>
-        	<groupId>com.mulesoft.muleesb.transports</groupId>
-			<artifactId>mule-transport-${transport}-ee</artifactId>
-			<version>${symbol_dollar}{mule.version}</version>
-			<scope>provided</scope>
-		</dependency>
-#end
-#end
+
 #end<!-- Mule Modules -->
 #foreach($module in $modules.split(","))
 #if($module != 'doc' && $module != 'context')
@@ -348,6 +340,16 @@
 			<name>MuleSoft Releases</name>
 			<url>http://repository.mulesoft.org/releases/</url>
 		</repository>
+        <repository>
+            <id>mulesoft-snapshots</id>
+            <name>MuleSoft Snapshots Repository</name>
+            <url>https://repository.mulesoft.org/nexus/content/repositories/snapshots/</url>
+            <layout>default</layout>
+        </repository>
+        <repository>
+            <id>mule-ee-releases</id>
+            <url>http://dev.ee.mulesource.com/repository/content/repositories/releases/</url>
+        </repository>
 		<repository>
 			<id>oss-sonatype-snapshots</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>

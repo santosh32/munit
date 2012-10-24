@@ -84,7 +84,11 @@
     If the Message Processor is not mocked then do not change its behavior">
 
         <mock:expect messageProcessor="jira:create-group">
-            <mock:to-return payload-ref="#[string:expectedPayload]"/>
+            <mock:to-return payload-ref="#[string:expectedPayload]">
+                <mock:inbound-properties>
+                    <mock:inbound-property/>
+                </mock:inbound-properties>
+                    </mock:to-return>
             <mock:attributes>
                 <mock:attribute name="groupName" whereValue-ref="#[string:someGroupName]"/>
                 <mock:attribute name="userName" whereValue-ref='#[anyString()]'/>
@@ -92,6 +96,7 @@
         </mock:expect>
 
         <mock:spy messageProcessor="jira:create-group">
+
             <mock:assertions-before-call>
                 <munit:assert-not-null/>
                 <munit:assert-that payloadIs-ref='#[resultOfScript("mockPayload")]'/>

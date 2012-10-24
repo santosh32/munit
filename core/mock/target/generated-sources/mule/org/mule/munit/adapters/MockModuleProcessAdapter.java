@@ -15,7 +15,7 @@ import org.mule.munit.MockModule;
  * A <code>MockModuleProcessAdapter</code> is a wrapper around {@link MockModule } that enables custom processing strategies.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.3.1", date = "2012-10-23T01:00:50-03:00", comments = "Build UNNAMED.1297.150f2c9")
+@Generated(value = "Mule DevKit Version 3.3.1", date = "2012-10-23T09:30:58-03:00", comments = "Build UNNAMED.1297.150f2c9")
 public class MockModuleProcessAdapter
     extends MockModuleLifecycleAdapter
     implements ProcessAdapter<MockModuleCapabilitiesAdapter>

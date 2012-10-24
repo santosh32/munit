@@ -19,7 +19,7 @@ import org.mule.munit.holders.AttributeExpressionHolder;
 import org.mule.munit.processors.AbstractExpressionEvaluator;
 import org.mule.transformer.types.DataTypeFactory;
 
-@Generated(value = "Mule DevKit Version 3.3.1", date = "2012-10-23T01:00:50-03:00", comments = "Build UNNAMED.1297.150f2c9")
+@Generated(value = "Mule DevKit Version 3.3.1", date = "2012-10-23T09:30:58-03:00", comments = "Build UNNAMED.1297.150f2c9")
 public class AttributeExpressionHolderTransformer
     extends AbstractExpressionEvaluator
     implements DiscoverableTransformer, MessageTransformer
