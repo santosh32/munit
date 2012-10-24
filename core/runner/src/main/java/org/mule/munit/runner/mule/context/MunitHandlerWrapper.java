@@ -4,6 +4,7 @@ import org.apache.commons.lang.StringUtils;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.config.spring.MuleHierarchicalBeanDefinitionParserDelegate;
 import org.mule.construct.Flow;
+import org.mule.enricher.MessageEnricher;
 import org.mule.munit.common.mp.MessageProcessorId;
 import org.mule.munit.common.mp.MunitMessageProcessor;
 import org.springframework.beans.MutablePropertyValues;
@@ -101,7 +102,7 @@ public class MunitHandlerWrapper implements NamespaceHandler {
     }
 
     private boolean isMessageProcessor(Class<?> beanType) {
-        return MessageProcessor.class.isAssignableFrom(beanType) && !Flow.class.isAssignableFrom(beanType);
+        return MessageProcessor.class.isAssignableFrom(beanType) && !Flow.class.isAssignableFrom(beanType) && !MessageEnricher.class.isAssignableFrom(beanType);
     }
     protected void setNoRecurseOnDefinition(BeanDefinition definition) {
         definition.setAttribute(MuleHierarchicalBeanDefinitionParserDelegate.MULE_NO_RECURSE, Boolean.TRUE);
