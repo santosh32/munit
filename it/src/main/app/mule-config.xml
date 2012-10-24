@@ -67,6 +67,14 @@
     </sub-flow>
 
 
+    <flow name="main">
+
+        <flow-ref name="enrichMessageFlow"/>
+        <jira:create-group groupName="#[variable:job]" userName="someUserName"/>
+
+    </flow>
+
+
     <flow name="outboundEndPointFlow">
         <http:outbound-endpoint method="GET"
                                 host="localhost" port="10443" path="test"

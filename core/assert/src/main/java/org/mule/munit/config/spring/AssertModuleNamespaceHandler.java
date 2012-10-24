@@ -3,7 +3,6 @@ package org.mule.munit.config.spring;
 import org.mule.munit.config.*;
 import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class AssertModuleNamespaceHandler
         registerBeanDefinitionParser("assert-false", new MunitDefinitionParser(AssertFalseMessageProcessor.class, asList("message", "condition")));
         registerBeanDefinitionParser("assert-not-null", new MunitDefinitionParser(AssertNotNullMessageProcessor.class, asList("message")));
         registerBeanDefinitionParser("assert-null", new MunitDefinitionParser(AssertNullMessageProcessor.class, asList("message")));
-        registerBeanDefinitionParser("set", new MunitDefinitionParser(SetMessageProcessor.class, new ArrayList<String>(),asList("payload")));
+        registerBeanDefinitionParser("set", new SetDefinitionParser());
         registerBeanDefinitionParser("set-null-payload",  new MunitDefinitionParser(SetNullPayloadMessageProcessor.class));
         registerBeanDefinitionParser("fail", new MunitDefinitionParser(FailMessageProcessor.class, asList("message")));
         registerBeanDefinitionParser("test", new MunitTestDefinitionParser(MunitTestFlow.class));
