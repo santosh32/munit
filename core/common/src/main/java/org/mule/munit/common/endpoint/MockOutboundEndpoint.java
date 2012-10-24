@@ -20,6 +20,7 @@ import org.mule.api.transformer.Transformer;
 import org.mule.api.transport.Connector;
 import org.mule.api.transport.PropertyScope;
 import org.mule.processor.AbstractRedeliveryPolicy;
+import org.mule.transport.NullPayload;
 
 import java.util.List;
 import java.util.Map;
@@ -201,7 +202,7 @@ public class MockOutboundEndpoint implements OutboundEndpoint{
 
     private void overrideMessage(MuleEvent event, OutboundBehavior behavior) {
         Object payload;
-        if ( behavior.getPayload() == null ){
+        if ( behavior.getPayload() == null || behavior.getPayload() == NullPayload.getInstance() ){
            payload = event.getMessage().getPayload();
         }
         else
@@ -212,19 +213,19 @@ public class MockOutboundEndpoint implements OutboundEndpoint{
         MuleMessage message = new DefaultMuleMessage(payload, event.getMuleContext());
         event.setMessage(message);
 
-        if ( behavior.getInboundProperties() != null ){
+        if ( behavior.getInboundProperties() != null && !behavior.getInboundProperties().isEmpty()){
             message.addProperties(behavior.getInboundProperties(), PropertyScope.INBOUND);
         }
 
-        if ( behavior.getOutboundProperties() != null ){
+        if ( behavior.getOutboundProperties() != null && !behavior.getOutboundProperties().isEmpty() ){
             message.addProperties(behavior.getOutboundProperties(), PropertyScope.OUTBOUND);
         }
 
-        if ( behavior.getSessionProperties() != null ){
+        if ( behavior.getSessionProperties() != null && !behavior.getSessionProperties().isEmpty()  ){
             message.addProperties(behavior.getSessionProperties(), PropertyScope.SESSION);
         }
 
-        if ( behavior.getInvocationProperties() != null ){
+        if ( behavior.getInvocationProperties() != null && !behavior.getInvocationProperties().isEmpty() ){
             message.addProperties(behavior.getInvocationProperties(), PropertyScope.INVOCATION);
         }
     }

@@ -8,17 +8,11 @@ import org.mule.api.*;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.param.Optional;
-import org.mule.api.config.MuleProperties;
 import org.mule.api.context.MuleContextAware;
 import org.mule.api.el.ExpressionLanguageContext;
 import org.mule.api.el.ExpressionLanguageExtension;
 import org.mule.api.processor.MessageProcessor;
-import org.mule.munit.common.endpoint.MockEndpointManager;
-import org.mule.munit.common.endpoint.OutboundBehavior;
-import org.mule.munit.common.mocking.MunitMocker;
-import org.mule.munit.common.mocking.MunitSpy;
-import org.mule.munit.common.mocking.MunitVerifier;
-import org.mule.munit.common.mocking.SpyProcess;
+import org.mule.munit.common.mocking.*;
 import org.mule.munit.functions.*;
 
 import java.util.*;
@@ -56,7 +50,11 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
         new MunitMocker(muleContext).expectMessageProcessor(getName(messageProcessor))
                 .ofNamespace(getNamespace(messageProcessor))
                 .withAttributes(createAttributes(attributes))
-                .toReturn(createMuleMessageFrom(toReturn));
+                .toReturn(createMuleMessageFrom(toReturn.getPayload(),
+                        toReturn.getInboundProperties(),
+                        toReturn.getOutboundProperties(),
+                        toReturn.getSessionProperties(),
+                        toReturn.getInvocationProperties()));
     }
 
     /**
@@ -155,16 +153,13 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
                                  @Optional Map<String, Object> returnOutboundProperties,
                                  @Optional List<NestedProcessor> assertions) {
 
-        MockEndpointManager factory = (MockEndpointManager) muleContext.getRegistry().lookupObject(MuleProperties.OBJECT_MULE_ENDPOINT_FACTORY);
-
-        OutboundBehavior behavior = new OutboundBehavior(returnPayload, createMessageProcessorsFrom(assertions));
-
-        behavior.setInboundProperties(returnInboundProperties);
-        behavior.setInvocationProperties(returnInvocationProperties);
-        behavior.setOutboundProperties(returnOutboundProperties);
-        behavior.setSessionProperties(returnSessionProperties);
-
-        factory.addBehavior(address, behavior);
+        new EndpointMocker(muleContext).expectEndpointWithAddress(address)
+                .withIncomingMessageSatisfying(createSpyAssertion(createMessageProcessorsFrom(assertions)))
+                .toReturn(createMuleMessageFrom(returnPayload, 
+                        returnInboundProperties, 
+                        returnOutboundProperties,
+                        returnSessionProperties,
+                        returnInvocationProperties));
     }
 
 
@@ -195,32 +190,33 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
         context.declareFunction("resultOfScript", new FlowResultFunction(muleContext));
     }
 
-
-    private MuleMessage createMuleMessageFrom(MunitMuleMessage toReturn) {
-        DefaultMuleMessage message = new DefaultMuleMessage(toReturn.getPayload(), muleContext);
-        if ( toReturn.getInboundProperties() != null ){
-            Map<String, Object> inboundProperties = toReturn.getInboundProperties();
+   
+    private MuleMessage createMuleMessageFrom(Object payload, 
+                                              Map<String,Object> inboundProperties,
+                                              Map<String,Object> outboundProperties,
+                                              Map<String,Object> sessionProperties,
+                                              Map<String,Object> invocationProperties
+                                              ) {
+        DefaultMuleMessage message = new DefaultMuleMessage(payload, muleContext);
+        if ( inboundProperties != null ){
             for (String property : inboundProperties.keySet() ){
                 message.setInboundProperty(property, inboundProperties.get(property));
             }
         }
 
-        if ( toReturn.getOutboundProperties() != null ){
-            Map<String, Object> outboundProperties = toReturn.getOutboundProperties();
+        if ( outboundProperties != null ){
             for (String property : outboundProperties.keySet() ){
                 message.setOutboundProperty(property, outboundProperties.get(property));
             }
         }
 
-        if ( toReturn.getInvocationProperties() != null ){
-            Map<String, Object> invocationProperties = toReturn.getInvocationProperties();
+        if ( invocationProperties != null ){
             for (String property : invocationProperties.keySet() ){
                 message.setInvocationProperty(property, invocationProperties.get(property));
             }
         }
 
-        if ( toReturn.getSessionProperties() != null ){
-            Map<String, Object> sessionProperties = toReturn.getSessionProperties();
+        if ( sessionProperties != null ){
             for (String property : sessionProperties.keySet() ){
                 message.setSessionProperty(property, sessionProperties.get(property));
             }

@@ -1,10 +1,12 @@
 package org.mule.munit.config;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@Ignore
 public class SetMessageProcessorTest extends AbstractMessageProcessorTest{
 
 
