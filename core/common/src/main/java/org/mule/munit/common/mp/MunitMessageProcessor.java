@@ -1,5 +1,6 @@
 package org.mule.munit.common.mp;
 
+import org.mule.DefaultMuleMessage;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleEvent;
 import org.mule.api.MuleException;
@@ -9,6 +10,7 @@ import org.mule.api.context.MuleContextAware;
 import org.mule.api.expression.ExpressionManager;
 import org.mule.api.lifecycle.*;
 import org.mule.api.processor.MessageProcessor;
+import org.mule.munit.common.mocking.NonDefinedPayload;
 
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +39,7 @@ public class MunitMessageProcessor implements MessageProcessor, Startable,Initia
         MessageProcessorCall messageProcessorCall = buildCall(event);
         MockedMessageProcessorBehavior behavior = manager.getBetterMatchingBehavior(messageProcessorCall);
         if ( behavior != null ){
-            event.getMessage().setPayload(behavior.getReturnMuleMessage().getPayload());
+            changeMessage((DefaultMuleMessage) behavior.getReturnMuleMessage(), (DefaultMuleMessage) event.getMessage());
 
             registerCall(event, manager, messageProcessorCall);
             return event;
@@ -45,6 +47,40 @@ public class MunitMessageProcessor implements MessageProcessor, Startable,Initia
 
         registerCall(event, manager, messageProcessorCall);
         return realMp.process(event);
+    }
+
+    private void changeMessage(DefaultMuleMessage returnMuleMessage, DefaultMuleMessage message) {
+
+        // TODO: refactor this and add tests
+        Object payload = returnMuleMessage.getPayload();
+        if ( !(payload instanceof NonDefinedPayload )){
+            message.setPayload(payload);
+        }
+
+        if ( returnMuleMessage.getInboundPropertyNames() != null && !returnMuleMessage.getInboundPropertyNames().isEmpty() ){
+            for ( String property : returnMuleMessage.getInboundPropertyNames() ){
+                message.setInboundProperty(property, returnMuleMessage.getInboundProperty(property));
+            }
+        }
+
+        if ( returnMuleMessage.getSessionPropertyNames() != null && !returnMuleMessage.getSessionPropertyNames().isEmpty() ){
+            for ( String property : returnMuleMessage.getSessionPropertyNames() ){
+                message.setSessionProperty(property, returnMuleMessage.getSessionProperty(property));
+            }
+        }
+
+        if ( returnMuleMessage.getInvocationPropertyNames() != null && !returnMuleMessage.getInvocationPropertyNames().isEmpty() ){
+            for ( String property : returnMuleMessage.getInvocationPropertyNames() ){
+                message.setInvocationProperty(property, returnMuleMessage.getInvocationProperty(property));
+            }
+        }
+
+        if ( returnMuleMessage.getOutboundPropertyNames() != null && !returnMuleMessage.getOutboundPropertyNames().isEmpty() ){
+            for ( String property : returnMuleMessage.getOutboundPropertyNames() ){
+                message.setOutboundProperty(property, returnMuleMessage.getOutboundProperty(property));
+            }
+        }
+
     }
 
     private void registerCall(MuleEvent event, MockedMessageProcessorManager manager, MessageProcessorCall messageProcessorCall) {

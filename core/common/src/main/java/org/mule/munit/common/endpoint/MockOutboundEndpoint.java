@@ -19,8 +19,8 @@ import org.mule.api.transaction.TransactionConfig;
 import org.mule.api.transformer.Transformer;
 import org.mule.api.transport.Connector;
 import org.mule.api.transport.PropertyScope;
+import org.mule.munit.common.mocking.NonDefinedPayload;
 import org.mule.processor.AbstractRedeliveryPolicy;
-import org.mule.transport.NullPayload;
 
 import java.util.List;
 import java.util.Map;
@@ -202,7 +202,7 @@ public class MockOutboundEndpoint implements OutboundEndpoint{
 
     private void overrideMessage(MuleEvent event, OutboundBehavior behavior) {
         Object payload;
-        if ( behavior.getPayload() == null || behavior.getPayload() == NullPayload.getInstance() ){
+        if ( behavior.getPayload() == null || behavior.getPayload() instanceof NonDefinedPayload){
            payload = event.getMessage().getPayload();
         }
         else
