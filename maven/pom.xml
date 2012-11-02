@@ -7,7 +7,7 @@
         <version>3.3.2-SNAPSHOT</version>
     </parent>
     <groupId>org.mule.munit</groupId>
-    <artifactId>maven</artifactId>
+    <artifactId>tools</artifactId>
     <packaging>pom</packaging>
     <name>Tools for Munit project</name>
 

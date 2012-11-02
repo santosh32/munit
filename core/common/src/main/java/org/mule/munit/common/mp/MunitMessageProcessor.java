@@ -107,7 +107,7 @@ public class MunitMessageProcessor implements MessageProcessor, Startable,Initia
         Object compareTo;
         ExpressionManager expressionManager = muleContext.getExpressionManager();
         if ( expressionManager.isExpression(elementValue)){
-            compareTo = expressionManager.evaluate(elementValue, event);
+            compareTo = expressionManager.parse(elementValue, event);
         }
         else {
             Object o = muleContext.getRegistry().lookupObject(elementValue);
