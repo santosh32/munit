@@ -34,7 +34,7 @@
 
     <flow name="echoFlow">
         <echo-component/>
-        <logger level="ERROR" message="fefe #[payload]"/>
+        <logger level="ERROR" message="some #[payload]"/>
     </flow>
 
     <sub-flow name="exceptionFlow">
