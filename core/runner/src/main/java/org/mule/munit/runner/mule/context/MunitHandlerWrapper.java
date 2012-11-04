@@ -1,15 +1,11 @@
 package org.mule.munit.runner.mule.context;
 
 import org.apache.commons.lang.StringUtils;
-import org.mule.api.processor.InterceptingMessageProcessor;
 import org.mule.api.processor.MessageProcessor;
-import org.mule.api.transformer.MessageTransformer;
 import org.mule.config.spring.MuleHierarchicalBeanDefinitionParserDelegate;
 import org.mule.construct.Flow;
-import org.mule.enricher.MessageEnricher;
 import org.mule.munit.common.mp.MessageProcessorId;
-import org.mule.munit.common.mp.MunitMessageProcessor;
-import org.mule.routing.Foreach;
+import org.mule.munit.common.mp.MunitMessageProcessorCallback;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.PropertyValue;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -52,13 +48,25 @@ public class MunitHandlerWrapper implements NamespaceHandler {
                 String tagName = element.getTagName();
                 
                 if ( !StringUtils.isEmpty(tagName) ){
-                    BeanDefinitionBuilder builder = BeanDefinitionBuilder.rootBeanDefinition(MunitMessageProcessor.class.getName());
+                    BeanDefinitionBuilder builder = BeanDefinitionBuilder.rootBeanDefinition(beanType.getName());
                     builder.setScope(beanDefinition.getScope());
-                    builder.addPropertyValue("realMp", beanDefinition);
-                    builder.addPropertyValue("id", new MessageProcessorId(getNameFrom(tagName), getNamespaceFrom(tagName)));
-                    builder.addPropertyValue("attributes", getAttributes(element));
+
+
+                    List<PropertyValue> propertyValues = beanDefinition.getPropertyValues().getPropertyValueList();
+                    for (PropertyValue values : propertyValues ){
+                        builder.addPropertyValue(values.getName(),values.getValue());
+                    }
+                    builder.setFactoryMethod("create");
+                    builder.addConstructorArgValue(beanType);
+                    builder.addConstructorArgValue(new MessageProcessorId(getNameFrom(tagName), getNamespaceFrom(tagName)));
+                    builder.addConstructorArgValue(getAttributes(element));
                     AbstractBeanDefinition mocked = builder.getBeanDefinition();
-                    setNoRecurseOnDefinition(mocked);
+                    mocked.setFactoryBeanName(MunitMessageProcessorCallback.ID);
+
+                    if ( beanDefinition.getAttribute(MuleHierarchicalBeanDefinitionParserDelegate.MULE_NO_RECURSE) != null && beanDefinition.getAttribute(MuleHierarchicalBeanDefinitionParserDelegate.MULE_NO_RECURSE).equals(Boolean.TRUE) ){
+                        setNoRecurseOnDefinition(mocked);
+
+                    }
                     removeProcessorDefinition(parserContext, beanDefinition);
                     attachProcessorDefinition(parserContext, mocked);
                     return mocked;  
@@ -106,11 +114,7 @@ public class MunitHandlerWrapper implements NamespaceHandler {
 
     private boolean isMessageProcessor(Class<?> beanType) {
         return MessageProcessor.class.isAssignableFrom(beanType) &&
-                !Flow.class.isAssignableFrom(beanType) &&
-                !MessageEnricher.class.isAssignableFrom(beanType) &&
-                !MessageTransformer.class.isAssignableFrom(beanType) &&
-                !InterceptingMessageProcessor.class.isAssignableFrom(beanType) &&
-                !Foreach.class.isAssignableFrom(beanType);
+                !Flow.class.isAssignableFrom(beanType);
     }
     protected void setNoRecurseOnDefinition(BeanDefinition definition) {
         definition.setAttribute(MuleHierarchicalBeanDefinitionParserDelegate.MULE_NO_RECURSE, Boolean.TRUE);

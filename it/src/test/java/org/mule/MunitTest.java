@@ -6,6 +6,6 @@ import org.mule.munit.runner.java.AbstractMuleSuite;
 public class MunitTest extends AbstractMuleSuite {
     @Override
     public String getConfigResources() {
-        return "outbound-mocking-test.xml";
+        return "mp-mocking-test.xml";
     }
   }

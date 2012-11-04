@@ -143,11 +143,7 @@
         <mock:outbound-endpoint address="jdbc://lookupJob" returnPayload-ref='#[resultOfScript("mockJdbcOutbound")]'/>
 
         <mock:expect messageProcessor="jira:create-group">
-            <mock:to-return payload-ref="#[string:createGroupResult]">
-                <mock:inbound-properties>
-                    <mock:inbound-property/>
-                </mock:inbound-properties>
-            </mock:to-return>
+            <mock:to-return payload-ref="#[string:createGroupResult]"/>
             <mock:attributes>
                 <mock:attribute name="groupName" whereValue-ref="#[string:someGroup]"/>
                 <mock:attribute name="userName" whereValue-ref='#[anyString()]'/>

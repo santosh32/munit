@@ -1,9 +1,9 @@
 package org.mule.munit.common.endpoint;
 
+import org.mule.api.MuleMessage;
 import org.mule.api.processor.MessageProcessor;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>This class defines how the outbound endpoint must behave. It has the list of message processors that
@@ -15,78 +15,27 @@ import java.util.Map;
 public class OutboundBehavior {
 
     /**
-     * <p>The Mule message Outbound properties</p>
+     * <p>The expected mule message to be returned</p>
      */
-    private Map<String, Object> outboundProperties;
+    private MuleMessage muleMessage;
 
     /**
-     * <p>The Mule message Inbound properties</p>
-     */
-    private Map<String, Object> inboundProperties;
-
-    /**
-     * <p>The Mule message Invocation properties</p>
-     */
-    private Map<String, Object> invocationProperties;
-
-    /**
-     * <p>The Mule message Session properties</p>
-     */
-    private Map<String, Object> sessionProperties;
-    
-    /**
-     * <p>The outbound Mule Message</p>
-     */
-    private Object payload;
-
-    /**
-     * <p>The list of message processors for message assertion</p>
+     * <p>The list of message processors for message assertion. These assertions will be called before
+     * calling the outbund endpoints.</p>
      */
     private List<MessageProcessor> assertions;
 
-    public OutboundBehavior(Object payload, List<MessageProcessor> assertions) {
-        this.payload = payload;
+    public OutboundBehavior(MuleMessage muleMessage, List<MessageProcessor> assertions) {
+        this.muleMessage = muleMessage;
         this.assertions = assertions;
     }
 
-
-    public Object getPayload() {
-        return payload;
-    }
 
     public List<MessageProcessor> getAssertions() {
         return assertions;
     }
 
-    public Map<String, Object> getOutboundProperties() {
-        return outboundProperties;
-    }
-
-    public void setOutboundProperties(Map<String, Object> outboundProperties) {
-        this.outboundProperties = outboundProperties;
-    }
-
-    public Map<String, Object> getInboundProperties() {
-        return inboundProperties;
-    }
-
-    public void setInboundProperties(Map<String, Object> inboundProperties) {
-        this.inboundProperties = inboundProperties;
-    }
-
-    public Map<String, Object> getInvocationProperties() {
-        return invocationProperties;
-    }
-
-    public void setInvocationProperties(Map<String, Object> invocationProperties) {
-        this.invocationProperties = invocationProperties;
-    }
-
-    public Map<String, Object> getSessionProperties() {
-        return sessionProperties;
-    }
-
-    public void setSessionProperties(Map<String, Object> sessionProperties) {
-        this.sessionProperties = sessionProperties;
+    public MuleMessage getMessage() {
+        return muleMessage;
     }
 }

@@ -17,14 +17,34 @@ import java.util.List;
 /**
  * <p>This class changes the endpoint factory and inject the mock manager</p>
  *
+ * <p>This is a piece part of the endpoint mocking. By overriding the endpoint factory we can mock all the outbound/inbound
+ * endpoints of a mule application</p>
+ *
  * @author Federico, Fernando
  * @version since 3.3.2
  */
 public class EndpointFactorySwapperPostProcessor implements BeanFactoryPostProcessor {
 
+    /**
+     * <p>Defines if the inbounds must be mocked or not. This is pure Munit configuration</p>
+     */
     protected boolean mockInbounds;
+
+    /**
+     * <p>List of flows which we don't want to mock the inbounds/message sources</p>
+     */
     protected List<String> mockingExcludedFlows;
 
+
+    /**
+     * <p>Implementation of the BeanFactoryPostProcessor. It removes the message sources of all the flows except
+     * for the ones specified in mockingExcludedFlows. Only if mockInbounds is true.</p>
+     *
+     * @param beanFactory
+     *          <p>The spring bean factory</p>
+     * @throws BeansException
+     *          <p>When post processing fails. Never thrown for this implementation</p>
+     */
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         if (isMockInbounds() ){
             String[] beanDefinitionNames = beanFactory.getBeanDefinitionNames();
@@ -37,11 +57,18 @@ public class EndpointFactorySwapperPostProcessor implements BeanFactoryPostProce
                 }
             }
 
-            wrapFactory(beanFactory);
+            swapFactory(beanFactory);
         }
     }
 
-    private void wrapFactory(ConfigurableListableBeanFactory beanFactory) {
+    /**
+     * <p>Changes the default EndpointFactory of mule with a Wrapper of it. This wrapper creates mocks of the Outbound
+     * Endpoints</p>
+     *
+     * @param beanFactory
+     *           <p>The spring bean factory</p>
+     */
+    private void swapFactory(ConfigurableListableBeanFactory beanFactory) {
         GenericBeanDefinition endpointFactory = (GenericBeanDefinition) beanFactory.getBeanDefinition(MuleProperties.OBJECT_MULE_ENDPOINT_FACTORY);
 
         AbstractBeanDefinition abstractBeanDefinition = endpointFactory.cloneBeanDefinition();
@@ -62,11 +89,6 @@ public class EndpointFactorySwapperPostProcessor implements BeanFactoryPostProce
 
     public boolean isMockInbounds() {
         return mockInbounds;
-    }
-
-
-    public List<String> getMockingExcludedFlows() {
-        return mockingExcludedFlows;
     }
 
 }

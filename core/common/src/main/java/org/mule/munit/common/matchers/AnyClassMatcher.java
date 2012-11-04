@@ -2,7 +2,10 @@ package org.mule.munit.common.matchers;
 
 
 /**
- * <p>Matcher to match a specified class</p>
+ * <p>Matcher to match a specified class.</p>
+ *
+ * <p>Usage ex.: <code>new AnyClassMatcher(String.class).match("hello);</code> Will return true</p>
+ * <p>Usage ex.: <code>new AnyClassMatcher(Integer.class).match("hello); </code> Will return false</p>
  *
  * @author Federico, Fernando
  * @version since 3.3.2
@@ -10,7 +13,7 @@ package org.mule.munit.common.matchers;
 public class AnyClassMatcher implements Matcher {
 
     /**
-     * <p>The wanted class</p>
+     * <p>The wanted class.</p>
      */
     private Class expectedClass;
 
