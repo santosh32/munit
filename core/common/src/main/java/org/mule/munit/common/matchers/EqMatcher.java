@@ -1,7 +1,9 @@
 package org.mule.munit.common.matchers;
 
 /**
- * <p>Equality matcher</p>
+ * <p>Equality matcher. It compares using the equal method of Object</p>
+ *
+ * Usage: <code>new EqMatcher("desired").match("desired");</code> will return true.
  *
  * @author Federico, Fernando
  * @version since 3.3.2

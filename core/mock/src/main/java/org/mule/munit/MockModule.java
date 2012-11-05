@@ -44,7 +44,7 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
      */
     @Processor
     public void expect(String messageProcessor,
-                       MunitMuleMessage toReturn,
+                       @Optional MunitMuleMessage toReturn,
                        @Optional List<Attribute> attributes) {
 
         new MunitMocker(muleContext).expectMessageProcessor(getName(messageProcessor))
@@ -198,7 +198,12 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
                                               Map<String,Object> sessionProperties,
                                               Map<String,Object> invocationProperties
                                               ) {
-        DefaultMuleMessage message = new DefaultMuleMessage(payload, muleContext);
+        Object definedPayload = payload;
+        if ( payload == null ){
+            definedPayload = new NonDefinedPayload();
+        }
+        DefaultMuleMessage message = new DefaultMuleMessage(definedPayload, muleContext);
+
         if ( inboundProperties != null ){
             for (String property : inboundProperties.keySet() ){
                 message.setInboundProperty(property, inboundProperties.get(property));

@@ -147,7 +147,7 @@
 				</configuration>
 			</plugin>
 			<plugin>
-                <groupId>org.mule.munit</groupId>
+                <groupId>org.mule.munit.tools</groupId>
                 <artifactId>munit-plugin</artifactId>
                 <version>3.3.2-SNAPSHOT</version>
                 <executions>
@@ -256,7 +256,14 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>findbugs-maven-plugin</artifactId>
 			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>2.12.4</version>
+            </plugin>
 		</plugins>
+
+
 	</reporting>
 
 	<!-- Mule Dependencies -->

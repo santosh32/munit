@@ -40,12 +40,7 @@ public class EndpointMocker {
     }
     
     public void toReturn(MuleMessage message){
-        OutboundBehavior behavior = new OutboundBehavior(message.getPayload(), createMessageProcessorFromSpy(process));
-
-        behavior.setInboundProperties(getMapOf(message, PropertyScope.INBOUND));
-        behavior.setInvocationProperties(getMapOf(message, PropertyScope.INVOCATION));
-        behavior.setOutboundProperties(getMapOf(message, PropertyScope.OUTBOUND));
-        behavior.setSessionProperties(getMapOf(message, PropertyScope.SESSION));
+        OutboundBehavior behavior = new OutboundBehavior(message, createMessageProcessorFromSpy(process));
 
         MockEndpointManager factory = (MockEndpointManager) muleContext.getRegistry().lookupObject(MuleProperties.OBJECT_MULE_ENDPOINT_FACTORY);
         factory.addBehavior(address, behavior);

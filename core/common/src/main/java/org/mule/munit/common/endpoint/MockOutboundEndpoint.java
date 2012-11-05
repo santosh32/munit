@@ -5,7 +5,6 @@ import org.mule.MessageExchangePattern;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleEvent;
 import org.mule.api.MuleException;
-import org.mule.api.MuleMessage;
 import org.mule.api.config.MuleProperties;
 import org.mule.api.endpoint.EndpointMessageProcessorChainFactory;
 import org.mule.api.endpoint.EndpointURI;
@@ -18,9 +17,8 @@ import org.mule.api.security.EndpointSecurityFilter;
 import org.mule.api.transaction.TransactionConfig;
 import org.mule.api.transformer.Transformer;
 import org.mule.api.transport.Connector;
-import org.mule.api.transport.PropertyScope;
+import org.mule.munit.common.MunitUtils;
 import org.mule.processor.AbstractRedeliveryPolicy;
-import org.mule.transport.NullPayload;
 
 import java.util.List;
 import java.util.Map;
@@ -193,53 +191,11 @@ public class MockOutboundEndpoint implements OutboundEndpoint{
                 return realEndpoint.process(event);
             }
 
-            verifyAssertions(event, behavior.getAssertions());
-            overrideMessage(event, behavior);
+            MunitUtils.verifyAssertions(event, behavior.getAssertions());
+            MunitUtils.changeMessage((DefaultMuleMessage) behavior.getMessage(), (DefaultMuleMessage) event.getMessage());
         }
 
         return event;
-    }
-
-    private void overrideMessage(MuleEvent event, OutboundBehavior behavior) {
-        Object payload;
-        if ( behavior.getPayload() == null || behavior.getPayload() == NullPayload.getInstance() ){
-           payload = event.getMessage().getPayload();
-        }
-        else
-        {
-            payload = behavior.getPayload();
-
-        }
-        MuleMessage message = new DefaultMuleMessage(payload, event.getMuleContext());
-        event.setMessage(message);
-
-        if ( behavior.getInboundProperties() != null && !behavior.getInboundProperties().isEmpty()){
-            message.addProperties(behavior.getInboundProperties(), PropertyScope.INBOUND);
-        }
-
-        if ( behavior.getOutboundProperties() != null && !behavior.getOutboundProperties().isEmpty() ){
-            message.addProperties(behavior.getOutboundProperties(), PropertyScope.OUTBOUND);
-        }
-
-        if ( behavior.getSessionProperties() != null && !behavior.getSessionProperties().isEmpty()  ){
-            message.addProperties(behavior.getSessionProperties(), PropertyScope.SESSION);
-        }
-
-        if ( behavior.getInvocationProperties() != null && !behavior.getInvocationProperties().isEmpty() ){
-            message.addProperties(behavior.getInvocationProperties(), PropertyScope.INVOCATION);
-        }
-    }
-
-    private void verifyAssertions(MuleEvent event, List<MessageProcessor> assertions) {
-        if ( assertions == null ) return;
-
-        for ( MessageProcessor processor : assertions ){
-            try {
-                processor.process(event);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
     }
 
     private String realAddressAsExpression() {

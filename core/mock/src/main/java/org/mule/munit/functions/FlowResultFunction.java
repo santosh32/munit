@@ -1,5 +1,6 @@
 package org.mule.munit.functions;
 
+import com.google.common.base.Preconditions;
 import org.mule.api.MuleContext;
 import org.mule.api.el.ExpressionLanguageContext;
 import org.mule.api.el.ExpressionLanguageFunction;
@@ -22,6 +23,8 @@ public class FlowResultFunction implements ExpressionLanguageFunction {
 
             String flowName = (String) params[0];
             Object registeredScript = this.context.getRegistry().lookupObject(flowName);
+
+            Preconditions.checkNotNull(registeredScript, "The script called " + flowName + " could not be found");
             if (registeredScript instanceof Scriptable) {
                 Scriptable script = (Scriptable) registeredScript;
                 Bindings bindings = script.getScriptEngine().createBindings();
@@ -29,10 +32,11 @@ public class FlowResultFunction implements ExpressionLanguageFunction {
                 try {
                     return script.runScript(bindings);
                 } catch (ScriptException e) {
-                    return null;
+                    throw new RuntimeException("Your script has an execution error ",e );
                 }
             }
         }
-        return null;
+        throw new IllegalArgumentException("The script name references a non script component, make sure the script is written as in " +
+                "http://www.mulesoft.org/documentation/display/MULE3USER/Scripting+Module+Reference ");
     }
 }

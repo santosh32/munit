@@ -1,7 +1,7 @@
 package org.mule.munit;
 
 
-import org.mule.munit.common.endpoint.EndpointFactorySwapperPostProcessor;
+import org.mule.munit.common.endpoint.MunitSpringFactoryPostProcessor;
 import org.mule.transport.NullPayload;
 
 import static junit.framework.Assert.assertEquals;
@@ -12,7 +12,7 @@ import static junit.framework.Assert.assertEquals;
  * @author Federico, Fernando
  * @version since 3.3.2
  */
-public class AssertModule extends EndpointFactorySwapperPostProcessor
+public class AssertModule extends MunitSpringFactoryPostProcessor
 {
     private static String wrapMessage(String message)
     {

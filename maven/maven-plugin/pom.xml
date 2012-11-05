@@ -9,6 +9,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>munit-plugin</artifactId>
+    <groupId>org.mule.munit.tools</groupId>
     <packaging>maven-plugin</packaging>
     <name>munit Maven Mojo</name>
     <url>http://maven.apache.org</url>

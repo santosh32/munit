@@ -2,6 +2,7 @@ package org.mule.munit.common.endpoint;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mule.DefaultMuleMessage;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleEvent;
 import org.mule.api.MuleException;
@@ -31,6 +32,7 @@ public class MockOutboundEndpointTest {
     private ExpressionManager expressionManager;
     private MockEndpointManager endpointManager;
     private MessageProcessor messageProcessor;
+    private MuleMessage muleMessage;
 
     @Before
     public void setUp(){
@@ -41,8 +43,10 @@ public class MockOutboundEndpointTest {
         expressionManager = mock(ExpressionManager.class);
         endpointManager = mock(MockEndpointManager.class);
         messageProcessor = mock(MessageProcessor.class);
+        muleMessage = mock(DefaultMuleMessage.class);
         
         when(event.getMuleContext()).thenReturn(context);
+        when(event.getMessage()).thenReturn(muleMessage);
         when(context.getRegistry()).thenReturn(registry);
         when(registry.lookupObject(MuleProperties.OBJECT_MULE_ENDPOINT_FACTORY)).thenReturn(endpointManager);
         when(context.getExpressionManager()).thenReturn(expressionManager);
@@ -64,18 +68,6 @@ public class MockOutboundEndpointTest {
         verify(realEndpoint, times(1)).process(event);
     }
 
-    @Test
-    public void testCloneMessage() throws MuleException {
-        OutboundBehavior behavior = new OutboundBehavior("payload", buildMessageAssertions());
-        behavior.setInboundProperties( properties());
-        behavior.setOutboundProperties( properties());
-        behavior.setInvocationProperties( properties());
-        when(endpointManager.getBehaviorFor(ADDRESS)).thenReturn(behavior);
-
-
-        new MockOutboundEndpoint(realEndpoint).process(event);
-
-    }
 
     private HashMap<String, Object> properties() {
         HashMap<String, Object> prop = new HashMap<String, Object>();
@@ -85,23 +77,21 @@ public class MockOutboundEndpointTest {
 
     @Test
     public void testVerifyAssertionIsCalled() throws MuleException {
-        when(endpointManager.getBehaviorFor(ADDRESS)).thenReturn(new OutboundBehavior("payload", buildMessageAssertions()));
+        when(endpointManager.getBehaviorFor(ADDRESS)).thenReturn(new OutboundBehavior(muleMessage, buildMessageAssertions()));
 
         new MockOutboundEndpoint(realEndpoint).process(event);
 
         verify(messageProcessor, times(1)).process(event);
-        verify(event,times(1)).setMessage(any(MuleMessage.class));
     }
 
 
     @Test
     public void testVerifyNotAssert() throws MuleException {
-        when(endpointManager.getBehaviorFor(ADDRESS)).thenReturn(new OutboundBehavior("payload", null));
+        when(endpointManager.getBehaviorFor(ADDRESS)).thenReturn(new OutboundBehavior(muleMessage, null));
 
         new MockOutboundEndpoint(realEndpoint).process(event);
 
         verify(messageProcessor, never()).process(event);
-        verify(event,times(1)).setMessage(any(MuleMessage.class));
     }
 
     @Test
