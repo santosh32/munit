@@ -2,16 +2,21 @@ package org.mule.munit.common.endpoint;
 
 
 import org.mule.api.config.MuleProperties;
+import org.mule.api.transport.Connector;
 import org.mule.construct.Flow;
+import org.mule.munit.common.connectors.ConnectorCallBack;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.beans.factory.config.ConstructorArgumentValues;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
+import org.springframework.beans.factory.support.RootBeanDefinition;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -23,7 +28,7 @@ import java.util.List;
  * @author Federico, Fernando
  * @version since 3.3.2
  */
-public class EndpointFactorySwapperPostProcessor implements BeanFactoryPostProcessor {
+public class MunitSpringFactoryPostProcessor implements BeanFactoryPostProcessor {
 
     /**
      * <p>Defines if the inbounds must be mocked or not. This is pure Munit configuration</p>
@@ -31,7 +36,7 @@ public class EndpointFactorySwapperPostProcessor implements BeanFactoryPostProce
     protected boolean mockInbounds;
 
     /**
-     * <p>List of flows which we don't want to mock the inbounds/message sources</p>
+     * <p>List of flows which we don't want to mock the inbound message sources</p>
      */
     protected List<String> mockingExcludedFlows;
 
@@ -58,6 +63,33 @@ public class EndpointFactorySwapperPostProcessor implements BeanFactoryPostProce
             }
 
             swapFactory(beanFactory);
+
+            String[] beanNamesForType = beanFactory.getBeanNamesForType(Connector.class);
+            for (String beanName : beanNamesForType) {
+                RootBeanDefinition beanDefinition = RootBeanDefinition.class.cast(beanFactory.getBeanDefinition(beanName));
+
+                if (beanDefinition.getFactoryMethodName() == null) {
+                    beanDefinition.setFactoryBeanName(ConnectorCallBack.ID);
+
+                    ConstructorArgumentValues constructorArgumentValues = beanDefinition.getConstructorArgumentValues();
+                    if (constructorArgumentValues != null && !constructorArgumentValues.isEmpty()) {
+                        ConstructorArgumentValues values = new ConstructorArgumentValues();
+                        Map<Integer, ConstructorArgumentValues.ValueHolder> indexedArgumentValues = constructorArgumentValues.getIndexedArgumentValues();
+
+                        for (Integer i :  indexedArgumentValues.keySet()){
+                            values.addIndexedArgumentValue(i+1,indexedArgumentValues.get(i));
+                        }
+                        values.addIndexedArgumentValue(0, beanDefinition.getBeanClass());
+                        beanDefinition.setConstructorArgumentValues(values);
+                    }
+
+
+                    beanDefinition.setFactoryMethodName("create");
+                } else {
+                    // TODO: Log message
+                }
+
+            }
         }
     }
 

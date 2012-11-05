@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
-public class EndpointFactorySwapperPostProcessorTest {
+public class MunitSpringFactoryPostProcessorTest {
 
     private ConfigurableListableBeanFactory beanFactory;
     
@@ -25,7 +25,7 @@ public class EndpointFactorySwapperPostProcessorTest {
 
     @Test
     public void testPostProcessBeanFactoryWithoutMocking(){
-        EndpointFactorySwapperPostProcessor pp = new EndpointFactorySwapperPostProcessor();
+        MunitSpringFactoryPostProcessor pp = new MunitSpringFactoryPostProcessor();
         pp.setMockInbounds(false);
         pp.setMockingExcludedFlows(new ArrayList<String>());
         
@@ -36,7 +36,7 @@ public class EndpointFactorySwapperPostProcessorTest {
 
     @Test
     public void testPostProcessBeanFactoryWithMockingExcludedFlows(){
-        EndpointFactorySwapperPostProcessor pp = new EndpointFactorySwapperPostProcessor();
+        MunitSpringFactoryPostProcessor pp = new MunitSpringFactoryPostProcessor();
         pp.setMockInbounds(true);
         pp.setMockingExcludedFlows(new ArrayList<String>());
 

@@ -4,7 +4,9 @@ import org.mule.api.MuleContext;
 import org.mule.config.ConfigResource;
 import org.mule.config.spring.MissingParserProblemReporter;
 import org.mule.config.spring.MuleApplicationContext;
-import org.mule.munit.common.endpoint.EndpointFactorySwapperPostProcessor;
+import org.mule.munit.common.connectors.ConnectorCallBack;
+import org.mule.munit.common.connectors.ConnectorCallBackFactory;
+import org.mule.munit.common.endpoint.MunitSpringFactoryPostProcessor;
 import org.mule.munit.common.mp.MunitMessageProcessorCallback;
 import org.mule.munit.common.mp.MunitMessageProcessorCallbackFactory;
 import org.springframework.beans.BeansException;
@@ -38,6 +40,7 @@ public class MunitApplicationContext extends MuleApplicationContext{
         //add error reporting
 
         beanFactory.registerBeanDefinition(MunitMessageProcessorCallback.ID, new RootBeanDefinition(MunitMessageProcessorCallbackFactory.class));
+        beanFactory.registerBeanDefinition(ConnectorCallBack.ID, new RootBeanDefinition(ConnectorCallBackFactory.class));
         beanDefinitionReader.setProblemReporter(new MissingParserProblemReporter());
 
         if ( configuration != null ){
@@ -56,7 +59,7 @@ public class MunitApplicationContext extends MuleApplicationContext{
     }
 
     private BeanFactoryPostProcessor createPostProcessorFromConfiguration() {
-        EndpointFactorySwapperPostProcessor postProcessor = new EndpointFactorySwapperPostProcessor();
+        MunitSpringFactoryPostProcessor postProcessor = new MunitSpringFactoryPostProcessor();
         postProcessor.setMockInbounds(configuration.isMockInbounds());
         postProcessor.setMockingExcludedFlows(configuration.getMockingExcludedFlows());
         return postProcessor;

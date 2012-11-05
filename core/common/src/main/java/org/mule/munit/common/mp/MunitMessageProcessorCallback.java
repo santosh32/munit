@@ -14,13 +14,6 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by IntelliJ IDEA.
- * User: fernandofederico
- * Date: 11/4/12
- * Time: 12:35 PM
- * To change this template use File | Settings | File Templates.
- */
 public class MunitMessageProcessorCallback implements MethodInterceptor{
 
     public static String ID = "__messageProcessorEnhancerFactory";
