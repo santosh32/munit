@@ -188,6 +188,7 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
         context.declareFunction("isNotNull", new NotNullMatcherFunction());
         context.declareFunction("any", new AnyClassMatcherFunction());
         context.declareFunction("resultOfScript", new FlowResultFunction(muleContext));
+		context.declareFunction("getResource", new GetResourceFunction());
     }
 
    
