@@ -159,5 +159,14 @@
         <munit:assert-on-equals expected-ref="#[string:someGroup]" value-ref="#[variable:job]"/>
         <munit:assert-that payloadIs-ref="#[string:createGroupResult]" />
     </munit:test>
+    
+    <munit:test name="testingGetResourceFunctionAsString" 
+    	description="We want to validate that the payload is the same as the file picked">
+
+        <munit:set payload-ref="#[getResource('testFile.txt').asString]"/>
+     
+        <munit:assert-not-null/>
+        <munit:assert-that payloadIs-ref="#[string:Hello World!]"/>
+    </munit:test>
 
 </mule>
