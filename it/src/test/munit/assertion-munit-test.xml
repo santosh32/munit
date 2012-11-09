@@ -4,10 +4,12 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xmlns:spring="http://www.springframework.org/schema/beans"
       xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+      xmlns:mock="http://www.mulesoft.org/schema/mule/mock"
       xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.2/mule.xsd
-        http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/3.3/mule-munit.xsd ">
+        http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/3.3/mule-munit.xsd 
+         http://www.mulesoft.org/schema/mule/mock http://www.mulesoft.org/schema/mule/mock/3.3/mule-mock.xsd">
 
 
     <spring:beans>
@@ -16,6 +18,7 @@
 
 
     <munit:config/>
+    <mock:config/>
 
     <munit:test name="testingEchoFlow"
                 description="
@@ -79,6 +82,17 @@
 
         <munit:fail/>
     </munit:test>
+
+
+    <munit:test name="testingGetResourceFunctionAsString" 
+    	description="We want to validate that the payload is the same as the file picked">
+
+        <munit:set payload-ref="#[getResource('testFile.txt').asString]"/>
+     
+        <munit:assert-not-null/>
+        <munit:assert-that payloadIs-ref="#[string:Hello World!]"/>
+    </munit:test>
+
 
     <munit:test name="testExceptions" description="Test Exceptions" expected="org.mule.api.transformer.TransformerMessagingException">
         <flow-ref name="exceptionFlow"/>
