@@ -24,14 +24,18 @@ public class MunitResourceTest {
 		String result = file.asString();
 		assertEquals("Hello World!", result);
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testCaseWhenFileDoesNotExist(){
+		new MunitResource("anything").asStream();
+	}
 
-	@SuppressWarnings("deprecation")
 	@Test
 	public void testMunitResourceAsByteArray() throws IOException {
 		String path = "/testFile.txt";
 		MunitResource file = new MunitResource(path);
 		byte[] result = file.asByteArray();
-		assertEquals("Hello World!", IOUtils.toString(result));
+		assertEquals("Hello World!", new String(result));
 	}
 
 }
