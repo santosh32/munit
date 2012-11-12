@@ -15,7 +15,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class MunitMockerTest {
+public class MessageProcessorMockerTest {
     private MuleContext muleContext;
     private MuleRegistry muleRegistry;
     private MockedMessageProcessorManager manager;
@@ -35,8 +35,8 @@ public class MunitMockerTest {
     
     @Test
     public void addBehavior(){
-        MunitMocker munitMocker = new MunitMocker(muleContext);
-        munitMocker.expectMessageProcessor("testMp")
+        MessageProcessorMocker messageProcessorMocker = new MessageProcessorMocker(muleContext);
+        messageProcessorMocker.expectMessageProcessor("testMp")
                 .ofNamespace("testNamespace")
                 .withAttributes(new HashMap<String, Object>())
                 .toReturn(message);
@@ -46,8 +46,8 @@ public class MunitMockerTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void failIfNoMessageProcessorNameNotSet(){
-        MunitMocker munitMocker = new MunitMocker(muleContext);
-        munitMocker
+        MessageProcessorMocker messageProcessorMocker = new MessageProcessorMocker(muleContext);
+        messageProcessorMocker
                 .toReturn(message);
     }
 }

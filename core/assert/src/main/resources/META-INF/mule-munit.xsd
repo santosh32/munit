@@ -169,7 +169,13 @@
           </xs:attribute>
             <xs:attribute name="mock-inbounds" use="optional" type="xs:boolean" default="true">
                 <xs:annotation>
-                    <xs:documentation>Defines if the tests are integration tests or not.</xs:documentation>
+                    <xs:documentation>Defines f the inbounds are mocked or not</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="mock-connectors" use="optional" type="xs:boolean" default="true">
+                <xs:annotation>
+                    <xs:documentation>Defines if the app connectors for outbound/inbound endpoints have to be mocked. If they are then all
+                        outbound endpoints/inbound endpoints must be mocked.</xs:documentation>
                 </xs:annotation>
             </xs:attribute>
         </xs:extension>

@@ -44,6 +44,11 @@ public class AssertModuleConfigDefinitionParser
             builder.addPropertyValue("mockInbounds", Boolean.TRUE);
         }
 
+        String connectors = element.getAttribute("mock-connectors");
+        if (Boolean.valueOf(connectors)) {
+            builder.addPropertyValue("mockConnectors", Boolean.TRUE);
+        }
+
         List<String> flowNames = new ArrayList<String>();
         Element exclusions = DomUtils.getChildElementByTagName(element, "exclude-inbound-mocking");
         if (exclusions != null) {

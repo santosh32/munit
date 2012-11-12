@@ -10,7 +10,7 @@ import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class MunitToolTest {
+public class MunitMockingToolTest {
 
     private MuleContext muleContext;
     private MuleRegistry muleRegistry;
@@ -30,7 +30,7 @@ public class MunitToolTest {
 
     @Test
     public void getFullNameWithEmptyNamespace(){
-        MunitTool munitTool = new MunitTool(muleContext);
+        MunitMockingTool munitTool = new MunitMockingTool(muleContext);
         munitTool.messageProcessorName = "testName";
         
         assertEquals("mule:testName", munitTool.getFullName());
@@ -38,7 +38,7 @@ public class MunitToolTest {
 
     @Test
     public void getManager(){
-        MunitTool munitTool = new MunitTool(muleContext);
+        MunitMockingTool munitTool = new MunitMockingTool(muleContext);
 
         assertEquals(manager, munitTool.getManager());
     }
@@ -46,7 +46,7 @@ public class MunitToolTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void validNameWithNull(){
-        MunitTool munitTool = new MunitTool(muleContext);
+        MunitMockingTool munitTool = new MunitMockingTool(muleContext);
 
         munitTool.checkValidQuery();
     }
@@ -54,7 +54,7 @@ public class MunitToolTest {
 
     @Test
     public void validName(){
-        MunitTool munitTool = new MunitTool(muleContext);
+        MunitMockingTool munitTool = new MunitMockingTool(muleContext);
         munitTool.messageProcessorName = "testName";
 
         munitTool.checkValidQuery();
@@ -62,7 +62,7 @@ public class MunitToolTest {
 
     @Test
     public void getFullNameWithNamespace(){
-        MunitTool munitTool = new MunitTool(muleContext);
+        MunitMockingTool munitTool = new MunitMockingTool(muleContext);
         munitTool.messageProcessorName = "testName";
         munitTool.messageProcessorNamespace = "testNamespace";
 

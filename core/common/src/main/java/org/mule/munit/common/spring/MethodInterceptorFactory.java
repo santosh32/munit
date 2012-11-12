@@ -1,40 +1,37 @@
-package org.mule.munit.common.connectors;
+package org.mule.munit.common.spring;
 
 import net.sf.cglib.proxy.Enhancer;
+import net.sf.cglib.proxy.MethodInterceptor;
 
 import java.lang.reflect.Constructor;
 
 /**
- * Created by IntelliJ IDEA.
- * User: fernandofederico
- * Date: 11/4/12
- * Time: 6:10 PM
- * To change this template use File | Settings | File Templates.
+ * <p>Abstract definition that creates an interceptor</p>
+ *
+ * @author Federico, Fernando
+ * @version since 3.3.2
  */
-public class ConnectorCallBackFactory {
+public abstract class MethodInterceptorFactory {
 
-    public static Class createClass( Class realMpClass, Object ... objects){
-        try {
-
-            Enhancer e = new Enhancer();
-            e.setSuperclass(realMpClass);
-
-            ConnectorCallBack callback = new ConnectorCallBack();
-
-            e.setCallbackType(ConnectorCallBack.class);
-            return e.createClass();
-
-        } catch (Throwable e) {
-            throw new Error("Could not mock the connectors", e);
-        }
-    }
+    /**
+     * <p>The factory method to create connector/message processors beans</p>
+     *
+     * @param realMpClass
+     *          <p>The class of the message processor/ connector</p>
+     *
+     * @param objects
+     *          <p>Constructor arguments</p>
+     *
+     * @return
+     *          <p>An @see #Enhancer of the message processor/connector</p>
+     */
     public Object create( Class realMpClass, Object ... objects){
         try {
 
             Enhancer e = new Enhancer();
             e.setSuperclass(realMpClass);
 
-            ConnectorCallBack callback = new ConnectorCallBack();
+            MethodInterceptor callback = createInterceptor();
 
             e.setCallback(callback);
             if ( objects != null ){
@@ -49,7 +46,6 @@ public class ConnectorCallBackFactory {
                         }
                         else{
                             matchConstructor=false;
-
                         }
                     }
 
@@ -65,4 +61,6 @@ public class ConnectorCallBackFactory {
             throw new Error("Could not mock the connectors", e);
         }
     }
+
+    protected abstract MethodInterceptor createInterceptor();
 }

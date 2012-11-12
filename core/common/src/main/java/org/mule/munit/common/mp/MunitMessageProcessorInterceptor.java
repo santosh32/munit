@@ -14,9 +14,13 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MunitMessageProcessorCallback implements MethodInterceptor{
-
-    public static String ID = "__messageProcessorEnhancerFactory";
+/**
+ * <p>It intercept the @see MessageProcessor#process() calls</p>
+ *
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
+public class MunitMessageProcessorInterceptor implements MethodInterceptor{
 
     private MessageProcessorId id;
     private Map<String,String> attributes;

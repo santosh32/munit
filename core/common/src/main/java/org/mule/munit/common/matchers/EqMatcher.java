@@ -18,6 +18,9 @@ public class EqMatcher implements Matcher{
         this.expected = expected;
     }
 
+    /**
+     *  @see Matcher#match(Object)
+     */
     @Override
     public boolean match(Object o) {
         if ( o == null ){

@@ -15,23 +15,45 @@ import static junit.framework.Assert.fail;
  * @author Federico, Fernando
  * @version since 3.3.2
  */
-public class MunitVerifier extends MunitTool{
+public class MunitVerifier extends MunitMockingTool {
 
     public MunitVerifier(MuleContext muleContext) {
         super(muleContext);
     }
 
+    /**
+     * <p>Defines the name of the message processor to verify call</p>
+     *
+     * @param name
+     *      <p>The name of the message processor to verify call</p>
+     * @return
+     *      <p>Itself</p>
+     */
     public MunitVerifier verifyCallOfMessageProcessor(String name) {
         this.messageProcessorName = name;
         return this;
     }
 
 
+    /**
+     * <p>Defines the namespace of the message processor to verify call</p>
+     *
+     * @param namespace
+     *      <p>The namespace of the message processor to verify call</p>
+     * @return
+     *      <p>Itself</p>
+     */
     public MunitVerifier ofNamespace(String namespace) {
         this.messageProcessorNamespace = namespace;
         return this;
     }
 
+    /**
+     * <p>The times it must be called</p>
+     *
+     * @param times
+     *      <p>The times it must be called</p>
+     */
     public void times(Integer times) {
         List<MessageProcessorCall> executedCalls = getExecutedCalls();
         
@@ -39,6 +61,49 @@ public class MunitVerifier extends MunitTool{
             fail("On " + getFullName() + ".Expected " + times +
                     " but got " + executedCalls.size() + " calls");
         }
+    }
+
+    /**
+     * <p>At least the times it must be called</p>
+     *
+     * @param atLeast
+     *      <p>At least the times it must be called</p>
+     */
+    public void atLeast(Integer atLeast) {
+        checkValidQuery();
+
+        List<MessageProcessorCall> executedCalls = getExecutedCalls();
+
+        if (executedCalls.size() < atLeast) {
+            fail("On " + getFullName() + ".Expected at least " + atLeast + " but got " + executedCalls.size() + " calls");
+        }
+    }
+
+    /**
+     * <p>At most the times it must be called</p>
+     *
+     * @param atMost
+     *      <p>At most the times it must be called</p>
+     */
+    public void atMost(Integer atMost) {
+        checkValidQuery();
+        List<MessageProcessorCall> executedCalls = getExecutedCalls();
+
+        if (executedCalls.size() > atMost) {
+            fail("On " + getFullName() + ".Expected at most " + atMost + " but got " + executedCalls.size() + " calls");
+        }
+    }
+
+    /**
+     * <p>At least one time called</p>
+     */
+    public void atLeastOnce() {
+        checkValidQuery();
+        List<MessageProcessorCall> executedCalls = getExecutedCalls();
+        if (executedCalls.isEmpty()) {
+            fail("On " + getFullName()  + ".It was never called");
+        }
+
     }
 
     private List<MessageProcessorCall> getExecutedCalls() {
@@ -51,32 +116,6 @@ public class MunitVerifier extends MunitTool{
         return this;
     }
 
-    public void atLeast(Integer atLeast) {
-        checkValidQuery();
 
-        List<MessageProcessorCall> executedCalls = getExecutedCalls();
-
-        if (executedCalls.size() < atLeast) {
-            fail("On " + getFullName() + ".Expected at least " + atLeast + " but got " + executedCalls.size() + " calls");
-        }
-    }
-
-    public void atMost(Integer atMost) {
-        checkValidQuery();
-        List<MessageProcessorCall> executedCalls = getExecutedCalls();
-
-        if (executedCalls.size() > atMost) {
-            fail("On " + getFullName() + ".Expected at most " + atMost + " but got " + executedCalls.size() + " calls");
-        }
-    }
-
-    public void atLeastOnce() {
-        checkValidQuery();
-        List<MessageProcessorCall> executedCalls = getExecutedCalls();
-        if (executedCalls.isEmpty()) {
-            fail("On " + getFullName()  + ".It was never called");
-        }
-
-    }
 
 }

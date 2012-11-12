@@ -5,7 +5,7 @@ import org.mule.api.processor.MessageProcessor;
 import org.mule.config.spring.MuleHierarchicalBeanDefinitionParserDelegate;
 import org.mule.construct.Flow;
 import org.mule.munit.common.mp.MessageProcessorId;
-import org.mule.munit.common.mp.MunitMessageProcessorCallback;
+import org.mule.munit.common.mp.MunitMessageProcessorInterceptorFactory;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.PropertyValue;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -56,13 +56,12 @@ public class MunitHandlerWrapper implements NamespaceHandler {
                     for (PropertyValue values : propertyValues ){
                         builder.addPropertyValue(values.getName(),values.getValue());
                     }
-                    builder.setFactoryMethod("create");
-                    builder.addConstructorArgValue(beanType);
-                    builder.addConstructorArgValue(new MessageProcessorId(getNameFrom(tagName), getNamespaceFrom(tagName)));
-                    builder.addConstructorArgValue(getAttributes(element));
-                    AbstractBeanDefinition mocked = builder.getBeanDefinition();
-                    mocked.setFactoryBeanName(MunitMessageProcessorCallback.ID);
 
+                    AbstractBeanDefinition mocked = builder.getBeanDefinition();
+
+                    MunitMessageProcessorInterceptorFactory.addFactoryDefinitionTo(mocked)
+                            .withConstructorArguments(beanType,new MessageProcessorId(getNameFrom(tagName), getNamespaceFrom(tagName)),
+                                    getAttributes(element));
                     if ( beanDefinition.getAttribute(MuleHierarchicalBeanDefinitionParserDelegate.MULE_NO_RECURSE) != null && beanDefinition.getAttribute(MuleHierarchicalBeanDefinitionParserDelegate.MULE_NO_RECURSE).equals(Boolean.TRUE) ){
                         setNoRecurseOnDefinition(mocked);
 

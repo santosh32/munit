@@ -11,7 +11,7 @@ import org.mule.api.MuleMessage;
 import org.mule.construct.Flow;
 import org.mule.munit.common.MunitCore;
 import org.mule.munit.common.matchers.*;
-import org.mule.munit.common.mocking.MunitMocker;
+import org.mule.munit.common.mocking.MessageProcessorMocker;
 import org.mule.munit.common.mocking.MunitSpy;
 import org.mule.munit.common.mocking.MunitVerifier;
 import org.mule.munit.runner.MuleContextManager;
@@ -39,7 +39,7 @@ public abstract class FunctionalMunitSuite {
     }
 
     private MockingConfiguration createConfiguration() {
-       return  new MockingConfiguration(mockInboundEndpoints(), mockingExcludedFlows());
+       return  new MockingConfiguration(mockInboundEndpoints(), mockingExcludedFlows(), mockConnectors());
     }
 
     private List<String> mockingExcludedFlows() {
@@ -47,6 +47,10 @@ public abstract class FunctionalMunitSuite {
     }
 
     protected boolean mockInboundEndpoints() {
+        return true;
+    }
+
+    protected boolean mockConnectors(){
         return true;
     }
 
@@ -70,8 +74,8 @@ public abstract class FunctionalMunitSuite {
         return  new DefaultMuleMessage(payload, muleContext);
     }
 
-    protected final MunitMocker expectMessageProcessor(String name){
-        return new MunitMocker(muleContext).expectMessageProcessor(name);
+    protected final MessageProcessorMocker expectMessageProcessor(String name){
+        return new MessageProcessorMocker(muleContext).expectMessageProcessor(name);
     }
     
     protected final MunitVerifier verifyCallOfMessageProcessor(String name){

@@ -13,7 +13,7 @@ import java.util.Map;
  * @author Federico, Fernando
  * @version since 3.3.2
  */
-public class MunitTool {
+public class MunitMockingTool {
 
     protected MuleContext muleContext;
 
@@ -21,7 +21,7 @@ public class MunitTool {
     protected String messageProcessorNamespace = "mule";
     protected Map<String, Object> messageProcessorAttributes = new HashMap<String, Object>();
 
-    public MunitTool(MuleContext muleContext) {
+    public MunitMockingTool(MuleContext muleContext) {
         this.muleContext = muleContext;
     }
 

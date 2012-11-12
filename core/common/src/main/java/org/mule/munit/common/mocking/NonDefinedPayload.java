@@ -7,4 +7,8 @@ package org.mule.munit.common.mocking;
  * @version since 3.3.2
  */
 public class NonDefinedPayload {
+
+    public static NonDefinedPayload getInstance(){
+       return new NonDefinedPayload();
+    }
 }
