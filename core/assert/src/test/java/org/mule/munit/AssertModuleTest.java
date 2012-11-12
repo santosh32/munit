@@ -20,6 +20,14 @@ public class AssertModuleTest {
     }
 
     /**
+     * Two equal payloads should not fail
+     */
+    @Test
+    public void assertPayloadOkWithMessage(){
+        module().assertThat("My Message", "a", "a");
+    }
+
+    /**
      * Two different payloads must fail
      */
     @Test(expected = AssertionFailedError.class)

@@ -11,6 +11,10 @@ import org.mule.construct.Flow;
  * @version since 3.3.2
  */
 public class MunitFlow extends Flow {
+
+    /**
+     * <p>The munit test description</p>
+     */
     private String description;
 
     public MunitFlow(String name, MuleContext muleContext) {
