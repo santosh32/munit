@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
+/**
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class OutboundBehaviorTest {
 
     public static final ArrayList<MessageProcessor> ASSERTIONS = new ArrayList<MessageProcessor>();

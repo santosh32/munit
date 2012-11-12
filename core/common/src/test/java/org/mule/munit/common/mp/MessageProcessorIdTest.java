@@ -6,6 +6,10 @@ import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
+/**
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class MessageProcessorIdTest {
 
     public static final String TEST_NAMESPACE = "testNamespace";

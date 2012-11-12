@@ -9,6 +9,10 @@ import org.mule.api.context.MuleContextAware;
 import org.mule.api.lifecycle.*;
 import org.mule.api.processor.MessageProcessor;
 
+/**
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class MockedMessageProcessor implements MessageProcessor, Startable,Initialisable, Disposable, MuleContextAware, FlowConstructAware, Stoppable {
     boolean calledDispose;
     boolean calledStart;

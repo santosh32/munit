@@ -89,7 +89,7 @@ public class EndpointMocker {
     }
 
 
-    private List<MessageProcessor> createMessageProcessorFromSpy(final List<SpyProcess> process) {
+    protected List<MessageProcessor> createMessageProcessorFromSpy(final List<SpyProcess> process) {
         List<MessageProcessor> messageProcessors = new ArrayList<MessageProcessor>();
 
         messageProcessors.add(new MessageProcessor() {

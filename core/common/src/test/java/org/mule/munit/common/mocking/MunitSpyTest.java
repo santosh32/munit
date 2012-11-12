@@ -17,6 +17,10 @@ import static junit.framework.Assert.assertEquals;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
+/**
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class MunitSpyTest {
 
     private MuleContext muleContext;

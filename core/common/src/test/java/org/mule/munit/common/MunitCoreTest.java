@@ -11,6 +11,10 @@ import org.mule.munit.common.mp.MockedMessageProcessorManager;
 
 import static org.mockito.Mockito.*;
 
+/**
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class MunitCoreTest {
 
     private MuleContext muleContext;

@@ -9,6 +9,10 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
+/**
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class MockedMessageProcessorManagerTest {
 
     public static final String TEST_NAMESPACE = "testNamespace";

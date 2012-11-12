@@ -4,13 +4,18 @@ package org.mule.munit.common.mocking;
 import org.junit.Test;
 import org.mule.transport.NullPayload;
 
+
 import static org.junit.Assert.assertTrue;
 
+/**
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class NotDefinedPayloadTest {
 
     @Test
     public void testItCreatesANonDefinedPayload(){
-        assertTrue(NotDefinedPayload.getInstance() instanceof NotDefinedPayload);
+        assertTrue(NotDefinedPayload.getInstance() != null);
     }
 
 

@@ -10,6 +10,10 @@ import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+/**
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class MunitMockingToolTest {
 
     private MuleContext muleContext;
