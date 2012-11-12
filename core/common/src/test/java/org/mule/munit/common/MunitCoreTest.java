@@ -9,6 +9,7 @@ import org.mule.api.registry.RegistrationException;
 import org.mule.munit.common.endpoint.MockEndpointManager;
 import org.mule.munit.common.mp.MockedMessageProcessorManager;
 
+import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 /**
@@ -71,6 +72,13 @@ public class MunitCoreTest {
         MunitCore.registerManager(muleContext);
 
         verify(muleRegistry).registerObject(eq(MockedMessageProcessorManager.ID), isA(MockedMessageProcessorManager.class));
+    }
+
+    @Test
+    public void testSetContext(){
+        MunitCore.setMuleContext(muleContext);
+
+        assertEquals(muleContext, MunitCore.getMuleContext());
     }
 
 

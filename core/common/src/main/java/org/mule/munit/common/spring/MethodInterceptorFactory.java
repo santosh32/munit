@@ -34,12 +34,12 @@ public abstract class MethodInterceptorFactory {
             MethodInterceptor callback = createInterceptor();
 
             e.setCallback(callback);
-            if ( objects != null ){
+            if ( objects.length != 0 ){
 
                 Constructor[] constructors = realMpClass.getConstructors();
                 for ( Constructor constructor : constructors ){
-                    boolean matchConstructor = true;
                     Class[] parameterTypes = constructor.getParameterTypes();
+                    boolean matchConstructor = parameterTypes.length == objects.length;
                     for ( int j=0;j< parameterTypes.length;j++){
                         if ( j<objects.length) {
                             matchConstructor = matchConstructor && parameterTypes[j].isAssignableFrom(objects[j].getClass());

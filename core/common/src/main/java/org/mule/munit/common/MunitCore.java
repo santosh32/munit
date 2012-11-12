@@ -16,12 +16,25 @@ import org.mule.munit.common.mp.MockedMessageProcessorManager;
  */
 public class MunitCore {
 
+    /**
+     * <p>The Mule context for the Munit test</p>
+     */
     private static MuleContext context;
 
+    /**
+     * <p>Sets the mule context for the Munit run</p>
+     *
+     * @param muleContext
+     *      <p>The Mule Context</p>
+     */
     public static synchronized void setMuleContext(MuleContext muleContext){
         context = muleContext;
     }
 
+    /**
+     * @return
+     *      <p>Returns the stored mule context</p>
+     */
     public static MuleContext getMuleContext(){
         return context;
     }
