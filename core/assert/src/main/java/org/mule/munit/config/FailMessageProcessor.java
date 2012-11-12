@@ -13,14 +13,22 @@ import org.mule.munit.AssertModule;
  */
 public class FailMessageProcessor extends MunitMessageProcessor
 {
-
+    /**
+     * @see AssertModule#fail(String)
+     */
     private String message;
 
+    /**
+     * @see MunitMessageProcessor#doProcess(org.mule.api.MuleMessage, org.mule.munit.AssertModule)
+     */
     @Override
     protected void doProcess(MuleMessage mulemessage, AssertModule module) {
         module.fail(message);
     }
 
+    /**
+     * @see org.mule.munit.config.MunitMessageProcessor#getProcessor()
+     */
     @Override
     protected String getProcessor() {
         return "Fail";

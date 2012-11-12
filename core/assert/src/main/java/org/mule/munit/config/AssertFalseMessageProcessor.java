@@ -13,15 +13,27 @@ import org.mule.munit.AssertModule;
  */
 public class AssertFalseMessageProcessor extends MunitMessageProcessor
 {
-
+    /**
+     * @see AssertModule#assertFalse(String, Boolean)
+     */
     private String message;
+
+    /**
+     * @see AssertModule#assertFalse(String, Boolean)
+     */
     private Object condition;
 
+    /**
+     * @see MunitMessageProcessor#doProcess(org.mule.api.MuleMessage, org.mule.munit.AssertModule)
+     */
     @Override
     protected void doProcess(MuleMessage mulemessage, AssertModule module) {
         module.assertFalse(message, (Boolean) evaluate(mulemessage,condition));
     }
 
+    /**
+     * @see org.mule.munit.config.MunitMessageProcessor#getProcessor()
+     */
     @Override
     protected String getProcessor() {
         return "assertFalse";

@@ -69,7 +69,7 @@ public abstract class MunitMessageProcessor implements Initialisable, MessagePro
             if (stringSource.startsWith(patternInfo.getPrefix())&&stringSource.endsWith(patternInfo.getSuffix())) {
                 return expressionManager.evaluate(stringSource, muleMessage);
             } else {
-                return expressionManager.parse(stringSource, muleMessage);
+                    return expressionManager.parse(stringSource, muleMessage);
             }
         }
         return source;
@@ -90,8 +90,21 @@ public abstract class MunitMessageProcessor implements Initialisable, MessagePro
         }
     }
 
+    /**
+     * <p>The method that do the actual process</p>
+     *
+     * @param mulemessage
+     *      <p>The mule Message</p>
+     * @param module
+     *      <p>The instance of the assert module</p>
+     */
     protected abstract void doProcess(MuleMessage mulemessage, AssertModule module);
-    protected abstract String getProcessor(); 
+
+    /**
+     * @return
+     *      <p>The name of the processor</p>
+     */
+    protected abstract String getProcessor();
 
     public void setMuleContext(MuleContext context) {
         this.muleContext = context;

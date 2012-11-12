@@ -17,13 +17,15 @@ import org.w3c.dom.Element;
 
 import java.util.List;
 
+/**
+ * <p>Assert Module Definition Parser</p>
+ *
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public abstract class AbstractDefinitionParser implements BeanDefinitionParser
 {
 
-    /**
-     * Mule Pattern Info
-     * 
-     */
     private TemplateParser.PatternInfo patternInfo;
 
     public AbstractDefinitionParser() {
@@ -53,7 +55,6 @@ public abstract class AbstractDefinitionParser implements BeanDefinitionParser
             return true;
         }
     }
-
 
     protected ManagedMap parseMap(Element element, String childElementName, AbstractDefinitionParser.ParseDelegate parserDelegate) {
         ManagedMap managedMap = new ManagedMap();
@@ -97,7 +98,6 @@ public abstract class AbstractDefinitionParser implements BeanDefinitionParser
         }
     }
 
-
     protected void attachProcessorDefinition(ParserContext parserContext, BeanDefinition definition) {
         MutablePropertyValues propertyValues = parserContext.getContainingBeanDefinition().getPropertyValues();
         if (parserContext.getContainingBeanDefinition().getBeanClassName().equals("org.mule.config.spring.factories.PollingMessageSourceFactoryBean")) {
@@ -122,21 +122,8 @@ public abstract class AbstractDefinitionParser implements BeanDefinitionParser
         definition.setAttribute(MuleHierarchicalBeanDefinitionParserDelegate.MULE_NO_RECURSE, Boolean.TRUE);
     }
 
-
-
-
-
-
-
-
-
-
-
     public interface ParseDelegate<T >{
-
-
         public T parse(Element element);
-
     }
 
 }

@@ -4,6 +4,10 @@ import org.junit.Test;
 
 import static org.mockito.Mockito.verify;
 
+/**
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class FailMessageProcessorTest extends AbstractMessageProcessorTest{
 
     public static final String TEST_MESSAGE = "testMessage";

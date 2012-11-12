@@ -14,6 +14,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
+/**
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class MunitMessageProcessorTest {
 
     public static final String EXP = "#[exp]";

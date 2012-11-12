@@ -23,14 +23,46 @@ import java.util.List;
  */
 public class MunitDefinitionParser implements BeanDefinitionParser {
 
+    /**
+     * <p>The message processor class</p>
+     */
     private Class mpClass;
+
+    /**
+     * <p>The message processor attributes to parse</p>
+     */
     private List<String> attributes;
+
+    /**
+     * <p>The ref attributes to parse</p>
+     */
     private List<String> refAttributes;
 
+    /**
+     * <p>Constructor for parsers that parse message processors with simple attributes</p>
+     *
+     * @param mpClass
+     *      <p>The message processor class</p>
+     *
+     * @param attributes
+     *      <p>The message processor attributes to parse</p>
+     */
     public MunitDefinitionParser(Class mpClass, List<String> attributes) {
         this(mpClass, attributes, new ArrayList<String>());
     }
 
+    /**
+     * <p>Constructor for parsers that parse message processors with simple attributes and complex ref-attributes</p>
+     *
+     * @param mpClass
+     *      <p>The message processor class</p>
+     *
+     * @param attributes
+     *      <p>The message processor attributes to parse</p>
+     *
+     * @param refAttributes
+     *      <p>The ref attributes to parse</p>
+     */
     public MunitDefinitionParser(Class mpClass, List<String> attributes, List<String> refAttributes) {
         this.mpClass = mpClass;
         this.attributes = attributes;
@@ -38,6 +70,12 @@ public class MunitDefinitionParser implements BeanDefinitionParser {
 
     }
 
+    /**
+     * <p>Constructor for parsers that parse message processors with no attributes</p>
+     *
+     * @param mpClass
+     *      <p>The message processor class</p>
+     */
     public MunitDefinitionParser(Class mpClass) {
         this(mpClass, new ArrayList<String>(), new ArrayList<String>());
     }

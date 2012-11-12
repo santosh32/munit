@@ -16,6 +16,10 @@ import static junit.framework.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+/**
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class MunitDefinitionParserTest {
 
     public static final String A_MESSAGE = "A Message";

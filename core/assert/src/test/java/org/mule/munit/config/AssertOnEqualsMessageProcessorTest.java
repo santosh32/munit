@@ -5,6 +5,10 @@ import org.junit.Test;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+/**
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class AssertOnEqualsMessageProcessorTest extends AbstractMessageProcessorTest{
 
     public static final String TEST_MESSAGE = "testMessage";
