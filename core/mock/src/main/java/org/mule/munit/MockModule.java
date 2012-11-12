@@ -200,7 +200,7 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
                                               ) {
         Object definedPayload = payload;
         if ( payload == null ){
-            definedPayload = new NonDefinedPayload();
+            definedPayload = NotDefinedPayload.getInstance();
         }
         DefaultMuleMessage message = new DefaultMuleMessage(definedPayload, muleContext);
 

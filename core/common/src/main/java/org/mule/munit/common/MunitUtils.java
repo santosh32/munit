@@ -4,20 +4,17 @@ package org.mule.munit.common;
 import org.mule.DefaultMuleMessage;
 import org.mule.api.MuleEvent;
 import org.mule.api.processor.MessageProcessor;
-import org.mule.munit.common.mocking.NonDefinedPayload;
-import org.mule.transport.NullPayload;
-import org.springframework.beans.factory.config.ConstructorArgumentValues;
-import org.springframework.beans.factory.support.RootBeanDefinition;
 
 import java.util.List;
-import java.util.Map;
+
+import static org.mule.munit.common.mocking.NotDefinedPayload.isNotDefined;
 
 public class MunitUtils {
 
     public static void changeMessage(DefaultMuleMessage returnMuleMessage, DefaultMuleMessage message) {
 
         Object payload = returnMuleMessage.getPayload();
-        if ( payload !=null && !payload.equals(NullPayload.getInstance()) && !(payload instanceof NonDefinedPayload)){
+        if (payload != null && !isNotDefined(payload)){
             message.setPayload(payload);
         }
 
