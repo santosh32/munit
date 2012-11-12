@@ -87,7 +87,7 @@
     <munit:test name="testingGetResourceFunctionAsString" 
     	description="We want to validate that the payload is the same as the file picked">
 
-        <munit:set payload-ref="#[getResource('testFile.txt').asString]"/>
+        <munit:set payload-ref='#[getResource("testFile.txt").asString()]'/>
      
         <munit:assert-not-null/>
         <munit:assert-that payloadIs-ref="#[string:Hello World!]"/>
