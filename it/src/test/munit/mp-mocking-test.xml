@@ -36,13 +36,13 @@
     </script:script>
 
 
-     <munit:test name="testMockMp" description="
+    <munit:test name="testMockMp" description="
      We are testing here that the Message processor can be mocked with an expected value to return.">
 
 
-        <mock:expect messageProcessor="echo-component" >
-         <mock:to-return payload-ref="#[string:expectedPayload]"/>
-         </mock:expect>
+        <mock:when messageProcessor="echo-component">
+            <mock:then-return payload-ref="#[string:expectedPayload]"/>
+        </mock:when>
 
         <munit:set payload-ref="#[string:anotherString]"/>
 
@@ -64,13 +64,13 @@
     <munit:test name="testMpWithParameters" description="
     If the Message Processor is not mocked then do not change its behavior">
 
-        <mock:expect messageProcessor="jira:create-group" >
-            <mock:to-return payload-ref="#[string:expectedPayload]"/>
-            <mock:attributes>
-                <mock:attribute name="groupName" whereValue-ref="#[string:someGroupName]"/>
-                <mock:attribute name="userName" whereValue-ref='#[anyString()]'/>
-            </mock:attributes>
-        </mock:expect>
+        <mock:when messageProcessor="jira:create-group">
+            <mock:with-attributes>
+                <mock:with-attribute name="groupName" whereValue-ref="#[string:someGroupName]"/>
+                <mock:with-attribute name="userName" whereValue-ref='#[anyString()]'/>
+            </mock:with-attributes>
+            <mock:then-return payload-ref="#[string:expectedPayload]"/>
+        </mock:when>
 
         <munit:set payload-ref="#[string:anotherString]"/>
 
@@ -92,17 +92,17 @@
     <munit:test name="testMpWithParametersAndSpy" description="
     If the Message Processor is not mocked then do not change its behavior">
 
-        <mock:expect messageProcessor="jira:create-group">
-            <mock:to-return payload-ref="#[string:expectedPayload]">
+        <mock:when messageProcessor="jira:create-group">
+            <mock:with-attributes>
+                <mock:with-attribute name="groupName" whereValue-ref="#[string:someGroupName]"/>
+                <mock:with-attribute name="userName" whereValue-ref='#[anyString()]'/>
+            </mock:with-attributes>
+            <mock:then-return payload-ref="#[string:expectedPayload]">
                 <mock:inbound-properties>
                     <mock:inbound-property/>
                 </mock:inbound-properties>
-                    </mock:to-return>
-            <mock:attributes>
-                <mock:attribute name="groupName" whereValue-ref="#[string:someGroupName]"/>
-                <mock:attribute name="userName" whereValue-ref='#[anyString()]'/>
-            </mock:attributes>
-        </mock:expect>
+            </mock:then-return>
+        </mock:when>
 
         <mock:spy messageProcessor="jira:create-group">
 
@@ -113,7 +113,7 @@
 
             <mock:assertions-after-call>
                 <munit:assert-not-null/>
-                <munit:assert-that payloadIs-ref="#[string:expectedPayload]" />
+                <munit:assert-that payloadIs-ref="#[string:expectedPayload]"/>
             </mock:assertions-after-call>
         </mock:spy>
 
@@ -142,13 +142,13 @@
 
         <mock:outbound-endpoint address="jdbc://lookupJob" returnPayload-ref='#[resultOfScript("mockJdbcOutbound")]'/>
 
-        <mock:expect messageProcessor="jira:create-group">
-            <mock:to-return payload-ref="#[string:createGroupResult]"/>
-            <mock:attributes>
-                <mock:attribute name="groupName" whereValue-ref="#[string:someGroup]"/>
-                <mock:attribute name="userName" whereValue-ref='#[anyString()]'/>
-            </mock:attributes>
-        </mock:expect>
+        <mock:when messageProcessor="jira:create-group">
+            <mock:with-attributes>
+                <mock:with-attribute name="groupName" whereValue-ref="#[string:someGroup]"/>
+                <mock:with-attribute name="userName" whereValue-ref='#[anyString()]'/>
+            </mock:with-attributes>
+            <mock:then-return payload-ref="#[string:createGroupResult]"/>
+        </mock:when>
 
 
         <munit:set payload-ref="#[string: Hello world!]"/>
@@ -157,9 +157,8 @@
 
         <munit:assert-not-null/>
         <munit:assert-on-equals expected-ref="#[string:someGroup]" value-ref="#[variable:job]"/>
-        <munit:assert-that payloadIs-ref="#[string:createGroupResult]" />
+        <munit:assert-that payloadIs-ref="#[string:createGroupResult]"/>
     </munit:test>
-    
 
 
 </mule>

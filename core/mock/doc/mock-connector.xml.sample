@@ -1,7 +1,7 @@
 <!-- BEGIN_INCLUDE(mock:expect) -->
- <mock:expect messageProcessor="echo-component" >
-         <mock:to-return payload-ref="#[string:expectedPayload]"/>
-         </mock:expect>
+ <mock:when messageProcessor="echo-component" >
+         <mock:then-return payload-ref="#[string:expectedPayload]"/>
+         </mock:when>
 <!-- END_INCLUDE(mock:expect) -->
 
 

@@ -39,22 +39,22 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
      * {@sample.xml ../../../doc/mock-connector.xml.sample mock:expect}
      *
      * @param messageProcessor Message processor name.
-     * @param toReturn         Expected return value.
-     * @param attributes       Message processor parameters.
+     * @param thenReturn         Expected return value.
+     * @param withAttributes       Message processor parameters.
      */
     @Processor
-    public void expect(String messageProcessor,
-                       @Optional MunitMuleMessage toReturn,
-                       @Optional List<Attribute> attributes) {
+    public void when(String messageProcessor,
+                     @Optional List<Attribute> withAttributes,
+                       @Optional MunitMuleMessage thenReturn) {
 
         new MessageProcessorMocker(muleContext).expectMessageProcessor(getName(messageProcessor))
                 .ofNamespace(getNamespace(messageProcessor))
-                .withAttributes(createAttributes(attributes))
-                .toReturn(createMuleMessageFrom(toReturn.getPayload(),
-                        toReturn.getInboundProperties(),
-                        toReturn.getOutboundProperties(),
-                        toReturn.getSessionProperties(),
-                        toReturn.getInvocationProperties()));
+                .withAttributes(createAttributes(withAttributes))
+                .toReturn(createMuleMessageFrom(thenReturn.getPayload(),
+                        thenReturn.getInboundProperties(),
+                        thenReturn.getOutboundProperties(),
+                        thenReturn.getSessionProperties(),
+                        thenReturn.getInvocationProperties()));
     }
 
     /**
