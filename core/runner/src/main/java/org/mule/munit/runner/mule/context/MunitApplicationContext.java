@@ -4,11 +4,9 @@ import org.mule.api.MuleContext;
 import org.mule.config.ConfigResource;
 import org.mule.config.spring.MissingParserProblemReporter;
 import org.mule.config.spring.MuleApplicationContext;
-import org.mule.munit.common.connectors.ConnectorCallBack;
-import org.mule.munit.common.connectors.ConnectorCallBackFactory;
+import org.mule.munit.common.connectors.ConnectorMethodInterceptorFactory;
 import org.mule.munit.common.endpoint.MunitSpringFactoryPostProcessor;
-import org.mule.munit.common.mp.MunitMessageProcessorCallback;
-import org.mule.munit.common.mp.MunitMessageProcessorCallbackFactory;
+import org.mule.munit.common.mp.MunitMessageProcessorInterceptorFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -39,8 +37,8 @@ public class MunitApplicationContext extends MuleApplicationContext{
         beanDefinitionReader.setDocumentReaderClass(MunitBeanDefinitionDocumentReader.class);
         //add error reporting
 
-        beanFactory.registerBeanDefinition(MunitMessageProcessorCallback.ID, new RootBeanDefinition(MunitMessageProcessorCallbackFactory.class));
-        beanFactory.registerBeanDefinition(ConnectorCallBack.ID, new RootBeanDefinition(ConnectorCallBackFactory.class));
+        beanFactory.registerBeanDefinition(MunitMessageProcessorInterceptorFactory.ID, new RootBeanDefinition(MunitMessageProcessorInterceptorFactory.class));
+        beanFactory.registerBeanDefinition(ConnectorMethodInterceptorFactory.ID, new RootBeanDefinition(ConnectorMethodInterceptorFactory.class));
         beanDefinitionReader.setProblemReporter(new MissingParserProblemReporter());
 
         if ( configuration != null ){
@@ -62,6 +60,7 @@ public class MunitApplicationContext extends MuleApplicationContext{
         MunitSpringFactoryPostProcessor postProcessor = new MunitSpringFactoryPostProcessor();
         postProcessor.setMockInbounds(configuration.isMockInbounds());
         postProcessor.setMockingExcludedFlows(configuration.getMockingExcludedFlows());
+        postProcessor.setMockConnectors(configuration.isMockConnectors());
         return postProcessor;
     }
 }

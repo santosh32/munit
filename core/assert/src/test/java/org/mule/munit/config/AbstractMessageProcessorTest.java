@@ -10,6 +10,10 @@ import org.mule.util.TemplateParser;
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
+/**
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public abstract class AbstractMessageProcessorTest {
     protected MuleMessage muleMessage;
     protected AssertModule module;

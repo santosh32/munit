@@ -9,6 +9,10 @@ package org.mule.munit.common.matchers;
  * @version since 3.3.2
  */
 public class NotNullMatcher implements Matcher{
+
+    /**
+     *  @see Matcher#match(Object)
+     */
     @Override
     public boolean match(Object o) {
         return o!=null;

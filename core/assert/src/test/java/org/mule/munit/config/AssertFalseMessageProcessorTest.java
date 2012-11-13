@@ -7,6 +7,10 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+/**
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class AssertFalseMessageProcessorTest extends AbstractMessageProcessorTest{
 
     public static final String FALSE_CONDITION = "#[1==2]";

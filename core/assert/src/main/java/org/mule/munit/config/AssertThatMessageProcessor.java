@@ -12,14 +12,27 @@ import org.mule.munit.AssertModule;
  */
 public class AssertThatMessageProcessor extends MunitMessageProcessor{
 
+    /**
+     * @see AssertModule#assertThat(String, Object, Object)
+     */
     private String message;
+
+    /**
+     * @see AssertModule#assertThat(String, Object, Object)
+     */
     private Object payloadIs;
 
+    /**
+     * @see MunitMessageProcessor#doProcess(org.mule.api.MuleMessage, org.mule.munit.AssertModule)
+     */
     @Override
     protected void doProcess(MuleMessage mulemessage, AssertModule module) {
         module.assertThat(message, evaluate(mulemessage,payloadIs), mulemessage.getPayload());
     }
 
+    /**
+     * @see org.mule.munit.config.MunitMessageProcessor#getProcessor()
+     */
     @Override
     protected String getProcessor() {
         return "assertThat";

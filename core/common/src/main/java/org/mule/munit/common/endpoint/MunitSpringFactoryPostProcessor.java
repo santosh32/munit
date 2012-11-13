@@ -4,19 +4,19 @@ package org.mule.munit.common.endpoint;
 import org.mule.api.config.MuleProperties;
 import org.mule.api.transport.Connector;
 import org.mule.construct.Flow;
-import org.mule.munit.common.connectors.ConnectorCallBack;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.beans.factory.config.ConstructorArgumentValues;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 
 import java.util.List;
-import java.util.Map;
+import java.util.logging.Logger;
+
+import static org.mule.munit.common.connectors.ConnectorMethodInterceptorFactory.addFactoryDefinitionTo;
 
 
 /**
@@ -30,15 +30,24 @@ import java.util.Map;
  */
 public class MunitSpringFactoryPostProcessor implements BeanFactoryPostProcessor {
 
+    private static Logger logger = Logger.getLogger("Bean definition Processor");
+
     /**
      * <p>Defines if the inbounds must be mocked or not. This is pure Munit configuration</p>
      */
     protected boolean mockInbounds;
 
     /**
+     * <p>Defines if the app connectors for outbound/inbound endpoints have to be mocked. If they are then all
+     * outbound endpoints/inbound endpoints must be mocked.</p>
+     */
+    protected boolean mockConnectors;
+
+    /**
      * <p>List of flows which we don't want to mock the inbound message sources</p>
      */
     protected List<String> mockingExcludedFlows;
+
 
 
     /**
@@ -51,7 +60,7 @@ public class MunitSpringFactoryPostProcessor implements BeanFactoryPostProcessor
      *          <p>When post processing fails. Never thrown for this implementation</p>
      */
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        if (isMockInbounds() ){
+        if ( isMockInbounds() || isMockConnectors() ){
             String[] beanDefinitionNames = beanFactory.getBeanDefinitionNames();
             for ( String name : beanDefinitionNames ){
                 BeanDefinition beanDefinition = beanFactory.getBeanDefinition(name);
@@ -62,35 +71,11 @@ public class MunitSpringFactoryPostProcessor implements BeanFactoryPostProcessor
                 }
             }
 
-            swapFactory(beanFactory);
-
-            String[] beanNamesForType = beanFactory.getBeanNamesForType(Connector.class);
-            for (String beanName : beanNamesForType) {
-                RootBeanDefinition beanDefinition = RootBeanDefinition.class.cast(beanFactory.getBeanDefinition(beanName));
-
-                if (beanDefinition.getFactoryMethodName() == null) {
-                    beanDefinition.setFactoryBeanName(ConnectorCallBack.ID);
-
-                    ConstructorArgumentValues constructorArgumentValues = beanDefinition.getConstructorArgumentValues();
-                    if (constructorArgumentValues != null && !constructorArgumentValues.isEmpty()) {
-                        ConstructorArgumentValues values = new ConstructorArgumentValues();
-                        Map<Integer, ConstructorArgumentValues.ValueHolder> indexedArgumentValues = constructorArgumentValues.getIndexedArgumentValues();
-
-                        for (Integer i :  indexedArgumentValues.keySet()){
-                            values.addIndexedArgumentValue(i+1,indexedArgumentValues.get(i));
-                        }
-                        values.addIndexedArgumentValue(0, beanDefinition.getBeanClass());
-                        beanDefinition.setConstructorArgumentValues(values);
-                    }
-
-
-                    beanDefinition.setFactoryMethodName("create");
-                } else {
-                    // TODO: Log message
-                }
-
-            }
+            changeEndpointFactory(beanFactory);
         }
+
+        mockConnectors(beanFactory);
+
     }
 
     /**
@@ -100,7 +85,7 @@ public class MunitSpringFactoryPostProcessor implements BeanFactoryPostProcessor
      * @param beanFactory
      *           <p>The spring bean factory</p>
      */
-    private void swapFactory(ConfigurableListableBeanFactory beanFactory) {
+    private void changeEndpointFactory(ConfigurableListableBeanFactory beanFactory) {
         GenericBeanDefinition endpointFactory = (GenericBeanDefinition) beanFactory.getBeanDefinition(MuleProperties.OBJECT_MULE_ENDPOINT_FACTORY);
 
         AbstractBeanDefinition abstractBeanDefinition = endpointFactory.cloneBeanDefinition();
@@ -109,6 +94,30 @@ public class MunitSpringFactoryPostProcessor implements BeanFactoryPostProcessor
         propertyValues.add("defaultFactory", abstractBeanDefinition);
         endpointFactory.setPropertyValues(propertyValues);
         endpointFactory.setBeanClassName(MockEndpointManager.class.getCanonicalName());
+    }
+
+    /**
+     * <p>Changes the @see #Connector bean definition so they are created as mocks of connectors that do not connect</p>
+     *
+     * <p>This action is done only if #isMockConnectors is true</p>
+
+     * @param beanFactory
+     *          <p>The bean factory that contains the bean definition</p>
+     */
+    private void mockConnectors(ConfigurableListableBeanFactory beanFactory) {
+        if ( isMockConnectors()){
+            String[] beanNamesForType = beanFactory.getBeanNamesForType(Connector.class);
+            for (String beanName : beanNamesForType) {
+                RootBeanDefinition beanDefinition = RootBeanDefinition.class.cast(beanFactory.getBeanDefinition(beanName));
+
+                if (beanDefinition.getFactoryMethodName() == null) {
+                    addFactoryDefinitionTo(beanDefinition)
+                            .withConstructorArguments(beanDefinition.getBeanClass());
+                } else {
+                    logger.info("The connector " + beanName + " cannot be mocked as it already has a factory method");
+                }
+            }
+        }
     }
 
     public void setMockInbounds(boolean mockInbounds) {
@@ -123,4 +132,11 @@ public class MunitSpringFactoryPostProcessor implements BeanFactoryPostProcessor
         return mockInbounds;
     }
 
+    public boolean isMockConnectors() {
+        return mockConnectors;
+    }
+
+    public void setMockConnectors(boolean mockConnectors) {
+        this.mockConnectors = mockConnectors;
+    }
 }

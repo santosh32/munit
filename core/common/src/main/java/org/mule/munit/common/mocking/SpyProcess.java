@@ -14,6 +14,9 @@ public interface SpyProcess {
     /**
      * <p>Executes code in the spying process</p>
      * @param event
+     *      <p>The @see #MuleEvent</p>
+     * @throws MuleException
+     *      <p>In case of spy failure</p>
      */
     void spy(MuleEvent event) throws MuleException;
 }

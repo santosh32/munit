@@ -8,12 +8,9 @@ import org.w3c.dom.Element;
 
 import javax.annotation.Generated;
 
-@Generated(value = "Mule DevKit Version 3.3.1", date = "2012-10-24T01:39:17-03:00", comments = "Build UNNAMED.1297.150f2c9")
 public class SetDefinitionParser
     extends AbstractDefinitionParser
 {
-
-
     public BeanDefinition parse(Element element, ParserContext parserContext) {
         BeanDefinitionBuilder builder = BeanDefinitionBuilder.rootBeanDefinition(SetMessageProcessor.class.getName());
         builder.setScope(BeanDefinition.SCOPE_PROTOTYPE);

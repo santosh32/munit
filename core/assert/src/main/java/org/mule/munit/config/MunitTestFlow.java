@@ -16,7 +16,14 @@ import static junit.framework.Assert.assertEquals;
  * @version since 3.3.2
  */
 public class MunitTestFlow extends MunitFlow{
+    /**
+     * <p>Determines if the test has to be ignored</p>
+     */
     private boolean ignore;
+
+    /**
+     * <p>The name of the exception that is expected</p>
+     */
     private String expected;
 
     public MunitTestFlow(String name, MuleContext muleContext) {
@@ -24,8 +31,6 @@ public class MunitTestFlow extends MunitFlow{
 
         registerMpManager(muleContext);
     }
-
-
 
     public String getExpected() {
         return expected;
@@ -59,7 +64,6 @@ public class MunitTestFlow extends MunitFlow{
 
         return process;
     }
-
 
     private void registerMpManager(MuleContext muleContext) {
          MunitCore.registerManager(muleContext);

@@ -8,6 +8,10 @@ import java.util.HashMap;
 
 import static junit.framework.Assert.*;
 
+/**
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class MessageProcessorCallTest {
 
     public static final HashMap<String,Object> ATTRIBUTES = new HashMap<String, Object>();

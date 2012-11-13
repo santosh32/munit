@@ -21,6 +21,9 @@ public class AnyClassMatcher implements Matcher {
         this.expectedClass = expectedClass;
     }
 
+    /**
+     *  @see Matcher#match(Object)
+     */
     @Override
     public boolean match(Object o) {
         if (o == null) {

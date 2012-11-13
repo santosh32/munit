@@ -47,7 +47,7 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
                        @Optional MunitMuleMessage toReturn,
                        @Optional List<Attribute> attributes) {
 
-        new MunitMocker(muleContext).expectMessageProcessor(getName(messageProcessor))
+        new MessageProcessorMocker(muleContext).expectMessageProcessor(getName(messageProcessor))
                 .ofNamespace(getNamespace(messageProcessor))
                 .withAttributes(createAttributes(attributes))
                 .toReturn(createMuleMessageFrom(toReturn.getPayload(),
@@ -200,7 +200,7 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
                                               ) {
         Object definedPayload = payload;
         if ( payload == null ){
-            definedPayload = new NonDefinedPayload();
+            definedPayload = NotDefinedPayload.getInstance();
         }
         DefaultMuleMessage message = new DefaultMuleMessage(definedPayload, muleContext);
 

@@ -5,6 +5,10 @@ import junit.framework.AssertionFailedError;
 import org.junit.Test;
 import org.mule.transport.NullPayload;
 
+/**
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class AssertModuleTest {
 
     /**
@@ -13,6 +17,14 @@ public class AssertModuleTest {
     @Test
     public void assertPayloadOkWithEmptyMessage(){
         module().assertThat(null, "a", "a");
+    }
+
+    /**
+     * Two equal payloads should not fail
+     */
+    @Test
+    public void assertPayloadOkWithMessage(){
+        module().assertThat("My Message", "a", "a");
     }
 
     /**

@@ -13,16 +13,32 @@ import org.mule.munit.AssertModule;
  */
 public class AssertOnEqualsMessageProcessor extends MunitMessageProcessor
 {
-
+    /**
+     * @see AssertModule#assertOnEquals(String, Object, Object)
+     */
     private String message;
+
+    /**
+     * @see AssertModule#assertOnEquals(String, Object, Object)
+     */
     private Object expected;
+
+    /**
+     * @see AssertModule#assertOnEquals(String, Object, Object)
+     */
     private Object value;
 
+    /**
+     * @see MunitMessageProcessor#doProcess(org.mule.api.MuleMessage, org.mule.munit.AssertModule)
+     */
     @Override
     protected void doProcess(MuleMessage mulemessage, AssertModule module) {
         module.assertOnEquals(message, evaluate(mulemessage, expected), evaluate(mulemessage, value));
     }
 
+    /**
+     * @see org.mule.munit.config.MunitMessageProcessor#getProcessor()
+     */
     @Override
     protected String getProcessor() {
         return "assertOnEquals";

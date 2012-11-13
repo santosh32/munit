@@ -36,6 +36,13 @@
                     <packageLineRate>70</packageLineRate>
                     <packageBranchRate>70</packageBranchRate>
                 </check>
+                <instrumentation>
+                    <excludes>
+                        <!-- Spring parsers are excluded as they are tested in the it project with
+                        integration tests -->
+                        <exclude>org/mule/munit/config/spring/*</exclude>
+                    </excludes>
+                </instrumentation>
             </configuration>
             <executions>
                 <execution>

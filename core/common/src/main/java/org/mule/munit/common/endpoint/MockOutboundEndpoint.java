@@ -192,7 +192,7 @@ public class MockOutboundEndpoint implements OutboundEndpoint{
             }
 
             MunitUtils.verifyAssertions(event, behavior.getAssertions());
-            MunitUtils.changeMessage((DefaultMuleMessage) behavior.getMessage(), (DefaultMuleMessage) event.getMessage());
+            MunitUtils.copyMessage((DefaultMuleMessage) behavior.getMessage(), (DefaultMuleMessage) event.getMessage());
         }
 
         return event;

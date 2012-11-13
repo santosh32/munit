@@ -7,6 +7,10 @@ import java.util.ArrayList;
 
 import static junit.framework.Assert.assertEquals;
 
+/**
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class SpyAssertionTest {
 
     @Test

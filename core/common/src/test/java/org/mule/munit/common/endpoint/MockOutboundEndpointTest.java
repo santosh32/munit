@@ -21,6 +21,10 @@ import static junit.framework.Assert.assertNull;
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.*;
 
+/**
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class MockOutboundEndpointTest {
 
     public static final String ADDRESS = "http://localhost:8080/test";

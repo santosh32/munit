@@ -15,7 +15,9 @@ public class DumbMatcher implements Matcher{
         this.expectedValue = expectedValue;
     }
 
-
+    /**
+     *  @see Matcher#match(Object)
+     */
     @Override
     public boolean match(Object o) {
         return expectedValue;
