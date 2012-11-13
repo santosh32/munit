@@ -20,7 +20,7 @@ import java.util.List;
  * <p>Usage:</p>
  *
  * <code>
- *     new EndpointMocker(muleContext).expectEndpointWithAddress("http://localhost:8080").toReturn(muleMessage);
+ *     new EndpointMocker(muleContext).expectEndpointWithAddress("http://localhost:8080").theReturn(muleMessage);
  * </code>
  *
  * @author Federico, Fernando

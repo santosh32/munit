@@ -50,7 +50,7 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
         new MessageProcessorMocker(muleContext).expectMessageProcessor(getName(messageProcessor))
                 .ofNamespace(getNamespace(messageProcessor))
                 .withAttributes(createAttributes(withAttributes))
-                .toReturn(createMuleMessageFrom(thenReturn.getPayload(),
+                .theReturn(createMuleMessageFrom(thenReturn.getPayload(),
                         thenReturn.getInboundProperties(),
                         thenReturn.getOutboundProperties(),
                         thenReturn.getSessionProperties(),

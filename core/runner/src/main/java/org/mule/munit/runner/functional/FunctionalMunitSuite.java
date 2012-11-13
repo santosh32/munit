@@ -74,7 +74,7 @@ public abstract class FunctionalMunitSuite {
         return  new DefaultMuleMessage(payload, muleContext);
     }
 
-    protected final MessageProcessorMocker expectMessageProcessor(String name){
+    protected final MessageProcessorMocker whenMessageProcessor(String name){
         return new MessageProcessorMocker(muleContext).expectMessageProcessor(name);
     }
     

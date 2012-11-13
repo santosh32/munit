@@ -43,7 +43,7 @@ public class MessageProcessorMockerTest {
         messageProcessorMocker.expectMessageProcessor("testMp")
                 .ofNamespace("testNamespace")
                 .withAttributes(new HashMap<String, Object>())
-                .toReturn(message);
+                .theReturn(message);
 
         verify(manager).addBehavior(any(MockedMessageProcessorBehavior.class));
     }
@@ -52,6 +52,6 @@ public class MessageProcessorMockerTest {
     public void failIfNoMessageProcessorNameNotSet(){
         MessageProcessorMocker messageProcessorMocker = new MessageProcessorMocker(muleContext);
         messageProcessorMocker
-                .toReturn(message);
+                .theReturn(message);
     }
 }
