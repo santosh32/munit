@@ -43,6 +43,7 @@ public class MunitSuite {
 			notificationListener.notify(testResult);
 		}
 
+        notificationListener.notifyEnd(result);
 		return result;
 	}
 

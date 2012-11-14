@@ -3,6 +3,7 @@ package org.mule.munit.runner.remote;
 
 import org.mule.munit.runner.mule.MunitSuiteRunner;
 import org.mule.munit.runner.mule.MunitTest;
+import org.mule.munit.runner.mule.result.SuiteResult;
 import org.mule.munit.runner.mule.result.TestResult;
 import org.mule.munit.runner.mule.result.notification.NotificationListener;
 
@@ -67,7 +68,13 @@ public class MunitRemoteRunner {
 					}
 					
 				}
-			});
+
+                @Override
+                public void notifyEnd(SuiteResult result) {
+                    // DO NOTHING
+                    // TODO: FIX THIS
+                }
+            });
 			out.writeObject("0;" + runner.getNumberOfTests());
 			out.writeObject("5;" + path);
 			runner.run();

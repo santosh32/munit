@@ -59,6 +59,11 @@ public class SuiteResult implements MunitResult {
 		return errors;
 	}
 
+    @Override
+    public int getNumberOfTests() {
+        return this.results.size();
+    }
+
     /**
      * @return The suite name.
      */

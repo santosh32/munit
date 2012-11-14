@@ -2,6 +2,7 @@
 *.iml
 *.iws
 *.ipr
+.clover
 /target
 .project
 .classpath

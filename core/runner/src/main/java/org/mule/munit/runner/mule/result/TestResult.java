@@ -35,7 +35,12 @@ public class TestResult implements MunitResult {
 		return error != null ? 1 : 0;
 	}
 
-	public Notification getFailure() {
+    @Override
+    public int getNumberOfTests() {
+        return 1;
+    }
+
+    public Notification getFailure() {
 		return failure;
 	}
 

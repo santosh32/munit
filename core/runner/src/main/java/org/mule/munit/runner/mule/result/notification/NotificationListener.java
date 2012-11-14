@@ -1,6 +1,7 @@
 package org.mule.munit.runner.mule.result.notification;
 
 import org.mule.munit.runner.mule.MunitTest;
+import org.mule.munit.runner.mule.result.SuiteResult;
 import org.mule.munit.runner.mule.result.TestResult;
 
 /**
@@ -12,4 +13,6 @@ public interface NotificationListener {
 
 	void notifyStartOf(MunitTest test);
 	void notify(TestResult testResult);
+
+    void notifyEnd(SuiteResult result);
 }

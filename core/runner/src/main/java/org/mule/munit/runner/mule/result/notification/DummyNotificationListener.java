@@ -1,6 +1,7 @@
 package org.mule.munit.runner.mule.result.notification;
 
 import org.mule.munit.runner.mule.MunitTest;
+import org.mule.munit.runner.mule.result.SuiteResult;
 import org.mule.munit.runner.mule.result.TestResult;
 
 /**
@@ -17,5 +18,10 @@ public class DummyNotificationListener implements NotificationListener{
     @Override
     public void notify(TestResult testResult) {
 
+    }
+
+    @Override
+    public void notifyEnd(SuiteResult result) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 }

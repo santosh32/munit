@@ -15,4 +15,6 @@ public interface MunitResult {
 	int getNumberOfFailures();
 	
 	int getNumberOfErrors();
+
+    int getNumberOfTests();
 }
