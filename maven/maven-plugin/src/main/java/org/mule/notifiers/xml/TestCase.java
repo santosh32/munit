@@ -13,6 +13,8 @@ public class TestCase {
     private String className;
 
     private String failure;
+    private String error;
+    private Skipped skipped;
 
 
     public TestCase(float time, String className,String name) {
@@ -39,5 +41,17 @@ public class TestCase {
 
     public void setFailure(String failure) {
         this.failure = failure;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public void setSkipped(boolean skipped) {
+     this.skipped = skipped ? new Skipped() : null;
     }
 }

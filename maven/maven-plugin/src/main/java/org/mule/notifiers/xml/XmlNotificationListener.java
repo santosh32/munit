@@ -33,8 +33,12 @@ public class XmlNotificationListener implements NotificationListener{
     @Override
     public void notify(TestResult testResult) {
         TestCase testCase = new TestCase(testResult.getTime(), name, testResult.getTestName());
+        testCase.setSkipped(testResult.isSkipped());
         if ( testResult.getFailure() != null ){
             testCase.setFailure(testResult.getFailure().getFullMessage());
+        }
+        if ( testResult.getError() != null ){
+            testCase.setError(testResult.getError().getFullMessage());
         }
         suite.add(testCase);
     }
@@ -47,6 +51,7 @@ public class XmlNotificationListener implements NotificationListener{
         suite.setFailures(result.getNumberOfFailures());
         suite.setTests(result.getNumberOfTests());
         suite.setTime(result.getTime());
+        suite.setSkipped(result.getNumberOfSkipped());
         out.print(xStream.toXML(suite));
     }
 

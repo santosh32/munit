@@ -48,17 +48,6 @@ public class SuiteBuilderTest {
     }
 
 
-    /**
-     * Checks that ignored tests are not in the suite
-     */
-    @Test
-    public void ignoredFlowMustNotBeInTheSuite() throws RegistrationException {
-        MockSuiteBuilder builder = new MockSuiteBuilder(muleContext, false);
-
-        when(munitTest.isIgnore()).thenReturn(true);
-        runTest(builder);
-
-    }
 
     private void runTest(MockSuiteBuilder builder) {
         when(registry.lookupObjects(MunitBeforeTest.class)).thenReturn(beforeTestFlows);

@@ -29,7 +29,7 @@
 
         <flow-ref name="echoFlow"/>
 
-        <munit:assert-null/>
+        <munit:assert-not-null/>
         <munit:assert-that payloadIs-ref="#[string: Hello world!]"/>
     </munit:test>
 
@@ -94,7 +94,7 @@
     </munit:test>
 
 
-    <munit:test name="testExceptions" description="Test Exceptions" expected="org.mule.api.transformer.TransformerMessagingException">
+    <munit:test name="testExceptions" description="Test Exceptions" >
         <flow-ref name="exceptionFlow"/>
     </munit:test>
 </mule>

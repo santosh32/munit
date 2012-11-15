@@ -14,6 +14,7 @@ public class TestResult implements MunitResult {
 	private Notification failure;
 	private Notification error;
     private float time;
+    private boolean skipped;
 
 
     public TestResult(String name) {
@@ -46,6 +47,11 @@ public class TestResult implements MunitResult {
         return time;
     }
 
+    @Override
+    public int getNumberOfSkipped() {
+       return skipped ? 1 : 0;
+    }
+
     public Notification getFailure() {
 		return failure;
 	}
@@ -64,5 +70,22 @@ public class TestResult implements MunitResult {
 
     public void setTime(float time) {
         this.time = time;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+    public void setSkipped(boolean skipped) {
+        this.skipped = skipped;
+    }
+
+    public boolean isSkipped() {
+        return skipped;
     }
 }

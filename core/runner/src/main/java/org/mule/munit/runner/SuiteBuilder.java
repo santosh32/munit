@@ -63,9 +63,7 @@ public abstract class SuiteBuilder<T,E> {
         List<MunitFlow> after = lookupFlows(MunitAfterTest.class);
         Collection<MunitTestFlow> flowConstructs = lookupTests();
         for (MunitTestFlow flowConstruct : flowConstructs) {
-            if ( !flowConstruct.isIgnore() ){
-               tests.add(test(before, flowConstruct, after));
-            }
+            tests.add(test(before, flowConstruct, after));
         }
         
         return createSuite(suiteName);

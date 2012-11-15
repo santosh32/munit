@@ -67,8 +67,13 @@ public class MunitTest {
     }
 
     public TestResult run() {
-        long start = System.currentTimeMillis();
         TestResult result = new TestResult(getName());
+        if ( test.isIgnore() ){
+            result.setSkipped(true);
+            return result;
+        }
+
+        long start = System.currentTimeMillis();
         MuleEvent event = muleEvent();
 
         try {
@@ -91,7 +96,7 @@ public class MunitTest {
         }
 
         long end = System.currentTimeMillis();
-        result.setTime((end - start)/1000);
+        result.setTime(new Float(end - start)/1000);
         return result;
 
     }

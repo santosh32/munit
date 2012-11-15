@@ -19,4 +19,6 @@ public interface MunitResult {
     int getNumberOfTests();
 
     float getTime();
+
+    int getNumberOfSkipped();
 }

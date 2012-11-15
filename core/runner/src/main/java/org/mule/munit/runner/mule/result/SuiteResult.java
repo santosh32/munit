@@ -74,6 +74,17 @@ public class SuiteResult implements MunitResult {
         return total;
     }
 
+    @Override
+    public int getNumberOfSkipped() {
+        int skipped = 0;
+        for ( MunitResult result : results )
+        {
+            skipped += result.getNumberOfSkipped();
+        }
+
+        return skipped;
+    }
+
     /**
      * @return The suite name.
      */
