@@ -14,7 +14,6 @@ public class JavaMunitTest extends FunctionalMunitSuite{
         return "mule-config.xml";
     }
 
-    @Ignore
     @Test
     public void test() throws Exception {
         whenMessageProcessor("create-group")
