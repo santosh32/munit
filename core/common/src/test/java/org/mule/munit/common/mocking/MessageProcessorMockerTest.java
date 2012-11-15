@@ -40,7 +40,7 @@ public class MessageProcessorMockerTest {
     @Test
     public void addBehavior(){
         MessageProcessorMocker messageProcessorMocker = new MessageProcessorMocker(muleContext);
-        messageProcessorMocker.expectMessageProcessor("testMp")
+        messageProcessorMocker.when("testMp")
                 .ofNamespace("testNamespace")
                 .withAttributes(new HashMap<String, Object>())
                 .theReturn(message);

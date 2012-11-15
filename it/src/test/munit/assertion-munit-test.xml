@@ -29,7 +29,7 @@
 
         <flow-ref name="echoFlow"/>
 
-        <munit:assert-not-null/>
+        <munit:assert-null/>
         <munit:assert-that payloadIs-ref="#[string: Hello world!]"/>
     </munit:test>
 

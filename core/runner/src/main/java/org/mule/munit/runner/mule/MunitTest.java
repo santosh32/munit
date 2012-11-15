@@ -67,7 +67,7 @@ public class MunitTest {
     }
 
     public TestResult run() {
-
+        long start = System.currentTimeMillis();
         TestResult result = new TestResult(getName());
         MuleEvent event = muleEvent();
 
@@ -90,6 +90,8 @@ public class MunitTest {
             runAfter(result, event);
         }
 
+        long end = System.currentTimeMillis();
+        result.setTime((end - start)/1000);
         return result;
 
     }

@@ -14,7 +14,6 @@
     <modules>
     <module>maven-plugin</module>
     <module>mule-app-archetype</module>
-    <module>surefire-provider</module>
     </modules>
 
 </project>

@@ -46,14 +46,14 @@ public class MuleContextManager {
 
     public void killMule(MuleContext muleContext) {
         try {
-            if ( muleContext != null )
+            if ( muleContext != null && !muleContext.isStopped() )
             {
                 muleContext.stop();
             }
         } catch (MuleException e1) {
 
         }
-        if (muleContext != null )
+        if (muleContext != null && !muleContext.isDisposed() )
         {
             muleContext.dispose();
         }

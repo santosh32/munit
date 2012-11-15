@@ -24,8 +24,11 @@ import org.apache.maven.project.MavenProject;
 import org.mule.munit.runner.mule.MunitSuiteRunner;
 import org.mule.munit.runner.mule.result.MunitResult;
 import org.mule.munit.runner.mule.result.SuiteResult;
+import org.mule.munit.runner.mule.result.notification.DummyNotificationListener;
+import org.mule.munit.runner.mule.result.notification.NotificationListener;
 import org.mule.notifiers.NotificationListenerDecorator;
 import org.mule.notifiers.StreamNotificationListener;
+import org.mule.notifiers.xml.XmlNotificationListener;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -173,15 +176,28 @@ public class MUnitMojo
         MunitSuiteRunner runner = new MunitSuiteRunner(fileName);
         NotificationListenerDecorator listener = new NotificationListenerDecorator();
         listener.addNotificationListener(new StreamNotificationListener(System.out));
-        String name = fileName.replace("xml", "txt");
-        try {
-            listener.addNotificationListener(new StreamNotificationListener(new PrintStream(new FileOutputStream(new File(project.getBasedir() + "/target/surefire-reports/munit."+name)))));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        listener.addNotificationListener(buildFileNotificationListener(fileName));
+        listener.addNotificationListener(buildXmlNotificationListener(fileName));
         runner.setNotificationListener(listener);
 		return runner;
 	}
+
+    private NotificationListener buildFileNotificationListener(String fileName) {
+        String name =fileName.replace(".xml", ".txt");
+        try {
+            return new StreamNotificationListener(new PrintStream(new FileOutputStream(new File(project.getBasedir() + "/target/surefire-reports/munit."+name))));
+        } catch (FileNotFoundException e) {
+            return new DummyNotificationListener();
+        }
+    }
+
+    private NotificationListener buildXmlNotificationListener(String fileName) {
+        try {
+            return new XmlNotificationListener(fileName,new PrintStream(new FileOutputStream(new File(project.getBasedir() + "/target/surefire-reports/TEST-munit."+fileName))));
+        } catch (FileNotFoundException e) {
+            return new DummyNotificationListener();
+        }
+    }
 
     private boolean validateFilter(String fileName) {
         if ( munittest == null )

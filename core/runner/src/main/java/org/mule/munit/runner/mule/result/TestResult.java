@@ -13,9 +13,10 @@ public class TestResult implements MunitResult {
 	private String name;
 	private Notification failure;
 	private Notification error;
-	
-	
-	public TestResult(String name) {
+    private float time;
+
+
+    public TestResult(String name) {
 		this.name = name;
 	}
 
@@ -40,6 +41,11 @@ public class TestResult implements MunitResult {
         return 1;
     }
 
+    @Override
+    public float getTime() {
+        return time;
+    }
+
     public Notification getFailure() {
 		return failure;
 	}
@@ -55,4 +61,8 @@ public class TestResult implements MunitResult {
 	public void setError(Notification error) {
 		this.error = error;
 	}
+
+    public void setTime(float time) {
+        this.time = time;
+    }
 }

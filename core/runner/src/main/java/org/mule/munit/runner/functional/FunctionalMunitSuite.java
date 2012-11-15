@@ -75,7 +75,7 @@ public abstract class FunctionalMunitSuite {
     }
 
     protected final MessageProcessorMocker whenMessageProcessor(String name){
-        return new MessageProcessorMocker(muleContext).expectMessageProcessor(name);
+        return new MessageProcessorMocker(muleContext).when(name);
     }
     
     protected final MunitVerifier verifyCallOfMessageProcessor(String name){

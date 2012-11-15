@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.mule.munit.runner.functional.FunctionalMunitSuite;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
 
 
 public class JavaMunitTest extends FunctionalMunitSuite{
@@ -22,6 +23,11 @@ public class JavaMunitTest extends FunctionalMunitSuite{
         Object payload = runFlow("callingJira", testEvent("something")).getMessage().getPayload();
 
         assertEquals("expected", payload);
+    }
+
+    @Test
+    public void testFail(){
+        assertNotNull(new Object());
     }
 
 

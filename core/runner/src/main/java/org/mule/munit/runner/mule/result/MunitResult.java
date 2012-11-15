@@ -17,4 +17,6 @@ public interface MunitResult {
 	int getNumberOfErrors();
 
     int getNumberOfTests();
+
+    float getTime();
 }

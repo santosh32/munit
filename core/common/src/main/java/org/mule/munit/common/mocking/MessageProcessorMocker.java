@@ -15,7 +15,7 @@ import java.util.Map;
  * <p>Usage:</p>
  *
  * <code>
- *     new MessageProcessorMocker(muleContext).expectMessageProcessor("mp").ofNamespace("namespace").theReturn(muleMessage);
+ *     new MessageProcessorMocker(muleContext).when("mp").ofNamespace("namespace").theReturn(muleMessage);
  * </code>
  *
  * @author Federico, Fernando
@@ -37,7 +37,7 @@ public class MessageProcessorMocker extends MunitMockingTool {
      * @return
      *      <p>The MessageProcessorMocker</p>
      */
-    public MessageProcessorMocker expectMessageProcessor(String name) {
+    public MessageProcessorMocker when(String name) {
         this.messageProcessorName = name;
         return this;
     }

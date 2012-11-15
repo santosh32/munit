@@ -64,6 +64,16 @@ public class SuiteResult implements MunitResult {
         return this.results.size();
     }
 
+    @Override
+    public float getTime() {
+        float total = 0;
+        for ( MunitResult result : results ){
+            total+=result.getTime();
+        }
+
+        return total;
+    }
+
     /**
      * @return The suite name.
      */
