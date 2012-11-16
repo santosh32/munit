@@ -1,7 +1,5 @@
 package org.mule.munit.common.mocking;
 
-import org.mule.transport.NullPayload;
-
 /**
  * <p>This class is a marker to know that the payload must not be overridden</p>
  *
@@ -32,6 +30,6 @@ public class NotDefinedPayload {
      *      <p>true/false based on the payload check</p>
      */
     public static boolean isNotDefined(Object payload) {
-        return payload.equals(NullPayload.getInstance()) || (payload instanceof NotDefinedPayload);
+        return (payload instanceof NotDefinedPayload);
     }
 }

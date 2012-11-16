@@ -4,7 +4,7 @@
     <parent>
         <artifactId>tools</artifactId>
         <groupId>org.mule.munit</groupId>
-        <version>3.3.2-SNAPSHOT</version>
+        <version>3.3.2-M1-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -22,12 +22,12 @@
         <dependency>
             <groupId>org.mule.munit</groupId>
             <artifactId>assert</artifactId>
-            <version>3.3.2-SNAPSHOT</version>
+            <version>3.3.2-M1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.mule.munit</groupId>
             <artifactId>runner</artifactId>
-            <version>3.3.2-SNAPSHOT</version>
+            <version>3.3.2-M1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

@@ -5,11 +5,11 @@
     <parent>
         <artifactId>core</artifactId>
         <groupId>org.mule.munit</groupId>
-        <version>3.3.2-SNAPSHOT</version>
+        <version>3.3.2-M1-SNAPSHOT</version>
     </parent>
     <groupId>org.mule.munit</groupId>
     <artifactId>runner</artifactId>
-    <version>3.3.2-SNAPSHOT</version>
+    <version>3.3.2-M1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Munit runner Module</name>
 
@@ -30,13 +30,13 @@
         <dependency>
             <groupId>org.mule.munit</groupId>
             <artifactId>assert</artifactId>
-            <version>3.3.2-SNAPSHOT</version>
+            <version>3.3.2-M1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>org.mule.munit</groupId>
             <artifactId>mock</artifactId>
-            <version>3.3.2-SNAPSHOT</version>
+            <version>3.3.2-M1-SNAPSHOT</version>
         </dependency>
 
     </dependencies>

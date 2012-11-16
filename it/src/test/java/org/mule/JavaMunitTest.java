@@ -1,6 +1,5 @@
 package org.mule;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mule.munit.runner.functional.FunctionalMunitSuite;
 

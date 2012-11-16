@@ -4,11 +4,11 @@
     <parent>
     <artifactId>munit</artifactId>
     <groupId>org.mule</groupId>
-    <version>3.3.2-SNAPSHOT</version>
+    <version>3.3.2-M1-SNAPSHOT</version>
   </parent>
     <groupId>org.mule.munit</groupId>
     <artifactId>core</artifactId>
-    <version>3.3.2-SNAPSHOT</version>
+    <version>3.3.2-M1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Munit core</name>
 

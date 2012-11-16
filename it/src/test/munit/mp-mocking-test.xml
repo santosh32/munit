@@ -144,7 +144,7 @@
 
         <mock:when messageProcessor="jira:create-group">
             <mock:with-attributes>
-                <mock:with-attribute name="groupName" whereValue-ref="#[string:someGroup]"/>
+                <mock:with-attribute name="groupName" whereValue-ref="#[anyString()]"/>
                 <mock:with-attribute name="userName" whereValue-ref='#[anyString()]'/>
             </mock:with-attributes>
             <mock:then-return payload-ref="#[string:createGroupResult]"/>

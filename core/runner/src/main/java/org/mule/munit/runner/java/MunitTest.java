@@ -40,6 +40,10 @@ public class MunitTest extends TestCase
 
     @Override
     protected void runTest() throws Throwable {
+        if ( flow.isIgnore() ){
+            return;
+        }
+
         MuleEvent event = muleEvent();
         run(event, before);
 

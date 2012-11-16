@@ -2,6 +2,7 @@ package org.mule.munit.common.mp;
 
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
+import org.apache.commons.lang.StringUtils;
 import org.mule.DefaultMuleMessage;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleEvent;
@@ -94,7 +95,7 @@ public class MunitMessageProcessorInterceptor implements MethodInterceptor{
         if ( expressionManager.isExpression(elementValue)){
             compareTo = expressionManager.parse(elementValue, event);
         }
-        else {
+        else if (!StringUtils.isEmpty(elementValue) ){
             Object o = getMuleContext().getRegistry().lookupObject(elementValue);
             if ( o != null ){
                 compareTo = o;
@@ -103,7 +104,7 @@ public class MunitMessageProcessorInterceptor implements MethodInterceptor{
                 compareTo = elementValue;
             }
         }
-        return compareTo;
+        return elementValue;
     }
 
 
