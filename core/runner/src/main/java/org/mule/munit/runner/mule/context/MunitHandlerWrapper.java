@@ -1,11 +1,15 @@
 package org.mule.munit.runner.mule.context;
 
 import org.apache.commons.lang.StringUtils;
+import org.mule.api.processor.InterceptingMessageProcessor;
 import org.mule.api.processor.MessageProcessor;
+import org.mule.api.transformer.MessageTransformer;
 import org.mule.config.spring.MuleHierarchicalBeanDefinitionParserDelegate;
 import org.mule.construct.Flow;
+import org.mule.enricher.MessageEnricher;
 import org.mule.munit.common.mp.MessageProcessorId;
 import org.mule.munit.common.mp.MunitMessageProcessorInterceptorFactory;
+import org.mule.routing.Foreach;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.PropertyValue;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -113,7 +117,12 @@ public class MunitHandlerWrapper implements NamespaceHandler {
 
     private boolean isMessageProcessor(Class<?> beanType) {
         return MessageProcessor.class.isAssignableFrom(beanType) &&
-                !Flow.class.isAssignableFrom(beanType);
+                !Flow.class.isAssignableFrom(beanType) &&
+                !MessageEnricher.class.isAssignableFrom(beanType) &&
+                !MessageTransformer.class.isAssignableFrom(beanType) &&
+                !InterceptingMessageProcessor.class.isAssignableFrom(beanType) &&
+                !Foreach.class.isAssignableFrom(beanType);
+
     }
     protected void setNoRecurseOnDefinition(BeanDefinition definition) {
         definition.setAttribute(MuleHierarchicalBeanDefinitionParserDelegate.MULE_NO_RECURSE, Boolean.TRUE);
