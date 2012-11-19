@@ -45,16 +45,25 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
     @Processor
     public void when(String messageProcessor,
                      @Optional List<Attribute> withAttributes,
-                       @Optional MunitMuleMessage thenReturn) {
+                     @Optional MunitMuleMessage thenReturn) {
 
-        new MessageProcessorMocker(muleContext).when(getName(messageProcessor))
-                .ofNamespace(getNamespace(messageProcessor))
-                .withAttributes(createAttributes(withAttributes))
-                .theReturn(createMuleMessageFrom(thenReturn.getPayload(),
-                        thenReturn.getInboundProperties(),
-                        thenReturn.getOutboundProperties(),
-                        thenReturn.getSessionProperties(),
-                        thenReturn.getInvocationProperties()));
+        if ( thenReturn == null ){
+            new MessageProcessorMocker(muleContext).when(getName(messageProcessor))
+                    .ofNamespace(getNamespace(messageProcessor))
+                    .withAttributes(createAttributes(withAttributes))
+                    .theReturn(createMuleMessageFrom(null,null,null,null,null));
+        }
+        else{
+            new MessageProcessorMocker(muleContext).when(getName(messageProcessor))
+                    .ofNamespace(getNamespace(messageProcessor))
+                    .withAttributes(createAttributes(withAttributes))
+                    .theReturn(createMuleMessageFrom(thenReturn.getPayload(),
+                            thenReturn.getInboundProperties(),
+                            thenReturn.getOutboundProperties(),
+                            thenReturn.getSessionProperties(),
+                            thenReturn.getInvocationProperties()));
+        }
+
     }
 
     /**
