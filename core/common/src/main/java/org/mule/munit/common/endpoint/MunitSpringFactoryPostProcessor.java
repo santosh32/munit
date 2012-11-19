@@ -71,8 +71,10 @@ public class MunitSpringFactoryPostProcessor implements BeanFactoryPostProcessor
                 }
             }
 
-            changeEndpointFactory(beanFactory);
+
         }
+
+        changeEndpointFactory(beanFactory);
 
         mockConnectors(beanFactory);
 

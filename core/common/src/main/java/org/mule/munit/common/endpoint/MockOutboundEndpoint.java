@@ -129,7 +129,7 @@ public class MockOutboundEndpoint implements OutboundEndpoint{
 
     @Override
     public MessageExchangePattern getExchangePattern() {
-        return null;
+        return realEndpoint.getExchangePattern();
     }
 
     @Override

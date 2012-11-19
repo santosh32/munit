@@ -402,6 +402,11 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.mule.utils</groupId>
+            <artifactId>mclient</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 		<dependency>
 			<groupId>com.mulesoft.muleesb.transports</groupId>
 			<artifactId>mule-transport-jdbc-ee</artifactId>

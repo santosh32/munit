@@ -3,6 +3,7 @@ package org.mule.munit.common.endpoint;
 import org.junit.Before;
 import org.junit.Test;
 import org.mule.DefaultMuleMessage;
+import org.mule.MessageExchangePattern;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleEvent;
 import org.mule.api.MuleException;
@@ -97,10 +98,11 @@ public class MockOutboundEndpointTest {
 
         verify(messageProcessor, never()).process(event);
     }
-
     @Test
     public void testNotDefinedMethods(){
-        MockOutboundEndpoint endpoint = new MockOutboundEndpoint(null);
+        MockOutboundEndpoint endpoint = new MockOutboundEndpoint(realEndpoint);
+
+        when(realEndpoint.getExchangePattern()).thenReturn(MessageExchangePattern.REQUEST_RESPONSE);
 
         assertNull(endpoint.getResponseProperties());
         assertNull(endpoint.getEndpointURI());
@@ -118,7 +120,7 @@ public class MockOutboundEndpointTest {
         assertNull(endpoint.getMessageProcessorsFactory());
         assertNull(endpoint.getMessageProcessors());
         assertNull(endpoint.getResponseMessageProcessors());
-        assertNull(endpoint.getExchangePattern());
+        assertEquals(MessageExchangePattern.REQUEST_RESPONSE, endpoint.getExchangePattern());
         assertNull(endpoint.getInitialState());
         assertNull(endpoint.getMuleContext());
         assertNull(endpoint.getRetryPolicyTemplate());

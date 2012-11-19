@@ -34,10 +34,11 @@ public class MunitSpringFactoryPostProcessorTest {
         MunitSpringFactoryPostProcessor pp = new MunitSpringFactoryPostProcessor();
         pp.setMockInbounds(false);
         pp.setMockingExcludedFlows(new ArrayList<String>());
+        when(beanFactory.getBeanDefinition(MuleProperties.OBJECT_MULE_ENDPOINT_FACTORY)).thenReturn(new GenericBeanDefinition());
         
         pp.postProcessBeanFactory(beanFactory);
         
-        verify(beanFactory, times(0)).getBeanDefinition(any(String.class));
+        verify(beanFactory, times(1)).getBeanDefinition(any(String.class));
     }
 
     @Test

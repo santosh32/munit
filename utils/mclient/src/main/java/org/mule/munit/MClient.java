@@ -8,6 +8,7 @@ import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.param.Optional;
 import org.mule.api.context.MuleContextAware;
 
+
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,8 @@ import java.util.Map;
  * <p>Module used to call mule transports.</p>
  *
  * @author Federico, Fernando
+ * @author Casal, Javier
+ * @author Scandroglio, Matias
  */
 @Module(name="mclient", schemaVersion="1.0")
 public class MClient implements MuleContextAware
