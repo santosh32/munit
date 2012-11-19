@@ -14,6 +14,8 @@
 
     <spring:beans>
         <spring:import resource="mule-config.xml"/>
+
+        <spring:bean class="org.mule.assertions.CustomAssertion" name="customAssertion"/>
     </spring:beans>
 
 
@@ -96,5 +98,12 @@
 
     <munit:test name="testExceptions" description="Test Exceptions" expected="org.mule.api.transformer.TransformerMessagingException">
         <flow-ref name="exceptionFlow"/>
+    </munit:test>
+
+    <munit:test name="testCustomAssertion" description="run and expect a failure in a custom assertion">
+
+        <munit:set payload-ref='#[string:Hello World]'/>
+
+        <munit:run-custom assertion-ref="customAssertion"/>
     </munit:test>
 </mule>

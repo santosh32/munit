@@ -614,4 +614,22 @@
             </xs:documentation>
         </xs:annotation>
     </xs:element>
+
+    <xs:element xmlns="http://www.mulesoft.org/schema/mule/munit" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="run-custom" substitutionGroup="mule:abstract-message-processor" type="RunCustomType">
+        <xs:annotation>
+            <xs:documentation>Run a custom assertion</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:complexType name="RunCustomType">
+        <xs:complexContent>
+            <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+
+                <xs:attribute name="assertion-ref" use="required" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>The assertion to run</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 </xs:schema>
