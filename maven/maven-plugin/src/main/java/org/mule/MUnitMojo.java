@@ -92,6 +92,9 @@ public class MUnitMojo
                 List<SuiteResult> results = new ArrayList<SuiteResult>();
                 addUrlsToClassPath(makeClassPath());
                 File testFolder = new File(project.getBasedir(), "src/test/munit");
+                if ( testFolder == null || !testFolder.exists() ){
+                    return;
+                }
 
                 for ( File file : testFolder.listFiles() )
                 {
