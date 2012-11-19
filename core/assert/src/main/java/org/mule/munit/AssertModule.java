@@ -105,7 +105,6 @@ public class AssertModule extends MunitSpringFactoryPostProcessor
     }
 
 
-
     /**
      * <p>Fail assertion.</p>
      *

@@ -36,6 +36,11 @@ public class MunitMessageProcessorInterceptor implements MethodInterceptor{
         MessageProcessorCall messageProcessorCall = buildCall(event);
         MockedMessageProcessorBehavior behavior = manager.getBetterMatchingBehavior(messageProcessorCall);
         if ( behavior != null ){
+            if (behavior.getExceptionToThrow() != null) {
+                registerCall(event, manager, messageProcessorCall);
+                throw behavior.getExceptionToThrow();
+            }
+
             MunitUtils.copyMessage((DefaultMuleMessage) behavior.getReturnMuleMessage(), (DefaultMuleMessage) event.getMessage());
 
             registerCall(event, manager, messageProcessorCall);

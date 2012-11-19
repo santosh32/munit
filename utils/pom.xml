@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mule.utils</groupId>
     <artifactId>parent</artifactId>
-    <version>3.3.2-M1-SNAPSHOT</version>
+    <version>3.3.2-M2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Utils for integration testing</name>
@@ -230,12 +230,12 @@
         <dependency>
             <groupId>org.mule.munit</groupId>
             <artifactId>assert</artifactId>
-            <version>3.3.2-M1-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.mule.munit</groupId>
             <artifactId>common</artifactId>
-            <version>3.3.2-M1-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

@@ -93,7 +93,7 @@
         <json:object-to-json-transformer />
 
         <default-exception-strategy>
-            <logger message="Something failed"/>
+            <logger assertion="Something failed"/>
         </default-exception-strategy>
     </flow>
 
@@ -178,7 +178,7 @@
 
     <flow name="peopleMatterInbound">
 
-        <pm:secure-event-message-filter key="secure_key" />
+        <pm:secure-event-assertion-filter key="secure_key" />
         <pm:event-to-xml-transformer />
 
 

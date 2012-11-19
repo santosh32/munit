@@ -17,7 +17,7 @@
 
     <munit:config/>
     <mpmock:config of="echoFlow:echo-component" name="mpMocked"/>
-    <mpmock:config of="peopleMatterInbound:secure-event-message-filter" name="secureEventMocked"/>
+    <mpmock:config of="peopleMatterInbound:secure-event-assertion-filter" name="secureEventMocked"/>
     <mpmock:config of="peopleMatterInbound:event-to-xml-transformer" name="xmlTransformerMocked"/>
 
 

@@ -45,9 +45,9 @@
           description="
         If the Job Id exist it must set the job property value with the database value">
 
-        <message-properties-transformer scope="invocation">
-            <add-message-property key="jobid" value="3" />
-        </message-properties-transformer>
+        <assertion-properties-transformer scope="invocation">
+            <add-assertion-property key="jobid" value="3" />
+        </assertion-properties-transformer>
 
         <flow-ref name="enrichMessageFlow" />
 
@@ -61,9 +61,9 @@
           description="
          If the Job Id doesn't exist it must set the job property value with HIR">
 
-        <message-properties-transformer scope="invocation">
-            <add-message-property key="jobid" value="11" />
-        </message-properties-transformer>
+        <assertion-properties-transformer scope="invocation">
+            <add-assertion-property key="jobid" value="11" />
+        </assertion-properties-transformer>
 
         <flow-ref name="enrichMessageFlow" />
 
@@ -75,9 +75,9 @@
     <munit:test name="databaseResult"
                 description="Testing database result">
 
-        <message-properties-transformer scope="invocation">
-            <add-message-property key="jobid" value="11" />
-        </message-properties-transformer>
+        <assertion-properties-transformer scope="invocation">
+            <add-assertion-property key="jobid" value="11" />
+        </assertion-properties-transformer>
 
         <flow-ref name="enrichMessageFlow" />
 

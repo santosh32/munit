@@ -86,4 +86,15 @@ public class MessageProcessorMocker extends MunitMockingTool {
         messageProcessorCall.setAttributes(messageProcessorAttributes);
         manager.addBehavior(new MockedMessageProcessorBehavior(messageProcessorCall, message));
     }
+
+    public void thenThrow(Throwable exception) {
+        if ( messageProcessorName == null ){
+            throw new IllegalArgumentException("You must specify at least the message processor name");
+        }
+
+        MockedMessageProcessorManager manager = getManager();
+        MessageProcessorCall messageProcessorCall = new MessageProcessorCall(new MessageProcessorId(messageProcessorName, messageProcessorNamespace));
+        messageProcessorCall.setAttributes(messageProcessorAttributes);
+        manager.addBehavior(new MockedMessageProcessorBehavior(messageProcessorCall, exception));
+    }
 }

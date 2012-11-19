@@ -3,7 +3,7 @@
     <parent>
         <artifactId>munit</artifactId>
         <groupId>org.mule</groupId>
-        <version>3.3.2-M1-SNAPSHOT</version>
+        <version>3.3.2-M2-SNAPSHOT</version>
     </parent>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -11,7 +11,6 @@
 	<artifactId>it</artifactId>
 	<packaging>mule</packaging>
 	<name>Integration Tests</name>
-    <version>3.3.2-M1-SNAPSHOT</version>
 	<description>Integration Test for Munit Project</description>
 
 	<properties>
@@ -149,7 +148,7 @@
 			<plugin>
                 <groupId>org.mule.munit.tools</groupId>
                 <artifactId>munit-plugin</artifactId>
-                <version>3.3.2-M1-SNAPSHOT</version>
+                <version>${project.version}</version>
                 <executions>
                     <execution>
                         <phase>test</phase>
@@ -399,7 +398,7 @@
         <dependency>
             <groupId>org.mule.munit</groupId>
             <artifactId>runner</artifactId>
-            <version>3.3.2-M1-SNAPSHOT</version>
+            <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
 

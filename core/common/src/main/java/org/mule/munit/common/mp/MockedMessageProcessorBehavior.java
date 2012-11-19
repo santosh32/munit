@@ -20,9 +20,16 @@ public class MockedMessageProcessorBehavior {
      */
     private MuleMessage returnMuleMessage;
 
+    private Throwable exceptionToThrow;
+
     public MockedMessageProcessorBehavior(MessageProcessorCall messageProcessorCall, MuleMessage returnMuleMessage) {
         this.messageProcessorCall = messageProcessorCall;
         this.returnMuleMessage = returnMuleMessage;
+    }
+
+    public MockedMessageProcessorBehavior(MessageProcessorCall messageProcessorCall, Throwable exceptionToThrow) {
+        this.messageProcessorCall = messageProcessorCall;
+        this.exceptionToThrow = exceptionToThrow;
     }
 
     public MuleMessage getReturnMuleMessage() {
@@ -31,5 +38,9 @@ public class MockedMessageProcessorBehavior {
 
     public MessageProcessorCall getMessageProcessorCall() {
         return messageProcessorCall;
+    }
+
+    public Throwable getExceptionToThrow() {
+        return exceptionToThrow;
     }
 }

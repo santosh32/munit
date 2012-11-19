@@ -27,3 +27,10 @@
 
 
 <!-- END_INCLUDE(mock:spy) -->
+
+<!-- BEGIN_INCLUDE(mock:expectFail) -->
+
+        <mock:throw-an exception-ref="#[new Exception()]" onCallOf="test"/>
+
+
+<!-- END_INCLUDE(mock:expectFail) -->
