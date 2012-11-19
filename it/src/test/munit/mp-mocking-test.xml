@@ -51,6 +51,21 @@
         <munit:assert-that payloadIs-ref="#[string:expectedPayload]"/>
     </munit:test>
 
+    <munit:test name="testMockWithoutChangingPayload"
+
+                description="
+        The payload must not change when to return is not defined">
+
+        <mock:when messageProcessor="jira:create-group"/>
+
+        <munit:set payload-ref="#[string: Hello world!]"/>
+
+        <flow-ref name="callingJira"/>
+
+        <munit:assert-that payloadIs-ref="#[string: Hello world!]"/>
+
+    </munit:test>
+
     <munit:test name="testMpIsNotMocked" description="
     If the Message Processor is not mocked then do not change its behavior">
 
@@ -163,7 +178,6 @@
     <munit:test name="testingMockTrowsException" description="Test if a mock can throw an exception" expected="java.lang.Exception">
         <mock:throw-an exception-ref="#[new Exception()]" onCallOf="jira:create-group"/>
     </munit:test>
-
 
 
 </mule>
