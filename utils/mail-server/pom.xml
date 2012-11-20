@@ -6,8 +6,17 @@
         <artifactId>parent</artifactId>
         <version>3.3.2-M2-SNAPSHOT</version>
   </parent>
-    <artifactId>mclient</artifactId>
+    <artifactId>mail-server</artifactId>
     <packaging>mule-module</packaging>
-    <name>Mule Client for integration testing</name>
+    <name>Mail server for integration testing</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.mule.munit.utils</groupId>
+            <artifactId>common</artifactId>
+            <version>3.3.2-M2-SNAPSHOT</version>
+        </dependency>
+
+    </dependencies>
 
 </project>

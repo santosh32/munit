@@ -1,0 +1,21 @@
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp"
+      xsi:schemaLocation="
+        http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+
+
+    <smtp:gmail-connector name="emailConnector"/>
+
+    <flow name="NotificationOfError">
+        <object-to-string-transformer />
+        <logger level="ERROR" message="FER"/>
+        <smtp:outbound-endpoint host="localhost"
+                                port="3025" user="" password="" from="fernando.federico@localhost.com" to="test@localhost.com" subject="#[string:Testing app]"
+                                connector-ref="emailConnector" />
+
+        <logger level="ERROR" message="FER2"/>
+    </flow>
+
+</mule>

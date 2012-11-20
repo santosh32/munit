@@ -403,9 +403,22 @@
         </dependency>
 
         <dependency>
-            <groupId>org.mule.utils</groupId>
+            <groupId>org.mule.munit.utils</groupId>
+            <artifactId>mail-server</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.munit.utils</groupId>
             <artifactId>mclient</artifactId>
             <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.transports</groupId>
+            <artifactId>mule-transport-email</artifactId>
+            <version>${mule.version}</version>
+            <scope>provided</scope>
         </dependency>
 		<dependency>
 			<groupId>com.mulesoft.muleesb.transports</groupId>

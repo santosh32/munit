@@ -1,0 +1,11 @@
+<!-- BEGIN_INCLUDE(mail-server:start) -->
+    <mail-server:start-server/>
+<!-- END_INCLUDE(mail-server:start) -->
+
+<!-- BEGIN_INCLUDE(mail-server:stop) -->
+    <mail-server:stop-server/>
+<!-- END_INCLUDE(mail-server:stop) -->
+
+<!-- BEGIN_INCLUDE(mail-server:getMessages) -->
+    <mail-server:get-received-messages/>
+<!-- END_INCLUDE(mail-server:getMessages) -->
