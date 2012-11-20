@@ -96,7 +96,7 @@
     </munit:test>
 
 
-    <munit:test name="testExceptions" description="Test Exceptions" expected="org.mule.api.transformer.TransformerMessagingException">
+    <munit:test name="testExceptions" description="Test Exceptions" expected="org.mule.api.transformer.TransformerException">
         <flow-ref name="exceptionFlow"/>
     </munit:test>
 
