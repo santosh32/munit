@@ -36,7 +36,9 @@
         <flow-ref name="NotificationOfError"/>
 
         <mail-server:get-received-messages/>
-        <!-- TODO figured out how to process mime message -->
+
+        <munit:assert-not-null/>
+        <munit:assert-false condition="#[payload.isEmpty()]"/>
 
     </munit:test>
 

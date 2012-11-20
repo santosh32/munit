@@ -10,12 +10,9 @@
 
     <flow name="NotificationOfError">
         <object-to-string-transformer />
-        <logger level="ERROR" message="FER"/>
         <smtp:outbound-endpoint host="localhost"
                                 port="3025" user="" password="" from="fernando.federico@localhost.com" to="test@localhost.com" subject="#[string:Testing app]"
                                 connector-ref="emailConnector" />
-
-        <logger level="ERROR" message="FER2"/>
     </flow>
 
 </mule>
