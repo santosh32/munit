@@ -29,6 +29,12 @@ utils/.settings
 utils/mclient/.idea
 utils/mclient/.settings
 utils/mclient/target
+utils/common/target
+utils/common/target/.idea
+utils/common/target/.settings
+utils/mail-server/target
+utils/mail-server/.idea
+utils/mail-server/.settings
 tooling/eclipse-plugin/.idea
 tooling/eclipse-plugin/.settings
 tooling/eclipse-plugin/org.mule.tooling.munit/.idea
