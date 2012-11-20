@@ -1,6 +1,7 @@
 package org.mule.munit.config;
 
 import org.apache.commons.lang.StringUtils;
+import org.mule.api.MessagingException;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleEvent;
 import org.mule.api.MuleException;
@@ -15,7 +16,7 @@ import static junit.framework.Assert.assertEquals;
  * @author Federico, Fernando
  * @version since 3.3.2
  */
-public class MunitTestFlow extends MunitFlow{
+public class MunitTestFlow extends MunitFlow {
     /**
      * <p>Determines if the test has to be ignored</p>
      */
@@ -47,12 +48,22 @@ public class MunitTestFlow extends MunitFlow{
     public boolean isIgnore() {
         return ignore;
     }
-    
-    public boolean expectException(Throwable t){
-        if ( !StringUtils.isEmpty(expected)){
-            assertEquals(expected, t.getClass().getName());
+
+    public boolean expectException(Throwable t) {
+
+        if (!StringUtils.isEmpty(expected)) {
+            String className = t.getClass().getName();
+            if (t instanceof MessagingException) {
+                Exception causeException = ((MessagingException) t).getCauseException();
+                if ( causeException != null ){
+                    className = causeException.getClass().getName();
+                }
+            }
+            assertEquals(expected, className);
             return true;
         }
+
+
         return false;
     }
 
@@ -66,7 +77,7 @@ public class MunitTestFlow extends MunitFlow{
     }
 
     private void registerMpManager(MuleContext muleContext) {
-         MunitCore.registerManager(muleContext);
+        MunitCore.registerManager(muleContext);
     }
 
 
