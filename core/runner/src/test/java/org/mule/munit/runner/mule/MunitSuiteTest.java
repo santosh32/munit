@@ -1,16 +1,12 @@
 package org.mule.munit.runner.mule;
 
 
-import org.mule.munit.runner.mule.MunitSuite;
-import org.mule.munit.runner.mule.MunitTest;
 import org.mule.munit.runner.mule.result.SuiteResult;
 import org.mule.munit.runner.mule.result.TestResult;
 import org.mule.munit.runner.mule.result.notification.NotificationListener;
 
 import static junit.framework.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class MunitSuiteTest {
 

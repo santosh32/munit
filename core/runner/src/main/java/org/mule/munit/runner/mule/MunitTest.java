@@ -85,7 +85,7 @@ public class MunitTest {
             result.setFailure(buildNotifcationFrom(t));
         } catch (MuleException e) {
             try {
-                if ( !test.expectException(e) ){
+                if ( !test.expectException(e,event) ){
                     result.setError(buildNotifcationFrom(e));
                 }
             }catch (AssertionError t) {

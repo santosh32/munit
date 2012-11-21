@@ -92,14 +92,14 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
      * {@sample.xml ../../../doc/mock-connector.xml.sample mock:expectFail}
      *
      * @param exception Java Exception full qualified name.
-     * @param onCallOf   Message processor name.
+     * @param whenCalling   Message processor name.
      * @param withAttributes list of expected attributes
      */
     @Processor
-    public void throwAn(Throwable exception, String onCallOf,
+    public void throwAn(Throwable exception, String whenCalling,
                         @Optional List<Attribute> withAttributes) {
-            new MessageProcessorMocker(muleContext).when(getName(onCallOf))
-                    .ofNamespace(getNamespace(onCallOf))
+            new MessageProcessorMocker(muleContext).when(getName(whenCalling))
+                    .ofNamespace(getNamespace(whenCalling))
                     .withAttributes(createAttributes(withAttributes))
                     .thenThrow(exception);
     }

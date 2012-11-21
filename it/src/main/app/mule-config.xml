@@ -94,14 +94,5 @@
         <jira:create-group groupName="someGroupName" userName="someUserName"/>
     </flow>
 
-    <flow name="someFlow">
-        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="10443" path="javierTest" >
-
-            <object-to-string-transformer />
-        </http:inbound-endpoint>
-
-        <logger level="ERROR" message="some #[payload]"/>
-
-    </flow>
 
 </mule>

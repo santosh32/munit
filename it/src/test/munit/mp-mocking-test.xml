@@ -175,9 +175,14 @@
         <munit:assert-that payloadIs-ref="#[string:createGroupResult]"/>
     </munit:test>
 
-    <munit:test name="testingMockTrowsException" description="Test if a mock can throw an exception" expected="java.lang.Exception">
-        <mock:throw-an exception-ref="#[new Exception()]" onCallOf="jira:create-group"/>
+    <munit:test name="testingMockTrowsException" description="Test if a mock can throw an exception" expectExceptionThatSatisfies="#[exception.causeMatches('java.lang.Exception')]">
+        <mock:throw-an exception-ref="#[new Exception()]" whenCalling="jira:create-group"/>
+        <flow-ref name="callingJira"/>
     </munit:test>
 
 
+    <munit:test name="testingMockTrowsExceptionWitCausedBy" description="Test if a mock can throw an exception" expectExceptionThatSatisfies="#[exception.causedBy(java.lang.Exception)]">
+        <mock:throw-an exception-ref="#[new Exception()]" whenCalling="jira:create-group"/>
+        <flow-ref name="callingJira"/>
+    </munit:test>
 </mule>

@@ -30,7 +30,7 @@
 
 <!-- BEGIN_INCLUDE(mock:expectFail) -->
 
-        <mock:throw-an exception-ref="#[new Exception()]" onCallOf="test"/>
+        <mock:throw-an exception-ref="#[new Exception()]" whenCalling="test"/>
 
 
 <!-- END_INCLUDE(mock:expectFail) -->

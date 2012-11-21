@@ -570,9 +570,9 @@
                         <xs:documentation>Defines if the test must be ignored.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <xs:attribute name="expected" use="optional" type="xs:string"  >
+                <xs:attribute name="expectExceptionThatSatisfies" use="optional" type="xs:string"  >
                     <xs:annotation>
-                        <xs:documentation>Exception name to be expected</xs:documentation>
+                        <xs:documentation>Exception expression to match</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
             </xs:extension>
