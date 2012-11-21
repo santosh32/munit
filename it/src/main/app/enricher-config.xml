@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:morphia="http://www.mulesoft.org/schema/mule/morphia"
+      xmlns:loggly="http://www.mulesoft.org/schema/mule/loggly"
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.3/mule.xsd
+        http://www.mulesoft.org/schema/mule/loggly http://www.mulesoft.org/schema/mule/loggly/current/mule-loggly.xsd
+        http://www.mulesoft.org/schema/mule/morphia http://www.mulesoft.org/schema/mule/morphia/current/mule-morphia.xsd">
+
+    <morphia:config name="morphia-master-config"
+                    host="localhost"
+                    port="1000"
+                    database="databaseName"
+                    username="username"
+                    password="password"
+                    ignoreInvalidClasses="false"
+                    ensureIndexesOnBackground="true"
+                    socketTimeout="30000"
+                    connectTimeout="30000">
+        <morphia:classes>
+            <morphia:class>org.mule.munit.Organization</morphia:class>
+        </morphia:classes>
+    </morphia:config>
+
+
+    <morphia:config name="morphia-repository-config"
+                    host="localhost"
+                    port="1000"
+                    database="databaseName"
+                    username="username"
+                    password="password"
+                    ignoreInvalidClasses="false"
+                    ensureIndexesOnBackground="true"
+                    socketTimeout="30000"
+                    connectTimeout="30000">
+        <morphia:classes>
+            <morphia:class>org.mule.munit.Organization</morphia:class>
+        </morphia:classes>
+    </morphia:config>
+
+    <flow name="create-consumer-version">
+        <loggly:logger message="Creating a new version of consumer #[flowVars['consumerName']]"/>
+        <loggly:logger message="Retrieving an organization named #[message.inboundProperties['http.query.params'].get('organizationName')]"/>
+        <enricher target="flowVars['organization']">
+            <morphia:find-single config-ref="morphia-master-config"
+                                 className="org.mule.munit.Organization" disableValidation="true">
+                <morphia:filters>
+                    <morphia:filter key="id">#[message.inboundProperties['http.query.params'].get('organizationName')]</morphia:filter>
+                </morphia:filters>
+            </morphia:find-single>
+        </enricher>
+        <choice>
+            <when expression="#[groovy:message.getInvocationProperty('organization') instanceof org.mule.transport.NullPayload]">
+                <set-property propertyName="http.status" value="404"/>
+                <set-payload
+                        value="{ &quot;message&quot;: &quot;Cannot find an organization named #[message.inboundProperties['http.query.params'].get('organizationName')]&quot; }"/>
+            </when>
+            <otherwise>
+                <loggly:logger message="Retrieving a consumer named #[flowVars['consumerName']]"/>
+                <enricher target="flowVars['consumer']">
+                    <morphia:find-single config-ref="morphia-repository-config"
+                                         className="org.mule.munit.Consumer"
+                                         disableValidation="true"
+                                         host="localhost"
+                                         port="8080"
+                                         database="#[flowVars.get('organization').database]"
+                                         username="username"
+                                         password="password">
+                        <morphia:filters>
+                            <morphia:filter key="id">#[flowVars['consumerName']]</morphia:filter>
+                        </morphia:filters>
+                    </morphia:find-single>
+                </enricher>
+                <choice>
+                    <when expression="#[groovy:flowVars['consumer'] instanceof org.mule.transport.NullPayload]">
+                        <set-property propertyName="http.status" value="404"/>
+                        <set-payload
+                                value="{ &quot;message&quot;: &quot;Cannot find a consumer named #[flowVars['consumerName']]&quot; }"/>
+                    </when>
+                    <otherwise>
+                        <logger level="INFO"
+                                message="Consumer named #[flowVars['consumerName']] has been successfully retrieved"/>
+                        <enricher target="flowVars['newVersion']">
+                            <set-payload value="3.3.1"/>
+                        </enricher>
+                        <expression-component>
+                            flowVars['consumer'].getVersions().add(flowVars['newVersion'])
+                        </expression-component>
+                        <morphia:save config-ref="morphia-repository-config"
+                                      host="localhost"
+                                      port="8080"
+                                      database="#[flowVars.get('organization').database]"
+                                      username="username"
+                                      password="password"
+                                      writeConcern="SAFE"
+                                      object-ref="#[flowVars['consumer']]"/>
+                    </otherwise>
+                </choice>
+            </otherwise>
+        </choice>
+        <choice-exception-strategy>
+            <catch-exception-strategy
+                    when="#[exception.causeMatches('*DuplicateKey*')]">
+                <loggly:logger message="Duplicated serivce id"/>
+                <set-property propertyName="http.status" value="409"/>
+                <set-payload
+                        value="{ &quot;message&quot;: &quot;The specified version already exists&quot; }"/>
+            </catch-exception-strategy>
+        </choice-exception-strategy>
+    </flow>
+
+
+</mule>
