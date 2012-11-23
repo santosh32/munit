@@ -1,19 +1,22 @@
 <!-- BEGIN_INCLUDE(dbserver:start) -->
-    <dbserver:start content="#[map-payload:content]" />
+    <dbserver:start-db-server/>
 <!-- END_INCLUDE(dbserver:start) -->
 
-<!-- BEGIN_INCLUDE(dbserver:stop) -->
-    <dbserver:my-processor content="#[map-payload:content]" />
-<!-- END_INCLUDE(dbserver:stop) -->
-
 <!-- BEGIN_INCLUDE(dbserver:execute) -->
-    <dbserver:my-processor content="#[map-payload:content]" />
+    <dbserver:execute sql="SELECT * FROM jobtitlelookup;" />
 <!-- END_INCLUDE(dbserver:execute) -->
 
 <!-- BEGIN_INCLUDE(dbserver:executeQuery) -->
-    <dbserver:my-processor content="#[map-payload:content]" />
+    <dbserver:execute-query sql="INSERT INTO jobtitlelookup VALUES ('value1','value2','value3')" />
 <!-- END_INCLUDE(dbserver:executeQuery) -->
 
 <!-- BEGIN_INCLUDE(dbserver:validateThat) -->
-    <dbserver:my-processor content="#[map-payload:content]" />
+    <dbserver:validate-that query="SELECT * FROM jobtitlelookup;" returns='[{"EECSALARYORHOURLY":"HOURLY",
+        "JOBTITLE":"Culinary Team Member","JOBTITLEID":"3"},{"EECSALARYORHOURLY":"SALARY",
+        "JOBTITLE":"Other","JOBTITLEID":"9"}]' />
 <!-- END_INCLUDE(dbserver:validateThat) -->
+
+<!-- BEGIN_INCLUDE(dbserver:stop) -->
+    <dbserver:stop-db-server />
+<!-- END_INCLUDE(dbserver:stop) -->
+

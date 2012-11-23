@@ -14,6 +14,7 @@
         <module>common</module>
         <module>mclient</module>
         <module>mail-server</module>
+        <module>dbserver</module>
     </modules>
 
     <properties>

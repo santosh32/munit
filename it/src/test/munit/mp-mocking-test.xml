@@ -180,4 +180,8 @@
     </munit:test>
 
 
+    <munit:test name="testingMockTrowsExceptionWitCausedBy" description="Test if a mock can throw an exception" expectExceptionThatSatisfies="#[exception.causedBy(java.lang.Exception)]">
+        <mock:throw-an exception-ref="#[new Exception()]" whenCalling="jira:create-group"/>
+        <flow-ref name="callingJira"/>
+    </munit:test>
 </mule>

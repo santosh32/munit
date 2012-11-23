@@ -54,9 +54,10 @@ public class MunitTest extends TestCase
         }
         catch(Throwable t)
         {
-            if ( !flow.expectException(t) ){
+            if ( !flow.expectException(t,event) ){
                 throw t;
             }
+
         }
         finally {
             run(event, after);

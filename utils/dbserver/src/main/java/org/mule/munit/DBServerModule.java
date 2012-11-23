@@ -84,7 +84,7 @@ public class DBServerModule
             addJdbcToClassLoader();
             connection = DriverManager.getConnection("jdbc:h2:mem:"+ database);
             Statement stmt = connection.createStatement();
-            createTablesFromExpressions(stmt);
+            createTablesFromExpressions(stmt);  // TODO: HACER QUE LEA DE UN ARCHIVO
             createTablesFromCsv(stmt);
 
         } catch (Exception e) {
@@ -111,6 +111,9 @@ public class DBServerModule
     }
 
     private void createTablesFromExpressions(Statement stmt) throws SQLException {
+
+        // TODO: LEER ARCHIVO A STRING Y EJECUTAR ESTO
+
         if ( creationalScript != null )
         {
             String[] expressions = creationalScript.split(";");

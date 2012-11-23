@@ -25,7 +25,7 @@ public class MunitTestDefinitionParser extends OrphanDefinitionParser {
     protected void doParse(Element element, ParserContext parserContext, BeanDefinitionBuilder builder) {
         builder.addConstructorArgValue(element.getAttribute(ATTRIBUTE_NAME));
         builder.addConstructorArgReference(MuleProperties.OBJECT_MULE_CONTEXT);
-        builder.addPropertyValue("expected", element.getAttribute("expected"));
+        builder.addPropertyValue("expectExceptionThatSatisfies", element.getAttribute("expectExceptionThatSatisfies"));
         builder.addPropertyValue("ignore", Boolean.getBoolean(element.getAttribute("ignore")));
         ProcessingStrategyUtils.configureProcessingStrategy(element, builder,
                 ProcessingStrategyUtils.QUEUED_ASYNC_PROCESSING_STRATEGY);
