@@ -176,7 +176,7 @@
     </munit:test>
 
     <munit:test name="testingMockTrowsException" description="Test if a mock can throw an exception" expected="java.lang.Exception">
-        <mock:throw-an exception-ref="#[new Exception()]" onCallOf="jira:create-group"/>
+        <mock:throw-an exception-ref='#[new java.lang.Exception()]' onCallOf="jira:create-group"/>
     </munit:test>
 
 
