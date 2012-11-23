@@ -14,8 +14,6 @@
         http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
         http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
 
-    <spring:bean class="org.mule.transformers.someCustomTransformer" name="someCustomTransformer"/>
-
     <flow name="someSimpleFlow">
         <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="10443" path="inbound-up-test" >
             <object-to-string-transformer />
@@ -30,7 +28,7 @@
         <mule-xml:namespace prefix="pm" uri="http://www.peoplematter.com/2011/01/userarea" />
     </mule-xml:namespace-manager>
 
-    <flow name="someFlow2">
+    <flow name="someBiggerFlow">
         <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="10443" path="inbound-up-test2" >
             <object-to-string-transformer />
         </http:inbound-endpoint>
@@ -67,16 +65,7 @@
         <logger level="INFO"
                 message="Received Event 20 for #[givenName] #[familyName]" />
 
-        <!--<jdbc:outbound-endpoint connector-ref="testMClientJDBCConnector"-->
-            <!--queryKey="insertForDebug" exchange-pattern="request-response" />-->
-
-        <!--<custom-transformer class="someCustomTransformer" />-->
-
         <expression-transformer evaluator="groovy" expression="return message.getInvocationProperty('locationid');" />
     </flow>
 
-    <!--<jdbc:connector name="testMClientJDBCConnector" dataSource-ref="jdbcDataSource">-->
-        <!--<jdbc:query key="insertForDebug"-->
-                    <!--value="INSERT INTO debug (data, status, lastmodifieddate) VALUES(#[payload:], 'I', now())" />-->
-    <!--</jdbc:connector>-->
 </mule>
