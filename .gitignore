@@ -35,6 +35,12 @@ utils/common/target/.settings
 utils/mail-server/target
 utils/mail-server/.idea
 utils/mail-server/.settings
+utils/dbserver/.settings
+utils/dbserver/.idea
+utils/dbserver/target
+utils/ftpserver/.settings
+utils/dbserver/.idea
+utils/dbserver/.target
 tooling/eclipse-plugin/.idea
 tooling/eclipse-plugin/.settings
 tooling/eclipse-plugin/org.mule.tooling.munit/.idea

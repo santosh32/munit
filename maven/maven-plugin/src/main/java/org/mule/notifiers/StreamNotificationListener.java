@@ -60,7 +60,7 @@ public class StreamNotificationListener implements NotificationListener {
     public void notifyEnd(SuiteResult result) {
         out.println();
         out.println("===========================================================================");
-        out.println("Number of test run: " + result.getNumberOfTests() + " - Failed: " + result.getNumberOfFailures() + " - Errors: " + result.getNumberOfErrors() + " - Skipped: " + result.getNumberOfSkipped());
+        out.println("Number of tests run: " + result.getNumberOfTests() + " - Failed: " + result.getNumberOfFailures() + " - Errors: " + result.getNumberOfErrors() + " - Skipped: " + result.getNumberOfSkipped());
         out.println("===========================================================================");
         out.flush();
     }
