@@ -18,17 +18,18 @@
           </xs:attribute>
           <xs:attribute name="database" use="required" type="xs:string">
             <xs:annotation>
-              <xs:documentation>&lt;p&gt;JBDC url&lt;/p&gt;</xs:documentation>
+              <xs:documentation>&lt;p&gt;H2 Database name&lt;/p&gt;</xs:documentation>
             </xs:annotation>
           </xs:attribute>
-          <xs:attribute name="creationalScript" use="optional" type="xs:string">
+          <xs:attribute name="sqlFile" use="optional" type="xs:string">
             <xs:annotation>
-              <xs:documentation>&lt;p&gt;Script to create the database.&lt;/p&gt;</xs:documentation>
+              <xs:documentation>&lt;p&gt;Name of (or path to) the SQL file whose statements will be executed when the database is started&lt;/p&gt;</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="csv" use="optional" type="xs:string">
             <xs:annotation>
-              <xs:documentation>&lt;p&gt;Cvs files to create the tables in a JSON string&lt;/p&gt;</xs:documentation>
+              <xs:documentation>&lt;p&gt;CSV files (separated by semicolon) that creates tables in the database using the file name (without the
+termination, ".csv") as the table name and its columns as the table columns&lt;/p&gt;</xs:documentation>
             </xs:annotation>
           </xs:attribute>
         </xs:extension>
@@ -37,7 +38,10 @@
   </xs:element>
   <xs:element xmlns="http://www.mulesoft.org/schema/mule/dbserver" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="start-db-server" substitutionGroup="mule:abstract-message-processor" type="StartDbServerType">
     <xs:annotation>
-      <xs:documentation>&lt;p&gt;Start the server.&lt;/p&gt;</xs:documentation>
+      <xs:documentation>&lt;p&gt;Starts the server&lt;/p&gt;
+&lt;p&gt;Executes the correspondent queries if an SQL file has been included in the dbserver configuration&lt;/p&gt;
+&lt;p&gt;Creates the correspondent tables in the database if a CSV file has been included in the dbserver
+configuration&lt;/p&gt;</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name="StartDbServerType">
@@ -53,7 +57,7 @@
   </xs:complexType>
   <xs:element xmlns="http://www.mulesoft.org/schema/mule/dbserver" xmlns:mule="http://www.mulesoft.org/schema/mule/core" name="execute" substitutionGroup="mule:abstract-message-processor" type="ExecuteType">
     <xs:annotation>
-      <xs:documentation>&lt;p&gt;Executes a SQL query&lt;/p&gt;</xs:documentation>
+      <xs:documentation>&lt;p&gt;Executes the SQL query received as parameter&lt;/p&gt;</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:complexType name="ExecuteType">
