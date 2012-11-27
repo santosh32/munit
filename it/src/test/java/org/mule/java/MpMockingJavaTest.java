@@ -117,18 +117,6 @@ public class MpMockingJavaTest extends FunctionalMunitSuite {
         return resultOfJdbc;
     }
 
-    private ArrayList<SpyProcess> afterCallSpy() {
-        ArrayList<SpyProcess> spyProcesses = new ArrayList<SpyProcess>();
-        spyProcesses.add(new AfterSpy());
-        return spyProcesses;
-    }
-
-    private ArrayList<SpyProcess> beforeCallSpy() {
-        ArrayList<SpyProcess> spyProcesses = new ArrayList<SpyProcess>();
-        spyProcesses.add(new BeforeSpy());
-        return spyProcesses;
-    }
-
     private HashMap<String, Object> attributes() {
         HashMap<String, Object> attributes = new HashMap<String, Object>();
         attributes.put("groupName", "someGroupName");
@@ -141,6 +129,18 @@ public class MpMockingJavaTest extends FunctionalMunitSuite {
         attributes.put("groupName", anyString());
         attributes.put("userName", anyString());
         return attributes;
+    }
+
+    private ArrayList<SpyProcess> afterCallSpy() {
+        ArrayList<SpyProcess> spyProcesses = new ArrayList<SpyProcess>();
+        spyProcesses.add(new AfterSpy());
+        return spyProcesses;
+    }
+
+    private ArrayList<SpyProcess> beforeCallSpy() {
+        ArrayList<SpyProcess> spyProcesses = new ArrayList<SpyProcess>();
+        spyProcesses.add(new BeforeSpy());
+        return spyProcesses;
     }
 
     private class BeforeSpy implements SpyProcess{
