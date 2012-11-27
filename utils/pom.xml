@@ -15,6 +15,8 @@
         <module>mclient</module>
         <module>mail-server</module>
         <module>dbserver</module>
+        <module>ftpserver</module>
+
     </modules>
 
     <properties>
