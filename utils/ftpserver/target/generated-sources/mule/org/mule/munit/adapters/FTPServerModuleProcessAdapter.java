@@ -15,7 +15,7 @@ import org.mule.munit.FTPServerModule;
  * A <code>FTPServerModuleProcessAdapter</code> is a wrapper around {@link FTPServerModule } that enables custom processing strategies.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.3.1", date = "2012-11-23T03:25:05-03:00", comments = "Build 3.3.1.1298.3ae82a7")
+@Generated(value = "Mule DevKit Version 3.3.1", date = "2012-11-27T01:35:59-03:00", comments = "Build 3.3.1.1298.3ae82a7")
 public class FTPServerModuleProcessAdapter
     extends FTPServerModuleLifecycleAdapter
     implements ProcessAdapter<FTPServerModuleCapabilitiesAdapter>

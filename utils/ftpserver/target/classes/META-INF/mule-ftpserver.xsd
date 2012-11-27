@@ -17,14 +17,16 @@
               <xs:documentation>Give a name to this configuration so it can be later referenced by config-ref.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
-          <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/ftpserver" name="port" use="required" type="integerType">
+          <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/ftpserver" name="port" default="22" use="optional" type="integerType">
             <xs:annotation>
-              <xs:documentation>&lt;p&gt;FTP server port.&lt;/p&gt;</xs:documentation>
+              <xs:documentation>&lt;p&gt;FTP/SFTP server port.&lt;/p&gt;
+&lt;p&gt;If is not defined, the default value is 22.&lt;/p&gt;</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute xmlns="http://www.mulesoft.org/schema/mule/ftpserver" name="secure" default="false" use="optional" type="booleanType">
             <xs:annotation>
-              <xs:documentation>&lt;p&gt;Defines if is FTP over ssh.&lt;/p&gt;</xs:documentation>
+              <xs:documentation>&lt;p&gt;Defines if is FTP over ssh(SFTP).&lt;/p&gt;
+&lt;p&gt;If is not defined,the default value is false.&lt;/p&gt;</xs:documentation>
             </xs:annotation>
           </xs:attribute>
         </xs:extension>
@@ -62,12 +64,12 @@
         </xs:attribute>
         <xs:attribute name="file" use="required" type="xs:string">
           <xs:annotation>
-            <xs:documentation>file</xs:documentation>
+            <xs:documentation>The file name that you want to check if is in the ftp.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name="path" use="required" type="xs:string">
           <xs:annotation>
-            <xs:documentation>path</xs:documentation>
+            <xs:documentation>path where is going to be the file.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
       </xs:extension>

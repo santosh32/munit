@@ -26,7 +26,7 @@ import org.mule.munit.adapters.FTPServerModuleProcessAdapter;
  * StartServerMessageProcessor invokes the {@link org.mule.munit.FTPServerModule#startServer()} method in {@link FTPServerModule }. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  * 
  */
-@Generated(value = "Mule DevKit Version 3.3.1", date = "2012-11-23T03:25:05-03:00", comments = "Build 3.3.1.1298.3ae82a7")
+@Generated(value = "Mule DevKit Version 3.3.1", date = "2012-11-27T01:35:59-03:00", comments = "Build 3.3.1.1298.3ae82a7")
 public class StartServerMessageProcessor
     extends AbstractMessageProcessor<Object>
     implements Disposable, Initialisable, Startable, Stoppable, MessageProcessor
@@ -84,7 +84,7 @@ public class StartServerMessageProcessor
         throws MuleException
     {
         try {
-            findOrCreate(FTPServerModuleProcessAdapter.class, false, event);
+            findOrCreate(FTPServerModuleProcessAdapter.class, true, event);
             ProcessTemplate<Object, Object> processTemplate = ((ProcessAdapter<Object> ) getModuleObject()).getProcessTemplate();
             processTemplate.execute(new ProcessCallback<Object,Object>() {
 
