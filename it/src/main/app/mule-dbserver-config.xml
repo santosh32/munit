@@ -1,0 +1,55 @@
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:http="http://www.mulesoft.org/schema/mule/http"
+      xmlns:script="http://www.mulesoft.org/schema/mule/scripting"
+      xmlns:jdbc="http://www.mulesoft.org/schema/mule/ee/jdbc"
+      xmlns:mule-xml="http://www.mulesoft.org/schema/mule/xml"
+      xmlns:spring="http://www.springframework.org/schema/beans"
+      xmlns:jira="http://www.mulesoft.org/schema/mule/jira"
+      xsi:schemaLocation="
+        http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
+        http://www.mulesoft.org/schema/mule/jira http://www.mulesoft.org/schema/mule/jira/current/mule-jira.xsd
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+        http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/ee/jdbc/current/mule-jdbc-ee.xsd
+        http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
+        http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+
+    <spring:bean id="jdbcDataSource"
+         class="org.enhydra.jdbc.standard.StandardDataSource" destroy-method="shutdown">
+        <spring:property name="driverName" value="org.h2.Driver" />
+        <spring:property name="url" value="jdbc:h2:mem:testDBFromSQL" />
+        <spring:property name="user" value="" />
+        <spring:property name="password" value="" />
+    </spring:bean>
+
+    <jdbc:connector name="jdbcConnectorInbound" dataSource-ref="jdbcDataSource">
+        <jdbc:query key="lookupJob"
+            value="SELECT * FROM jobtitlelookup;" />
+    </jdbc:connector>
+
+    <flow name="PMEnrichMessageFlow">
+        <message-properties-transformer scope="invocation">
+            <add-message-property key="jobid" value="3" />
+        </message-properties-transformer>
+        <enricher>
+            <processor-chain>
+                <jdbc:outbound-endpoint connector-ref="jdbcConnectorInbound"
+                                        queryKey="lookupJob" exchange-pattern="request-response" />
+
+                <choice>
+                    <when evaluator="groovy" expression="return ((ArrayList)payload).size > 0">
+                        <expression-transformer evaluator="groovy"
+                                                expression="return payload[0].get('jobtitle')" />
+                    </when>
+                    <otherwise>
+                        <expression-transformer evaluator="string"
+                                                expression="HIR" />
+                    </otherwise>
+                </choice>
+            </processor-chain>
+
+            <enrich target="#[variable:job]" source="#[payload]" />
+        </enricher>
+    </flow>
+
+</mule>
