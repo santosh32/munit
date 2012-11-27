@@ -177,6 +177,8 @@
 
     <munit:test name="testingMockTrowsException" description="Test if a mock can throw an exception" expectExceptionThatSatisfies="java.lang.Exception">
         <mock:throw-an exception-ref='#[new java.lang.Exception()]' whenCalling="jira:create-group"/>
+
+        <flow-ref name="callingJira"/>
     </munit:test>
 
 </mule>

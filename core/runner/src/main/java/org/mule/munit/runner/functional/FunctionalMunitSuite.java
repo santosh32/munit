@@ -11,6 +11,7 @@ import org.mule.api.MuleMessage;
 import org.mule.construct.Flow;
 import org.mule.munit.common.MunitCore;
 import org.mule.munit.common.matchers.*;
+import org.mule.munit.common.mocking.EndpointMocker;
 import org.mule.munit.common.mocking.MessageProcessorMocker;
 import org.mule.munit.common.mocking.MunitSpy;
 import org.mule.munit.common.mocking.MunitVerifier;
@@ -88,9 +89,16 @@ public abstract class FunctionalMunitSuite {
     
     protected final MuleEvent runFlow(String name, MuleEvent event) throws MuleException {
         Flow flow = (Flow) muleContext.getRegistry().lookupFlowConstruct(name);
+        if ( flow == null ){
+            throw new IllegalArgumentException("Flow " + name + " does not exist");
+        }
         return flow.process(event);
     }
 
+    protected final EndpointMocker expectOutboundEndpointWithAddress(String address) {
+        EndpointMocker endpointMocker = new EndpointMocker(muleContext);
+        return endpointMocker.expectEndpointWithAddress(address);
+    }
 
     protected final Matcher any(){
         return new AnyClassMatcher(Object.class);
