@@ -33,9 +33,10 @@ public abstract class FunctionalMunitSuite {
             muleContext = muleContextManager.startMule(resources);
 
         } catch (Exception e) {
-
-            muleContextManager.killMule(muleContext);
             throw new RuntimeException(e);
+        }
+        finally {
+            muleContextManager.killMule(muleContext);
         }
     }
 

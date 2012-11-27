@@ -28,7 +28,7 @@
            <mail-server:start-server/>
     </munit:before-suite>
 
-    <munit:test name="testingMClientCall"
+    <munit:test name="testingMailServerCall"
                 description="We want to validate that the call using MClient works">
 
         <munit:set payload-ref="#[string:hello]"/>
