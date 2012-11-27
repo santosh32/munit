@@ -420,6 +420,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.mule.munit.utils</groupId>
+            <artifactId>dbserver</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.mule.transports</groupId>
             <artifactId>mule-transport-email</artifactId>
             <version>${mule.version}</version>
