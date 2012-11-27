@@ -1,5 +1,6 @@
 package org.mule.munit.common.mocking;
 
+import org.mule.DefaultMuleMessage;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleMessage;
 import org.mule.munit.common.mp.MessageProcessorCall;
@@ -96,5 +97,17 @@ public class MessageProcessorMocker extends MunitMockingTool {
         MessageProcessorCall messageProcessorCall = new MessageProcessorCall(new MessageProcessorId(messageProcessorName, messageProcessorNamespace));
         messageProcessorCall.setAttributes(messageProcessorAttributes);
         manager.addBehavior(new MockedMessageProcessorBehavior(messageProcessorCall, exception));
+    }
+
+    public void theReturnSameEvent() {
+        if ( messageProcessorName == null ){
+            throw new IllegalArgumentException("You must specify at least the message processor name");
+        }
+
+        MockedMessageProcessorManager manager = getManager();
+        MessageProcessorCall messageProcessorCall = new MessageProcessorCall(new MessageProcessorId(messageProcessorName, messageProcessorNamespace));
+        messageProcessorCall.setAttributes(messageProcessorAttributes);
+        manager.addBehavior(new MockedMessageProcessorBehavior(messageProcessorCall, new DefaultMuleMessage(NotDefinedPayload.getInstance(), muleContext)));
+
     }
 }
