@@ -17,7 +17,7 @@
         <spring:import resource="mule-dbserver-config.xml"/>
     </spring:beans>
 
-    <munit:config mock-inbounds="false"/>
+    <munit:config mock-inbounds="false" mock-connectors="false"/>
     <mock:config/>
 
 
@@ -74,17 +74,17 @@
         <dbserver:stop-db-server config-ref="configCSV"/>
     </munit:test>
 
-    <!--<munit:test name="testEnricherWhenValueExists"-->
-                <!--description="If the Job Id exist it must set the job property value with the database value">-->
-        <!--&lt;!&ndash;<assertion-properties-transformer scope="invocation">&ndash;&gt;-->
-            <!--&lt;!&ndash;<add-assertion-property key="jobid" value="3" />&ndash;&gt;-->
-        <!--&lt;!&ndash;</assertion-properties-transformer>&ndash;&gt;-->
+    <munit:test name="testEnricherWhenValueExists"
+                description="If the Job Id exist it must set the job property value with the database value">
+        <flow-ref name="PMEnrichMessageFlow" />
+        <munit:assert-on-equals expected-ref="#[string:Culinary Team Member]" value-ref="#[variable:job]" />
+    </munit:test>
 
-        <!--<flow-ref name="PMEnrichMessageFlow" />-->
-
-        <!--<munit:assert-on-equals expected-ref="#[string:Culinary Team Member]" value-ref="#[variable:job]" />-->
-
-    <!--</munit:test>-->
+    <munit:test name="testEnricherWhenValueDoesNotExists"
+                description="If the Job Id doesn't exist it must set the job property value with HIR">
+        <flow-ref name="PMEnrichMessageFlowWhitLookupFailure" />
+        <munit:assert-on-equals expected-ref="#[string:HIR]" value-ref="#[variable:job]" />
+    </munit:test>
 
     <munit:test name="testCloseSQLDataBase"
                 description="The database created and started from a SQL file is stopped">
