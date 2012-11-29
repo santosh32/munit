@@ -56,17 +56,5 @@
 		</dependency>
 	</dependencies>
 
-    <distributionManagement>
-        <repository>
-            <id>mulesoft-releases</id>
-            <name>MuleForge Snapshot Repository</name>
-            <url>http://repository.mulesoft.org/releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>mulesoft-snapshots</id>
-            <name>MuleForge Repository</name>
-            <url>http://repository.mulesoft.org/snapshots/</url>
-            <uniqueVersion>false</uniqueVersion>
-        </snapshotRepository>
-    </distributionManagement>
+
 </project>

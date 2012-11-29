@@ -6,18 +6,11 @@
     <groupId>org.mule.munit.utils</groupId>
     <version>3.3.2-M2-SNAPSHOT</version>
   </parent>
-    <groupId>org.mule.munit</groupId>
     <artifactId>ftpserver</artifactId>
     <packaging>mule-module</packaging>
     <name>SFTP Server for Mule Testing</name>
 
     <dependencies>
-        <dependency>
-            <groupId>org.mule.tests</groupId>
-            <artifactId>mule-tests-functional</artifactId>
-            <version>${mule.version}</version>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>org.apache.sshd</groupId>
             <artifactId>sshd-core</artifactId>

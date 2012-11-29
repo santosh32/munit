@@ -6,7 +6,6 @@
     <groupId>org.mule.munit.utils</groupId>
     <version>3.3.2-M2-SNAPSHOT</version>
   </parent>
-    <groupId>org.mule.munit</groupId>
     <artifactId>dbserver</artifactId>
     <packaging>mule-module</packaging>
     <name>Database Server</name>
@@ -26,7 +25,7 @@
         <dependency>
             <groupId>org.mule.munit.utils</groupId>
             <artifactId>common</artifactId>
-            <version>3.3.2-M2-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 
