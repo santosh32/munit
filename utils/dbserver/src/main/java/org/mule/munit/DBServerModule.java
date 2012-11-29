@@ -20,15 +20,15 @@
  */
 package org.mule.munit;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import au.com.bytecode.opencsv.CSVWriter;
+import org.apache.log4j.Logger;
+import org.h2.tools.RunScript;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.param.Optional;
 
+import java.io.*;
 import java.net.URISyntaxException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -42,25 +42,27 @@ import static junit.framework.Assert.assertEquals;
  * <p>Module to test database connections</p>
  *
  * @author Federico, Fernando
+ * @author Casal, Javier
  */
 @Module(name="dbserver", schemaVersion="1.0")
 public class DBServerModule
 {
     /**
-     * <p>JBDC url</p>
+     * <p>H2 Database name</p>
      */
     @Configurable
     private String database;
 
     /**
-     * <p>Script to create the database.</p>
+     * <p>Name of (or path to) the SQL file whose statements will be executed when the database is started</p>
      */
     @Configurable
     @Optional
-    private String creationalScript;
+    private String sqlFile;
 
     /**
-     * <p>Cvs files to create the tables in a JSON string</p>
+     * <p>CSV files (separated by semicolon) that creates tables in the database using the file name (without the
+     * termination, ".csv") as the table name and its columns as the table columns</p>
      */
     @Configurable
     @Optional
@@ -68,10 +70,14 @@ public class DBServerModule
 
 
     private Connection connection;
+    static Logger logger = Logger.getLogger(DBServerModule.class);
 
 
     /**
-     * <p>Start the server.</p>
+     * <p>Starts the server</p>
+     * <p>Executes the correspondent queries if an SQL file has been included in the dbserver configuration</p>
+     * <p>Creates the correspondent tables in the database if a CSV file has been included in the dbserver
+     * configuration</p>
      *
      * {@sample.xml ../../../doc/DBServer-connector.xml.sample dbserver:start}
      *
@@ -79,67 +85,75 @@ public class DBServerModule
     @Processor
     public void startDbServer()
     {
-        try {
-
+        try
+        {
             addJdbcToClassLoader();
             connection = DriverManager.getConnection("jdbc:h2:mem:"+ database);
+            executeQueriesFromSQLFile(connection);
             Statement stmt = connection.createStatement();
-            createTablesFromExpressions(stmt);  // TODO: HACER QUE LEA DE UN ARCHIVO
             createTablesFromCsv(stmt);
-
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             throw new RuntimeException("Could not start the database server", e);
         }
     }
 
-    private void createTablesFromCsv(Statement stmt) {
-        if ( csv != null )
+    private void executeQueriesFromSQLFile(Connection conn) throws SQLException, FileNotFoundException
+    {
+        if(sqlFile != null)
+        {
+            InputStream streamImput = getClass().getResourceAsStream(File.separator + sqlFile);
+            RunScript.execute(conn, new InputStreamReader(streamImput));
+        }
+    }
+
+    private void createTablesFromCsv(Statement stmt)
+    {
+        if (csv != null)
         {
             String[] tables = csv.split(";");
             for ( String table : tables )
             {
                 String tableName = table.replaceAll(".csv", "");
-                try {
-                    stmt.execute("CREATE TABLE "+tableName+" AS SELECT * FROM CSVREAD(\'" + getClass().getResource("/"+table).toURI().toASCIIString()  + "\');");
-                } catch (SQLException e) {
+                try
+                {
+                    stmt.execute("CREATE TABLE "+tableName+" AS SELECT * FROM CSVREAD(\'" + getClass().
+                            getResource("/"+table).toURI().toASCIIString()  + "\');");
+                }
+                catch (SQLException e)
+                {
                     throw new RuntimeException("Invalid SQL, could not create table " + tableName + " from " + table);
-                } catch (URISyntaxException e) {
+                }
+                catch (URISyntaxException e)
+                {
                     throw new RuntimeException("Could not read file " + table);
                 }
             }
         }
     }
 
-    private void createTablesFromExpressions(Statement stmt) throws SQLException {
-
-        // TODO: LEER ARCHIVO A STRING Y EJECUTAR ESTO
-
-        if ( creationalScript != null )
-        {
-            String[] expressions = creationalScript.split(";");
-            for ( String expression : expressions)
-            {
-                stmt.execute(expression);
-            }
-        }
-    }
 
     /**
-     * <p>Executes a SQL query</p>
+     * <p>Executes the SQL query received as parameter</p>
      *
      * {@sample.xml ../../../doc/DBServer-connector.xml.sample dbserver:execute}
      *
      * @param sql query to be executed
-     * @return result of the SQL query.
+     * @return result of the SQL query received
      */
     @Processor
     public Object execute(String sql)
     {
         Statement statement = null;
-        try {
+        try
+        {
             statement = connection.createStatement();
             return statement.execute(sql);
-        } catch (SQLException e) {
+        }
+        catch (SQLException e)
+        {
+            logger.error("There has been a problem while executing the SQL statement", e);
             return null;
         }
     }
@@ -153,24 +167,32 @@ public class DBServerModule
      * @return result of the SQL query in a JSON format.
      */
     @Processor
-    public Object executeQuery(String sql) {
+    public Object executeQuery(String sql)
+    {
         Statement statement = null;
-        try {
+        try
+        {
             return getMap(sql);
-        } catch (SQLException e) {
+        }
+        catch (SQLException e)
+        {
+            logger.error("There has been a problem while executing the SQL statement", e);
             return null;
         }
     }
 
-    private List<Map<String, String>> getMap(String sql) throws SQLException {
+    private List<Map<String, String>> getMap(String sql) throws SQLException
+    {
         Statement statement;
         statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
-       List<Map<String, String>> jsonArray = new ArrayList<Map<String,String>>();
+        List<Map<String, String>> jsonArray = new ArrayList<Map<String,String>>();
         ResultSetMetaData metaData = resultSet.getMetaData();
-        while (resultSet.next()) {
+        while (resultSet.next())
+        {
             HashMap<String, String> jsonObject = new HashMap<String,String>();
-            for (int i = 1; i <= metaData.getColumnCount(); i++) {
+            for (int i = 1; i <= metaData.getColumnCount(); i++)
+            {
                 String columnName = metaData.getColumnName(i);
                 jsonObject.put(columnName, String.valueOf(resultSet.getObject(columnName)));
             }
@@ -178,22 +200,17 @@ public class DBServerModule
         }
         return jsonArray;
     }
-    
-    private JSONArray getJSON(String sql) throws SQLException {
+
+    private Writer getResults(String sql) throws SQLException, IOException {
         Statement statement;
         statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
-        JSONArray jsonArray = new JSONArray();
-        ResultSetMetaData metaData = resultSet.getMetaData();
-        while (resultSet.next()) {
-            JSONObject jsonObject = new JSONObject();
-            for (int i = 1; i <= metaData.getColumnCount(); i++) {
-                String columnName = metaData.getColumnName(i);
-                jsonObject.put(columnName, resultSet.getObject(columnName));
-            }
-            jsonArray.add(jsonObject);
-        }
-        return jsonArray;
+
+        Writer writer = new StringWriter();
+        CSVWriter csvwriter = new CSVWriter(writer);
+        csvwriter.writeAll(resultSet,true);
+
+        return writer;
     }
 
     /**
@@ -205,21 +222,24 @@ public class DBServerModule
      * @param returns Expected value
      */
     @Processor
-    public void validateThat(String query, String returns) {
-
-        try {
-            JSONArray jsonArray = getJSON(query);
-            JSONArray parser = (JSONArray) new JSONParser().parse(returns);
-
-            assertEquals(jsonArray.toJSONString(), parser.toJSONString());
-        } catch (ParseException e) {
-            throw new RuntimeException("Invalid JSON Object");
+    public void validateThat(String query, String returns)
+    {
+        try
+        {
+            Writer writerQueryResult = getResults(query);
+            assertEquals(writerQueryResult.toString().trim(), returns.replace("\\n", "\n"));
         }
         catch (ClassCastException ccException)
         {
             throw new RuntimeException("The JSON String must always be an array");
-        } catch (SQLException e) {
+        }
+        catch (SQLException e)
+        {
             throw new RuntimeException("Invalid Query");
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException("Could no access to query results");
         }
 
     }
@@ -230,40 +250,51 @@ public class DBServerModule
      * {@sample.xml ../../../doc/DBServer-connector.xml.sample dbserver:stop}
      */
     @Processor
-    public void stopDbServer() {
-        try {
+    public void stopDbServer()
+    {
+        try
+        {
             if ( connection != null ) connection.close();
-        } catch (SQLException e) {
+        }
+        catch (SQLException e)
+        {
             throw new RuntimeException("Could not stop the database server", e);
         }
     }
 
     private void addJdbcToClassLoader() throws InstantiationException,
-            IllegalAccessException, ClassNotFoundException {
+            IllegalAccessException, ClassNotFoundException
+    {
         Class.forName("org.h2.Driver").newInstance();
     }
 
-    public void setDatabase(String database) {
+    public void setDatabase(String database)
+    {
         this.database = database;
     }
 
-    public void setCreationalScript(String creationalScript) {
-        this.creationalScript = creationalScript;
+    public void setSqlFile(String sqlFile)
+    {
+        this.sqlFile = sqlFile;
     }
 
-    public void setCsv(String csv) {
+    public void setCsv(String csv)
+    {
         this.csv = csv;
     }
 
-    public String getDatabase() {
+    public String getDatabase()
+    {
         return database;
     }
 
-    public String getCreationalScript() {
-        return creationalScript;
+    public String getSqlFile()
+    {
+        return sqlFile;
     }
 
-    public String getCsv() {
+    public String getCsv()
+    {
         return csv;
     }
 }

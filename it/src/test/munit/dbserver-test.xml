@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:spring="http://www.springframework.org/schema/beans"
+      xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+      xmlns:mock="http://www.mulesoft.org/schema/mule/mock"
+      xmlns:dbserver="http://www.mulesoft.org/schema/mule/dbserver"
+      xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+        http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+        http://www.mulesoft.org/schema/mule/mock http://www.mulesoft.org/schema/mule/mock/3.3/mule-mock.xsd
+        http://www.mulesoft.org/schema/mule/dbserver http://www.mulesoft.org/schema/mule/dbserver/current/mule-dbserver.xsd">
+
+    <spring:beans>
+        <spring:import resource="mule-dbserver-config.xml"/>
+    </spring:beans>
+
+    <munit:config mock-inbounds="false" mock-connectors="false"/>
+    <mock:config/>
+
+
+    <dbserver:config name="configCSV"
+        database="testDBFromCSV" csv="test.csv"/>
+
+    <dbserver:config name="configSQL"
+        database="testDBFromSQL" sqlFile="test.sql"/>
+
+
+    <munit:before-suite name="testCreateDataBaseFromCSVFile"
+                description="The database is created and started from a CSV file">
+        <dbserver:start-db-server config-ref="configCSV"/>
+    </munit:before-suite>
+
+    <munit:test name="testCreateDataBaseFromSQLFile"
+                description="The database is created and started from a SQL file">
+        <dbserver:start-db-server config-ref="configSQL"/>
+    </munit:test>
+
+    <munit:test name="testExecuteSelectFromAnExistingTable"
+                description="A Select query is executed and bringing results from an existing table">
+        <dbserver:execute sql="SELECT * FROM jobtitlelookup;" config-ref="configSQL"/>
+        <munit:assert-not-null/>
+    </munit:test>
+
+    <munit:test name="testExecuteSelectFromANonExistentTable"
+                description="A Select query is executed returning null when the table is not found in the database">
+        <dbserver:execute sql="SELECT * FROM nonExistentTable;" config-ref="configSQL"/>
+        <munit:assert-null/>
+    </munit:test>
+
+    <munit:test name="testValidateThatResultsAreWhatExpectedFromSQL"
+                description="The query results are the same as the expected ones (using the database created with an SQL file)">
+        <dbserver:validate-that query="SELECT * FROM jobtitlelookup;" config-ref="configSQL"
+            returns='"JOBTITLE","EECSALARYORHOURLY","JOBTITLEID"\n"Culinary Team Member","HOURLY","3"\n"Other","SALARY","9"' />
+    </munit:test>
+
+    <munit:test name="testValidateThatResultsAreWhatExpectedFromCSV"
+                description="The query results are the same as the expected ones (using the database created with an CSV file)">
+        <dbserver:validate-that query="SELECT * FROM test;"
+            returns='"NAME","ZIP_CODE"\n"Javier","1001"\n"Jose","1002"' config-ref="configCSV"/>
+    </munit:test>
+
+    <munit:test name="testValidateTheInsertedValues"
+                description="The query results are the same as the generated ones (using the database created with an SQL file)">
+        <dbserver:execute config-ref="configSQL" sql="INSERT INTO jobtitlelookup VALUES('Developer','SALARY','10');" />
+        <dbserver:validate-that query="SELECT * FROM jobtitlelookup WHERE JOBTITLE='Developer';"
+            returns='"JOBTITLE","EECSALARYORHOURLY","JOBTITLEID"\n"Developer","SALARY","10"' config-ref="configSQL"/>
+    </munit:test>
+
+    <munit:test name="testCloseCSVDataBase"
+                description="The database created and started from a CSV file is stopped">
+        <dbserver:stop-db-server config-ref="configCSV"/>
+    </munit:test>
+
+    <munit:test name="testEnricherWhenValueExists"
+                description="If the Job Id exist it must set the job property value with the database value">
+        <flow-ref name="PMEnrichMessageFlow" />
+        <munit:assert-on-equals expected-ref="#[string:Culinary Team Member]" value-ref="#[variable:job]" />
+    </munit:test>
+
+    <munit:test name="testEnricherWhenValueDoesNotExists"
+                description="If the Job Id doesn't exist it must set the job property value with HIR">
+        <flow-ref name="PMEnrichMessageFlowWhitLookupFailure" />
+        <munit:assert-on-equals expected-ref="#[string:HIR]" value-ref="#[variable:job]" />
+    </munit:test>
+
+    <munit:after-suite name="testCloseSQLDataBase"
+                description="The database created and started from a SQL file is stopped">
+        <dbserver:stop-db-server config-ref="configSQL"/>
+    </munit:after-suite>
+
+
+
+</mule>
