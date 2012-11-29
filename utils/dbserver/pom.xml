@@ -4,7 +4,7 @@
     <parent>
     <artifactId>parent</artifactId>
     <groupId>org.mule.munit.utils</groupId>
-    <version>3.3.2-M2-SNAPSHOT</version>
+    <version>3.3.2-M3-SNAPSHOT</version>
   </parent>
     <artifactId>dbserver</artifactId>
     <packaging>mule-module</packaging>
