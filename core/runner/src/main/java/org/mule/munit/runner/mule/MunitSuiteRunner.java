@@ -5,8 +5,7 @@ import org.mule.munit.runner.MuleContextManager;
 import org.mule.munit.runner.MunitRunner;
 import org.mule.munit.runner.mule.result.SuiteResult;
 import org.mule.munit.runner.mule.result.notification.NotificationListener;
-import org.mule.munit.runner.mule.result.output.DefaultOutputHandler;
-import org.mule.munit.runner.mule.result.output.TestOutputHandler;
+import org.mule.munit.runner.output.*;
 
 
 /**
@@ -43,6 +42,11 @@ public class MunitSuiteRunner  {
             @Override
             protected SuiteResult runSuite() throws Exception {
                 return suite.run();
+            }
+
+            @Override
+            protected String getSuiteName() {
+                return suite.getName();
             }
         }.run();
 	}

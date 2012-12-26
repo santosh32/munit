@@ -9,7 +9,7 @@ import org.mule.api.registry.MuleRegistry;
 import org.mule.munit.config.MunitAfterSuite;
 import org.mule.munit.config.MunitBeforeSuite;
 import org.mule.munit.config.MunitTestFlow;
-import org.mule.munit.runner.mule.result.output.TestOutputHandler;
+import org.mule.munit.runner.output.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -67,6 +67,11 @@ public class MunitRunnerTest {
             protected MockSuiteResult runSuite() throws Exception {
                 return null;
             }
+
+            @Override
+            protected String getSuiteName() {
+                return "testSuite";
+            }
         };
 
         runner.run();
@@ -88,6 +93,11 @@ public class MunitRunnerTest {
             protected MockSuiteResult runSuite() throws Exception {
                 throw new Exception("error");
             }
+
+            @Override
+            protected String getSuiteName() {
+                return "testSuite";
+            }
         };
 
         runner.run();
@@ -96,8 +106,8 @@ public class MunitRunnerTest {
     }
 
     private void verifyMocks() throws MuleException {
-        verify(handler, times(1)).print(BEFORE_TEST_NAME, BEFORE_TEST_DESCRIPTION);
-        verify(handler, times(1)).print(AFTER_TEST_NAME, AFTER_TEST_DESCRIPTION);
+        verify(handler, times(1)).printDescription(BEFORE_TEST_NAME, BEFORE_TEST_DESCRIPTION);
+        verify(handler, times(1)).printDescription(AFTER_TEST_NAME, AFTER_TEST_DESCRIPTION);
         verify(afterTest, times(1)).process(null);
         verify(beforeTest, times(1)).process(null);
         verify(manager, times(1)).killMule(muleContext);

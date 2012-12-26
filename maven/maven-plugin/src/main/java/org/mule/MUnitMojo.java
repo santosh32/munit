@@ -30,10 +30,7 @@ import org.mule.notifiers.NotificationListenerDecorator;
 import org.mule.notifiers.StreamNotificationListener;
 import org.mule.notifiers.xml.XmlNotificationListener;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
@@ -81,6 +78,8 @@ public class MUnitMojo
         
         if ( !"true".equals(System.getProperty("skipTests")) )
         {
+
+
             List testResources = project.getTestResources();
             for ( Object o : testResources )
             {
@@ -102,9 +101,8 @@ public class MUnitMojo
                     String fileName = file.getName();
                     if (fileName.endsWith(".xml") && validateFilter(fileName))
                     {
-                    	System.out.println();
-                        System.out.println("===========  Running " + fileName +" test ===========");
-                        System.out.println();
+
+
                         results.add(buildRunnerFor(fileName).run());
                     }
 
@@ -120,6 +118,8 @@ public class MUnitMojo
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             } finally {
             }
         }
@@ -173,6 +173,8 @@ public class MUnitMojo
 				System.out.println("\t\t ---" + result.getTestName() + " <<< ERROR");
 			}
 		}
+
+
 	}
 
 	private MunitSuiteRunner buildRunnerFor(String fileName) {

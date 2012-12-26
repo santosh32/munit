@@ -4,7 +4,7 @@ package org.mule.munit.runner.mule;
 import org.junit.Before;
 import org.junit.Test;
 import org.mule.api.MuleContext;
-import org.mule.munit.runner.mule.result.output.DefaultOutputHandler;
+import org.mule.munit.runner.output.DefaultOutputHandler;
 
 import static junit.framework.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;

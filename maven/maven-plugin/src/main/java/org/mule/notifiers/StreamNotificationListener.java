@@ -18,9 +18,6 @@ public class StreamNotificationListener implements NotificationListener {
     }
 
     public void notifyStartOf(MunitTest test) {
-        out.println();
-        out.println("RUNNIG " + test.getName());
-        out.println();
         out.flush();
     }
 

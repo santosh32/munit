@@ -1,4 +1,4 @@
-package org.mule.munit.runner.mule.result.output;
+package org.mule.munit.runner.output;
 
 
 /**
@@ -13,5 +13,7 @@ public interface TestOutputHandler {
      * @param name The name of the Munit flow (before-test,after-test,before-suite,after-suite,test)
      * @param description The flow description
      */
-    void print(String name, String description);
+    void printDescription(String name, String description);
+    
+    void printTestName(String suiteName);
 }

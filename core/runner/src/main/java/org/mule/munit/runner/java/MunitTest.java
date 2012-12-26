@@ -7,6 +7,7 @@ import org.mule.api.MuleEvent;
 import org.mule.api.MuleException;
 import org.mule.munit.config.MunitFlow;
 import org.mule.munit.config.MunitTestFlow;
+import org.mule.munit.runner.output.*;
 import org.mule.tck.MuleTestUtils;
 
 import java.util.List;
@@ -16,9 +17,10 @@ public class MunitTest extends TestCase
 {
 
     private List<MunitFlow> before;
-    MunitTestFlow flow;
+    private MunitTestFlow flow;
     private List<MunitFlow> after;
     private MuleContext muleContext;
+    private TestOutputHandler outputHandler = new DefaultOutputHandler();
 
 
     public MunitTest(List<MunitFlow> before, MunitTestFlow flow, List<MunitFlow> after) {
@@ -69,14 +71,14 @@ public class MunitTest extends TestCase
         {
             for ( MunitFlow flow : flows )
             {
-                System.out.printf(flow.getDescription() + "%n");
+                outputHandler.printDescription(flow.getName(), flow.getDescription());
                 flow.process(event);
             }
         }
     }
 
     private void showDescription() {
-        System.out.printf("%nDescription:%n************%n" + flow.getDescription().replaceAll("\\.", "\\.%n") + "%n");
+        outputHandler.printDescription(flow.getName(), flow.getDescription().replaceAll("\\.", "\\.%n"));
     }
 
 

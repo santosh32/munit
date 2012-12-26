@@ -1,5 +1,9 @@
 package org.mule.munit.runner;
 
+import org.apache.log4j.FileAppender;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.SimpleLayout;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleException;
 import org.mule.api.config.ConfigurationBuilder;
@@ -11,9 +15,11 @@ import org.mule.context.DefaultMuleContextFactory;
 import org.mule.munit.common.MunitCore;
 import org.mule.munit.runner.mule.context.MockingConfiguration;
 import org.mule.munit.runner.mule.context.MunitSpringXmlConfigurationBuilder;
+import org.mule.munit.runner.output.DefaultOutputHandler;
 import org.mule.tck.TestingWorkListener;
 import org.mule.util.ClassUtils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +66,8 @@ public class MuleContextManager {
     }
 
     private MuleContext createMule(String resources) throws Exception {
+        defineLogOutput(resources);
+
         MuleContext context;
         org.mule.api.context.MuleContextFactory muleContextFactory = new DefaultMuleContextFactory();
 
@@ -78,9 +86,19 @@ public class MuleContextManager {
                 .createMuleContext(builders, contextBuilder);
         ((DefaultMuleConfiguration) context.getConfiguration())
                 .setShutdownTimeout(0);
+
         return context;
     }
 
+    private void defineLogOutput(String resources) throws IOException {
+        String path = System.getProperty(DefaultOutputHandler.OUTPUT_FOLDER_PROPERTY);
+        if ( path != null){
+            Logger logger = Logger.getRootLogger();
+            logger.removeAllAppenders();
+            logger.addAppender(new FileAppender(new SimpleLayout(),path + "/" + resources + ".out"));
+            logger.setLevel(Level.ALL);
+        }
+    }
 
 
     protected ConfigurationBuilder getBuilder(String resources) throws Exception {

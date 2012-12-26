@@ -24,4 +24,5 @@ public class MockingConfiguration {
     public boolean isMockConnectors() {
         return mockConnectors;
     }
+
 }

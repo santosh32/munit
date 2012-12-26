@@ -10,8 +10,7 @@ import org.junit.runner.notification.RunNotifier;
 import org.mule.api.MuleContext;
 import org.mule.munit.runner.MuleContextManager;
 import org.mule.munit.runner.MunitRunner;
-import org.mule.munit.runner.mule.result.output.DefaultOutputHandler;
-
+import org.mule.munit.runner.output.*;
 import java.lang.reflect.Method;
 
 
@@ -64,6 +63,11 @@ public class MuleSuiteRunner extends Runner implements Filterable, Sortable {
             protected Void runSuite() throws Exception {
                 testSuite.run(result);
                 return null;
+            }
+
+            @Override
+            protected String getSuiteName() {
+                return testSuite.getName();
             }
         }.run();
 

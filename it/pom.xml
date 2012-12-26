@@ -21,7 +21,6 @@
 		<vmtype>org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType</vmtype>
 		<jdk5Name>J2SE-1.6</jdk5Name>
 		<jdk.version>1.6</jdk.version>
-
 	</properties>
 
     <repositories>

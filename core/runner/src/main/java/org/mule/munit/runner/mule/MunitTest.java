@@ -7,7 +7,7 @@ import org.mule.munit.config.MunitFlow;
 import org.mule.munit.config.MunitTestFlow;
 import org.mule.munit.runner.mule.result.TestResult;
 import org.mule.munit.runner.mule.result.notification.Notification;
-import org.mule.munit.runner.mule.result.output.TestOutputHandler;
+import org.mule.munit.runner.output.*;
 import org.mule.tck.MuleTestUtils;
 
 import java.io.PrintWriter;
@@ -118,14 +118,14 @@ public class MunitTest {
             throws MuleException {
         if (flows != null) {
             for (MunitFlow flow : flows) {
-                outputHandler.print(flow.getName(), flow.getDescription());
+                outputHandler.printDescription(flow.getName(), flow.getDescription());
                 flow.process(event);
             }
         }
     }
 
     private void showDescription() {
-       outputHandler.print(test.getName(), test.getDescription());
+       outputHandler.printDescription(test.getName(), test.getDescription());
     }
 
     protected MuleEvent muleEvent() {

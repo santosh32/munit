@@ -59,5 +59,7 @@ public class MunitSuite {
 		return munitTests.size();
 	}
 
-	
+    public String getName() {
+        return name;
+    }
 }

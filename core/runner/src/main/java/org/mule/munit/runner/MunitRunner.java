@@ -7,8 +7,7 @@ import org.mule.api.MuleException;
 import org.mule.munit.config.MunitAfterSuite;
 import org.mule.munit.config.MunitBeforeSuite;
 import org.mule.munit.config.MunitFlow;
-import org.mule.munit.runner.mule.result.output.DefaultOutputHandler;
-import org.mule.munit.runner.mule.result.output.TestOutputHandler;
+import org.mule.munit.runner.output.*;
 import org.mule.tck.MuleTestUtils;
 
 import java.util.ArrayList;
@@ -44,11 +43,18 @@ public abstract class MunitRunner<T> {
     protected abstract T runSuite() throws Exception;
 
     /**
+     * <p>Get the name of the suite</p>
+     * @return The suite name
+     */
+    protected abstract String getSuiteName();
+
+    /**
      * <p>Runs the suite based on the constructor arguments </p>
      * @return The suite result
      */
     public T run() {
         try {
+            handler.printTestName(getSuiteName());
             process(lookupFlows(MunitBeforeSuite.class), muleEvent());
 
             T result = runSuite();
@@ -83,7 +89,7 @@ public abstract class MunitRunner<T> {
     private void process(Collection<MunitFlow> flowConstructs, MuleEvent event)
             throws MuleException {
         for (MunitFlow flowConstruct : flowConstructs) {
-            handler.print(flowConstruct.getName(), flowConstruct.getDescription());
+            handler.printDescription(flowConstruct.getName(), flowConstruct.getDescription());
             (flowConstruct).process(event);
         }
     }
