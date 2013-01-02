@@ -67,7 +67,7 @@ public class MUnitMojo
     protected String munittest;
 
     /**
-     * @parameter expression="${log.to.file}"  default-value="true"
+     * @parameter expression="${log.to.file}" default-value="true"
      */
     protected boolean logToFile;
 
