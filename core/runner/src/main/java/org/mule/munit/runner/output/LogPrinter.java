@@ -20,6 +20,6 @@ public class LogPrinter implements OutputPrinter{
 
     @Override
     public void print(String message) {
-        log.info(message);
+       log.info(message);
     }
 }

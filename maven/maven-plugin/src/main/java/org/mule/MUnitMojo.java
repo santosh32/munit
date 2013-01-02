@@ -26,6 +26,7 @@ import org.mule.munit.runner.mule.result.MunitResult;
 import org.mule.munit.runner.mule.result.SuiteResult;
 import org.mule.munit.runner.mule.result.notification.DummyNotificationListener;
 import org.mule.munit.runner.mule.result.notification.NotificationListener;
+import org.mule.munit.runner.output.DefaultOutputHandler;
 import org.mule.notifiers.NotificationListenerDecorator;
 import org.mule.notifiers.StreamNotificationListener;
 import org.mule.notifiers.xml.XmlNotificationListener;
@@ -48,9 +49,12 @@ import java.util.List;
  * @goal test
  * @phase test
  */
+
 public class MUnitMojo
     extends AbstractMojo
 {
+    public static final String TARGET_SUREFIRE_REPORTS_MUNIT_TXT = "/target/surefire-reports/munit.";
+    public static final String TARGET_SUREFIRE_REPORTS_TEST_MUNIT_XML = "/target/surefire-reports/TEST-munit.";
     /**
      * @parameter expression="${project}"
      * @required
@@ -61,6 +65,11 @@ public class MUnitMojo
      * @parameter expression="${munit.test}"
      */
     protected String munittest;
+
+    /**
+     * @parameter expression="${log.to.file}"  default-value="true"
+     */
+    protected boolean logToFile;
 
     /**
      * The classpath elements of the project being tested.
@@ -78,7 +87,9 @@ public class MUnitMojo
         
         if ( !"true".equals(System.getProperty("skipTests")) )
         {
-
+            if ( logToFile ){
+                System.setProperty(DefaultOutputHandler.OUTPUT_FOLDER_PROPERTY, project.getBasedir() + TARGET_SUREFIRE_REPORTS_MUNIT_TXT+"%s-output.txt");
+            }
 
             List testResources = project.getTestResources();
             for ( Object o : testResources )
@@ -101,8 +112,6 @@ public class MUnitMojo
                     String fileName = file.getName();
                     if (fileName.endsWith(".xml") && validateFilter(fileName))
                     {
-
-
                         results.add(buildRunnerFor(fileName).run());
                     }
 
@@ -190,7 +199,7 @@ public class MUnitMojo
     private NotificationListener buildFileNotificationListener(String fileName) {
         String name =fileName.replace(".xml", ".txt");
         try {
-            return new StreamNotificationListener(new PrintStream(new FileOutputStream(new File(project.getBasedir() + "/target/surefire-reports/munit."+name))));
+            return new StreamNotificationListener(new PrintStream(new FileOutputStream(new File(project.getBasedir() + TARGET_SUREFIRE_REPORTS_MUNIT_TXT +name))));
         } catch (FileNotFoundException e) {
             return new DummyNotificationListener();
         }
@@ -198,7 +207,7 @@ public class MUnitMojo
 
     private NotificationListener buildXmlNotificationListener(String fileName) {
         try {
-            return new XmlNotificationListener(fileName,new PrintStream(new FileOutputStream(new File(project.getBasedir() + "/target/surefire-reports/TEST-munit."+fileName))));
+            return new XmlNotificationListener(fileName,new PrintStream(new FileOutputStream(new File(project.getBasedir() + TARGET_SUREFIRE_REPORTS_TEST_MUNIT_XML +fileName))));
         } catch (FileNotFoundException e) {
             return new DummyNotificationListener();
         }

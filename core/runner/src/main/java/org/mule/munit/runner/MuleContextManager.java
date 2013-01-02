@@ -93,10 +93,11 @@ public class MuleContextManager {
     private void defineLogOutput(String resources) throws IOException {
         String path = System.getProperty(DefaultOutputHandler.OUTPUT_FOLDER_PROPERTY);
         if ( path != null){
+            String name =resources.replace(".xml", "");
             Logger logger = Logger.getRootLogger();
             logger.removeAllAppenders();
-            logger.addAppender(new FileAppender(new SimpleLayout(),path + "/" + resources + ".out"));
-            logger.setLevel(Level.ALL);
+            logger.addAppender(new FileAppender(new SimpleLayout(), String.format(path, name)));
+            logger.setLevel(Level.INFO);
         }
     }
 
