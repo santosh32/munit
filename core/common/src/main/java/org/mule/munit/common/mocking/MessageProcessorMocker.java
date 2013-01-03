@@ -16,7 +16,7 @@ import java.util.Map;
  * <p>Usage:</p>
  *
  * <code>
- *     new MessageProcessorMocker(muleContext).when("mp").ofNamespace("namespace").theReturn(muleMessage);
+ *     new MessageProcessorMocker(muleContext).when("mp").ofNamespace("namespace").thenReturn(muleMessage);
  * </code>
  *
  * @author Federico, Fernando
@@ -77,10 +77,8 @@ public class MessageProcessorMocker extends MunitMockingTool {
      * @param message
      *      <p>The MuleMessage to return </p>
      */
-    public void theReturn(MuleMessage message) {
-        if ( messageProcessorName == null ){
-            throw new IllegalArgumentException("You must specify at least the message processor name");
-        }
+    public void thenReturn(MuleMessage message) {
+        validateMessageProcessorName();
 
         MockedMessageProcessorManager manager = getManager();
         MessageProcessorCall messageProcessorCall = new MessageProcessorCall(new MessageProcessorId(messageProcessorName, messageProcessorNamespace));
@@ -88,10 +86,15 @@ public class MessageProcessorMocker extends MunitMockingTool {
         manager.addBehavior(new MockedMessageProcessorBehavior(messageProcessorCall, message));
     }
 
+    /**
+     * <p>
+     *     Defines that the message processor must throw an exception when called.
+     * </p>
+     * @param exception
+     * <p>The exception to be throw</p>
+     */
     public void thenThrow(Throwable exception) {
-        if ( messageProcessorName == null ){
-            throw new IllegalArgumentException("You must specify at least the message processor name");
-        }
+        validateMessageProcessorName();
 
         MockedMessageProcessorManager manager = getManager();
         MessageProcessorCall messageProcessorCall = new MessageProcessorCall(new MessageProcessorId(messageProcessorName, messageProcessorNamespace));
@@ -99,15 +102,25 @@ public class MessageProcessorMocker extends MunitMockingTool {
         manager.addBehavior(new MockedMessageProcessorBehavior(messageProcessorCall, exception));
     }
 
-    public void theReturnSameEvent() {
-        if ( messageProcessorName == null ){
-            throw new IllegalArgumentException("You must specify at least the message processor name");
-        }
+
+    /**
+     * <p>
+     *    Determines that the mocked message processor must return the same event as before its call.
+     * </p>
+     */
+    public void thenReturnSameEvent() {
+        validateMessageProcessorName();
 
         MockedMessageProcessorManager manager = getManager();
         MessageProcessorCall messageProcessorCall = new MessageProcessorCall(new MessageProcessorId(messageProcessorName, messageProcessorNamespace));
         messageProcessorCall.setAttributes(messageProcessorAttributes);
         manager.addBehavior(new MockedMessageProcessorBehavior(messageProcessorCall, new DefaultMuleMessage(NotDefinedPayload.getInstance(), muleContext)));
 
+    }
+
+    private void validateMessageProcessorName() {
+        if ( messageProcessorName == null ){
+            throw new IllegalArgumentException("You must specify at least the message processor name");
+        }
     }
 }

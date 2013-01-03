@@ -51,6 +51,18 @@ public class MunitMessageProcessorInterceptor implements MethodInterceptor{
         return proxy.invokeSuper(obj,args);
     }
 
+    @Override
+    public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
+        Class<?> declaringClass = method.getDeclaringClass();
+        if ( MessageProcessor.class.isAssignableFrom(declaringClass) && method.getName().equals("process") )
+        {
+
+            return process(obj,args,proxy);
+        }
+
+        return proxy.invokeSuper(obj, args);
+    }
+
     private void registerCall(MuleEvent event, MockedMessageProcessorManager manager, MessageProcessorCall messageProcessorCall) {
         manager.addCall(messageProcessorCall);
         runSpyAfterAssertions(manager, event);
@@ -95,7 +107,7 @@ public class MunitMessageProcessorInterceptor implements MethodInterceptor{
 
 
     private Object evaluate(String elementValue, MuleEvent event) {
-        Object compareTo;
+        Object compareTo = elementValue;
         ExpressionManager expressionManager = getMuleContext().getExpressionManager();
         if ( expressionManager.isExpression(elementValue)){
             compareTo = expressionManager.parse(elementValue, event);
@@ -105,25 +117,10 @@ public class MunitMessageProcessorInterceptor implements MethodInterceptor{
             if ( o != null ){
                 compareTo = o;
             }
-            else{
-                compareTo = elementValue;
-            }
         }
-        return elementValue;
+        return compareTo;
     }
 
-
-    @Override
-    public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
-        Class<?> declaringClass = method.getDeclaringClass();
-        if ( MessageProcessor.class.isAssignableFrom(declaringClass) && method.getName().equals("process") )
-        {
-
-            return process(obj,args,proxy);
-        }
-
-          return proxy.invokeSuper(obj, args);
-    }
 
     protected MockedMessageProcessorManager getMockedMessageProcessorManager() {
         return ((MockedMessageProcessorManager) getMuleContext().getRegistry().lookupObject(MockedMessageProcessorManager.ID));
@@ -141,4 +138,6 @@ public class MunitMessageProcessorInterceptor implements MethodInterceptor{
     public MuleContext getMuleContext() {
         return MunitCore.getMuleContext();
     }
+
+
 }

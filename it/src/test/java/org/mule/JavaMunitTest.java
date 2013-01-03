@@ -17,7 +17,7 @@ public class JavaMunitTest extends FunctionalMunitSuite{
     public void test() throws Exception {
         whenMessageProcessor("create-group")
                 .ofNamespace("jira")
-                .theReturn(muleMessageWithPayload("expected"));
+                .thenReturn(muleMessageWithPayload("expected"));
 
         Object payload = runFlow("callingJira", testEvent("something")).getMessage().getPayload();
 

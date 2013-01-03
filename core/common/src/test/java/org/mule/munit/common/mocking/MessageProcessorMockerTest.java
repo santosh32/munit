@@ -39,19 +39,46 @@ public class MessageProcessorMockerTest {
     
     @Test
     public void addBehavior(){
-        MessageProcessorMocker messageProcessorMocker = new MessageProcessorMocker(muleContext);
-        messageProcessorMocker.when("testMp")
+        mocker().when("testMp")
                 .ofNamespace("testNamespace")
                 .withAttributes(new HashMap<String, Object>())
-                .theReturn(message);
+                .thenReturn(message);
 
         verify(manager).addBehavior(any(MockedMessageProcessorBehavior.class));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void failIfNoMessageProcessorNameNotSet(){
-        MessageProcessorMocker messageProcessorMocker = new MessageProcessorMocker(muleContext);
-        messageProcessorMocker
-                .theReturn(message);
+        mocker()
+                .thenReturn(message);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void validateThatThenThrowChecksMessageProcessorExistence(){
+         mocker().thenThrow(new Exception());
+    }
+
+    @Test
+    public void validateThatBehaviorIsAddedWhenThenThrow(){
+        mocker().when("mp").thenThrow(new Exception());
+
+        verify(manager).addBehavior(any(MockedMessageProcessorBehavior.class));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void failIfNoMessageProcessorNameNotSetWheReturnSame(){
+        mocker()
+                .thenReturnSameEvent();
+    }
+
+    @Test
+    public void validateThatBehaviorIsAddedWhenThenReturnSame(){
+        mocker().when("mp").thenThrow(new Exception());
+
+        verify(manager).addBehavior(any(MockedMessageProcessorBehavior.class));
+    }
+
+    private MessageProcessorMocker mocker() {
+        return new MessageProcessorMocker(muleContext);
     }
 }

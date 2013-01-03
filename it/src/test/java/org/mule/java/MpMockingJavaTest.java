@@ -21,7 +21,7 @@ public class MpMockingJavaTest extends FunctionalMunitSuite {
     
     @Test
     public void testMockMp() throws Exception {
-        whenMessageProcessor("echo-component").theReturn(muleMessageWithPayload("expectedPayload"));
+        whenMessageProcessor("echo-component").thenReturn(muleMessageWithPayload("expectedPayload"));
 
         MuleEvent eventResult = runFlow("echoFlow", testEvent("anotherString"));
 
@@ -31,7 +31,7 @@ public class MpMockingJavaTest extends FunctionalMunitSuite {
     
     @Test
     public void testMockWithoutChangingPayload() throws Exception {
-        whenMessageProcessor("create-group").ofNamespace("jira").theReturnSameEvent();
+        whenMessageProcessor("create-group").ofNamespace("jira").thenReturnSameEvent();
 
         MuleEvent eventResult = runFlow("callingJira", testEvent(" Hello world!"));
 
@@ -43,7 +43,7 @@ public class MpMockingJavaTest extends FunctionalMunitSuite {
         whenMessageProcessor("create-group")
                 .ofNamespace("jira")
                 .withAttributes(attributes())
-                .theReturn(muleMessageWithPayload("expectedPayload"));
+                .thenReturn(muleMessageWithPayload("expectedPayload"));
 
         MuleEvent eventResult = runFlow("callingJira", testEvent("anotherString"));
 
@@ -66,7 +66,7 @@ public class MpMockingJavaTest extends FunctionalMunitSuite {
         whenMessageProcessor("create-group")
                 .ofNamespace("jira")
                 .withAttributes(anyAttributes())
-                .theReturn(muleMessageWithPayload("createGroupResult"));
+                .thenReturn(muleMessageWithPayload("createGroupResult"));
 
         MuleEvent eventResult = runFlow("main", testEvent(" Hello world!]"));
 
@@ -80,7 +80,7 @@ public class MpMockingJavaTest extends FunctionalMunitSuite {
         whenMessageProcessor("create-group")
                 .ofNamespace("jira")
                 .withAttributes(attributes())
-                .theReturn(muleMessageWithPayload("expectedPayload"));
+                .thenReturn(muleMessageWithPayload("expectedPayload"));
 
         spyMessageProcessor("create-group")
                 .ofNamespace("jira")

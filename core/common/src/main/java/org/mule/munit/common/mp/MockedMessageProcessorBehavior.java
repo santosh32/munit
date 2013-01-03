@@ -3,8 +3,10 @@ package org.mule.munit.common.mp;
 import org.mule.api.MuleMessage;
 
 /**
- * <p>The representation of a Message Processor mocked behavior.</p>
- * <p>We use this in order to know that the Message processor must return</p>
+ * <p>
+ *     The representation of a Message Processor mocked behavior.
+ *     We use this in order to know that the Message processor must return.
+ * </p>
  *
  * @author Federico, Fernando
  * @version since 3.3.2
@@ -20,6 +22,9 @@ public class MockedMessageProcessorBehavior {
      */
     private MuleMessage returnMuleMessage;
 
+    /**
+     * <p>The exception that has to be thrown when this behavior is executed</p>
+     */
     private Throwable exceptionToThrow;
 
     public MockedMessageProcessorBehavior(MessageProcessorCall messageProcessorCall, MuleMessage returnMuleMessage) {
