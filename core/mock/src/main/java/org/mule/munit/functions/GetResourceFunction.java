@@ -11,6 +11,18 @@ import org.mule.api.el.ExpressionLanguageFunction;
  * the payload of the message from where the method was called. The type of the
  * returned value can be String, InputStream or byte array, depending of the
  * operation aplicated to the MunitResource returned
+ *
+ *     <pre>
+ *         {@code
+ *
+ *           <mock:verify-call messageProcessor="jira:create-group" atLeast="1">
+ *                   <mock:attributes>
+ *                           <mock:attribute name="userName" whereValue-ref='#[getResource(fileName).asString()]'/>
+ *                   </mock:attributes>
+ *           </mock:verify-call>
+ *         }
+ *     </pre>
+ *
  * </p>
  * 
  * @author Javier Casal

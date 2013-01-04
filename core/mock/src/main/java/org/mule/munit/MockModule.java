@@ -18,9 +18,13 @@ import org.mule.munit.functions.*;
 import java.util.*;
 
 /**
- * Generic module
+ * <p>
+ *     Munit module for mocking message processors.
  *
- * @author MuleSoft, Inc.
+ * </p>
+ *
+ * @author Federico, Fernando
+ * @version since 3.3.2
  */
 @Module(name="mock", schemaVersion="3.3")
 public class MockModule implements MuleContextAware, ExpressionLanguageExtension
@@ -48,7 +52,7 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
                      @Optional MunitMuleMessage thenReturn) {
         MunitMuleMessage munitMuleMessage = thenReturn == null ? new MunitMuleMessage() : thenReturn;
 
-        new MessageProcessorMocker(muleContext).when(getName(messageProcessor))
+        mocker().when(getName(messageProcessor))
                     .ofNamespace(getNamespace(messageProcessor))
                     .withAttributes(createAttributes(withAttributes))
                     .thenReturn(createMuleMessageFrom(munitMuleMessage.getPayload(),
@@ -98,7 +102,7 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
     @Processor
     public void throwAn(Throwable exception, String whenCalling,
                         @Optional List<Attribute> withAttributes) {
-            new MessageProcessorMocker(muleContext).when(getName(whenCalling))
+            mocker().when(getName(whenCalling))
                     .ofNamespace(getNamespace(whenCalling))
                     .withAttributes(createAttributes(withAttributes))
                     .thenThrow(exception);
@@ -302,5 +306,9 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
         };
     }
 
+
+    private MessageProcessorMocker mocker() {
+        return new MessageProcessorMocker(muleContext);
+    }
 
 }

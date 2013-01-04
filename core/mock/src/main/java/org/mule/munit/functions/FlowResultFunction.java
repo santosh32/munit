@@ -10,6 +10,32 @@ import javax.script.Bindings;
 import javax.script.ScriptException;
 
 
+/**
+ * <p>
+ *     MEL function that executes an script to get a payload
+ *
+ *     usage:
+ *
+ *     <pre>
+ *         {@code
+ *
+ *           <script:script name="mockPayload" engine="groovy"><![CDATA[
+ *                       return new String("anotherString");
+ *                 ]]>
+ *           </script:script>
+ *
+ *           <mock:verify-call messageProcessor="jira:create-group" atLeast="1">
+ *                   <mock:attributes>
+ *                           <mock:attribute name="userName" whereValue-ref='#[resultOfScript(mockPayload)]'/>
+ *                   </mock:attributes>
+ *           </mock:verify-call>
+ *         }
+ *     </pre>
+ * </p>
+ *
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class FlowResultFunction implements ExpressionLanguageFunction {
     private MuleContext context;
 
@@ -19,7 +45,7 @@ public class FlowResultFunction implements ExpressionLanguageFunction {
 
     @Override
     public Object call(Object[] params, ExpressionLanguageContext context) {
-        if (params.length > 0 && params[0] instanceof String) {
+        if (params!=null && params.length > 0 && params[0] instanceof String) {
 
             String flowName = (String) params[0];
             Object registeredScript = this.context.getRegistry().lookupObject(flowName);

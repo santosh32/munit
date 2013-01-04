@@ -5,6 +5,26 @@ import org.mule.api.el.ExpressionLanguageFunction;
 import org.mule.munit.common.matchers.AnyClassMatcher;
 import org.mule.munit.common.matchers.DumbMatcher;
 
+/**
+ * <p>
+ *     MEL function for the Munit {@link AnyClassMatcher}
+ *
+ *     usage:
+ *
+ *     <pre>
+ *         {@code
+ *           <mock:verify-call messageProcessor="jira:create-group" atLeast="1">
+ *                   <mock:attributes>
+ *                           <mock:attribute name="userName" whereValue-ref='#[any()]'/>
+ *                   </mock:attributes>
+ *           </mock:verify-call>
+ *         }
+ *     </pre>
+ * </p>
+ *
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class AnyClassMatcherFunction implements ExpressionLanguageFunction {
     @Override
     public Object call(final Object[] params, ExpressionLanguageContext context) {

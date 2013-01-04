@@ -7,6 +7,10 @@ import java.util.*;
 
 import static junit.framework.Assert.assertTrue;
 
+/**
+ * @author Federico, Fernando
+ * @version since 3.3.2
+ */
 public class AnyMatcherFunctionTest {
     
     @Test

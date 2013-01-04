@@ -150,6 +150,42 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.5.2</version>
+                <configuration>
+                    <check>
+                        <branchRate>70</branchRate>
+                        <lineRate>70</lineRate>
+                        <haltOnFailure>true</haltOnFailure>
+                        <totalBranchRate>70</totalBranchRate>
+                        <totalLineRate>70</totalLineRate>
+                        <packageLineRate>70</packageLineRate>
+                        <packageBranchRate>70</packageBranchRate>
+                    </check>
+                    <instrumentation>
+                        <excludes>
+                            <!-- Exclude devkit generated -->
+                            <exclude>org/mule/munit/config/*</exclude>
+                            <exclude>org/mule/munit/processors/*</exclude>
+                            <exclude>org/mule/munit/transformers/*</exclude>
+                            <exclude>org/mule/munit/adapters/*</exclude>
+                            <exclude>org/mule/munit/process/*</exclude>
+                            <exclude>org/mule/munit/agents/*</exclude>
+                            <exclude>org/mule/munit/holders/*</exclude>
+                        </excludes>
+                    </instrumentation>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>clean</goal>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
         <resources>
             <resource>

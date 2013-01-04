@@ -5,6 +5,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+/**
+ * @author Javier Casal
+ * @version since 3.3.2
+ */
 public class GetResourceFunctionTest {
 	/*
 	 * If the params parameter has more than one object, then an
