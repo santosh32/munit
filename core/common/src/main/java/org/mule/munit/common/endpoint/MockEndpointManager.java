@@ -85,12 +85,19 @@ public class MockEndpointManager implements EndpointFactory {
         behaviors.put(address, behavior);
     }
 
+    /**
+     * <p>
+     *     Gets the behavior of an address
+     * </p>
+     */
     public OutboundBehavior getBehaviorFor(String address){
         return this.behaviors.get(address);
     }
 
     /**
-     * <p>Resets all the expected behaviors for the outbound endpoints of the application.</p>
+     * <p>
+     *     Resets all the expected behaviors for the outbound endpoints of the application.
+     * </p>
      */
     public void resetBehaviors() {
         this.behaviors.clear();
