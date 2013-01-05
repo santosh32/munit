@@ -10,7 +10,9 @@ import org.mule.munit.runner.SuiteBuilder;
 import java.util.List;
 
 /**
- * <p>Creates a Munit Suite and its tests to be run with Junit framework</p>
+ * <p>
+ *     Creates a Munit Suite and its tests to be run with Junit framework
+ * </p>
  *
  * @author Federico, Fernando
  * @version since 3.3.2

@@ -12,6 +12,7 @@ import org.mule.api.context.MuleContextAware;
 import org.mule.api.el.ExpressionLanguageContext;
 import org.mule.api.el.ExpressionLanguageExtension;
 import org.mule.api.processor.MessageProcessor;
+import org.mule.api.transport.PropertyScope;
 import org.mule.munit.common.mocking.*;
 import org.mule.munit.functions.*;
 
@@ -174,8 +175,6 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
                         returnInvocationProperties));
     }
 
-
-
     @Override
     public void setMuleContext(MuleContext muleContext) {
         this.muleContext = muleContext;
@@ -234,11 +233,12 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
             }
         }
 
-        if ( sessionProperties != null ){
-            for (String property : sessionProperties.keySet() ){
-                message.setSessionProperty(property, sessionProperties.get(property));
-            }
-        }
+        // TODO: how we can set the session properties?
+//        if ( sessionProperties != null ){
+//            for (String property : sessionProperties.keySet() ){
+//                message.setProperty(property, sessionProperties.get(property), PropertyScope.SESSION);
+//            }
+//        }
         return message;
     }
 
@@ -307,7 +307,7 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
     }
 
 
-    private MessageProcessorMocker mocker() {
+    protected MessageProcessorMocker mocker() {
         return new MessageProcessorMocker(muleContext);
     }
 
