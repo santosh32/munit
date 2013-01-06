@@ -1,6 +1,8 @@
 package org.mule.munit;
 
+import org.mule.munit.common.mocking.EndpointMocker;
 import org.mule.munit.common.mocking.MessageProcessorMocker;
+import org.mule.munit.common.mocking.MunitSpy;
 
 /**
  * <p>
@@ -12,14 +14,28 @@ import org.mule.munit.common.mocking.MessageProcessorMocker;
  */
 public class MockMockModule  extends MockModule{
 
-    MessageProcessorMocker mocker;
+    private MessageProcessorMocker mocker;
+    private EndpointMocker endpointMocker;
+    private MunitSpy spy;
 
-    public MockMockModule(MessageProcessorMocker mocker) {
+    public MockMockModule(MessageProcessorMocker mocker, EndpointMocker endpointMocker, MunitSpy spy) {
         this.mocker = mocker;
+        this.endpointMocker = endpointMocker;
+        this.spy = spy;
     }
 
     @Override
     protected MessageProcessorMocker mocker() {
         return mocker;
+    }
+
+    @Override
+    protected EndpointMocker endpointMocker() {
+        return endpointMocker;
+    }
+
+    @Override
+    protected MunitSpy spy() {
+        return spy;
     }
 }

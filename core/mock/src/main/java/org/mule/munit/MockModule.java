@@ -83,13 +83,11 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
                     @Optional List<NestedProcessor> assertionsBeforeCall,
                     @Optional List<NestedProcessor> assertionsAfterCall) {
 
-            new MunitSpy(muleContext).spyMessageProcessor(getName(messageProcessor))
+            spy().spyMessageProcessor(getName(messageProcessor))
                     .ofNamespace(getNamespace(messageProcessor))
                     .running(createSpyAssertion(createMessageProcessorsFrom(assertionsBeforeCall)),
                             createSpyAssertion(createMessageProcessorsFrom(assertionsAfterCall)));
     }
-
-
 
     /**
      * <p>Expect to throw an exception when message processor is called. </p>
@@ -166,7 +164,7 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
                                  @Optional Map<String, Object> returnOutboundProperties,
                                  @Optional List<NestedProcessor> assertions) {
 
-        new EndpointMocker(muleContext).expectEndpointWithAddress(address)
+        endpointMocker().expectEndpointWithAddress(address)
                 .withIncomingMessageSatisfying(createSpyAssertion(createMessageProcessorsFrom(assertions)))
                 .toReturn(createMuleMessageFrom(returnPayload, 
                         returnInboundProperties, 
@@ -174,6 +172,8 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
                         returnSessionProperties,
                         returnInvocationProperties));
     }
+
+
 
     @Override
     public void setMuleContext(MuleContext muleContext) {
@@ -294,7 +294,7 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
         return mps;
     }
 
-    private SpyProcess createSpy(final List<MessageProcessor> messageProcessorsFrom) {
+    protected SpyProcess createSpy(final List<MessageProcessor> messageProcessorsFrom) {
         return new SpyProcess(){
 
             @Override
@@ -309,6 +309,14 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
 
     protected MessageProcessorMocker mocker() {
         return new MessageProcessorMocker(muleContext);
+    }
+
+    protected EndpointMocker endpointMocker() {
+        return new EndpointMocker(muleContext);
+    }
+
+    protected MunitSpy spy() {
+        return new MunitSpy(muleContext);
     }
 
 }

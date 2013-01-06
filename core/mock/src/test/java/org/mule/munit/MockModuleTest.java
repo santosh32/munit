@@ -1,13 +1,19 @@
 package org.mule.munit;
 
 import org.junit.Test;
-import org.mule.api.MuleContext;
-import org.mule.api.MuleMessage;
+import org.mule.api.*;
+import org.mule.api.el.ExpressionLanguageContext;
+import org.mule.api.processor.MessageProcessor;
+import org.mule.munit.common.mocking.EndpointMocker;
 import org.mule.munit.common.mocking.MessageProcessorMocker;
+import org.mule.munit.common.mocking.MunitSpy;
+import org.mule.munit.common.mocking.SpyProcess;
+import org.mule.munit.functions.*;
 
 import java.util.*;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.notNull;
 import static org.mockito.Mockito.*;
 
@@ -19,6 +25,7 @@ public class MockModuleTest {
 
     public static final String NAMESPACE = "namespace";
     public static final String MESSAGE_PROCESSOR = "mp";
+    public static final String FULL_NAME = NAMESPACE + ":" + MESSAGE_PROCESSOR;
     public static final String INBOUND_KEY = "inboundKey";
     public static final String INBOUND_VALUE = "inboundValue";
     public static final String OUTBOUND_KEY = "outboundKey";
@@ -29,8 +36,12 @@ public class MockModuleTest {
     public static final String SESSION_KEY = "sessionKey";
     public static final String PAYLOAD = "payload";
     public static final Exception EXCEPTION = new Exception("error");
+    public static final String ADDRESS = "address";
     private MessageProcessorMocker mocker = mock(MessageProcessorMocker.class);
     private MuleContext muleContext = mock(MuleContext.class);
+    private EndpointMocker endpointMocker = mock(EndpointMocker.class);
+    private MunitSpy spy = mock(MunitSpy.class);
+    private MessageProcessor messageProcessor = mock(MessageProcessor.class);
 
     @Test
     public void whenMethodCanHandlerNullOptionals(){
@@ -56,6 +67,17 @@ public class MockModuleTest {
         verify(mocker,times(1)).thenReturn(any(MuleMessage.class));
     }
 
+    @Test
+    public void noNamespaceMeansMuleNamespace(){
+        defineMockerMuleNamespaceBehavior();
+
+        module().when(MESSAGE_PROCESSOR, createAttributes(),null);
+
+        verify(mocker,times(1)).when(MESSAGE_PROCESSOR);
+        verify(mocker,times(1)).ofNamespace("mule");
+        verify(mocker,times(1)).withAttributes((Map<String, Object>) notNull());
+        verify(mocker,times(1)).thenReturn(any(MuleMessage.class));
+    }
 
     @Test
     public void whenMethodCanHandleNotNullReturnValue(){
@@ -72,7 +94,7 @@ public class MockModuleTest {
     @Test
     public void throwExceptionMustSupportNullOptionals(){
         defineMockerBehavior();
-        module().throwAn(EXCEPTION, NAMESPACE + ":" + MESSAGE_PROCESSOR, null);
+        module().throwAn(EXCEPTION, FULL_NAME, null);
 
         verify(mocker,times(1)).when(MESSAGE_PROCESSOR);
         verify(mocker,times(1)).ofNamespace(NAMESPACE);
@@ -91,11 +113,116 @@ public class MockModuleTest {
         verify(mocker,times(1)).thenThrow(EXCEPTION);
     }
 
+    @Test
+    public void endpointMockingMustSupportNullOptionals(){
+        endpointMockerBehavior();
+
+        module().outboundEndpoint(ADDRESS, null,null,null,null,null,null);
+
+        verify(endpointMocker,times(1)).expectEndpointWithAddress(ADDRESS);
+        verify(endpointMocker, times(1)).withIncomingMessageSatisfying((List<SpyProcess>) notNull());
+        verify(endpointMocker, times(1)).toReturn((MuleMessage) notNull());
+    }
+
+
+    @Test
+    public void endpointMockingMustSupportOptionals(){
+        endpointMockerBehavior();
+
+        module().outboundEndpoint(ADDRESS, PAYLOAD,
+                props(entry(INVOCATION_KEY,INVOCATION_VALUE)),
+                props(entry(INBOUND_KEY,INBOUND_VALUE)),
+                props(entry(SESSION_KEY, SESSION_VALUE)),
+                props(entry(OUTBOUND_KEY,OUTBOUND_VALUE)),
+                createAssertions());
+
+        verify(endpointMocker,times(1)).expectEndpointWithAddress(ADDRESS);
+        verify(endpointMocker, times(1)).withIncomingMessageSatisfying((List<SpyProcess>) notNull());
+        verify(endpointMocker, times(1)).toReturn((MuleMessage) notNull());
+    }
+
+    @Test
+    public void spyMustSupportNullOptionals(){
+        spyBehavior();
+
+        module().spy(FULL_NAME, null,null);
+
+        verify(spy, times(1)).spyMessageProcessor(MESSAGE_PROCESSOR);
+        verify(spy, times(1)).ofNamespace(NAMESPACE);
+        verify(spy, times(1)).running((List<SpyProcess>) notNull(), (List<SpyProcess>) notNull());
+    }
+
+    @Test
+    public void spyMustSupportOptionals(){
+        spyBehavior();
+
+        module().spy(FULL_NAME, createAssertions(),createAssertions());
+
+        verify(spy, times(1)).spyMessageProcessor(MESSAGE_PROCESSOR);
+        verify(spy, times(1)).ofNamespace(NAMESPACE);
+        verify(spy, times(1)).running((List<SpyProcess>) notNull(), (List<SpyProcess>) notNull());
+    }
+
+    @Test
+    public void expressionLanguageContextMustBeSetCorrectly(){
+        ExpressionLanguageContext context = mock(ExpressionLanguageContext.class);
+
+        module().configureContext(context);
+
+        verify(context, times(1)).declareFunction(eq("eq"), any(EqMatcherFunction.class));
+        verify(context, times(1)).declareFunction(eq("anyByte"), any(AnyMatcherFunction.class));
+        verify(context, times(1)).declareFunction(eq("anyBoolean"), any(AnyMatcherFunction.class));
+        verify(context, times(1)).declareFunction(eq("anyInt"), any(AnyMatcherFunction.class));
+        verify(context, times(1)).declareFunction(eq("anyDouble"), any(AnyMatcherFunction.class));
+        verify(context, times(1)).declareFunction(eq("anyFloat"), any(AnyMatcherFunction.class));
+        verify(context, times(1)).declareFunction(eq("anyShort"), any(AnyMatcherFunction.class));
+        verify(context, times(1)).declareFunction(eq("anyObject"), any(AnyMatcherFunction.class));
+        verify(context, times(1)).declareFunction(eq("anyString"), any(AnyMatcherFunction.class));
+        verify(context, times(1)).declareFunction(eq("anyList"), any(AnyMatcherFunction.class));
+        verify(context, times(1)).declareFunction(eq("anySet"), any(AnyMatcherFunction.class));
+        verify(context, times(1)).declareFunction(eq("anyMap"), any(AnyMatcherFunction.class));
+        verify(context, times(1)).declareFunction(eq("anyCollection"), any(AnyMatcherFunction.class));
+        verify(context, times(1)).declareFunction(eq("isNull"), any(NullMatcherFunction.class));
+        verify(context, times(1)).declareFunction(eq("isNotNull"), any(NotNullMatcherFunction.class));
+        verify(context, times(1)).declareFunction(eq("any"), any(AnyClassMatcherFunction.class));
+        verify(context, times(1)).declareFunction(eq("resultOfScript"), any(FlowResultFunction.class));
+        verify(context, times(1)).declareFunction(eq("getResource"), any(GetResourceFunction.class));
+    }
+
+    @Test
+    public void createSpyIsCorrect() throws MuleException {
+        SpyProcess spyProcess = module().createSpy(createMessageProcessors());
+
+        MuleEvent event = mock(MuleEvent.class);
+        spyProcess.spy(event);
+
+        verify(messageProcessor, times(1)).process(event);
+    }
+
+    private List<MessageProcessor> createMessageProcessors() {
+        ArrayList<MessageProcessor> messageProcessors = new ArrayList<MessageProcessor>();
+
+        messageProcessors.add(messageProcessor);
+        return messageProcessors;
+    }
+
+    private void spyBehavior() {
+        when(spy.ofNamespace(NAMESPACE)).thenReturn(spy);
+        when(spy.spyMessageProcessor(MESSAGE_PROCESSOR)).thenReturn(spy);
+    }
+
+    private List<NestedProcessor> createAssertions() {
+        ArrayList<NestedProcessor> nestedProcessors = new ArrayList<NestedProcessor>();
+        nestedProcessors.add(mock(NestedProcessor.class));
+        return nestedProcessors;
+    }
+
     private MunitMuleMessage createMuleMessage() {
         MunitMuleMessage munitMuleMessage = new MunitMuleMessage();
         munitMuleMessage.setInboundProperties(props(entry(INBOUND_KEY, INBOUND_VALUE)));
         munitMuleMessage.setOutboundProperties(props(entry(OUTBOUND_KEY, OUTBOUND_VALUE)));
         munitMuleMessage.setInvocationProperties(props(entry(INVOCATION_KEY, INVOCATION_VALUE)));
+        // TODO: add this line and make test work
 //        munitMuleMessage.setSessionProperties(props(entry(SESSION_KEY, SESSION_VALUE)));
         munitMuleMessage.setPayload(PAYLOAD);
         return munitMuleMessage;
@@ -121,16 +248,25 @@ public class MockModuleTest {
     }
 
     private void defineMockerBehavior() {
-        when(mocker.when(anyString())).thenReturn(mocker);
+        when(mocker.when(MESSAGE_PROCESSOR)).thenReturn(mocker);
         when(mocker.withAttributes(anyMap())).thenReturn(mocker);
-        when(mocker.ofNamespace(anyString())).thenReturn(mocker);
+        when(mocker.ofNamespace(NAMESPACE)).thenReturn(mocker);
     }
 
-
+    private void defineMockerMuleNamespaceBehavior() {
+        when(mocker.when(MESSAGE_PROCESSOR)).thenReturn(mocker);
+        when(mocker.withAttributes(anyMap())).thenReturn(mocker);
+        when(mocker.ofNamespace("mule")).thenReturn(mocker);
+    }
 
     private MockMockModule module() {
-        MockMockModule mockMockModule = new MockMockModule(mocker);
+        MockMockModule mockMockModule = new MockMockModule(mocker, endpointMocker, spy);
         mockMockModule.setMuleContext(muleContext);
         return mockMockModule;
+    }
+
+    private void endpointMockerBehavior() {
+        when(endpointMocker.expectEndpointWithAddress(anyString())).thenReturn(endpointMocker);
+        when(endpointMocker.withIncomingMessageSatisfying(anyList())).thenReturn(endpointMocker);
     }
 }
