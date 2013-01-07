@@ -12,6 +12,14 @@
         http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/ee/jdbc/current/mule-jdbc-ee.xsd
         http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
 
+    <configuration>
+        <expression-language autoResolveVariables="false">
+            <global-functions>
+                   def hello() {'hello FeFe'}
+            </global-functions>
+        </expression-language>
+    </configuration>
+
     <spring:bean id="jdbcDataSource"
                  class="org.enhydra.jdbc.standard.StandardDataSource" destroy-method="shutdown">
         <spring:property name="driverName" value="org.h2.Driver" />
@@ -31,6 +39,10 @@
 
     <custom-transformer name="exceptionTransformer" class="org.mule.transformers.ExceptionTransformer"/>
 
+
+    <flow name="echoFunctionFlow">
+        <logger level="ERROR" message="#[hello()]"/>
+    </flow>
 
     <flow name="echoFlow">
         <echo-component/>

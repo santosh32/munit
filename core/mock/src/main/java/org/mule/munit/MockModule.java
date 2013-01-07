@@ -11,6 +11,7 @@ import org.mule.api.annotations.param.Optional;
 import org.mule.api.context.MuleContextAware;
 import org.mule.api.el.ExpressionLanguageContext;
 import org.mule.api.el.ExpressionLanguageExtension;
+import org.mule.api.el.ExpressionLanguageFunction;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.api.transport.PropertyScope;
 import org.mule.munit.common.mocking.*;
@@ -31,6 +32,7 @@ import java.util.*;
 public class MockModule implements MuleContextAware, ExpressionLanguageExtension
 {
     private MuleContext muleContext;
+    private ExpressionLanguageContext melContext;
 
 
     /**
@@ -173,6 +175,29 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
                         returnInvocationProperties));
     }
 
+    /**
+     * Reset mock behaviour
+     *
+     * {@sample.xml ../../../doc/mock-connector.xml.sample mock:outboundEndpoint}
+     *
+     * @param functionName the address
+     * @param returnValue the Return Payload
+
+     */
+    @Processor
+    public void melFunction(String functionName,
+                                 final Object returnValue) {
+
+        ExpressionLanguageFunction function = new ExpressionLanguageFunction() {
+            @Override
+            public Object call(Object[] params, ExpressionLanguageContext context) {
+                return returnValue;
+            }
+        };
+
+        melContext.declareFunction(functionName, function);
+    }
+
 
 
     @Override
@@ -182,6 +207,8 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
 
     @Override
     public void configureContext(ExpressionLanguageContext context) {
+
+        this.melContext = context;
         context.declareFunction("eq", new EqMatcherFunction());
         context.declareFunction("anyBoolean", new AnyMatcherFunction(Boolean.class));
         context.declareFunction("anyByte", new AnyMatcherFunction(Byte.class));

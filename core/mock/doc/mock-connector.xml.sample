@@ -32,5 +32,10 @@
 
         <mock:throw-an exception-ref="#[new Exception()]" whenCalling="test"/>
 
-
 <!-- END_INCLUDE(mock:expectFail) -->
+
+<!-- BEGIN_INCLUDE(mock:melFunction) -->
+
+        <mock:mel-function functionName="functionName" returnValue="#[string:something]/>
+
+<!-- END_INCLUDE(mock:melFunction) -->

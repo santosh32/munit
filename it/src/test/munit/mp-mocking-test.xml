@@ -181,4 +181,9 @@
         <flow-ref name="callingJira"/>
     </munit:test>
 
+    <munit:test name="testEchoFunction" description="echo function">
+        <mock:mel-function functionName="hello" returnValue-ref="#[string:hello world]"/>
+        <flow-ref name="echoFunctionFlow"/>
+    </munit:test>
+
 </mule>
