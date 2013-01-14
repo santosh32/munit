@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mule.munit.utils</groupId>
     <artifactId>parent</artifactId>
-    <version>3.3.2-M3-SNAPSHOT</version>
+    <version>3.4-M1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Utils for integration testing</name>
@@ -20,8 +20,8 @@
     </modules>
 
     <properties>
-        <mule.version>3.3.1</mule.version>
-        <mule.devkit.version>3.3.1</mule.devkit.version>
+        <mule.version>3.4-M3</mule.version>
+        <mule.devkit.version>3.4-SNAPSHOT</mule.devkit.version>
         <junit.version>4.9</junit.version>
         <mockito.version>1.8.2</mockito.version>
         <skip.javadoc>true</skip.javadoc>
@@ -254,13 +254,12 @@
         <repository>
             <id>mulesoft-snapshots</id>
             <name>MuleSoft Snapshots Repository</name>
-            <url>http://repository.mulesoft.org/snapshots/</url>
+            <url>https://repository.mulesoft.org/nexus/content/repositories/snapshots/</url>
             <layout>default</layout>
         </repository>
         <repository>
-            <id>codehaus-releases</id>
-            <name>CodeHaus Releases</name>
-            <url>http://repository.codehaus.org/</url>
+            <id>mule-ee-releases</id>
+            <url>http://dev.ee.mulesource.com/repository/content/repositories/releases/</url>
         </repository>
 
     </repositories>
