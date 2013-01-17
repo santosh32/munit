@@ -35,6 +35,9 @@
         <munit:assert-that payloadIs-ref="#[string: Hello world!]"/>
     </munit:test>
 
+    <sub-flow name="doFalseAssertion">
+        <munit:assert-false condition="#[1==1]"/>
+    </sub-flow>
 
     <munit:test name="testingEchoWithANullPayload"
                 description="
@@ -68,7 +71,7 @@
                 description="
         Testing that something is false">
 
-        <munit:assert-false condition="#[1==2]"/>
+        <flow-ref name="doFalseAssertion"/>
     </munit:test>
 
     <munit:test name="testThatSomethingIsTrue"

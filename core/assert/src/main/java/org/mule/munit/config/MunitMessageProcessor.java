@@ -1,6 +1,9 @@
 package org.mule.munit.config;
 
+import org.apache.commons.lang.StringUtils;
 import org.mule.api.*;
+import org.mule.api.construct.FlowConstruct;
+import org.mule.api.construct.FlowConstructAware;
 import org.mule.api.context.MuleContextAware;
 import org.mule.api.expression.ExpressionManager;
 import org.mule.api.lifecycle.Initialisable;
@@ -9,6 +12,7 @@ import org.mule.api.processor.MessageProcessor;
 import org.mule.api.registry.RegistrationException;
 import org.mule.config.i18n.CoreMessages;
 import org.mule.config.i18n.MessageFactory;
+import org.mule.construct.Flow;
 import org.mule.munit.AssertModule;
 import org.mule.util.TemplateParser;
 
@@ -20,9 +24,9 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author Federico, Fernando
  * @version since 3.3.2
  */
-public abstract class MunitMessageProcessor implements Initialisable, MessageProcessor, MuleContextAware{
+public abstract class MunitMessageProcessor implements Initialisable, MessageProcessor, MuleContextAware, FlowConstructAware{
 
-
+    protected FlowConstruct flowConstruct;
     protected Object moduleObject;
     protected MuleContext muleContext;
     protected ExpressionManager expressionManager;
@@ -85,7 +89,29 @@ public abstract class MunitMessageProcessor implements Initialisable, MessagePro
             doProcess(mulemessage, module);
             retryCount.set(0);
             return event;
-        } catch (Exception e) {
+        }catch (AssertionError error){
+            String path = ((Flow) flowConstruct).getMessageProcessorPaths().get(this);
+            path = path.replaceAll("/processors/", "/");
+            path = path.replaceAll("/subprocessors/", "/");
+            path = path.replaceAll("/es/", "/exception-strategy/");
+
+            String[] split = path.split("/");
+            StringBuffer coordenate = new StringBuffer();
+            StringBuffer stackTrace = new StringBuffer();
+            for ( int i=split.length-1; i>0; i--){
+                if (StringUtils.isNumeric(split[i]) ){
+                    coordenate.append(split[i]+ ":");
+                }
+                else{
+                    stackTrace.append(split[i] + "(" + coordenate.toString()+")");
+                    coordenate = new StringBuffer();
+                }
+
+            }
+
+            throw  error;
+        }
+        catch (Exception e) {
             throw new MessagingException(CoreMessages.failedToInvoke(getProcessor()), event, e);
         }
     }
@@ -116,5 +142,10 @@ public abstract class MunitMessageProcessor implements Initialisable, MessagePro
 
     public void setRetryMax(int value) {
         this.retryMax = value;
+    }
+
+
+    public void setFlowConstruct(FlowConstruct flowConstruct) {
+        this.flowConstruct = flowConstruct;
     }
 }

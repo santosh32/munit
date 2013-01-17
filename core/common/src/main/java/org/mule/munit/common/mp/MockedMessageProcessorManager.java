@@ -1,5 +1,8 @@
 package org.mule.munit.common.mp;
 
+import org.apache.commons.collections.ListUtils;
+import org.mockito.internal.util.ListUtil;
+
 import java.util.*;
 
 /**
@@ -20,7 +23,7 @@ public class MockedMessageProcessorManager {
     /**
      * <p>These are the real calls of the message processors.</p>
      */
-    protected List<MessageProcessorCall> calls = new ArrayList<MessageProcessorCall>();
+    protected List<MessageProcessorCall> calls = new LinkedList<MessageProcessorCall>();
 
     /**
      * <p>The spy process per message processor</p>
@@ -87,5 +90,9 @@ public class MockedMessageProcessorManager {
 
     public synchronized void addSpyAssertion(MessageProcessorId messageProcessor, SpyAssertion assertionMessageProcessor){
         spyAssertions.put(messageProcessor, assertionMessageProcessor);
+    }
+
+    public List<MessageProcessorCall> getCalls() {
+        return new LinkedList<MessageProcessorCall>(calls);
     }
 }
