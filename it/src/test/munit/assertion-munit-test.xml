@@ -36,7 +36,7 @@
     </munit:test>
 
     <sub-flow name="doFalseAssertion">
-        <munit:assert-true condition="#[1==2]"/>
+        <munit:assert-false condition="#[1==2]"/>
     </sub-flow>
 
     <munit:test name="testingEchoWithANullPayload"
