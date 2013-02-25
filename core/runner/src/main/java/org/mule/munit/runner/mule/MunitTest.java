@@ -3,6 +3,7 @@ package org.mule.munit.runner.mule;
 import org.mule.MessageExchangePattern;
 import org.mule.api.MuleEvent;
 import org.mule.api.MuleException;
+import org.mule.munit.common.MunitCore;
 import org.mule.munit.config.MunitFlow;
 import org.mule.munit.config.MunitTestFlow;
 import org.mule.munit.runner.mule.result.TestResult;
@@ -13,6 +14,8 @@ import org.mule.tck.MuleTestUtils;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
+
+import static org.mule.munit.common.MunitCore.getStackTraceElements;
 
 /**
  * <p>MUnit Test</p>
@@ -86,12 +89,17 @@ public class MunitTest {
         } catch (MuleException e) {
             try {
                 if ( !test.expectException(e,event) ){
+                    List<StackTraceElement> stackTraceElements = getStackTraceElements(event.getMuleContext());
+                    e.setStackTrace(stackTraceElements.toArray(new StackTraceElement[]{}));
                     result.setError(buildNotifcationFrom(e));
                 }
             }catch (AssertionError t) {
+                List<StackTraceElement> stackTraceElements = getStackTraceElements(event.getMuleContext());
+                t.setStackTrace(stackTraceElements.toArray(new StackTraceElement[]{}));
                 result.setFailure(buildNotifcationFrom(t));
             }
         } finally {
+            MunitCore.reset(event.getMuleContext());
             runAfter(result, event);
         }
 

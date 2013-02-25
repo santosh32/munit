@@ -3,10 +3,16 @@ package org.mule.munit.common;
 
 import org.mule.api.MuleContext;
 import org.mule.api.config.MuleProperties;
+import org.mule.api.construct.FlowConstruct;
 import org.mule.api.registry.MuleRegistry;
 import org.mule.api.registry.RegistrationException;
 import org.mule.munit.common.endpoint.MockEndpointManager;
+import org.mule.munit.common.mp.MessageProcessorCall;
 import org.mule.munit.common.mp.MockedMessageProcessorManager;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>Util class to manage the Mocking managers</p>
@@ -63,5 +69,41 @@ public class MunitCore {
         } catch (RegistrationException e) {
 
         }
+    }
+
+
+    public static List<StackTraceElement> getStackTraceElements(MuleContext muleContext) {
+        MockedMessageProcessorManager manager = (MockedMessageProcessorManager) muleContext.getRegistry().lookupObject(MockedMessageProcessorManager.ID);
+        List<MessageProcessorCall> calls = manager.getCalls();
+
+        List<StackTraceElement> stackTraceElements = new ArrayList<StackTraceElement>();
+
+        StringBuffer stackTrace = new StringBuffer();
+        for (MessageProcessorCall call : calls ){
+            stackTraceElements.add(0, new StackTraceElement(getFlowConstructName(call), getFullName(call), call.getFileName(), Integer.valueOf(call.getLineNumber())));
+            stackTrace.insert(0, call.getMessageProcessorId().getFullName());
+        }
+        return stackTraceElements;
+    }
+
+    private static String getFullName(MessageProcessorCall call) {
+        String fullName = call.getMessageProcessorId().getFullName();
+        Map<String,Object> attributes = call.getAttributes();
+        attributes.toString();
+        attributes.remove("name");
+        attributes.remove("location");
+
+
+        return fullName + attributes.toString();
+    }
+
+
+
+    private static String getFlowConstructName(MessageProcessorCall call) {
+        FlowConstruct flowConstruct = call.getFlowConstruct();
+        if (flowConstruct == null ){
+            return "";
+        }
+        return flowConstruct.getName();
     }
 }

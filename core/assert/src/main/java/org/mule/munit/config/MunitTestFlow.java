@@ -86,13 +86,11 @@ public class MunitTestFlow extends MunitFlow {
 
     @Override
     public MuleEvent process(MuleEvent event) throws MuleException {
-        try{
+
             MuleEvent process = super.process(event);
             return process;
-        }
-        finally {
-            MunitCore.reset(muleContext);
-        }
+
+
     }
 
     private void registerMpManager(MuleContext muleContext) {

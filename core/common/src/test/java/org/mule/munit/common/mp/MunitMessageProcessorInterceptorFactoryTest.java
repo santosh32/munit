@@ -41,6 +41,6 @@ public class MunitMessageProcessorInterceptorFactoryTest {
     public void testCreate(){
         MunitMessageProcessorInterceptorFactory factory = new MunitMessageProcessorInterceptorFactory();
 
-        factory.create(EchoComponent.class, new MessageProcessorId("name","namespace"), new HashMap<String, String>());
+        factory.create(EchoComponent.class, new MessageProcessorId("name","namespace"), new HashMap<String, String>(), "fileName", "2");
     }
 }

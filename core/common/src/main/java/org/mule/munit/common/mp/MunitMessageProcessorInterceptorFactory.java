@@ -38,7 +38,7 @@ public class MunitMessageProcessorInterceptorFactory  extends MethodInterceptorF
         return new BeanFactoryMethodBuilder(beanDefinition, "create", ID);
     }
 
-    public Object create(Class realMpClass, MessageProcessorId id, Map<String,String> attributes){
+    public Object create(Class realMpClass, MessageProcessorId id, Map<String,String> attributes, String fileName, String lineNumber){
         try {
 
             Enhancer e = new Enhancer();
@@ -47,6 +47,8 @@ public class MunitMessageProcessorInterceptorFactory  extends MethodInterceptorF
             MunitMessageProcessorInterceptor callback = new MunitMessageProcessorInterceptor();
             callback.setId(id);
             callback.setAttributes(attributes);
+            callback.setFileName(fileName);
+            callback.setLineNumber(lineNumber);
             e.setCallback(callback);
             return e.create();
 

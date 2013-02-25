@@ -42,10 +42,10 @@ public class MunitHandlerWrapper implements NamespaceHandler {
                 String tagName = element.getTagName();
                 
                 if ( !StringUtils.isEmpty(tagName) ){
-
+                    String filename = parserContext.getReaderContext().getResource().getFilename();
                     MunitMessageProcessorInterceptorFactory.addFactoryDefinitionTo((AbstractBeanDefinition) beanDefinition)
                             .withConstructorArguments(beanType,new MessageProcessorId(getNameFrom(tagName), getNamespaceFrom(tagName)),
-                                    getAttributes(element));
+                                    getAttributes(element), filename, element.getAttribute("location"));
                     return beanDefinition;
                 }
             }

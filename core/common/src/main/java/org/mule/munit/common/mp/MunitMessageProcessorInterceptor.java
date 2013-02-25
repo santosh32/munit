@@ -6,6 +6,8 @@ import org.apache.commons.lang.StringUtils;
 import org.mule.DefaultMuleMessage;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleEvent;
+import org.mule.api.construct.FlowConstruct;
+import org.mule.api.construct.FlowConstructAware;
 import org.mule.api.expression.ExpressionManager;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.munit.common.MunitCore;
@@ -25,6 +27,8 @@ public class MunitMessageProcessorInterceptor implements MethodInterceptor{
 
     private MessageProcessorId id;
     private Map<String,String> attributes;
+    private String fileName;
+    private String lineNumber;
 
 
     public Object process(Object obj,Object[] args, MethodProxy proxy) throws Throwable {
@@ -32,22 +36,24 @@ public class MunitMessageProcessorInterceptor implements MethodInterceptor{
 
         MockedMessageProcessorManager manager = getMockedMessageProcessorManager();
 
-        runSpyBeforeAssertions(manager, event);
         MessageProcessorCall messageProcessorCall = buildCall(event);
+        registerCall(manager, messageProcessorCall);
+
+        runSpyBeforeAssertions(manager, event);
         MockedMessageProcessorBehavior behavior = manager.getBetterMatchingBehavior(messageProcessorCall);
         if ( behavior != null ){
             if (behavior.getExceptionToThrow() != null) {
-                registerCall(event, manager, messageProcessorCall);
+                runSpyAfterAssertions(manager, event);
                 throw behavior.getExceptionToThrow();
             }
 
             MunitUtils.copyMessage((DefaultMuleMessage) behavior.getReturnMuleMessage(), (DefaultMuleMessage) event.getMessage());
 
-            registerCall(event, manager, messageProcessorCall);
+            runSpyAfterAssertions(manager, event);
             return event;
         }
 
-        registerCall(event, manager, messageProcessorCall);
+        runSpyAfterAssertions(manager, event);
         return proxy.invokeSuper(obj,args);
     }
 
@@ -56,16 +62,14 @@ public class MunitMessageProcessorInterceptor implements MethodInterceptor{
         Class<?> declaringClass = method.getDeclaringClass();
         if ( MessageProcessor.class.isAssignableFrom(declaringClass) && method.getName().equals("process") )
         {
-
             return process(obj,args,proxy);
         }
 
         return proxy.invokeSuper(obj, args);
     }
 
-    private void registerCall(MuleEvent event, MockedMessageProcessorManager manager, MessageProcessorCall messageProcessorCall) {
+    private void registerCall(MockedMessageProcessorManager manager, MessageProcessorCall messageProcessorCall) {
         manager.addCall(messageProcessorCall);
-        runSpyAfterAssertions(manager, event);
     }
 
     private void runSpyAfterAssertions(MockedMessageProcessorManager manager, MuleEvent event) {
@@ -98,10 +102,17 @@ public class MunitMessageProcessorInterceptor implements MethodInterceptor{
         MessageProcessorCall call = new MessageProcessorCall(id);
         Map<String, Object> processed = new HashMap<String, Object>();
         for (Map.Entry<String,String> attrs : attributes.entrySet() ){
-            Object evaluate = evaluate(attrs.getValue(), event);
-            processed.put(attrs.getKey(), evaluate);
+            try{
+                Object evaluate = evaluate(attrs.getValue(), event);
+                processed.put(attrs.getKey(), evaluate);
+            }catch (Throwable t){
+                processed.put(attrs.getKey(), attrs.getValue());
+            }
         }
         call.setAttributes(processed);
+        call.setFlowConstruct(event.getFlowConstruct());
+        call.setFileName(fileName);
+        call.setLineNumber(lineNumber);
         return call;
     }
 
@@ -139,5 +150,15 @@ public class MunitMessageProcessorInterceptor implements MethodInterceptor{
         return MunitCore.getMuleContext();
     }
 
+    public String getFileName() {
+        return fileName;
+    }
 
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public void setLineNumber(String lineNumber) {
+        this.lineNumber = lineNumber;
+    }
 }

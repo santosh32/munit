@@ -5,12 +5,15 @@ import org.mule.MessageExchangePattern;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleEvent;
 import org.mule.api.MuleException;
+import org.mule.munit.common.MunitCore;
 import org.mule.munit.config.MunitFlow;
 import org.mule.munit.config.MunitTestFlow;
 import org.mule.munit.runner.output.*;
 import org.mule.tck.MuleTestUtils;
 
 import java.util.List;
+
+import static org.mule.munit.common.MunitCore.getStackTraceElements;
 
 
 public class MunitTest extends TestCase
@@ -57,11 +60,14 @@ public class MunitTest extends TestCase
         catch(Throwable t)
         {
             if ( !flow.expectException(t,event) ){
+                List<StackTraceElement> stackTraceElements = getStackTraceElements(event.getMuleContext());
+                t.setStackTrace(stackTraceElements.toArray(new StackTraceElement[]{}));
                 throw t;
             }
 
         }
         finally {
+            MunitCore.reset(muleContext);
             run(event, after);
         }
     }

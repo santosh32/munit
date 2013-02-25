@@ -1,6 +1,7 @@
 package org.mule.munit.common.mp;
 
 
+import org.mule.api.construct.FlowConstruct;
 import org.mule.munit.common.matchers.Matcher;
 
 import java.util.HashMap;
@@ -23,6 +24,14 @@ public class MessageProcessorCall {
      * <p>The xml attributes of the message processor with its object (the attribute resolution)</p>
      */
     private Map<String, Object> attributes = new HashMap<String, Object>();
+
+
+    /**
+     * The flow Construct of the message processor, can be null
+     */
+    private FlowConstruct flowConstruct;
+    private String fileName;
+    private String lineNumber;
 
     public MessageProcessorCall(MessageProcessorId messageProcessorId) {
         this.messageProcessorId = messageProcessorId;
@@ -87,6 +96,30 @@ public class MessageProcessorCall {
 
         return matcher.equals(value);
 
+    }
+
+    public void setFlowConstruct(FlowConstruct flowConstruct) {
+        this.flowConstruct = flowConstruct;
+    }
+
+    public FlowConstruct getFlowConstruct() {
+        return flowConstruct;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setLineNumber(String lineNumber) {
+        this.lineNumber = lineNumber;
+    }
+
+    public String getLineNumber() {
+        return lineNumber;
     }
 }
 

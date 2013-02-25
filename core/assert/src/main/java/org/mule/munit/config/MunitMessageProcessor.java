@@ -14,9 +14,16 @@ import org.mule.config.i18n.CoreMessages;
 import org.mule.config.i18n.MessageFactory;
 import org.mule.construct.Flow;
 import org.mule.munit.AssertModule;
+import org.mule.munit.common.mp.MessageProcessorCall;
+import org.mule.munit.common.mp.MockedMessageProcessorManager;
 import org.mule.util.TemplateParser;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import static org.mule.munit.common.MunitCore.getStackTraceElements;
 
 /**
  * <p>Generic Munit Message Processor</p>
@@ -90,30 +97,27 @@ public abstract class MunitMessageProcessor implements Initialisable, MessagePro
             retryCount.set(0);
             return event;
         }catch (AssertionError error){
-            String path = ((Flow) flowConstruct).getMessageProcessorPaths().get(this);
-            path = path.replaceAll("/processors/", "/");
-            path = path.replaceAll("/subprocessors/", "/");
-            path = path.replaceAll("/es/", "/exception-strategy/");
+            List<StackTraceElement> stackTraceElements = getStackTraceElements(muleContext);
 
-            String[] split = path.split("/");
-            StringBuffer coordenate = new StringBuffer();
-            StringBuffer stackTrace = new StringBuffer();
-            for ( int i=split.length-1; i>0; i--){
-                if (StringUtils.isNumeric(split[i]) ){
-                    coordenate.append(split[i]+ ":");
-                }
-                else{
-                    stackTrace.append(split[i] + "(" + coordenate.toString()+")");
-                    coordenate = new StringBuffer();
-                }
+            AssertionError exception = new AssertionError(getMessage(error));
+                     exception.setStackTrace(stackTraceElements.toArray(new StackTraceElement[]{}));
 
-            }
 
-            throw  error;
+            throw  exception;
         }
         catch (Exception e) {
             throw new MessagingException(CoreMessages.failedToInvoke(getProcessor()), event, e);
         }
+    }
+
+
+
+    private String getMessage(AssertionError error) {
+        String message = error.getMessage();
+        if ( StringUtils.isEmpty(message )) {
+            return this.getProcessor();
+        }
+        return message;
     }
 
     /**
