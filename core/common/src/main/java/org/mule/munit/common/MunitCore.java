@@ -26,6 +26,8 @@ import java.util.Map;
  */
 public class MunitCore {
 
+    public static final String LINE_NUMBER_ELEMENT_ATTRIBUTE = "__MUNIT_LINE_NUMBER";
+
     /**
      * <p>
      *     The Mule context for the Munit test.
@@ -149,7 +151,7 @@ public class MunitCore {
         Map<String,Object> attributes = call.getAttributes();
         attributes.toString();
         attributes.remove("name");
-        attributes.remove("location");
+        attributes.remove(LINE_NUMBER_ELEMENT_ATTRIBUTE);
 
 
         return fullName + attributes.toString();

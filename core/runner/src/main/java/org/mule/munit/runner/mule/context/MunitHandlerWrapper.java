@@ -3,6 +3,7 @@ package org.mule.munit.runner.mule.context;
 import org.apache.commons.lang.StringUtils;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.construct.Flow;
+import org.mule.munit.common.MunitCore;
 import org.mule.munit.common.mp.MessageProcessorId;
 import org.mule.munit.common.mp.MunitMessageProcessorInterceptorFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -45,7 +46,7 @@ public class MunitHandlerWrapper implements NamespaceHandler {
                     String filename = parserContext.getReaderContext().getResource().getFilename();
                     MunitMessageProcessorInterceptorFactory.addFactoryDefinitionTo((AbstractBeanDefinition) beanDefinition)
                             .withConstructorArguments(beanType,new MessageProcessorId(getNameFrom(tagName), getNamespaceFrom(tagName)),
-                                    getAttributes(element), filename, element.getAttribute("location"));
+                                    getAttributes(element), filename, element.getAttribute(MunitCore.LINE_NUMBER_ELEMENT_ATTRIBUTE));
                     return beanDefinition;
                 }
             }
@@ -63,7 +64,9 @@ public class MunitHandlerWrapper implements NamespaceHandler {
         NamedNodeMap attributes = element.getAttributes();
         for (int i=0 ; i<attributes.getLength(); i++){
             Node attr = attributes.item(i);
-            attrs.put(attr.getNodeName(), attr.getNodeValue());
+            if ( !MunitCore.LINE_NUMBER_ELEMENT_ATTRIBUTE.equals(attr.getNodeName() )){
+                attrs.put(attr.getNodeName(), attr.getNodeValue());
+            }
         }
         return attrs;
     }

@@ -1,5 +1,6 @@
 package org.mule.munit.runner.mule.context;
 
+import org.mule.munit.common.MunitCore;
 import org.springframework.beans.factory.xml.DefaultDocumentLoader;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -18,22 +19,18 @@ import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.sax.SAXSource;
 
 /**
- * Created with IntelliJ IDEA.
- * User: fernandofederico
- * Date: 2/22/13
- * Time: 9:34 AM
- * To change this template use File | Settings | File Templates.
+ * <p>
+ *     We change the document loader in order to get the line numbers as element attribute.
+ * </p>
+ *
+ * @author Federico, Fernando
+ * @version since 3.4
  */
 public class MunitDocumentLoader extends DefaultDocumentLoader {
 
     public Document loadDocument(InputSource inputSource, EntityResolver entityResolver,
                                  ErrorHandler errorHandler, int validationMode, boolean namespaceAware) throws Exception {
 
-        DocumentBuilderFactory factory = createDocumentBuilderFactory(validationMode, namespaceAware);
-
-        DocumentBuilder builder = createDocumentBuilder(factory, entityResolver, errorHandler);
-
-        Document document = builder.newDocument();
         XMLReader xmlReader = XMLReaderFactory.createXMLReader();
         LocationFilter locationFilter = new LocationFilter(xmlReader);
         SAXSource saxSource = new SAXSource(locationFilter, inputSource);
@@ -47,6 +44,8 @@ public class MunitDocumentLoader extends DefaultDocumentLoader {
     }
 
     class LocationFilter extends XMLFilterImpl {
+
+        public static final String NAMESPACE = "http://www.mule.org/munit";
 
         LocationFilter(XMLReader xmlReader) {
             super(xmlReader);
@@ -67,7 +66,7 @@ public class MunitDocumentLoader extends DefaultDocumentLoader {
             String location = String.valueOf(locator.getLineNumber());
             Attributes2Impl attrs = new Attributes2Impl(attributes);
 
-            attrs.addAttribute("http://myNamespace", "location", "location", "CDATA", location);
+            attrs.addAttribute(NAMESPACE, MunitCore.LINE_NUMBER_ELEMENT_ATTRIBUTE, MunitCore.LINE_NUMBER_ELEMENT_ATTRIBUTE, "CDATA", location);
             super.startElement(uri, localName, qName, attrs);
         }
     }

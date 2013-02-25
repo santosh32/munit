@@ -113,6 +113,8 @@ public class MunitCoreTest {
 
         HashMap<String, Object> attributes = new HashMap<String, Object>();
         attributes.put("key", "value");
+        attributes.put("name", "any");
+        attributes.put(MunitCore.LINE_NUMBER_ELEMENT_ATTRIBUTE, "anyLocation");
         call1.setAttributes(attributes);
         calls.add(call1);
         return calls;
