@@ -10,6 +10,7 @@ import org.mule.api.config.MuleProperties;
 import org.mule.api.registry.MuleRegistry;
 import org.mule.munit.common.endpoint.MockEndpointManager;
 import org.mule.munit.common.mp.MessageProcessorCall;
+import org.mule.munit.common.mp.MessageProcessorId;
 import org.mule.munit.common.mp.MockedMessageProcessorManager;
 import org.mule.munit.config.MunitFlow;
 import org.mule.munit.config.MunitTestFlow;
@@ -85,8 +86,9 @@ public class MunitTestTest {
     public void testRunWithError() throws MuleException {
         MunitTest test = new MockedTest(buildList(before), testFlow, buildList(after), handler);
 
-        when(processorManager.getCalls()).thenReturn(new ArrayList<MessageProcessorCall>());
+        when(processorManager.getCalls()).thenReturn(createTestCalls());
         when(testFlow.process(muleEvent)).thenThrow(new DefaultMuleException("Error"));
+
         TestResult testResult = test.run();
 
         verify(testFlow,times(1)).process(muleEvent);
@@ -95,6 +97,18 @@ public class MunitTestTest {
 
         assertFalse(testResult.hasSucceeded());
         assertEquals("Error", testResult.getError().getShortMessage());
+        assertTrue(testResult.getError().getFullMessage().contains("namespace2"));
+        assertTrue(testResult.getError().getFullMessage().contains("mp2"));
+        assertTrue(testResult.getError().getFullMessage().contains("namespace1"));
+        assertTrue(testResult.getError().getFullMessage().contains("mp1"));
+    }
+
+    private ArrayList<MessageProcessorCall> createTestCalls() {
+        ArrayList<MessageProcessorCall> calls = new ArrayList<MessageProcessorCall>();
+        calls.add(new MessageProcessorCall(new MessageProcessorId("mp1", "namespace1")));
+        calls.add(new MessageProcessorCall(new MessageProcessorId("mp2", "namespace2")));
+
+        return calls;
     }
 
 

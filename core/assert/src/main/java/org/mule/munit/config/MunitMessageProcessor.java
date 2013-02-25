@@ -12,21 +12,17 @@ import org.mule.api.processor.MessageProcessor;
 import org.mule.api.registry.RegistrationException;
 import org.mule.config.i18n.CoreMessages;
 import org.mule.config.i18n.MessageFactory;
-import org.mule.construct.Flow;
 import org.mule.munit.AssertModule;
-import org.mule.munit.common.mp.MessageProcessorCall;
-import org.mule.munit.common.mp.MockedMessageProcessorManager;
 import org.mule.util.TemplateParser;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.mule.munit.common.MunitCore.getStackTraceElements;
+import static org.mule.munit.common.MunitCore.buildMuleStackTrace;
 
 /**
- * <p>Generic Munit Message Processor</p>
+ * <p>
+ *     Generic Munit Message Processor.
+ * </p>
  *
  * @author Federico, Fernando
  * @version since 3.3.2
@@ -86,6 +82,24 @@ public abstract class MunitMessageProcessor implements Initialisable, MessagePro
         return source;
     }
 
+    /**
+     * <p>
+     *     Executes the message processor code. In case of an assertion error it throws a new exception with the
+     *     mule stack trace (@since 3.4)
+     * </p>
+     * @param event
+     * <p>
+     *     The mule event to be processed.
+     * </p>
+     * @return
+     * <p>
+     *     The result mule event
+     * </p>
+     * @throws MuleException
+     * <p>
+     *     In case of error. If the assertion fails, it throws an {@link AssertionError}
+     * </p>
+     */
     public MuleEvent process(MuleEvent event)
             throws MuleException
     {
@@ -97,11 +111,8 @@ public abstract class MunitMessageProcessor implements Initialisable, MessagePro
             retryCount.set(0);
             return event;
         }catch (AssertionError error){
-            List<StackTraceElement> stackTraceElements = getStackTraceElements(muleContext);
-
             AssertionError exception = new AssertionError(getMessage(error));
-                     exception.setStackTrace(stackTraceElements.toArray(new StackTraceElement[]{}));
-
+            exception.setStackTrace(buildMuleStackTrace(muleContext).toArray(new StackTraceElement[]{}));
 
             throw  exception;
         }
@@ -111,17 +122,10 @@ public abstract class MunitMessageProcessor implements Initialisable, MessagePro
     }
 
 
-
-    private String getMessage(AssertionError error) {
-        String message = error.getMessage();
-        if ( StringUtils.isEmpty(message )) {
-            return this.getProcessor();
-        }
-        return message;
-    }
-
     /**
-     * <p>The method that do the actual process</p>
+     * <p>
+     *     The method that do the actual process
+     * </p>
      *
      * @param mulemessage
      *      <p>The mule Message</p>
@@ -151,5 +155,13 @@ public abstract class MunitMessageProcessor implements Initialisable, MessagePro
 
     public void setFlowConstruct(FlowConstruct flowConstruct) {
         this.flowConstruct = flowConstruct;
+    }
+
+    private String getMessage(AssertionError error) {
+        String message = error.getMessage();
+        if ( StringUtils.isEmpty(message )) {
+            return this.getProcessor();
+        }
+        return message;
     }
 }

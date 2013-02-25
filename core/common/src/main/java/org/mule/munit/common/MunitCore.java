@@ -15,7 +15,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <p>Util class to manage the Mocking managers</p>
+ * <p>
+ *     Util class to manage Munit tests.
+ *
+ *     This class should have minimal functionality as any Util class.
+ * </p>
  *
  * @author Federico, Fernando
  * @version since 3.3.2
@@ -23,12 +27,26 @@ import java.util.Map;
 public class MunitCore {
 
     /**
-     * <p>The Mule context for the Munit test</p>
+     * <p>
+     *     The Mule context for the Munit test.
+     * </p>
+     *
+     * <p>
+     *     This static value makes Munit test not able to run in parallel, which might be a good feature in the future.
+     *     but it make no sense when transports are declared (i.e. flows with ports declared)
+     * </p>
+     *
+     * <p>
+     *     Check out that most of the methods of this class receives the {@link MuleContext} as parameter. This is because
+     *     we want to get rid off this static reference.
+     * </p>
      */
     private static MuleContext context;
 
     /**
-     * <p>Sets the mule context for the Munit run</p>
+     * <p>
+     *     Sets the mule context for the Munit run
+     * </p>
      *
      * @param muleContext
      *      <p>The Mule Context</p>
@@ -46,7 +64,9 @@ public class MunitCore {
     }
 
     /**
-     * <p>Resets the status of Munit. Used after each test.</p>
+     * <p>
+     *     Resets the status of Munit. Used after each test.
+     * </p>
      * @param muleContext The Mule context
      */
     public static void reset(MuleContext muleContext){
@@ -59,7 +79,16 @@ public class MunitCore {
             mpManager.reset();
         }
     }
-    
+
+    /**
+     * <p>
+     *     Adds the {@link MockedMessageProcessorManager} to the {@link MuleRegistry}
+     * </p>
+     * @param muleContext
+     * <p>
+     *     The mule context where the manager must be registered.
+     * </p>
+     */
     public static void registerManager(MuleContext muleContext){
         try {
             MuleRegistry registry = muleContext.getRegistry();
@@ -67,12 +96,33 @@ public class MunitCore {
                 registry.registerObject(MockedMessageProcessorManager.ID, new MockedMessageProcessorManager());
             }
         } catch (RegistrationException e) {
-
+           // Very uncommon scenario.
+           throw new RuntimeException(e);
         }
     }
 
 
-    public static List<StackTraceElement> getStackTraceElements(MuleContext muleContext) {
+    /**
+     * <p>
+     *     Builds the mule Stack Trace based on the Munit registered calls.
+     * </p>
+     *
+     * <p>
+     *     The Mule stack trace contains the executed {@link org.mule.api.processor.MessageProcessor} in the test in the
+     *     same format as JAVA.
+     * </p>
+     *
+     * @since 3.4
+     * @param muleContext
+     * <p>
+     *     The mule context
+     * </p>
+     * @return
+     * <p>
+     *     A list of JAVA stack trace elements.
+     * </p>
+     */
+    public static List<StackTraceElement> buildMuleStackTrace(MuleContext muleContext) {
         MockedMessageProcessorManager manager = (MockedMessageProcessorManager) muleContext.getRegistry().lookupObject(MockedMessageProcessorManager.ID);
         List<MessageProcessorCall> calls = manager.getCalls();
 
@@ -80,10 +130,18 @@ public class MunitCore {
 
         StringBuffer stackTrace = new StringBuffer();
         for (MessageProcessorCall call : calls ){
-            stackTraceElements.add(0, new StackTraceElement(getFlowConstructName(call), getFullName(call), call.getFileName(), Integer.valueOf(call.getLineNumber())));
+            stackTraceElements.add(0, new StackTraceElement(getFlowConstructName(call), getFullName(call), call.getFileName(), lineNumber(call)));
             stackTrace.insert(0, call.getMessageProcessorId().getFullName());
         }
         return stackTraceElements;
+    }
+
+    private static Integer lineNumber(MessageProcessorCall call) {
+        String lineNumber = call.getLineNumber();
+        if ( lineNumber == null ){
+            return 0;
+        }
+        return Integer.valueOf(lineNumber);
     }
 
     private static String getFullName(MessageProcessorCall call) {

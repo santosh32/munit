@@ -8,8 +8,12 @@ import org.mule.api.lifecycle.InitialisationException;
 import org.mule.api.registry.MuleRegistry;
 import org.mule.api.registry.RegistrationException;
 import org.mule.munit.AssertModule;
+import org.mule.munit.common.mp.MessageProcessorCall;
+import org.mule.munit.common.mp.MessageProcessorId;
+import org.mule.munit.common.mp.MockedMessageProcessorManager;
 import org.mule.util.TemplateParser;
 
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static junit.framework.Assert.assertEquals;
@@ -29,6 +33,7 @@ public class MunitMessageProcessorTest {
     ExpressionManager manager;
     MuleContext muleContext;
     MuleRegistry muleRegistry;
+    private MockedMessageProcessorManager mpManager = mock(MockedMessageProcessorManager.class);
 
     @Before
     public void setUp(){
@@ -124,6 +129,32 @@ public class MunitMessageProcessorTest {
         verify(manager, times(1)).parse("any", message);
     }
 
+    @Test
+    public void handleAssertionError() throws MuleException {
+        MockMunitMessageProcessor mp = new MockMunitMessageProcessor();
+        mp.setFails(true);
+        mp.setMuleContext(muleContext);
+
+        when(muleContext.getRegistry()).thenReturn(muleRegistry);
+        when(muleRegistry.lookupObject(MockedMessageProcessorManager.ID)).thenReturn(mpManager);
+        when(mpManager.getCalls()).thenReturn(createCallsForTest());
+
+        try {
+            mp.process(event);
+        }
+        catch (AssertionError e){
+            assertEquals(1, e.getStackTrace().length);
+            assertEquals("nsp:mp{}", e.getStackTrace()[0].getMethodName());
+        }
+    }
+
+    private ArrayList<MessageProcessorCall> createCallsForTest() {
+        ArrayList<MessageProcessorCall> calls = new ArrayList<MessageProcessorCall>();
+        calls.add(new MessageProcessorCall(new MessageProcessorId("mp", "nsp")));
+
+        return calls;
+    }
+
     private MockMunitMessageProcessor processorForInitialize(Object module) throws RegistrationException {
         MockMunitMessageProcessor mp = new MockMunitMessageProcessor();
         mp.setMuleContext(muleContext);
@@ -136,6 +167,7 @@ public class MunitMessageProcessorTest {
 
     private class MockMunitMessageProcessor extends MunitMessageProcessor{
 
+        boolean fails;
         private MockMunitMessageProcessor() {
             this.setModuleObject(module);
             this.setRetryMax(1);
@@ -146,6 +178,9 @@ public class MunitMessageProcessorTest {
 
         @Override
         protected void doProcess(MuleMessage mulemessage, AssertModule module) {
+            if ( fails ){
+                throw new AssertionError();
+            }
             assertEquals(message, mulemessage);
             assertEquals(module, module);
         }
@@ -153,6 +188,10 @@ public class MunitMessageProcessorTest {
         @Override
         protected String getProcessor() {
             return "processor";
+        }
+
+        public void setFails(boolean fails) {
+            this.fails = fails;
         }
     }
 }

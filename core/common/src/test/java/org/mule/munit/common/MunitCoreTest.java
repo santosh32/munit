@@ -4,10 +4,17 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mule.api.MuleContext;
 import org.mule.api.config.MuleProperties;
+import org.mule.api.construct.FlowConstruct;
 import org.mule.api.registry.MuleRegistry;
 import org.mule.api.registry.RegistrationException;
 import org.mule.munit.common.endpoint.MockEndpointManager;
+import org.mule.munit.common.mp.MessageProcessorCall;
+import org.mule.munit.common.mp.MessageProcessorId;
 import org.mule.munit.common.mp.MockedMessageProcessorManager;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.*;
@@ -22,6 +29,7 @@ public class MunitCoreTest {
     private MuleRegistry muleRegistry;
     private MockedMessageProcessorManager manager;
     private MockEndpointManager endpointManager;
+    private FlowConstruct flowConstruct = mock(FlowConstruct.class);
 
     @Before
     public void setUp(){
@@ -33,6 +41,7 @@ public class MunitCoreTest {
         when(muleContext.getRegistry()).thenReturn(muleRegistry);
         when(muleRegistry.lookupObject(MockedMessageProcessorManager.ID)).thenReturn(manager);
         when(muleRegistry.lookupObject(MuleProperties.OBJECT_MULE_ENDPOINT_FACTORY)).thenReturn(endpointManager);
+        when(flowConstruct.getName()).thenReturn("flowName");
 
     }
 
@@ -81,5 +90,32 @@ public class MunitCoreTest {
         assertEquals(muleContext, MunitCore.getMuleContext());
     }
 
+
+    @Test
+    public void buildStackTrace(){
+
+        when(manager.getCalls()).thenReturn(executedCalls());
+        List<StackTraceElement> stackTraceElements = MunitCore.buildMuleStackTrace(muleContext);
+
+        assertEquals(1, stackTraceElements.size());
+        assertEquals("nsp1:mp1{key=value}", stackTraceElements.get(0).getMethodName());
+        assertEquals("mule-config.xml", stackTraceElements.get(0).getFileName());
+        assertEquals("flowName", stackTraceElements.get(0).getClassName());
+        assertEquals(20, stackTraceElements.get(0).getLineNumber());
+    }
+
+    private List<MessageProcessorCall> executedCalls() {
+        ArrayList<MessageProcessorCall> calls = new ArrayList<MessageProcessorCall>();
+        MessageProcessorCall call1 = new MessageProcessorCall(new MessageProcessorId("mp1", "nsp1"));
+        call1.setFileName("mule-config.xml");
+        call1.setLineNumber("20");
+        call1.setFlowConstruct(flowConstruct);
+
+        HashMap<String, Object> attributes = new HashMap<String, Object>();
+        attributes.put("key", "value");
+        call1.setAttributes(attributes);
+        calls.add(call1);
+        return calls;
+    }
 
 }

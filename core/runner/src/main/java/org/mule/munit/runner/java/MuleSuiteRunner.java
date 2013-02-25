@@ -15,7 +15,9 @@ import java.lang.reflect.Method;
 
 
 /**
- * <p>Mule for Junit Runners</p>
+ * <p>
+ *     Mule for Junit Runners
+ * </p>
  *
  * @author Federico, Fernando
  * @version since 3.3.2

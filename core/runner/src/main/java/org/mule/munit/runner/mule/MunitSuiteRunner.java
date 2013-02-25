@@ -9,7 +9,9 @@ import org.mule.munit.runner.output.*;
 
 
 /**
- * <p>The Munit test runner</p>
+ * <p>
+ *     The Munit test runner
+ * </p>
  *
  * @author Federico, Fernando
  * @version since 3.3.2

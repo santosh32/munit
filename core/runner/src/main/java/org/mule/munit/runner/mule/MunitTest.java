@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
 
-import static org.mule.munit.common.MunitCore.getStackTraceElements;
+import static org.mule.munit.common.MunitCore.buildMuleStackTrace;
 
 /**
  * <p>MUnit Test</p>
@@ -89,13 +89,13 @@ public class MunitTest {
         } catch (MuleException e) {
             try {
                 if ( !test.expectException(e,event) ){
-                    List<StackTraceElement> stackTraceElements = getStackTraceElements(event.getMuleContext());
-                    e.setStackTrace(stackTraceElements.toArray(new StackTraceElement[]{}));
+                    e.setStackTrace( buildMuleStackTrace(event.getMuleContext())
+                            .toArray(new StackTraceElement[]{}));
                     result.setError(buildNotifcationFrom(e));
                 }
             }catch (AssertionError t) {
-                List<StackTraceElement> stackTraceElements = getStackTraceElements(event.getMuleContext());
-                t.setStackTrace(stackTraceElements.toArray(new StackTraceElement[]{}));
+                t.setStackTrace(buildMuleStackTrace(event.getMuleContext())
+                        .toArray(new StackTraceElement[]{}));
                 result.setFailure(buildNotifcationFrom(t));
             }
         } finally {
