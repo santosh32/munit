@@ -28,7 +28,7 @@ import static org.mule.munit.common.connectors.ConnectorMethodInterceptorFactory
  * @author Federico, Fernando
  * @version since 3.3.2
  */
-public class MunitSpringFactoryPostProcessor implements BeanFactoryPostProcessor {
+public class MunitSpringFactoryPostProcessor {
 
     private static Logger logger = Logger.getLogger("Bean definition Processor");
 

@@ -4,12 +4,14 @@ import org.mule.api.MuleContext;
 import org.mule.config.ConfigResource;
 import org.mule.config.spring.MissingParserProblemReporter;
 import org.mule.config.spring.MuleApplicationContext;
+import org.mule.munit.AssertModule;
 import org.mule.munit.common.connectors.ConnectorMethodInterceptorFactory;
 import org.mule.munit.common.endpoint.MunitSpringFactoryPostProcessor;
 import org.mule.munit.common.mp.MunitMessageProcessorInterceptorFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.core.io.Resource;
@@ -42,7 +44,12 @@ public class MunitApplicationContext extends MuleApplicationContext{
         beanDefinitionReader.setProblemReporter(new MissingParserProblemReporter());
 
         if ( configuration != null ){
-            this.addBeanFactoryPostProcessor(createPostProcessorFromConfiguration());
+            GenericBeanDefinition beanDefinition = new GenericBeanDefinition();
+            beanDefinition.setBeanClass(MunitSpringFactoryPostProcessor.class);
+            beanDefinition.setAttribute("mockInbounds", configuration.isMockInbounds());
+            beanDefinition.setAttribute("mockConnectors", configuration.isMockConnectors());
+            beanDefinition.setAttribute("mockingExcludedFlows", configuration.getMockingExcludedFlows());
+            beanFactory.registerBeanDefinition("___MunitSpringFactoryPostProcessor", beanDefinition);
         }
         // Communicate mule context to parsers
         try
@@ -52,15 +59,12 @@ public class MunitApplicationContext extends MuleApplicationContext{
         }
         finally
         {
+            MunitSpringFactoryPostProcessor bean = beanFactory.getBean(MunitSpringFactoryPostProcessor.class);
+            bean.postProcessBeanFactory(beanFactory);
+
             getCurrentMuleContext().remove();
         }
     }
 
-    private BeanFactoryPostProcessor createPostProcessorFromConfiguration() {
-        MunitSpringFactoryPostProcessor postProcessor = new MunitSpringFactoryPostProcessor();
-        postProcessor.setMockInbounds(configuration.isMockInbounds());
-        postProcessor.setMockingExcludedFlows(configuration.getMockingExcludedFlows());
-        postProcessor.setMockConnectors(configuration.isMockConnectors());
-        return postProcessor;
-    }
+
 }
