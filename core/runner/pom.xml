@@ -5,7 +5,7 @@
     <parent>
         <artifactId>core</artifactId>
         <groupId>org.mule.munit</groupId>
-        <version>3.3.2-M3-SNAPSHOT</version>
+        <version>3.3.2-M4-SNAPSHOT</version>
     </parent>
     <artifactId>runner</artifactId>
     <packaging>jar</packaging>
