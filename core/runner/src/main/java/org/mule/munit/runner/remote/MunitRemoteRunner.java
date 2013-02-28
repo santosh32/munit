@@ -48,7 +48,7 @@ public class MunitRemoteRunner {
 					try {
 						if( testResult.getError() != null )
 						{
-							out.writeObject("3;" + testResult.getTestName()+ ";'"+testResult.getFailure().getFullMessage()+"'");
+							out.writeObject("3;" + testResult.getTestName()+ ";'"+testResult.getError().getFullMessage()+"'");
 							out.flush();
 						}
 						else if( testResult.getFailure() != null )

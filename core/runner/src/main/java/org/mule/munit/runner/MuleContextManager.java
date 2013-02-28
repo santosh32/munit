@@ -56,7 +56,7 @@ public class MuleContextManager {
             {
                 muleContext.stop();
             }
-        } catch (MuleException e1) {
+        } catch (Throwable e1) {
 
         }
         if (muleContext != null && !muleContext.isDisposed() )

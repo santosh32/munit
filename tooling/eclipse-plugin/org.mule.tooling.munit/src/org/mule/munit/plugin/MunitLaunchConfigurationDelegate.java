@@ -19,18 +19,30 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import org.mule.munit.runner.MuleContextManager;
 import org.osgi.framework.Bundle;
 
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -42,6 +54,7 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchManager;
 
+import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMember;
@@ -89,7 +102,6 @@ public class MunitLaunchConfigurationDelegate extends AbstractJavaLaunchConfigur
 		if (monitor == null) {
 			monitor = new NullProgressMonitor();
 		}
-
 		monitor.beginTask(MessageFormat.format("{0}...", new String[]{configuration.getName()}), 5); //$NON-NLS-1$
 		// check for cancellation
 		if (monitor.isCanceled()) {
@@ -111,7 +123,29 @@ public class MunitLaunchConfigurationDelegate extends AbstractJavaLaunchConfigur
 			if (monitor.isCanceled()) {
 				return;
 			}
+			
+			IProject project = getJavaProject(configuration).getProject();
+			project.build(IncrementalProjectBuilder.FULL_BUILD, monitor);
 
+			Map<String, IFolder> sourceFolders = new HashMap<String, IFolder>();
+			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+			IJavaProject javaProject = getJavaProject(configuration);
+			IPath munitOutputFolder = null;
+			IClasspathEntry[] entries = javaProject .getResolvedClasspath(true);
+			for (int i = 0; i < entries.length; i++) {
+				IClasspathEntry entry = entries[i];
+				if (entry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
+					IPath path = entry.getPath();
+					IFolder sourceFolder = root.getFolder(path);
+					if ( sourceFolder.getLocation().toString().contains("test/munit") ){
+						munitOutputFolder = entry.getOutputLocation();
+					}
+					
+				}
+			}
+			
+			
+			
 			MunitEclipseUpdater.launch();
 
 			String mainTypeName= verifyMainTypeName(configuration);
@@ -133,14 +167,51 @@ public class MunitLaunchConfigurationDelegate extends AbstractJavaLaunchConfigur
 			programArguments.add(configuration.getAttribute("Mpath", ""));
 			programArguments.add("-port");
 			programArguments.add(String.valueOf(MunitEclipseUpdater.getInstance().getPort()));
-			;
+
 			// VM-specific attributes
 			Map vmAttributesMap= getVMSpecificAttributesMap(configuration);
+				
+			for (int i = 0; i < entries.length; i++) {
+				IClasspathEntry entry = entries[i];
+				if (entry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
+					IPath path = entry.getPath();
+					IFolder sourceFolder = root.getFolder(path);
+					if ( !sourceFolder.getLocation().toString().contains("test/munit") ){
+						try {
+							IFolder folder = root.getFolder(entry.getOutputLocation());
+							for ( IResource resource : folder.members() ){
+								try{
+									resource.copy(munitOutputFolder, IFolder.SHALLOW,  monitor);
+								}
+								catch(Throwable e){
+									
+								}
+							}
+							
+						}
+						catch(Throwable y){
+							
+						}
+						
+					}
+					
+				}
+			}
+			String[] classpath = getClasspath(configuration);
+			// ClasspathgetC
+			List<String> classPathAsList = new ArrayList<String>(Arrays.asList(classpath));
+			try {
+				URL[] urlClasspath = new ClasspathProvider().getClassPath(getJavaProject(configuration));
+				for ( URL url : urlClasspath ){
+					classPathAsList.add(url.getFile());
+				}
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
+			
 
-			// Classpath
-			String[] classpath= getClasspath(configuration);
 			// Create VM config
-			VMRunnerConfiguration runConfig= new VMRunnerConfiguration("org.mule.munit.runner.remote.MunitRemoteRunner", classpath);
+			VMRunnerConfiguration runConfig= new VMRunnerConfiguration("org.mule.munit.runner.remote.MunitRemoteRunner", classPathAsList.toArray(new String[]{}));
 			runConfig.setVMArguments((String[]) vmArguments.toArray(new String[vmArguments.size()]));
 			runConfig.setProgramArguments((String[]) programArguments.toArray(new String[programArguments.size()]));
 			runConfig.setEnvironment(envp);
@@ -285,7 +356,7 @@ public class MunitLaunchConfigurationDelegate extends AbstractJavaLaunchConfigur
 			programArguments.add(0, "-keepalive"); //$NON-NLS-1$
 
 		ITestKind testRunnerKind= getTestRunnerKind(configuration);
-
+		getTestTarget(configuration, getJavaProject(configuration));
 		programArguments.add("-testLoaderClass"); //$NON-NLS-1$
 		programArguments.add(testRunnerKind.getLoaderClassName());
 		programArguments.add("-loaderpluginname"); //$NON-NLS-1$
