@@ -5,6 +5,7 @@
   <groupId>org.mule.munit.examples</groupId>
   <artifactId>jira-mock-example</artifactId>
   <version>1.0.0-SNAPSHOT</version>
+  <name>Jira mocking after polling</name>
   <packaging>mule</packaging>
   <properties>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
