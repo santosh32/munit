@@ -62,7 +62,8 @@ public class MunitSpringFactoryPostProcessor {
      */
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         if ( isMockInbounds() || isMockConnectors() ){
-            String[] beanDefinitionNames = beanFactory.getBeanDefinitionNames();
+            String[] names = beanFactory.getBeanDefinitionNames();
+            String[] beanDefinitionNames = names == null ? new String[0] : names;
             for ( String name : beanDefinitionNames ){
                 BeanDefinition beanDefinition = beanFactory.getBeanDefinition(name);
                 if ( Flow.class.getName().equals(beanDefinition.getBeanClassName()) ){
@@ -108,18 +109,21 @@ public class MunitSpringFactoryPostProcessor {
      *          <p>The bean factory that contains the bean definition</p>
      */
     private void mockConnectors(ConfigurableListableBeanFactory beanFactory) {
-        if ( isMockConnectors()){
+        if (isMockConnectors()) {
             String[] beanNamesForType = beanFactory.getBeanNamesForType(Connector.class);
-            for (String beanName : beanNamesForType) {
-                RootBeanDefinition beanDefinition = RootBeanDefinition.class.cast(beanFactory.getBeanDefinition(beanName));
+            if (beanNamesForType != null) {
+                for (String beanName : beanNamesForType) {
+                    RootBeanDefinition beanDefinition = RootBeanDefinition.class.cast(beanFactory.getBeanDefinition(beanName));
 
-                if (beanDefinition.getFactoryMethodName() == null) {
-                    addFactoryDefinitionTo(beanDefinition)
-                            .withConstructorArguments(beanDefinition.getBeanClass());
-                } else {
-                    logger.info("The connector " + beanName + " cannot be mocked as it already has a factory method");
+                    if (beanDefinition.getFactoryMethodName() == null) {
+                        addFactoryDefinitionTo(beanDefinition)
+                                .withConstructorArguments(beanDefinition.getBeanClass());
+                    } else {
+                        logger.info("The connector " + beanName + " cannot be mocked as it already has a factory method");
+                    }
                 }
             }
+
         }
     }
 
