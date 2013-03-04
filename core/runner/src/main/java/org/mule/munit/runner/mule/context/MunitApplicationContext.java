@@ -9,6 +9,7 @@ import org.mule.munit.common.connectors.ConnectorMethodInterceptorFactory;
 import org.mule.munit.common.endpoint.MunitSpringFactoryPostProcessor;
 import org.mule.munit.common.mp.MunitMessageProcessorInterceptorFactory;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
@@ -44,11 +45,13 @@ public class MunitApplicationContext extends MuleApplicationContext{
         beanDefinitionReader.setProblemReporter(new MissingParserProblemReporter());
 
         if ( configuration != null ){
-            GenericBeanDefinition beanDefinition = new GenericBeanDefinition();
+            RootBeanDefinition beanDefinition = new RootBeanDefinition();
             beanDefinition.setBeanClass(MunitSpringFactoryPostProcessor.class);
-            beanDefinition.setAttribute("mockInbounds", configuration.isMockInbounds());
-            beanDefinition.setAttribute("mockConnectors", configuration.isMockConnectors());
-            beanDefinition.setAttribute("mockingExcludedFlows", configuration.getMockingExcludedFlows());
+            MutablePropertyValues mutablePropertyValues = new MutablePropertyValues();
+            mutablePropertyValues.add("mockInbounds", Boolean.valueOf(configuration.isMockInbounds()));
+            mutablePropertyValues.add("mockConnectors", configuration.isMockConnectors());
+            mutablePropertyValues.add("mockingExcludedFlows", configuration.getMockingExcludedFlows());
+            beanDefinition.setPropertyValues(mutablePropertyValues);
             beanFactory.registerBeanDefinition("___MunitSpringFactoryPostProcessor", beanDefinition);
         }
         // Communicate mule context to parsers
