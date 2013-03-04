@@ -3,6 +3,7 @@
  */
 package org.mule.munit;
 
+import org.apache.commons.lang.StringUtils;
 import org.mule.DefaultMuleMessage;
 import org.mule.api.*;
 import org.mule.api.annotations.Module;
@@ -17,6 +18,8 @@ import org.mule.munit.common.mocking.*;
 import org.mule.munit.functions.*;
 
 import java.util.*;
+
+import static org.mule.munit.common.MunitCore.buildMuleStackTrace;
 
 /**
  * <p>
@@ -83,10 +86,18 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
                     @Optional List<NestedProcessor> assertionsBeforeCall,
                     @Optional List<NestedProcessor> assertionsAfterCall) {
 
+        try {
             spy().spyMessageProcessor(getName(messageProcessor))
                     .ofNamespace(getNamespace(messageProcessor))
                     .running(createSpyAssertion(createMessageProcessorsFrom(assertionsBeforeCall)),
                             createSpyAssertion(createMessageProcessorsFrom(assertionsAfterCall)));
+        } catch (AssertionError error) {
+            AssertionError exception = new AssertionError(getMessage(error, "Spy Message Processor Failed"));
+            exception.setStackTrace(buildMuleStackTrace(muleContext).toArray(new StackTraceElement[]{}));
+
+            throw exception;
+        }
+
     }
 
     /**
@@ -101,10 +112,12 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
     @Processor
     public void throwAn(Throwable exception, String whenCalling,
                         @Optional List<Attribute> withAttributes) {
-            mocker().when(getName(whenCalling))
-                    .ofNamespace(getNamespace(whenCalling))
-                    .withAttributes(createAttributes(withAttributes))
-                    .thenThrow(exception);
+
+        mocker().when(getName(whenCalling))
+                .ofNamespace(getNamespace(whenCalling))
+                .withAttributes(createAttributes(withAttributes))
+                .thenThrow(exception);
+
     }
 
 
@@ -124,20 +137,28 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
                            @Optional Integer times,
                            @Optional Integer atLeast, @Optional Integer atMost) {
 
-        MunitVerifier mockVerifier =
-        new MunitVerifier(muleContext).verifyCallOfMessageProcessor(getName(messageProcessor))
-                .ofNamespace(getNamespace(messageProcessor))
-                .withAttributes(createAttributes(attributes));
+        try {
+            MunitVerifier mockVerifier =
+                    new MunitVerifier(muleContext).verifyCallOfMessageProcessor(getName(messageProcessor))
+                            .ofNamespace(getNamespace(messageProcessor))
+                            .withAttributes(createAttributes(attributes));
 
-        if (times != null) {
-            mockVerifier.times(times);
+            if (times != null) {
+                mockVerifier.times(times);
 
-        } else if (atLeast != null) {
-            mockVerifier.atLeast(atLeast);
-        } else if (atMost != null) {
-            mockVerifier.atMost(atMost);
-        } else {
-            mockVerifier.atLeastOnce();
+            } else if (atLeast != null) {
+                mockVerifier.atLeast(atLeast);
+            } else if (atMost != null) {
+                mockVerifier.atMost(atMost);
+            } else {
+                mockVerifier.atLeastOnce();
+            }
+
+        } catch (AssertionError error) {
+            AssertionError assertionException = new AssertionError(getMessage(error, "Verify Processor Failed"));
+            assertionException.setStackTrace(buildMuleStackTrace(muleContext).toArray(new StackTraceElement[]{}));
+
+            throw assertionException;
         }
 
     }
@@ -317,6 +338,14 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
 
     protected MunitSpy spy() {
         return new MunitSpy(muleContext);
+    }
+
+    private String getMessage(AssertionError error, String defaultValue) {
+        String message = error.getMessage();
+        if ( StringUtils.isEmpty(message)) {
+            return defaultValue;
+        }
+        return message;
     }
 
 }

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -46,7 +47,7 @@ public class MunitSpringFactoryPostProcessor {
     /**
      * <p>List of flows which we don't want to mock the inbound message sources</p>
      */
-    protected List<String> mockingExcludedFlows;
+    protected List<String> mockingExcludedFlows = new ArrayList<String>();
 
 
 
