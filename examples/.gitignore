@@ -3,7 +3,7 @@
 *.iws
 *.ipr
 .clover
-/target
+**/target
 .project
 .classpath
 .idea
