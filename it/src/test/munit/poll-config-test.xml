@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:spring="http://www.springframework.org/schema/beans"
+      xmlns:script="http://www.mulesoft.org/schema/mule/scripting"
+      xmlns:mock="http://www.mulesoft.org/schema/mule/mock"
+      xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/corehttp://www.mulesoft.org/schema/mule/core/3.2/mule.xsd
+    http://www.mulesoft.org/schema/mule/munithttp://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+            http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
+            http://www.mulesoft.org/schema/mule/mock http://www.mulesoft.org/schema/mule/mock/curren/mule-mock.xsd">
+
+    <munit:config />
+    <mock:config/>
+
+    <spring:beans>
+        <spring:import resource="poll-config.xml" />
+    </spring:beans>
+
+
+    <script:script name="mockTaskList" engine="groovy"><![CDATA[
+
+            List<String> lists = new ArrayList<String>();
+            lists.add("task1");
+
+			return lists;
+		]]>
+    </script:script>
+
+    <munit:test name="whenJiraIsCorrectLogMessage"
+                description="If Jira Does not fail then we log the message Everything OK">
+
+
+        <mock:when messageProcessor="jira:create-issue">
+            <mock:then-return payload-ref="#[string:OK]"/>
+        </mock:when>
+
+        <munit:set
+                payload-ref="#[resultOfScript('mockTaskList')]" />
+
+        <flow-ref name="jira-mock-exampleFlow" />
+
+
+    </munit:test>
+
+
+</mule>

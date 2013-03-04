@@ -35,13 +35,13 @@ public class MunitSpringFactoryPostProcessor {
     /**
      * <p>Defines if the inbounds must be mocked or not. This is pure Munit configuration</p>
      */
-    protected boolean mockInbounds;
+    protected boolean mockInbounds = true;
 
     /**
      * <p>Defines if the app connectors for outbound/inbound endpoints have to be mocked. If they are then all
      * outbound endpoints/inbound endpoints must be mocked.</p>
      */
-    protected boolean mockConnectors;
+    protected boolean mockConnectors = true;
 
     /**
      * <p>List of flows which we don't want to mock the inbound message sources</p>
