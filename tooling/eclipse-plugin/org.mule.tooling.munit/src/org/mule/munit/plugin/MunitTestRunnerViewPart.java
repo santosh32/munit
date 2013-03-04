@@ -140,6 +140,8 @@ public class MunitTestRunnerViewPart extends ViewPart {
 		}
 
 		public void stop() {
+			fProgressBar.step(suiteStatus.getErrors()
+					+ suiteStatus.getFailures());
 			fRunning = false;
 		}
 

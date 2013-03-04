@@ -5,13 +5,13 @@
 
     <groupId>org.mule</groupId>
     <artifactId>munit</artifactId>
-    <version>3.4-M1</version>
+    <version>3.4-M1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>The Munit Project</name>
 
     <properties>
-        <mule.version>3.4-M3</mule.version>
+        <mule.version>3.4.0-RC1</mule.version>
         <mule.devkit.version>3.4-SNAPSHOT</mule.devkit.version>
         <junit.version>4.8.2</junit.version>
         <mockito.version>1.8.2</mockito.version>
