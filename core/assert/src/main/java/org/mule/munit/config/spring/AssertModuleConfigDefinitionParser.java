@@ -39,14 +39,12 @@ public class AssertModuleConfigDefinitionParser
             builder.setDestroyMethodName(Disposable.PHASE_NAME);
         }
 
-        String integration = element.getAttribute("mock-inbounds");
-        if (Boolean.valueOf(integration)) {
-            builder.addPropertyValue("mockInbounds", Boolean.TRUE);
+        if ( element.hasAttribute("mock-inbounds")){
+            builder.addPropertyValue("mockInbounds", Boolean.valueOf(element.getAttribute("mock-inbounds")));
         }
 
-        String connectors = element.getAttribute("mock-connectors");
-        if (Boolean.valueOf(connectors)) {
-            builder.addPropertyValue("mockConnectors", Boolean.TRUE);
+        if ( element.hasAttribute("mock-connectors") ){
+            builder.addPropertyValue("mockConnectors", Boolean.valueOf(element.getAttribute("mock-connectors")));
         }
 
         List<String> flowNames = new ArrayList<String>();
