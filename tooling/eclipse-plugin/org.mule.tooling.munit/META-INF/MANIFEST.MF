@@ -36,9 +36,6 @@ Import-Package: org.eclipse.core.expressions,
  org.eclipse.ui.part,
  org.eclipse.wst.xml.ui.internal.tabletree
 Bundle-ClassPath: lib/,
- lib/runner.jar,
  .,
- lib/assert.jar,
- lib/mock.jar
-
+ lib/runner.jar
 
