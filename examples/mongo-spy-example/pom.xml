@@ -3,17 +3,16 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.mule.munit.examples</groupId>
-  <artifactId>jira-mock-example</artifactId>
+  <artifactId>mongo-spy-example</artifactId>
   <version>1.0.0-SNAPSHOT</version>
-  <name>Jira mocking after polling</name>
   <packaging>mule</packaging>
   <properties>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <jdk.version>1.6</jdk.version>
     <mule.version>3.4.0-RC1</mule.version>
     <eclipsePluginVersion>2.8</eclipsePluginVersion>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jdkName>JavaSE-1.6</jdkName>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <munit.version>3.4-M1</munit.version>
     <junit.version>4.9</junit.version>
   </properties>
@@ -48,6 +47,12 @@
       <version>${mule.version}</version>
       <scope>provided</scope>
     </dependency>
+		<dependency>
+			<groupId>org.mule.transports</groupId>
+			<artifactId>mule-transport-sftp</artifactId>
+			<version>${mule.version}</version>
+			<scope>provided</scope>
+		</dependency>
     <dependency>
       <groupId>org.mule.transports</groupId>
       <artifactId>mule-transport-http</artifactId>
@@ -96,6 +101,14 @@
       <version>${mule.version}</version>
       <scope>provided</scope>
     </dependency>
+    
+       <dependency>
+      <groupId>org.mule.modules</groupId>
+      <artifactId>mule-module-management</artifactId>
+      <version>${mule.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    
     <dependency>
       <groupId>org.mule.modules</groupId>
       <artifactId>mule-module-scripting</artifactId>
@@ -142,6 +155,11 @@
       <artifactId>mule-module-google-tasks</artifactId>
       <version>1.0.5</version>
     </dependency>
+    <dependency>
+      <groupId>org.mule.modules</groupId>
+      <artifactId>mule-module-mongo</artifactId>
+      <version>3.2</version>
+    </dependency>
   </dependencies>
   <repositories>
     <repository>
@@ -187,6 +205,9 @@
     <testResources>
       <testResource>
         <directory>src/test/munit</directory>
+      </testResource>
+      <testResource>
+        <directory>src/test/resources</directory>
       </testResource>
     </testResources>
     <pluginManagement>
@@ -238,6 +259,10 @@
             <inclusion>
               <groupId>org.mule.modules</groupId>
               <artifactId>mule-module-google-tasks</artifactId>
+            </inclusion>
+            <inclusion>
+              <groupId>org.mule.modules</groupId>
+              <artifactId>mule-module-mongo</artifactId>
             </inclusion>
           </inclusions>
         </configuration>
