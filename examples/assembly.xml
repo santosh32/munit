@@ -1,0 +1,28 @@
+<assembly>
+    <id>full</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+
+
+    <files>
+        <file>
+            <source>first-test-example/target/first-test-example-1.0.zip</source>
+            <outputDirectory></outputDirectory>
+        </file>
+        <file>
+            <source>first-test-example/target/first-test-example-1.0.zip</source>
+            <outputDirectory></outputDirectory>
+        </file>
+        <file>
+            <source>jira-mock-example/target/jira-mock-example-1.0.zip</source>
+            <outputDirectory></outputDirectory>
+        </file>
+        <file>
+            <source>mongo-spy-example/target/mongo-spy-example-1.0.zip</source>
+            <outputDirectory></outputDirectory>
+        </file>
+    </files>
+
+
+</assembly>
