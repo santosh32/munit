@@ -49,7 +49,7 @@ public class MunitApplicationContext extends MuleApplicationContext{
             beanDefinition.setBeanClass(MunitSpringFactoryPostProcessor.class);
             MutablePropertyValues mutablePropertyValues = new MutablePropertyValues();
             mutablePropertyValues.add("mockInbounds", Boolean.valueOf(configuration.isMockInbounds()));
-            mutablePropertyValues.add("mockConnectors", configuration.isMockConnectors());
+            mutablePropertyValues.add("mockConnectors", Boolean.valueOf(configuration.isMockConnectors()));
             mutablePropertyValues.add("mockingExcludedFlows", configuration.getMockingExcludedFlows());
             beanDefinition.setPropertyValues(mutablePropertyValues);
             beanFactory.registerBeanDefinition("___MunitSpringFactoryPostProcessor", beanDefinition);
