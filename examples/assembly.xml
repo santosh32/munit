@@ -22,6 +22,10 @@
             <source>mongo-spy-example/target/mongo-spy-example-1.0.zip</source>
             <outputDirectory></outputDirectory>
         </file>
+        <file>
+            <source>outbound-endpoint-mocking-example/target/outbound-endpoint-mocking-example-1.0.zip</source>
+            <outputDirectory></outputDirectory>
+        </file>
     </files>
 
 

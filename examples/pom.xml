@@ -16,6 +16,7 @@
         <module>first-test-example</module>
         <module>jira-mock-example</module>
         <module>mongo-spy-example</module>
+        <module>outbound-endpoint-mocking-example</module>
     </modules>
 
     <build>
