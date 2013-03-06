@@ -165,7 +165,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <logToFile>false</logToFile>
+                    <logToFile>true</logToFile>
                 </configuration>
             </plugin>
 			<plugin>

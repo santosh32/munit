@@ -20,7 +20,7 @@
 		<jdkName>JavaSE-1.6</jdkName>
 		<jdk.version>1.6</jdk.version>
 		<junit.version>4.9</junit.version>
-        <munit.version>3.4-M1</munit.version>
+        <munit.version>3.4-M1-SNAPSHOT</munit.version>
 	</properties>
 
 	<build>

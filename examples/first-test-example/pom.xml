@@ -7,7 +7,7 @@
 	<artifactId>first-test-example</artifactId>
 	<packaging>mule</packaging>
 	<name>The first munit example</name>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,7 +19,7 @@
 		<jdkName>JavaSE-1.6</jdkName>
 		<jdk.version>1.6</jdk.version>
 		<junit.version>4.9</junit.version>
-        <munit.version>3.4-M1</munit.version>
+        <munit.version>3.4-M1-SNAPSHOT</munit.version>
 	</properties>
 
 	<build>
@@ -237,7 +237,7 @@
         <dependency>
             <groupId>org.mule.munit</groupId>
             <artifactId>runner</artifactId>
-            <version>3.4-M1</version>
+            <version>3.4-M1-SNAPSHOT</version>
         </dependency>
 		<!-- Xml configuration -->
 		<dependency>
