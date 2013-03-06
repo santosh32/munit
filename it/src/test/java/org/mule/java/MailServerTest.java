@@ -10,7 +10,7 @@ import org.mule.munit.runner.functional.FunctionalMunitSuite;
 
 import static junit.framework.Assert.assertFalse;
 
-@Ignore
+        @Ignore
 public class MailServerTest extends FunctionalMunitSuite{
 
     private static MailServer mailServer;
@@ -43,6 +43,7 @@ public class MailServerTest extends FunctionalMunitSuite{
     }
 
     @Test
+    @Ignore
     public void testingServerCall() throws Exception {
         runFlow("NotificationOfError", testEvent("hello"));
 
