@@ -38,7 +38,7 @@ public class FTPServerModule
     @Default("false")
     private boolean secure;
 
-    private FTPServer server;
+    private Server server;
 
 
     /**
@@ -110,9 +110,9 @@ public class FTPServerModule
     @PostConstruct
     public void buildServer() throws InitialisationException {
         if ( secure )
-            server = new SFTPServerWrapper();
+            server = new SFTPServer();
         else
-            server = new FTPServerWrapper();
+            server = new FTPServer();
 
 
         server.initialize(port);

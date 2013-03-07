@@ -19,10 +19,15 @@ import java.util.Arrays;
  *
  * @author Federico, Fernando
  */
-public class SFTPServerWrapper extends FTPServer{
+public class SFTPServer extends Server {
 
     private SshServer sshd;
 
+    public static Server instance(int port){
+        SFTPServer sftpServer = new SFTPServer();
+        sftpServer.initialize(port);
+        return sftpServer;
+    }
 
     @Override
     public void initialize(int port) {

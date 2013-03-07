@@ -1,37 +1,48 @@
 package org.mule.munit;
 
-import java.io.File;
-import java.io.FilenameFilter;
-
-import static org.junit.Assert.assertTrue;
+import org.apache.ftpserver.FtpServer;
+import org.apache.ftpserver.FtpServerFactory;
+import org.apache.ftpserver.ftplet.*;
+import org.apache.ftpserver.listener.ListenerFactory;
 
 /**
- * <p>Implementation of the FTP server</p>
+ * <p>Wrapper of the FTP Server</p>
  *
  * @author Federico, Fernando
  */
-public abstract class FTPServer {
+public class FTPServer extends Server {
+    private FtpServer server;
 
-    abstract void initialize(int port);
-    abstract void start();
-    abstract void stop();
-
-    public void containsFiles(String file, String path) {
-        assertTrue(containsFilteredFiles(file, path).length > 0);
+    public static Server instance(int port){
+        FTPServer ftpServer = new FTPServer();
+        ftpServer.initialize(port);
+        return ftpServer;
     }
 
-    private File[] containsFilteredFiles(final String fileName, String path) {
-        return new File(path).listFiles(new FilenameFilter() {
+    @Override
+    void initialize(int port) {
+        FtpServerFactory serverFactory = new FtpServerFactory();
 
-            @Override
-            public boolean accept(File file, String name) {
-                return name.startsWith(fileName);
-            }
-        });
+        ListenerFactory factory = new ListenerFactory();
+
+        factory.setPort(port);
+        serverFactory.setUserManager(new MockUserManager());
+        serverFactory.addListener("default", factory.createListener());
+
+        server = serverFactory.createServer();
     }
 
-    public void remove(String path)
-    {
-        new File(path).delete();
+    @Override
+    void start() {
+        try {
+            server.start();
+        } catch (FtpException e) {
+            throw new RuntimeException("Could not start FTP server", e);
+        }
+    }
+
+    @Override
+    void stop() {
+        server.stop();
     }
 }
