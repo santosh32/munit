@@ -69,8 +69,8 @@ public class DBServerModule
     private String csv;
 
 
-    private Connection connection;
-    static Logger logger = Logger.getLogger(DBServerModule.class);
+    private DatabaseServer server;
+
 
 
     /**
@@ -85,54 +85,9 @@ public class DBServerModule
     @Processor
     public void startDbServer()
     {
-        try
-        {
-            addJdbcToClassLoader();
-            connection = DriverManager.getConnection("jdbc:h2:mem:"+ database);
-            executeQueriesFromSQLFile(connection);
-            Statement stmt = connection.createStatement();
-            createTablesFromCsv(stmt);
-        }
-        catch (Exception e)
-        {
-            throw new RuntimeException("Could not start the database server", e);
-        }
+        server = new DatabaseServer(database,sqlFile,csv);
+        server.start();
     }
-
-    private void executeQueriesFromSQLFile(Connection conn) throws SQLException, FileNotFoundException
-    {
-        if(sqlFile != null)
-        {
-            InputStream streamImput = getClass().getResourceAsStream(File.separator + sqlFile);
-            RunScript.execute(conn, new InputStreamReader(streamImput));
-        }
-    }
-
-    private void createTablesFromCsv(Statement stmt)
-    {
-        if (csv != null)
-        {
-            String[] tables = csv.split(";");
-            for ( String table : tables )
-            {
-                String tableName = table.replaceAll(".csv", "");
-                try
-                {
-                    stmt.execute("CREATE TABLE "+tableName+" AS SELECT * FROM CSVREAD(\'" + getClass().
-                            getResource("/"+table).toURI().toASCIIString()  + "\');");
-                }
-                catch (SQLException e)
-                {
-                    throw new RuntimeException("Invalid SQL, could not create table " + tableName + " from " + table);
-                }
-                catch (URISyntaxException e)
-                {
-                    throw new RuntimeException("Could not read file " + table);
-                }
-            }
-        }
-    }
-
 
     /**
      * <p>Executes the SQL query received as parameter</p>
@@ -145,18 +100,9 @@ public class DBServerModule
     @Processor
     public Object execute(String sql)
     {
-        Statement statement = null;
-        try
-        {
-            statement = connection.createStatement();
-            return statement.execute(sql);
-        }
-        catch (SQLException e)
-        {
-            logger.error("There has been a problem while executing the SQL statement", e);
-            return null;
-        }
+        return server.execute(sql);
     }
+
 
     /**
      * <p>Executes a SQL query</p>
@@ -169,48 +115,7 @@ public class DBServerModule
     @Processor
     public Object executeQuery(String sql)
     {
-        Statement statement = null;
-        try
-        {
-            return getMap(sql);
-        }
-        catch (SQLException e)
-        {
-            logger.error("There has been a problem while executing the SQL statement", e);
-            return null;
-        }
-    }
-
-    private List<Map<String, String>> getMap(String sql) throws SQLException
-    {
-        Statement statement;
-        statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(sql);
-        List<Map<String, String>> jsonArray = new ArrayList<Map<String,String>>();
-        ResultSetMetaData metaData = resultSet.getMetaData();
-        while (resultSet.next())
-        {
-            HashMap<String, String> jsonObject = new HashMap<String,String>();
-            for (int i = 1; i <= metaData.getColumnCount(); i++)
-            {
-                String columnName = metaData.getColumnName(i);
-                jsonObject.put(columnName, String.valueOf(resultSet.getObject(columnName)));
-            }
-            jsonArray.add(jsonObject);
-        }
-        return jsonArray;
-    }
-
-    private Writer getResults(String sql) throws SQLException, IOException {
-        Statement statement;
-        statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(sql);
-
-        Writer writer = new StringWriter();
-        CSVWriter csvwriter = new CSVWriter(writer);
-        csvwriter.writeAll(resultSet,true);
-
-        return writer;
+        return server.executeQuery(sql);
     }
 
     /**
@@ -224,24 +129,7 @@ public class DBServerModule
     @Processor
     public void validateThat(String query, String returns)
     {
-        try
-        {
-            Writer writerQueryResult = getResults(query);
-            assertEquals(writerQueryResult.toString().trim(), returns.replace("\\n", "\n"));
-        }
-        catch (ClassCastException ccException)
-        {
-            throw new RuntimeException("The JSON String must always be an array");
-        }
-        catch (SQLException e)
-        {
-            throw new RuntimeException("Invalid Query");
-        }
-        catch (IOException e)
-        {
-            throw new RuntimeException("Could no access to query results");
-        }
-
+       server.validateThat(query,returns);
     }
 
     /**
@@ -252,21 +140,9 @@ public class DBServerModule
     @Processor
     public void stopDbServer()
     {
-        try
-        {
-            if ( connection != null ) connection.close();
-        }
-        catch (SQLException e)
-        {
-            throw new RuntimeException("Could not stop the database server", e);
-        }
+        server.stop();
     }
 
-    private void addJdbcToClassLoader() throws InstantiationException,
-            IllegalAccessException, ClassNotFoundException
-    {
-        Class.forName("org.h2.Driver").newInstance();
-    }
 
     public void setDatabase(String database)
     {

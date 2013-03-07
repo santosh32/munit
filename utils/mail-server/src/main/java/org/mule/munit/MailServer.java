@@ -1,4 +1,4 @@
-package org.mule.munit.mail;
+package org.mule.munit;
 
 import com.icegreen.greenmail.util.GreenMail;
 import com.icegreen.greenmail.util.ServerSetupTest;

@@ -2,7 +2,7 @@ package org.mule.munit;
 
 import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
-import org.mule.munit.mail.MailServer;
+import org.mule.munit.MailServer;
 
 import javax.annotation.PostConstruct;
 import javax.mail.internet.MimeMessage;

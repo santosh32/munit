@@ -5,7 +5,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.mule.munit.mail.MailServer;
+import org.mule.munit.MailServer;
 import org.mule.munit.runner.functional.FunctionalMunitSuite;
 
 import static junit.framework.Assert.assertFalse;
