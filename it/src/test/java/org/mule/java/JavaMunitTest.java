@@ -1,4 +1,4 @@
-package org.mule;
+package org.mule.java;
 
 import org.junit.Test;
 import org.mule.munit.runner.functional.FunctionalMunitSuite;
