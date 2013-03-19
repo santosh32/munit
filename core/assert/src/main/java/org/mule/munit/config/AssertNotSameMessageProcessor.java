@@ -6,10 +6,12 @@ import org.mule.munit.AssertModule;
 
 
 /**
- * <p>Assert not Same message processor</p>
+ * <p>
+ *     Assert not Same message processor
+ * </p>
  *
  * @author Federico, Fernando
- * @version since 3.3.2
+ * @since 3.3.2
  */
 public class AssertNotSameMessageProcessor extends MunitMessageProcessor
 {

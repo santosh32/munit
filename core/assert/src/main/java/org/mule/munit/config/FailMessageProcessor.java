@@ -6,10 +6,12 @@ import org.mule.munit.AssertModule;
 
 
 /**
- * <p>Assert Fail Message processor</p>
+ * <p>
+ *     Assert Fail Message processor
+ * </p>
  *
  * @author Federico, Fernando
- * @version since 3.3.2
+ * @since 3.3.2
  */
 public class FailMessageProcessor extends MunitMessageProcessor
 {

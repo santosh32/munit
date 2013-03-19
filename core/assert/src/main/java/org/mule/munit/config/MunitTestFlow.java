@@ -13,10 +13,12 @@ import static junit.framework.Assert.fail;
 
 
 /**
- * <p>The Test Flow</p>
+ * <p>
+ *     The Test Flow
+ * </p>
  *
  * @author Federico, Fernando
- * @version since 3.3.2
+ * @since 3.3.2
  */
 public class MunitTestFlow extends MunitFlow {
     /**

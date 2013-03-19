@@ -89,7 +89,7 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>2.9</version>
                 <configuration>
-                    <excludePackageNames>org.mule.munit.adapters:org.mule.munit.agents:org.mule.munit.functions:org.mule.munit.config:org.mule.munit.holders:org.mule.munit.process:org.mule.munit.processors:org.mule.munit.transformers</excludePackageNames>
+                    <excludePackageNames>org.mule.munit.connection:org.mule.munit.adapters:org.mule.munit.agents:org.mule.munit.functions:org.mule.munit.config:org.mule.munit.holders:org.mule.munit.process:org.mule.munit.processors:org.mule.munit.transformers</excludePackageNames>
                 </configuration>
             </plugin>
             <plugin>

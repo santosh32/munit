@@ -8,10 +8,12 @@ import org.springframework.beans.factory.xml.ParserContext;
 import org.w3c.dom.Element;
 
 /**
- * <p>Munit Flow Definition Parser</p>
+ * <p>
+ *     Munit Flow Definition Parser
+ * </p>
  *
  * @author Federico, Fernando
- * @version since 3.3.2
+ * @since 3.3.2
  */
 public class MUnitFlowDefinitionParser extends OrphanDefinitionParser {
     public MUnitFlowDefinitionParser(Class munitClass) {

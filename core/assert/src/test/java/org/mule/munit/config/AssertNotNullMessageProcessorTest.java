@@ -4,9 +4,7 @@ package org.mule.munit.config;
 import org.junit.Test;
 import org.mule.transport.NullPayload;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * @author Federico, Fernando

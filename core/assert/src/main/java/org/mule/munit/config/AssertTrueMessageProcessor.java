@@ -6,10 +6,12 @@ import org.mule.munit.AssertModule;
 
 
 /**
- * <p>Assert true message processor</p>
+ * <p>
+ *     Assert true message processor
+ * </p>
  *
  * @author Federico, Fernando
- * @version since 3.3.2
+ * @since 3.3.2
  */
 public class AssertTrueMessageProcessor extends MunitMessageProcessor
 {

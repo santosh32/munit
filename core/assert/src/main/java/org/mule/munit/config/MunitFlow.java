@@ -5,10 +5,12 @@ import org.mule.construct.Flow;
 
 
 /**
- * <p>Generic Munit Flow</p>
+ * <p>
+ *     Generic Munit Flow
+ * </p>
  *
  * @author Federico, Fernando
- * @version since 3.3.2
+ * @since 3.3.2
  */
 public class MunitFlow extends Flow {
 

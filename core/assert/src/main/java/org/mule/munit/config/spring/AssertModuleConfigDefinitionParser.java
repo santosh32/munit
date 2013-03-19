@@ -18,10 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>Assert Module Definition Parser</p>
+ * <p>
+ *     Assert Module Definition Parser
+ * </p>
  *
  * @author Federico, Fernando
- * @version since 3.3.2
+ * @since 3.3.2
  */
 public class AssertModuleConfigDefinitionParser
         implements BeanDefinitionParser {
