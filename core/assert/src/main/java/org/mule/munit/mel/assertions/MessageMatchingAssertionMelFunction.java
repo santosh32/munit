@@ -1,13 +1,14 @@
-package org.mule.munit.common.mel.assertions;
+package org.mule.munit.mel.assertions;
 
 
 import org.mule.api.MuleMessage;
 import org.mule.api.el.ExpressionLanguageContext;
 
-public class MassageMatchingAssertionMelFunction extends AssertionMelFunction{
-    private ElementMatcherBuilder command;
 
-    public MassageMatchingAssertionMelFunction(ElementMatcherBuilder command) {
+public class MessageMatchingAssertionMelFunction extends AssertionMelFunction{
+    private ElementMatcherFactory command;
+
+    public MessageMatchingAssertionMelFunction(ElementMatcherFactory command) {
         this.command = command;
     }
 

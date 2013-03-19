@@ -1,10 +1,27 @@
 package org.mule.munit;
 
 
+import org.mule.api.MuleContext;
+import org.mule.api.MuleMessage;
+import org.mule.api.context.MuleContextAware;
+import org.mule.api.el.ExpressionLanguageContext;
+import org.mule.api.el.ExpressionLanguageExtension;
 import org.mule.munit.common.endpoint.MunitSpringFactoryPostProcessor;
+import org.mule.munit.mel.assertions.*;
+import org.mule.munit.mel.matchers.*;
+import org.mule.munit.mel.utils.FlowResultFunction;
+import org.mule.munit.mel.utils.GetResourceFunction;
 import org.mule.transport.NullPayload;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import static junit.framework.Assert.assertEquals;
+import static org.mule.module.hamcrest.message.AttachmentMatcher.hasInboundAttachment;
+import static org.mule.module.hamcrest.message.PropertyMatcher.*;
+import static org.mule.module.hamcrest.message.PropertyMatcher.hasInvocationProperty;
 
 /**
  * <p>Module to assert payload's results</p>
@@ -12,8 +29,15 @@ import static junit.framework.Assert.assertEquals;
  * @author Federico, Fernando
  * @version since 3.3.2
  */
-public class AssertModule extends MunitSpringFactoryPostProcessor
+public class AssertModule extends MunitSpringFactoryPostProcessor implements ExpressionLanguageExtension, MuleContextAware
 {
+    /**
+     * <p>
+     *     For MEL expressions
+     * </p>
+     */
+    private MuleContext muleContext;
+
     private static String wrapMessage(String message)
     {
         return message == null ? "" : message;
@@ -115,5 +139,123 @@ public class AssertModule extends MunitSpringFactoryPostProcessor
         junit.framework.Assert.fail(wrapMessage(message));
     }
 
+    @Override
+    public void configureContext(ExpressionLanguageContext context) {
+        context.declareFunction("messageHasPropertyInAnyScopeCalled",  new MessageHasElementAssertionMelFunction(new MessageHasElementAssertionCommand(){
+            @Override
+            public boolean messageHas(String param, MuleMessage muleMessage) {
+                return hasPropertyInAnyScope(param).matches(muleMessage);
+            }
+        }));
 
+        context.declareFunction("messageHasInboundPropertyCalled",  new MessageHasElementAssertionMelFunction(new MessageHasElementAssertionCommand(){
+            @Override
+            public boolean messageHas(String param, MuleMessage muleMessage) {
+                return hasInboundProperty(param).matches(muleMessage);
+            }
+        }));
+
+        context.declareFunction("messageHasOutboundPropertyCalled",  new MessageHasElementAssertionMelFunction(new MessageHasElementAssertionCommand(){
+            @Override
+            public boolean messageHas(String param, MuleMessage muleMessage) {
+                return hasOutboundProperty(param).matches(muleMessage);
+            }
+        }));
+
+        context.declareFunction("messageHasSessionPropertyCalled",  new MessageHasElementAssertionMelFunction(new MessageHasElementAssertionCommand(){
+            @Override
+            public boolean messageHas(String param, MuleMessage muleMessage) {
+                return hasSessionProperty(param).matches(muleMessage);
+            }
+        }));
+
+        context.declareFunction("messageHasInvocationPropertyCalled",  new MessageHasElementAssertionMelFunction(new MessageHasElementAssertionCommand(){
+            @Override
+            public boolean messageHas(String param, MuleMessage muleMessage) {
+                return hasInvocationProperty(param).matches(muleMessage);
+            }
+        }));
+
+        context.declareFunction("messageHasInboundAttachmentCalled",  new MessageHasElementAssertionMelFunction(new MessageHasElementAssertionCommand(){
+            @Override
+            public boolean messageHas(String param, MuleMessage muleMessage) {
+                return hasInboundAttachment(param).matches(muleMessage);
+            }
+        }));
+
+        context.declareFunction("messageHasOutboundAttachmentCalled",  new MessageHasElementAssertionMelFunction(new MessageHasElementAssertionCommand(){
+            @Override
+            public boolean messageHas(String param, MuleMessage muleMessage) {
+                return hasInboundAttachment(param).matches(muleMessage);
+            }
+        }));
+
+        context.declareFunction("messageInboundProperty",  new MessageMatchingAssertionMelFunction(new ElementMatcherFactory(){
+            @Override
+            public ElementMatcher build(String elementName,  MuleMessage muleMessage) {
+                return new ElementMatcher(muleMessage.getInboundProperty(elementName));
+            }
+        }));
+
+        context.declareFunction("messageOutboundProperty",  new MessageMatchingAssertionMelFunction(new ElementMatcherFactory(){
+            @Override
+            public ElementMatcher build(String elementName, MuleMessage muleMessage) {
+                return new ElementMatcher(muleMessage.getOutboundProperty(elementName));
+            }
+        }));
+
+        context.declareFunction("messageInboundProperty",  new MessageMatchingAssertionMelFunction(new ElementMatcherFactory(){
+            @Override
+            public ElementMatcher build(String elementName,  MuleMessage muleMessage) {
+                return new ElementMatcher(muleMessage.getInboundProperty(elementName));
+            }
+        }));
+
+        context.declareFunction("messageInvocationProperty",  new MessageMatchingAssertionMelFunction(new ElementMatcherFactory(){
+            @Override
+            public ElementMatcher build(String elementName,  MuleMessage muleMessage) {
+                return new ElementMatcher(muleMessage.getInvocationProperty(elementName));
+            }
+        }));
+
+        context.declareFunction("messageInboundAttachment",  new MessageMatchingAssertionMelFunction(new ElementMatcherFactory(){
+            @Override
+            public ElementMatcher build(String elementName,  MuleMessage muleMessage) {
+                return new ElementMatcher(muleMessage.getInboundAttachment(elementName));
+            }
+        }));
+
+        context.declareFunction("messageOutboundAttachment",  new MessageMatchingAssertionMelFunction(new ElementMatcherFactory(){
+            @Override
+            public ElementMatcher build(String elementName,  MuleMessage muleMessage) {
+                return new ElementMatcher(muleMessage.getOutboundAttachment(elementName));
+            }
+        }));
+
+        context.declareFunction("eq", new EqMatcherFunction());
+        context.declareFunction("anyBoolean", new AnyMatcherFunction(Boolean.class));
+        context.declareFunction("anyByte", new AnyMatcherFunction(Byte.class));
+        context.declareFunction("anyInt", new AnyMatcherFunction(Integer.class));
+        context.declareFunction("anyDouble", new AnyMatcherFunction(Double.class));
+        context.declareFunction("anyFloat", new AnyMatcherFunction(Float.class));
+        context.declareFunction("anyShort", new AnyMatcherFunction(Short.class));
+        context.declareFunction("anyObject", new AnyMatcherFunction(Object.class));
+        context.declareFunction("anyString", new AnyMatcherFunction(String.class));
+        context.declareFunction("anyList", new AnyMatcherFunction(List.class));
+        context.declareFunction("anySet", new AnyMatcherFunction(Set.class));
+        context.declareFunction("anyMap", new AnyMatcherFunction(Map.class));
+        context.declareFunction("anyCollection", new AnyMatcherFunction(Collection.class));
+        context.declareFunction("isNull", new NullMatcherFunction());
+        context.declareFunction("isNotNull", new NotNullMatcherFunction());
+        context.declareFunction("any", new AnyClassMatcherFunction());
+        context.declareFunction("resultOfScript", new FlowResultFunction(muleContext));
+        context.declareFunction("getResource", new GetResourceFunction());
+
+    }
+
+
+    @Override
+    public void setMuleContext(MuleContext context) {
+        this.muleContext = context;
+    }
 }

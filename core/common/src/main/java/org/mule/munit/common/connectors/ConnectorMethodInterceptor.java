@@ -16,7 +16,7 @@ import java.lang.reflect.Method;
  * </p>
  *
  * @author Federico, Fernando
- * @version since 3.3.2
+ * @since 3.3.2
  */
 public class ConnectorMethodInterceptor implements MethodInterceptor {
 

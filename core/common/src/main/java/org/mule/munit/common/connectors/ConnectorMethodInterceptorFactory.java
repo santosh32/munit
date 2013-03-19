@@ -11,7 +11,7 @@ import org.springframework.beans.factory.support.AbstractBeanDefinition;
  *  </p>
  *
  * @author Federico, Fernando
- * @version since 3.3.2
+ * @since 3.3.2
  */
 public class ConnectorMethodInterceptorFactory extends MethodInterceptorFactory {
 

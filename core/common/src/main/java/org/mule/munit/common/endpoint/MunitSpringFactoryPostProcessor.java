@@ -1,18 +1,9 @@
 package org.mule.munit.common.endpoint;
 
 
-import org.mule.api.MuleContext;
-import org.mule.api.MuleMessage;
 import org.mule.api.config.MuleProperties;
-import org.mule.api.context.MuleContextAware;
-import org.mule.api.el.ExpressionLanguageContext;
-import org.mule.api.el.ExpressionLanguageExtension;
 import org.mule.api.transport.Connector;
 import org.mule.construct.Flow;
-import org.mule.munit.common.mel.assertions.*;
-import org.mule.munit.common.mel.matchers.*;
-import org.mule.munit.common.mel.utils.FlowResultFunction;
-import org.mule.munit.common.mel.utils.GetResourceFunction;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -21,11 +12,10 @@ import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
-import static org.mule.module.hamcrest.message.AttachmentMatcher.hasInboundAttachment;
-import static org.mule.module.hamcrest.message.PropertyMatcher.*;
 import static org.mule.munit.common.connectors.ConnectorMethodInterceptorFactory.addFactoryDefinitionTo;
 
 
@@ -40,9 +30,9 @@ import static org.mule.munit.common.connectors.ConnectorMethodInterceptorFactory
  * </p>
  *
  * @author Federico, Fernando
- * @version since 3.3.2
+ * @since 3.3.2
  */
-public class MunitSpringFactoryPostProcessor  implements ExpressionLanguageExtension, MuleContextAware{
+public class MunitSpringFactoryPostProcessor {
 
     private static Logger logger = Logger.getLogger("Bean definition Processor");
 
@@ -68,12 +58,6 @@ public class MunitSpringFactoryPostProcessor  implements ExpressionLanguageExten
      */
     protected List<String> mockingExcludedFlows = new ArrayList<String>();
 
-    /**
-     * <p>
-     *     Mule context for MEL expressions
-     * </p>
-     */
-    private MuleContext muleContext;
 
 
     /**
@@ -186,124 +170,5 @@ public class MunitSpringFactoryPostProcessor  implements ExpressionLanguageExten
 
     public void setMockConnectors(boolean mockConnectors) {
         this.mockConnectors = mockConnectors;
-    }
-
-    @Override
-    public void configureContext(ExpressionLanguageContext context) {
-        context.declareFunction("messageHasPropertyInAnyScopeCalled",  new MessageHasElementAssertionMelFunction(new MessageHasElementAssertionCommand(){
-            @Override
-            public boolean messageHas(String param, MuleMessage muleMessage) {
-                return hasPropertyInAnyScope(param).matches(muleMessage);
-            }
-        }));
-
-        context.declareFunction("messageHasInboundPropertyCalled",  new MessageHasElementAssertionMelFunction(new MessageHasElementAssertionCommand(){
-            @Override
-            public boolean messageHas(String param, MuleMessage muleMessage) {
-                return hasInboundProperty(param).matches(muleMessage);
-            }
-        }));
-
-        context.declareFunction("messageHasOutboundPropertyCalled",  new MessageHasElementAssertionMelFunction(new MessageHasElementAssertionCommand(){
-            @Override
-            public boolean messageHas(String param, MuleMessage muleMessage) {
-                return hasOutboundProperty(param).matches(muleMessage);
-            }
-        }));
-
-        context.declareFunction("messageHasSessionPropertyCalled",  new MessageHasElementAssertionMelFunction(new MessageHasElementAssertionCommand(){
-            @Override
-            public boolean messageHas(String param, MuleMessage muleMessage) {
-                return hasSessionProperty(param).matches(muleMessage);
-            }
-        }));
-
-        context.declareFunction("messageHasInvocationPropertyCalled",  new MessageHasElementAssertionMelFunction(new MessageHasElementAssertionCommand(){
-            @Override
-            public boolean messageHas(String param, MuleMessage muleMessage) {
-                return hasInvocationProperty(param).matches(muleMessage);
-            }
-        }));
-
-        context.declareFunction("messageHasInboundAttachmentCalled",  new MessageHasElementAssertionMelFunction(new MessageHasElementAssertionCommand(){
-            @Override
-            public boolean messageHas(String param, MuleMessage muleMessage) {
-                return hasInboundAttachment(param).matches(muleMessage);
-            }
-        }));
-
-        context.declareFunction("messageHasOutboundAttachmentCalled",  new MessageHasElementAssertionMelFunction(new MessageHasElementAssertionCommand(){
-            @Override
-            public boolean messageHas(String param, MuleMessage muleMessage) {
-                return hasInboundAttachment(param).matches(muleMessage);
-            }
-        }));
-
-        context.declareFunction("messageInboundProperty",  new MassageMatchingAssertionMelFunction(new ElementMatcherBuilder(){
-            @Override
-            public ElementMatcher build(String elementName,  MuleMessage muleMessage) {
-                return new ElementMatcher(muleMessage.getInboundProperty(elementName));
-            }
-        }));
-
-        context.declareFunction("messageOutboundProperty",  new MassageMatchingAssertionMelFunction(new ElementMatcherBuilder(){
-            @Override
-            public ElementMatcher build(String elementName, MuleMessage muleMessage) {
-                return new ElementMatcher(muleMessage.getOutboundProperty(elementName));
-            }
-        }));
-
-        context.declareFunction("messageInboundProperty",  new MassageMatchingAssertionMelFunction(new ElementMatcherBuilder(){
-            @Override
-            public ElementMatcher build(String elementName,  MuleMessage muleMessage) {
-                return new ElementMatcher(muleMessage.getInboundProperty(elementName));
-            }
-        }));
-
-        context.declareFunction("messageInvocationProperty",  new MassageMatchingAssertionMelFunction(new ElementMatcherBuilder(){
-            @Override
-            public ElementMatcher build(String elementName,  MuleMessage muleMessage) {
-                return new ElementMatcher(muleMessage.getInvocationProperty(elementName));
-            }
-        }));
-
-        context.declareFunction("messageInboundAttachment",  new MassageMatchingAssertionMelFunction(new ElementMatcherBuilder(){
-            @Override
-            public ElementMatcher build(String elementName,  MuleMessage muleMessage) {
-                return new ElementMatcher(muleMessage.getInboundAttachment(elementName));
-            }
-        }));
-
-        context.declareFunction("messageOutboundAttachment",  new MassageMatchingAssertionMelFunction(new ElementMatcherBuilder(){
-            @Override
-            public ElementMatcher build(String elementName,  MuleMessage muleMessage) {
-                return new ElementMatcher(muleMessage.getOutboundAttachment(elementName));
-            }
-        }));
-
-        context.declareFunction("eq", new EqMatcherFunction());
-        context.declareFunction("anyBoolean", new AnyMatcherFunction(Boolean.class));
-        context.declareFunction("anyByte", new AnyMatcherFunction(Byte.class));
-        context.declareFunction("anyInt", new AnyMatcherFunction(Integer.class));
-        context.declareFunction("anyDouble", new AnyMatcherFunction(Double.class));
-        context.declareFunction("anyFloat", new AnyMatcherFunction(Float.class));
-        context.declareFunction("anyShort", new AnyMatcherFunction(Short.class));
-        context.declareFunction("anyObject", new AnyMatcherFunction(Object.class));
-        context.declareFunction("anyString", new AnyMatcherFunction(String.class));
-        context.declareFunction("anyList", new AnyMatcherFunction(List.class));
-        context.declareFunction("anySet", new AnyMatcherFunction(Set.class));
-        context.declareFunction("anyMap", new AnyMatcherFunction(Map.class));
-        context.declareFunction("anyCollection", new AnyMatcherFunction(Collection.class));
-        context.declareFunction("isNull", new NullMatcherFunction());
-        context.declareFunction("isNotNull", new NotNullMatcherFunction());
-        context.declareFunction("any", new AnyClassMatcherFunction());
-        context.declareFunction("resultOfScript", new FlowResultFunction(muleContext));
-        context.declareFunction("getResource", new GetResourceFunction());
-
-    }
-
-    @Override
-    public void setMuleContext(MuleContext context) {
-        this.muleContext = context;
     }
 }

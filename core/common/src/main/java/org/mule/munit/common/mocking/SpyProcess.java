@@ -9,7 +9,7 @@ import org.mule.api.MuleException;
  * </p>
  *
  * @author Federico, Fernando
- * @version since 3.3.2
+ * @since 3.3.2
  */
 public interface SpyProcess {
 
