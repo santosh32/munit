@@ -1,7 +1,9 @@
 package org.mule.munit.common.matchers;
 
 /**
- * <p>Dumb matcher that returns the specified value</p>
+ * <p>
+ *     Dumb matcher that returns the specified value
+ * </p>
  *
  * Usage: <code>new DumbMatcher(true).match(any)</code> will return always true, no matter <code>any</code> value
  *

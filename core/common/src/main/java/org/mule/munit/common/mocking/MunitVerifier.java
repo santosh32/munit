@@ -10,7 +10,9 @@ import java.util.Map;
 import static junit.framework.Assert.fail;
 
 /**
- * <p>This is the general Munit Tool</p>
+ * <p>
+ *     This is the general Munit Tool
+ * </p>
  *
  * @author Federico, Fernando
  * @version since 3.3.2
@@ -22,12 +24,18 @@ public class MunitVerifier extends MunitMockingTool {
     }
 
     /**
-     * <p>Defines the name of the message processor to verify call</p>
+     * <p>
+     *     Defines the name of the message processor to verify call
+     * </p>
      *
      * @param name
-     *      <p>The name of the message processor to verify call</p>
+     *      <p>
+     *          The name of the message processor to verify call
+     *      </p>
      * @return
-     *      <p>Itself</p>
+     *      <p>
+     *          Itself
+     *      </p>
      */
     public MunitVerifier verifyCallOfMessageProcessor(String name) {
         this.messageProcessorName = name;
@@ -36,12 +44,18 @@ public class MunitVerifier extends MunitMockingTool {
 
 
     /**
-     * <p>Defines the namespace of the message processor to verify call</p>
+     * <p>
+     *     Defines the namespace of the message processor to verify call
+     * </p>
      *
      * @param namespace
-     *      <p>The namespace of the message processor to verify call</p>
+     *      <p>
+     *          The namespace of the message processor to verify call
+     *      </p>
      * @return
-     *      <p>Itself</p>
+     *      <p>
+     *          Itself
+     *      </p>
      */
     public MunitVerifier ofNamespace(String namespace) {
         this.messageProcessorNamespace = namespace;
@@ -49,10 +63,14 @@ public class MunitVerifier extends MunitMockingTool {
     }
 
     /**
-     * <p>The times it must be called</p>
+     * <p>
+     *     The times it must be called
+     * </p>
      *
      * @param times
-     *      <p>The times it must be called</p>
+     *      <p>
+     *          The times it must be called
+     *      </p>
      */
     public void times(Integer times) {
         List<MessageProcessorCall> executedCalls = getExecutedCalls();
@@ -64,10 +82,14 @@ public class MunitVerifier extends MunitMockingTool {
     }
 
     /**
-     * <p>At least the times it must be called</p>
+     * <p>
+     *     At least the times it must be called
+     * </p>
      *
      * @param atLeast
-     *      <p>At least the times it must be called</p>
+     *      <p>
+     *          At least the times it must be called
+     *      </p>
      */
     public void atLeast(Integer atLeast) {
         checkValidQuery();
@@ -80,10 +102,14 @@ public class MunitVerifier extends MunitMockingTool {
     }
 
     /**
-     * <p>At most the times it must be called</p>
+     * <p>
+     *     At most the times it must be called
+     * </p>
      *
      * @param atMost
-     *      <p>At most the times it must be called</p>
+     *      <p>
+     *          At most the times it must be called
+     *      </p>
      */
     public void atMost(Integer atMost) {
         checkValidQuery();
@@ -95,7 +121,9 @@ public class MunitVerifier extends MunitMockingTool {
     }
 
     /**
-     * <p>At least one time called</p>
+     * <p>
+     *     At least one time called
+     * </p>
      */
     public void atLeastOnce() {
         checkValidQuery();

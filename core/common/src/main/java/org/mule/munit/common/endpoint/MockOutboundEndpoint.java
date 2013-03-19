@@ -24,7 +24,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <p>Mocked outbound Endpoint</p>
+ * <p>
+ *     Mocked outbound Endpoint
+ * </p>
  *
  * @author Federico, Fernando
  * @version since 3.3.2

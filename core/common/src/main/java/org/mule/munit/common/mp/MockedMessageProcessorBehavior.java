@@ -13,17 +13,23 @@ import org.mule.api.MuleMessage;
  */
 public class MockedMessageProcessorBehavior {
     /**
-     * <p>The message processor call representation. When this call is executed then return returnMessage</p>
+     * <p>
+     *     The message processor call representation. When this call is executed then return returnMessage
+     * </p>
      */
     private MessageProcessorCall messageProcessorCall;
 
     /**
-     * <p>The Mule message information that will be replaced in the flow Message</p>
+     * <p>
+     *     The Mule message information that will be replaced in the flow Message
+     * </p>
      */
     private MuleMessage returnMuleMessage;
 
     /**
-     * <p>The exception that has to be thrown when this behavior is executed</p>
+     * <p>
+     *     The exception that has to be thrown when this behavior is executed
+     * </p>
      */
     private Throwable exceptionToThrow;
 

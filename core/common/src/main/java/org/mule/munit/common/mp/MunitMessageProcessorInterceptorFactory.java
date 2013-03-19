@@ -10,7 +10,9 @@ import java.util.Map;
 
 
 /**
- * <p>This is the Message processor interceptor factory.</p>
+ * <p>
+ *     This is the Message processor interceptor factory.
+ * </p>
  *
  * @author Federico, Fernando
  * @version since 3.3.2
@@ -18,12 +20,16 @@ import java.util.Map;
 public class MunitMessageProcessorInterceptorFactory  extends MethodInterceptorFactory {
 
     /**
-     * <p>The Id in the spring registry of Mule</p>
+     * <p>
+     *     The Id in the spring registry of Mule
+     * </p>
      */
     public static String ID = "__messageProcessorEnhancerFactory";
 
     /**
-     * <p>Util method that creates a @see #BeanFactoryMethodBuilder based on an abstract bean definition</p>
+     * <p>
+     *     Util method that creates a @see #BeanFactoryMethodBuilder based on an abstract bean definition
+     * </p>
      * <p/>
      * <p>The usage:</p>
      * <p/>
@@ -31,7 +37,10 @@ public class MunitMessageProcessorInterceptorFactory  extends MethodInterceptorF
      * addFactoryDefinitionTo(beanDefinition).withConstructorArguments(beanDefinition.getBeanClass());
      * </code>
      *
-     * @param beanDefinition <p>The bean definition that we want to modify</p>
+     * @param beanDefinition
+     * <p>
+     *     The bean definition that we want to modify
+     * </p>
      * @return
      */
     public static BeanFactoryMethodBuilder addFactoryDefinitionTo(AbstractBeanDefinition beanDefinition) {
@@ -58,10 +67,14 @@ public class MunitMessageProcessorInterceptorFactory  extends MethodInterceptorF
     }
 
     /**
-     * <p>Actual implementation of the interceptor creation</p>
+     * <p>
+     *     Actual implementation of the interceptor creation
+     * </p>
      *
      * @return
-     *      <p>A #MunitMessageProcessorInterceptor object</p>
+     *      <p>
+     *          A {@link MunitMessageProcessorInterceptor} object
+     *      </p>
      */
     @Override
     protected MethodInterceptor createInterceptor() {

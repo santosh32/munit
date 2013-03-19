@@ -6,7 +6,9 @@ import net.sf.cglib.proxy.MethodInterceptor;
 import java.lang.reflect.Constructor;
 
 /**
- * <p>Abstract definition that creates an interceptor</p>
+ * <p>
+ *     Abstract definition that creates an interceptor
+ * </p>
  *
  * @author Federico, Fernando
  * @version since 3.3.2
@@ -14,16 +16,24 @@ import java.lang.reflect.Constructor;
 public abstract class MethodInterceptorFactory {
 
     /**
-     * <p>The factory method to create connector/message processors beans</p>
+     * <p>
+     *     The factory method to create connector/message processors beans
+     * </p>
      *
      * @param realMpClass
-     *          <p>The class of the message processor/ connector</p>
+     *          <p>
+     *              The class of the message processor/ connector
+     *          </p>
      *
      * @param objects
-     *          <p>Constructor arguments</p>
+     *          <p>
+     *              Constructor arguments
+     *          </p>
      *
      * @return
-     *          <p>An @see #Enhancer of the message processor/connector</p>
+     *          <p>
+     *              An {@link Enhancer} of the message processor/connector
+     *          </p>
      */
     public Object create( Class realMpClass, Object ... objects){
         try {

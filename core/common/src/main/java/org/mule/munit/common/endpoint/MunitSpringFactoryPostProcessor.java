@@ -30,10 +30,14 @@ import static org.mule.munit.common.connectors.ConnectorMethodInterceptorFactory
 
 
 /**
- * <p>This class changes the endpoint factory and inject the mock manager</p>
+ * <p>
+ *     This class changes the endpoint factory and inject the mock manager
+ * </p>
  *
- * <p>This is a piece part of the endpoint mocking. By overriding the endpoint factory we can mock all the outbound/inbound
- * endpoints of a mule application</p>
+ * <p>
+ *     This is a piece part of the endpoint mocking. By overriding the endpoint factory we can mock all the outbound/inbound
+ * endpoints of a mule application
+ * </p>
  *
  * @author Federico, Fernando
  * @version since 3.3.2
@@ -43,35 +47,49 @@ public class MunitSpringFactoryPostProcessor  implements ExpressionLanguageExten
     private static Logger logger = Logger.getLogger("Bean definition Processor");
 
     /**
-     * <p>Defines if the inbounds must be mocked or not. This is pure Munit configuration</p>
+     * <p>
+     *     Defines if the inbounds must be mocked or not. This is pure Munit configuration
+     * </p>
      */
     protected boolean mockInbounds = true;
 
     /**
-     * <p>Defines if the app connectors for outbound/inbound endpoints have to be mocked. If they are then all
-     * outbound endpoints/inbound endpoints must be mocked.</p>
+     * <p>
+     *     Defines if the app connectors for outbound/inbound endpoints have to be mocked. If they are then all
+     * outbound endpoints/inbound endpoints must be mocked.
+     * </p>
      */
     protected boolean mockConnectors = true;
 
     /**
-     * <p>List of flows which we don't want to mock the inbound message sources</p>
+     * <p>
+     *     List of flows which we don't want to mock the inbound message sources
+     * </p>
      */
     protected List<String> mockingExcludedFlows = new ArrayList<String>();
 
     /**
-     * <p>Mule context for MEL expressions</p>
+     * <p>
+     *     Mule context for MEL expressions
+     * </p>
      */
     private MuleContext muleContext;
 
 
     /**
-     * <p>Implementation of the BeanFactoryPostProcessor. It removes the message sources of all the flows except
-     * for the ones specified in mockingExcludedFlows. Only if mockInbounds is true.</p>
+     * <p>
+     *     Implementation of the BeanFactoryPostProcessor. It removes the message sources of all the flows except
+     * for the ones specified in mockingExcludedFlows. Only if mockInbounds is true.
+     * </p>
      *
      * @param beanFactory
-     *          <p>The spring bean factory</p>
+     *          <p>
+     *              The spring bean factory
+     *          </p>
      * @throws BeansException
-     *          <p>When post processing fails. Never thrown for this implementation</p>
+     *          <p>
+     *              When post processing fails. Never thrown for this implementation
+     *          </p>
      */
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         if ( isMockInbounds() || isMockConnectors() ){
@@ -96,11 +114,15 @@ public class MunitSpringFactoryPostProcessor  implements ExpressionLanguageExten
     }
 
     /**
-     * <p>Changes the default EndpointFactory of mule with a Wrapper of it. This wrapper creates mocks of the Outbound
-     * Endpoints</p>
+     * <p>
+     *     Changes the default EndpointFactory of mule with a Wrapper of it. This wrapper creates mocks of the Outbound
+     * Endpoints
+     * </p>
      *
      * @param beanFactory
-     *           <p>The spring bean factory</p>
+     *           <p>
+     *               The spring bean factory
+     *           </p>
      */
     private void changeEndpointFactory(ConfigurableListableBeanFactory beanFactory) {
         GenericBeanDefinition endpointFactory = (GenericBeanDefinition) beanFactory.getBeanDefinition(MuleProperties.OBJECT_MULE_ENDPOINT_FACTORY);
@@ -114,12 +136,18 @@ public class MunitSpringFactoryPostProcessor  implements ExpressionLanguageExten
     }
 
     /**
-     * <p>Changes the @see #Connector bean definition so they are created as mocks of connectors that do not connect</p>
+     * <p>
+     *     Changes the {@link Connector} bean definition so they are created as mocks of connectors that do not connect
+     * </p>
      *
-     * <p>This action is done only if #isMockConnectors is true</p>
+     * <p>
+     *     This action is done only if {@link #isMockConnectors()} is true
+     * </p>
 
      * @param beanFactory
-     *          <p>The bean factory that contains the bean definition</p>
+     *          <p>
+     *              The bean factory that contains the bean definition
+     *          </p>
      */
     private void mockConnectors(ConfigurableListableBeanFactory beanFactory) {
         if (isMockConnectors()) {
