@@ -6,8 +6,6 @@ import org.apache.commons.lang.StringUtils;
 import org.mule.DefaultMuleMessage;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleEvent;
-import org.mule.api.construct.FlowConstruct;
-import org.mule.api.construct.FlowConstructAware;
 import org.mule.api.expression.ExpressionManager;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.munit.common.MunitCore;

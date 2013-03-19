@@ -2,18 +2,18 @@ package org.mule.munit;
 
 import org.junit.Test;
 import org.mule.api.*;
-import org.mule.api.el.ExpressionLanguageContext;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.munit.common.mocking.EndpointMocker;
 import org.mule.munit.common.mocking.MessageProcessorMocker;
 import org.mule.munit.common.mocking.MunitSpy;
 import org.mule.munit.common.mocking.SpyProcess;
-import org.mule.munit.functions.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.notNull;
 import static org.mockito.Mockito.*;
 
@@ -161,32 +161,6 @@ public class MockModuleTest {
         verify(spy, times(1)).spyMessageProcessor(MESSAGE_PROCESSOR);
         verify(spy, times(1)).ofNamespace(NAMESPACE);
         verify(spy, times(1)).running((List<SpyProcess>) notNull(), (List<SpyProcess>) notNull());
-    }
-
-    @Test
-    public void expressionLanguageContextMustBeSetCorrectly(){
-        ExpressionLanguageContext context = mock(ExpressionLanguageContext.class);
-
-        module().configureContext(context);
-
-        verify(context, times(1)).declareFunction(eq("eq"), any(EqMatcherFunction.class));
-        verify(context, times(1)).declareFunction(eq("anyByte"), any(AnyMatcherFunction.class));
-        verify(context, times(1)).declareFunction(eq("anyBoolean"), any(AnyMatcherFunction.class));
-        verify(context, times(1)).declareFunction(eq("anyInt"), any(AnyMatcherFunction.class));
-        verify(context, times(1)).declareFunction(eq("anyDouble"), any(AnyMatcherFunction.class));
-        verify(context, times(1)).declareFunction(eq("anyFloat"), any(AnyMatcherFunction.class));
-        verify(context, times(1)).declareFunction(eq("anyShort"), any(AnyMatcherFunction.class));
-        verify(context, times(1)).declareFunction(eq("anyObject"), any(AnyMatcherFunction.class));
-        verify(context, times(1)).declareFunction(eq("anyString"), any(AnyMatcherFunction.class));
-        verify(context, times(1)).declareFunction(eq("anyList"), any(AnyMatcherFunction.class));
-        verify(context, times(1)).declareFunction(eq("anySet"), any(AnyMatcherFunction.class));
-        verify(context, times(1)).declareFunction(eq("anyMap"), any(AnyMatcherFunction.class));
-        verify(context, times(1)).declareFunction(eq("anyCollection"), any(AnyMatcherFunction.class));
-        verify(context, times(1)).declareFunction(eq("isNull"), any(NullMatcherFunction.class));
-        verify(context, times(1)).declareFunction(eq("isNotNull"), any(NotNullMatcherFunction.class));
-        verify(context, times(1)).declareFunction(eq("any"), any(AnyClassMatcherFunction.class));
-        verify(context, times(1)).declareFunction(eq("resultOfScript"), any(FlowResultFunction.class));
-        verify(context, times(1)).declareFunction(eq("getResource"), any(GetResourceFunction.class));
     }
 
     @Test

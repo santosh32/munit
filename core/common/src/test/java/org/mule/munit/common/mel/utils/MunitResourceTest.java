@@ -1,4 +1,4 @@
-package org.mule.munit.functions;
+package org.mule.munit.common.mel.utils;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,6 +7,8 @@ import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
+import org.mule.munit.common.mel.utils.GetResourceFunction;
+import org.mule.munit.common.mel.utils.MunitResource;
 
 public class MunitResourceTest {
 

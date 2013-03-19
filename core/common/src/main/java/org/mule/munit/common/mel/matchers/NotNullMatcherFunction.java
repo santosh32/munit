@@ -1,13 +1,12 @@
-package org.mule.munit.functions;
+package org.mule.munit.common.mel.matchers;
 
 import org.mule.api.el.ExpressionLanguageContext;
 import org.mule.api.el.ExpressionLanguageFunction;
-import org.mule.munit.common.matchers.NullMatcher;
-
+import org.mule.munit.common.matchers.NotNullMatcher;
 
 /**
  * <p>
- *     MEL function for {@link org.mule.munit.common.matchers.NullMatcher}
+ *     MEL function for {@link NotNullMatcher}
  *
  *     usage:
  *
@@ -21,7 +20,7 @@ import org.mule.munit.common.matchers.NullMatcher;
  *
  *           <mock:verify-call messageProcessor="jira:create-group" atLeast="1">
  *                   <mock:attributes>
- *                           <mock:attribute name="userName" whereValue-ref='#[isNull()]'/>
+ *                           <mock:attribute name="userName" whereValue-ref='#[isNotNull()]'/>
  *                   </mock:attributes>
  *           </mock:verify-call>
  *         }
@@ -31,9 +30,9 @@ import org.mule.munit.common.matchers.NullMatcher;
  * @author Federico, Fernando
  * @version since 3.3.2
  */
-public class NullMatcherFunction implements ExpressionLanguageFunction {
+public class NotNullMatcherFunction implements ExpressionLanguageFunction {
     @Override
     public Object call(Object[] params, ExpressionLanguageContext context) {
-        return new NullMatcher();
+        return new NotNullMatcher();
     }
 }

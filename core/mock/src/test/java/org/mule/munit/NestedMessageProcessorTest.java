@@ -1,7 +1,6 @@
 package org.mule.munit;
 
 
-import org.junit.Before;
 import org.junit.Test;
 import org.mule.api.MuleEvent;
 import org.mule.api.MuleException;

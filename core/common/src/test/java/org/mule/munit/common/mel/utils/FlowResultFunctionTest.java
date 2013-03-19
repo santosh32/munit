@@ -1,9 +1,10 @@
-package org.mule.munit.functions;
+package org.mule.munit.common.mel.utils;
 
 import org.junit.Test;
 import org.mule.api.MuleContext;
 import org.mule.api.registry.MuleRegistry;
 import org.mule.module.scripting.component.Scriptable;
+import org.mule.munit.common.mel.utils.FlowResultFunction;
 
 import javax.script.Bindings;
 import javax.script.ScriptEngine;
