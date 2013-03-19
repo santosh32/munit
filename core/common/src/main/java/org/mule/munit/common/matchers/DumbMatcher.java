@@ -8,7 +8,7 @@ package org.mule.munit.common.matchers;
  * Usage: <code>new DumbMatcher(true).match(any)</code> will return always true, no matter <code>any</code> value
  *
  * @author Federico, Fernando
- * @version since 3.3.2
+ * @since 3.3.2
  */
 public class DumbMatcher implements Matcher{
     boolean expectedValue;

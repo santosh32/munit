@@ -1,4 +1,4 @@
-package org.mule.munit.common.mel.matchers;
+package org.mule.munit.mel.matchers;
 
 import org.mule.api.el.ExpressionLanguageContext;
 import org.mule.api.el.ExpressionLanguageFunction;
@@ -28,7 +28,7 @@ import org.mule.munit.common.matchers.NotNullMatcher;
  * </p>
  *
  * @author Federico, Fernando
- * @version since 3.3.2
+ * @since 3.3.2
  */
 public class NotNullMatcherFunction implements ExpressionLanguageFunction {
     @Override

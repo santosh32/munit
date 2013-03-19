@@ -1,4 +1,4 @@
-package org.mule.munit.common.mel.assertions;
+package org.mule.munit.mel.assertions;
 
 import org.mule.api.MuleMessage;
 import org.mule.api.el.ExpressionLanguageContext;
@@ -10,8 +10,15 @@ import java.lang.reflect.Field;
 
 /**
  * <p>
- *
+ *    Abstract class that represents an MEL function for asserting
  * </p>
+ *
+ * <p>
+ *     This class just contains a method to get the mule message when the function is called.
+ * </p>
+ *
+ * @author Federico, Fernando
+ * @version since 3.4
  */
 public abstract class AssertionMelFunction implements ExpressionLanguageFunction {
 

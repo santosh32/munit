@@ -8,7 +8,7 @@ package org.mule.munit.common.matchers;
  * Usage: <code>new NotNullMatcher().match(null)</code> will return false
  *
  * @author Federico, Fernando
- * @version since 3.3.2
+ * @since 3.3.2
  */
 public class NotNullMatcher implements Matcher{
 
