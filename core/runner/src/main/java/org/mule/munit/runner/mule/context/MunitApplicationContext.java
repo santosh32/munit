@@ -63,6 +63,7 @@ public class MunitApplicationContext extends MuleApplicationContext{
         finally
         {
             MunitSpringFactoryPostProcessor bean = beanFactory.getBean(MunitSpringFactoryPostProcessor.class);
+            bean.setMuleContext(this.getMuleContext());
             bean.postProcessBeanFactory(beanFactory);
 
             getCurrentMuleContext().remove();
