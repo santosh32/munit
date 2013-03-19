@@ -18,7 +18,7 @@ import java.lang.reflect.Field;
  * </p>
  *
  * @author Federico, Fernando
- * @version since 3.4
+ * @since 3.4
  */
 public abstract class AssertionMelFunction implements ExpressionLanguageFunction {
 

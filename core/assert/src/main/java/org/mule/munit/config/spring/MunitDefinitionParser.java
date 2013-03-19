@@ -16,30 +16,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>Munit Bean Definition Parser</p>
+ * <p>
+ *     Munit Bean Definition Parser
+ * </p>
  *
  * @author Federico, Fernando
- * @version since 3.3.2
+ * @since 3.3.2
  */
 public class MunitDefinitionParser implements BeanDefinitionParser {
 
     /**
-     * <p>The message processor class</p>
+     * <p>
+     *     The message processor class
+     * </p>
      */
     private Class mpClass;
 
     /**
-     * <p>The message processor attributes to parse</p>
+     * <p>
+     *     The message processor attributes to parse
+     * </p>
      */
     private List<String> attributes;
 
     /**
-     * <p>The ref attributes to parse</p>
+     * <p>
+     *     The ref attributes to parse
+     * </p>
      */
     private List<String> refAttributes;
 
     /**
-     * <p>Constructor for parsers that parse message processors with simple attributes</p>
+     * <p>
+     *     Constructor for parsers that parse message processors with simple attributes
+     * </p>
      *
      * @param mpClass
      *      <p>The message processor class</p>
@@ -52,7 +62,9 @@ public class MunitDefinitionParser implements BeanDefinitionParser {
     }
 
     /**
-     * <p>Constructor for parsers that parse message processors with simple attributes and complex ref-attributes</p>
+     * <p>
+     *     Constructor for parsers that parse message processors with simple attributes and complex ref-attributes
+     * </p>
      *
      * @param mpClass
      *      <p>The message processor class</p>
@@ -71,7 +83,9 @@ public class MunitDefinitionParser implements BeanDefinitionParser {
     }
 
     /**
-     * <p>Constructor for parsers that parse message processors with no attributes</p>
+     * <p>
+     *     Constructor for parsers that parse message processors with no attributes
+     * </p>
      *
      * @param mpClass
      *      <p>The message processor class</p>

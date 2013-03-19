@@ -5,12 +5,21 @@ import org.mule.api.MuleMessage;
 import org.mule.api.el.ExpressionLanguageContext;
 
 
+/**
+ * <p>
+ *     MEL function to evaluate that an element of the message matches something
+ * </p>
+ *
+ * @author Federico, Fernando
+ * @since 3.4
+ */
 public class MessageMatchingAssertionMelFunction extends AssertionMelFunction{
     private ElementMatcherFactory command;
 
     public MessageMatchingAssertionMelFunction(ElementMatcherFactory command) {
         this.command = command;
     }
+
 
     @Override
     public Object call(Object[] params, ExpressionLanguageContext context) {

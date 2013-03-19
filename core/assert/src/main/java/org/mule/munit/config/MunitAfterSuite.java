@@ -3,10 +3,12 @@ package org.mule.munit.config;
 import org.mule.api.MuleContext;
 
 /**
- * <p>After Suite Flow</p>
+ * <p>
+ *     After Suite Flow
+ * </p>
  *
  * @author Federico, Fernando
- * @version since 3.3.2
+ * @since 3.3.2
  */
 public class MunitAfterSuite extends MunitFlow{
     public MunitAfterSuite(String name, MuleContext muleContext) {

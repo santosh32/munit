@@ -25,7 +25,7 @@ import static org.mule.munit.common.MunitCore.buildMuleStackTrace;
  * </p>
  *
  * @author Federico, Fernando
- * @version since 3.3.2
+ * @since 3.3.2
  */
 public abstract class MunitMessageProcessor implements Initialisable, MessageProcessor, MuleContextAware, FlowConstructAware{
 

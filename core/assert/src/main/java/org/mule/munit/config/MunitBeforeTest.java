@@ -3,10 +3,12 @@ package org.mule.munit.config;
 import org.mule.api.MuleContext;
 
 /**
- * <p>Before Test flow</p>
+ * <p>
+ *     Before Test flow
+ * </p>
  *
  * @author Federico, Fernando
- * @version since 3.3.2
+ * @since 3.3.2
  */
 public class MunitBeforeTest extends MunitFlow{
     public MunitBeforeTest(String name, MuleContext muleContext) {

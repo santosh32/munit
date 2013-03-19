@@ -9,10 +9,12 @@ import java.util.List;
 
 
 /**
- * <p>Assert Module Namespace Handler</p>
+ * <p>
+ *     Assert Module Namespace Handler
+ * </p>
  *
  * @author Federico, Fernando
- * @version since 3.3.2
+ * @since 3.3.2
  */
 public class AssertModuleNamespaceHandler
         extends NamespaceHandlerSupport {

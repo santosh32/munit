@@ -7,14 +7,18 @@ import org.mule.munit.MunitAssertion;
 
 
 /**
- * <p>Message processor that runs the custom assertion</p>
+ * <p>
+ *     Message processor that runs the custom assertion
+ * </p>
  *
  * @author Federico, Fernando
- * @version since 3.3.2
+ * @since 3.3.2
  */
 public class RunAssertionMessageProcessor implements MessageProcessor{
     /**
-     * <p>The assertion to be run.</p>
+     * <p>
+     *     The assertion to be run.
+     * </p>
      */
     private MunitAssertion assertion;
 
