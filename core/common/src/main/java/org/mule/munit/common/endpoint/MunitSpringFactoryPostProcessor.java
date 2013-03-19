@@ -1,7 +1,9 @@
 package org.mule.munit.common.endpoint;
 
 
+import org.mule.api.MuleContext;
 import org.mule.api.config.MuleProperties;
+import org.mule.api.context.MuleContextAware;
 import org.mule.api.transport.Connector;
 import org.mule.construct.Flow;
 import org.springframework.beans.BeansException;
@@ -32,9 +34,16 @@ import static org.mule.munit.common.connectors.ConnectorMethodInterceptorFactory
  * @author Federico, Fernando
  * @since 3.3.2
  */
-public class MunitSpringFactoryPostProcessor {
+public class MunitSpringFactoryPostProcessor implements MuleContextAware {
 
     private static Logger logger = Logger.getLogger("Bean definition Processor");
+
+    /**
+     * <p>
+     *     For MEL expressions
+     * </p>
+     */
+    protected MuleContext muleContext;
 
     /**
      * <p>
@@ -170,5 +179,10 @@ public class MunitSpringFactoryPostProcessor {
 
     public void setMockConnectors(boolean mockConnectors) {
         this.mockConnectors = mockConnectors;
+    }
+
+    @Override
+    public void setMuleContext(MuleContext context) {
+        this.muleContext = context;
     }
 }

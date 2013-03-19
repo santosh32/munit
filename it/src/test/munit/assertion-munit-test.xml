@@ -109,4 +109,33 @@
 
         <munit:run-custom assertion-ref="customAssertion"/>
     </munit:test>
+
+
+    <munit:test name="testMelFunctions" description="Test Exceptions">
+        <munit:set payload-ref="#[string:aString]">
+            <munit:invocation-properties>
+                <munit:invocation-property key="invocation" value-ref="#[string:invocationValue]"/>
+            </munit:invocation-properties>
+            <munit:inbound-properties>
+                <munit:inbound-property key="inbound" value-ref="#[string:inboundValue]" />
+            </munit:inbound-properties>
+            <munit:outbound-properties>
+                <munit:outbound-property key="outbound" value-ref="#[string:outboundValue]" />
+            </munit:outbound-properties>
+        </munit:set>
+
+        <munit:assert-true condition="#[messageHasPropertyInAnyScopeCalled('invocation')]"/>
+        <munit:assert-true condition="#[messageHasInvocationPropertyCalled('invocation')]"/>
+        <munit:assert-true condition="#[messageInvocationProperty('invocation').is(anyString())]"/>
+
+        <munit:assert-true condition="#[messageHasPropertyInAnyScopeCalled('inbound')]"/>
+        <munit:assert-true condition="#[messageHasInboundPropertyCalled('inbound')]"/>
+        <munit:assert-true condition="#[messageInboundProperty('inbound').is(eq('inboundValue'))]"/>
+
+
+        <munit:assert-true condition="#[messageHasPropertyInAnyScopeCalled('outbound')]"/>
+        <munit:assert-true condition="#[messageHasOutboundPropertyCalled('outbound')]"/>
+        <munit:assert-true condition="#[messageOutboundProperty('outbound').is(eq('outboundValue'))]"/>
+    </munit:test>
+
 </mule>

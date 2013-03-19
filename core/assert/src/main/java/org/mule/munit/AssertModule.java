@@ -29,14 +29,9 @@ import static org.mule.module.hamcrest.message.PropertyMatcher.hasInvocationProp
  * @author Federico, Fernando
  * @version since 3.3.2
  */
-public class AssertModule extends MunitSpringFactoryPostProcessor implements ExpressionLanguageExtension, MuleContextAware
+public class AssertModule extends MunitSpringFactoryPostProcessor implements ExpressionLanguageExtension
 {
-    /**
-     * <p>
-     *     For MEL expressions
-     * </p>
-     */
-    private MuleContext muleContext;
+
 
     private static String wrapMessage(String message)
     {
@@ -254,8 +249,5 @@ public class AssertModule extends MunitSpringFactoryPostProcessor implements Exp
     }
 
 
-    @Override
-    public void setMuleContext(MuleContext context) {
-        this.muleContext = context;
-    }
+
 }
