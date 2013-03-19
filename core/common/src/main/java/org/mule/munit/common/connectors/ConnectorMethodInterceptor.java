@@ -7,9 +7,13 @@ import java.lang.reflect.Method;
 
 
 /**
- * <p>Every time a method of a @see #org.mule.api.transport.Connector implementation is called this class is called. @see{MethodInterceptor}</p>
+ * <p>
+ *     Every time a method of a @see #org.mule.api.transport.Connector implementation is called this class is called. @see{MethodInterceptor}
+ * </p>
  *
- * <p>This class only acts when the method is connect</p>
+ * <p>
+ *     This class only acts when the method is connect
+ * </p>
  *
  * @author Federico, Fernando
  * @version since 3.3.2
@@ -17,7 +21,9 @@ import java.lang.reflect.Method;
 public class ConnectorMethodInterceptor implements MethodInterceptor {
 
     /**
-     * <p>The method of the <code>Connector</code> implementation that is wanted to be mocked</p>
+     * <p>
+     *     The method of the <code>Connector</code> implementation that is wanted to be mocked
+     * </p>
      */
     private static final String METHOD_TO_INTERCEPT = "connect";
 

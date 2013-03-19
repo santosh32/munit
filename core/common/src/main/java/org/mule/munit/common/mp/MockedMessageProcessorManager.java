@@ -3,8 +3,10 @@ package org.mule.munit.common.mp;
 import java.util.*;
 
 /**
- * <p>The Class that manages the mocking process. Gets the behaviors, stores the message processor calls and stores
- * the spy process</p>
+ * <p>
+ *     The Class that manages the mocking process. Gets the behaviors, stores the message processor calls and stores
+ * the spy process
+ * </p>
  *
  * @author Federico, Fernando
  * @version since 3.3.2
@@ -13,23 +15,31 @@ public class MockedMessageProcessorManager {
     public static String ID = "_muleMockMpManager";
 
     /**
-     * <p>These are the behaviors expected for different message processor mocks</p>
+     * <p>
+     *     These are the behaviors expected for different message processor mocks
+     * </p>
      */
     protected List<MockedMessageProcessorBehavior> behaviors = new ArrayList<MockedMessageProcessorBehavior>();
 
     /**
-     * <p>These are the real calls of the message processors.</p>
+     * <p>
+     *     These are the real calls of the message processors.
+     * </p>
      */
     protected List<MessageProcessorCall> calls = new LinkedList<MessageProcessorCall>();
 
     /**
-     * <p>The spy process per message processor</p>
+     * <p>
+     *     The spy process per message processor
+     * </p>
      */
     protected Map<MessageProcessorId, SpyAssertion> spyAssertions = new HashMap<MessageProcessorId, SpyAssertion>();
 
 
     /**
-     * <p>Reset all the status</p>
+     * <p>
+     *     Reset all the status
+     * </p>
      */
     public void reset(){
         behaviors.clear();
@@ -38,7 +48,10 @@ public class MockedMessageProcessorManager {
     }
 
     /**
-     * <p>Retrieve all the execute calls for a message processor that satisfies the attribute matchers</p>
+     * <p>
+     *     Retrieve all the execute calls for a message processor that satisfies the attribute matchers
+     * </p>
+     *
      * @param mpId The Message processor Id
      * @param attributesMatchers The attributes that the message processor must match
      * @return The List of message processor calls
@@ -56,7 +69,10 @@ public class MockedMessageProcessorManager {
     }
 
     /**
-     * <p>Gets the best matching Behavior. The best matching behavior is the one that mostly matches the attributes</p>
+     * <p>
+     *     Gets the best matching Behavior. The best matching behavior is the one that mostly matches the attributes
+     * </p>
+     *
      * @param messageProcessorCall The comparing call
      * @return The best matching behavior
      */

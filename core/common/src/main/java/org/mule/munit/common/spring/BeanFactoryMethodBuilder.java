@@ -7,7 +7,9 @@ import java.util.Map;
 
 
 /**
- * <p>Sets the constructor information to a bean definition</p>
+ * <p>
+ *     Sets the constructor information to a bean definition
+ * </p>
  *
  * @author Federico, Fernando
  * @version since 3.3.2
@@ -15,20 +17,30 @@ import java.util.Map;
 public class BeanFactoryMethodBuilder {
 
     /**
-     * <p>The bean definition that has to be modified</p>
+     * <p>
+     *     The bean definition that has to be modified
+     * </p>
      */
     private AbstractBeanDefinition beanDefinition;
 
 
     /**
-     * <p>Constructor. Sets the factory method name and the bean factory.</p>
+     * <p>
+     *     Constructor. Sets the factory method name and the bean factory.
+     * </p>
      *
      * @param beanDefinition
-     *        <p>The bean definition that has to be modified</p>
+     *        <p>
+     *            The bean definition that has to be modified
+     *        </p>
      * @param factoryMethodName
-     *        <p>The factory method name</p>
+     *        <p>
+     *            The factory method name
+     *        </p>
      * @param beanFactoryName
-     *        <p>The bean factory name</p>
+     *        <p>
+     *            The bean factory name
+     *        </p>
      */
     public BeanFactoryMethodBuilder(AbstractBeanDefinition beanDefinition,
                                     String factoryMethodName,
@@ -40,13 +52,19 @@ public class BeanFactoryMethodBuilder {
     }
 
     /**
-     * <p>Sets the constructor arguments to the bean definition</p>
+     * <p>
+     *     Sets the constructor arguments to the bean definition
+     * </p>
      *
      * @param constructorArguments
-     *      <p>The constructor arguments for the bean definition</p>
+     *      <p>
+     *          The constructor arguments for the bean definition
+     *      </p>
      *
      * @return
-     *      <p>The bean definition with the one it was created.</p>
+     *      <p>
+     *          The bean definition with the one it was created.
+     *      </p>
      */
     public AbstractBeanDefinition withConstructorArguments(Object... constructorArguments) {
         int argumentsSize = constructorArguments.length;

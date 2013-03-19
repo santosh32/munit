@@ -16,7 +16,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <p>It intercept the @see MessageProcessor#process() calls</p>
+ * <p>
+ *     It intercept the {@link MessageProcessor#process(org.mule.api.MuleEvent)}  calls
+ * </p>
  *
  * @author Federico, Fernando
  * @version since 3.3.2

@@ -1,7 +1,9 @@
 package org.mule.munit.common.matchers;
 
 /**
- * <p>Matcher to check not null</p>
+ * <p>
+ *     Matcher to check not null
+ * </p>
  *
  * Usage: <code>new NotNullMatcher().match(null)</code> will return false
  *

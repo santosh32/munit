@@ -1,7 +1,9 @@
 package org.mule.munit.common.mp;
 
 /**
- * <p>The representation of a Message Processor Id</p>
+ * <p>
+ *     The representation of a Message Processor Id
+ * </p>
  *
  * @author Federico, Fernando
  * @version since 3.3.2
@@ -9,12 +11,16 @@ package org.mule.munit.common.mp;
 public class MessageProcessorId {
 
     /**
-     * <p>The Name of the message processor. For example, the name of jira:create-group is create-group</p>
+     * <p>
+     *     The Name of the message processor. For example, the name of jira:create-group is create-group
+     * </p>
      */
     private String name;
 
     /**
-     * <p>The namespace of the message processor. For example, the namespace of jira:create-group is jira</p>
+     * <p>
+     *     The namespace of the message processor. For example, the namespace of jira:create-group is jira
+     * </p>
      */
     private String namespace;
 

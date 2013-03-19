@@ -8,7 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <p>The representation of a Message Processor call</p>
+ * <p>
+ *     The representation of a Message Processor call
+ * </p>
  *
  * @author Federico, Fernando
  * @version since 3.3.2
@@ -16,18 +18,24 @@ import java.util.Map;
 public class MessageProcessorCall {
 
     /**
-     * <p>The Id of the message processor</p>
+     * <p>
+     *     The Id of the message processor
+     * </p>
      */
     private MessageProcessorId messageProcessorId;
 
     /**
-     * <p>The xml attributes of the message processor with its object (the attribute resolution)</p>
+     * <p>
+     *     The xml attributes of the message processor with its object (the attribute resolution)
+     * </p>
      */
     private Map<String, Object> attributes = new HashMap<String, Object>();
 
 
     /**
-     * The flow Construct of the message processor, can be null
+     * <p>
+     *     The flow Construct of the message processor, can be null
+     * </p>
      */
     private FlowConstruct flowConstruct;
     private String fileName;
@@ -50,9 +58,14 @@ public class MessageProcessorCall {
     }
 
     /**
-     * <p>Defines if this call is of a particular message processor</p>
+     * <p>
+     *     Defines if this call is of a particular message processor
+     * </p>
      *
-     * @param id The id of the message processor
+     * @param id
+     * <p>
+     *           The id of the message processor
+     * </p>
      * @return true/false
      */
     public boolean isCallOf(MessageProcessorId id) {
@@ -61,8 +74,11 @@ public class MessageProcessorCall {
 
 
     /**
-     * <p>If the current call matches exactly with the call sent by parameter. Then it returns the number of attributes</p>
-     * <p>of the current call, else returns -1</p>
+     * <p>
+     *     If the current call matches exactly with the call sent by parameter. Then it returns the number of attributes
+     *     of the current call, else returns -1
+     * </p>
+     *
      * @param call The Message processor call that we need to compare to.
      * @return The total number of matching attributes or -1
      */

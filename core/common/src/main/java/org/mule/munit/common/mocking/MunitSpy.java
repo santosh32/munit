@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>This class is a Munit Tool to create Message processor spiers</p>
+ * <p>
+ *     This class is a Munit Tool to create Message processor spiers
+ * </p>
  *
  * @author Federico, Fernando
  * @version since 3.3.2
@@ -24,12 +26,18 @@ public class MunitSpy extends MunitMockingTool {
     }
 
     /**
-     * <p>Defines the name of the message processor to spy</p>
+     * <p>
+     *     Defines the name of the message processor to spy
+     * </p>
      *
      * @param name
-     *      <p>The name of the message processor to spy</p>
+     *      <p>
+     *          The name of the message processor to spy
+     *      </p>
      * @return
-     *      <p>Itself</p>
+     *      <p>
+     *          Itself
+     *      </p>
      */
     public MunitSpy spyMessageProcessor(String name) {
         this.messageProcessorName = name;
@@ -37,12 +45,18 @@ public class MunitSpy extends MunitMockingTool {
     }
 
     /**
-     * <p>Defines the namespace of the message processor to spy</p>
+     * <p>
+     *     Defines the namespace of the message processor to spy
+     * </p>
      *
      * @param namespace
-     *      <p>The namespace of the message processor to spy</p>
+     *      <p>
+     *          The namespace of the message processor to spy
+     *      </p>
      * @return
-     *      <p>Itself</p>
+     *      <p>
+     *          Itself
+     *      </p>
      */
     public MunitSpy ofNamespace(String namespace) {
         this.messageProcessorNamespace = namespace;
@@ -50,11 +64,17 @@ public class MunitSpy extends MunitMockingTool {
     }
 
     /**
-     * <p>The process to run before and after the message processor</p>
+     * <p>
+     *     The process to run before and after the message processor
+     * </p>
      * @param beforeCall
-     *      <p>Processes to run before the message processor call</p>
+     *      <p>
+     *          Processes to run before the message processor call
+     *      </p>
      * @param afterCall
-     *      <p>Processes to run after the message processor call</p>
+     *      <p>
+     *          Processes to run after the message processor call
+     *      </p>
      *
      */
     public void running(List<SpyProcess> beforeCall, List<SpyProcess> afterCall){

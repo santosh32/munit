@@ -13,9 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>This class is a Munit Tool to create Endpoint mocks</p>
+ * <p>
+ *     This class is a Munit Tool to create Endpoint mocks
+ * </p>
  *
- * <p>This is though as a fluent pattern implementation</p>
+ * <p>
+ *     This is though as a fluent pattern implementation
+ * </p>
  *
  * <p>Usage:</p>
  *
@@ -29,17 +33,23 @@ import java.util.List;
 public class EndpointMocker {
 
     /**
-     * <p>The mule context</p>
+     * <p>
+     *     The mule context
+     * </p>
      */
     private MuleContext muleContext;
 
     /**
-     * <p>The endpoint address. The address is used to identify the endpoint</p>
+     * <p>
+     *     The endpoint address. The address is used to identify the endpoint
+     * </p>
      */
     private String address;
 
     /**
-     * <p>The processes for Spying the entry of the inbound endpoint</p>
+     * <p>
+     *     The processes for Spying the entry of the inbound endpoint
+     * </p>
      */
     private List<SpyProcess> process;
 
@@ -48,13 +58,19 @@ public class EndpointMocker {
     }
 
     /**
-     * <p>Defines which endpoint to use based on the endpoint address</p>
+     * <p>
+     *     Defines which endpoint to use based on the endpoint address
+     * </p>
 
      * @param address
-     *      <p>The endpoint identification</p>
+     *      <p>
+     *          The endpoint identification
+     *      </p>
 
      * @return
-     *      <p>The EndpointMocker object</p>
+     *      <p>
+     *          The EndpointMocker object
+     *      </p>
      */
     public EndpointMocker expectEndpointWithAddress(String address){
         this.address = address;
@@ -62,12 +78,18 @@ public class EndpointMocker {
     }
 
     /**
-     * <p>Adds the spying processes to be consider when executing the endpoint</p>
+     * <p>
+     *     Adds the spying processes to be consider when executing the endpoint
+     * </p>
      *
      * @param process
-     *      <p>The spying processes</p>
+     *      <p>
+     *          The spying processes
+     *      </p>
      * @return
-     *      <p>The EndpointMocker object</p>
+     *      <p>
+     *          The EndpointMocker object
+     *      </p>
      */
     public EndpointMocker withIncomingMessageSatisfying(List<SpyProcess> process){
         this.process = process;
@@ -76,10 +98,14 @@ public class EndpointMocker {
     }
 
     /**
-     * <p>Determines what value must the endpoint return</p>
+     * <p>
+     *     Determines what value must the endpoint return
+     * </p>
      *
      * @param message
-     *      <p>The @see #MuleMessage to return</p>
+     *      <p>
+     *          The {@link MuleMessage} to return
+     *      </p>
      */
     public void toReturn(MuleMessage message){
         OutboundBehavior behavior = new OutboundBehavior(message, createMessageProcessorFromSpy(process));

@@ -11,7 +11,9 @@ import org.mule.munit.common.mp.MockedMessageProcessorManager;
 import java.util.Map;
 
 /**
- * <p>This class is a Munit Tool to create Message processor mocks</p>
+ * <p>
+ *     This class is a Munit Tool to create Message processor mocks
+ * </p>
  *
  * <p>Usage:</p>
  *
@@ -30,13 +32,19 @@ public class MessageProcessorMocker extends MunitMockingTool {
     }
 
     /**
-     * <p>Defines the name of the message processor to be mocked</p>
+     * <p>
+     *     Defines the name of the message processor to be mocked
+     * </p>
      *
      * @param name
-     *      <p>The name of the message processor to be mocked</p>
+     *      <p>
+     *          The name of the message processor to be mocked
+     *      </p>
      *
      * @return
-     *      <p>The MessageProcessorMocker</p>
+     *      <p>
+     *          The MessageProcessorMocker
+     *      </p>
      */
     public MessageProcessorMocker when(String name) {
         this.messageProcessorName = name;
@@ -44,13 +52,19 @@ public class MessageProcessorMocker extends MunitMockingTool {
     }
 
     /**
-     * <p>Defines the namespace of the message processor to be mocked</p>
+     * <p>
+     *     Defines the namespace of the message processor to be mocked
+     * </p>
      *
      * @param namespace
-     *      <p>The namespace of the message processor to be mocked</p>
+     *      <p>
+     *          The namespace of the message processor to be mocked
+     *      </p>
      *
      * @return
-     *      <p>The MessageProcessorMocker</p>
+     *      <p>
+     *          The MessageProcessorMocker
+     *      </p>
      */
     public MessageProcessorMocker ofNamespace(String namespace) {
         this.messageProcessorNamespace = namespace;
@@ -58,13 +72,19 @@ public class MessageProcessorMocker extends MunitMockingTool {
     }
 
     /**
-     * <p>Defines the attributes of the message processor to be mocked</p>
+     * <p>
+     *     Defines the attributes of the message processor to be mocked
+     * </p>
      *
      * @param attributes
-     *      <p>The attributes of the message processor to be mocked</p>
+     *      <p>
+     *          The attributes of the message processor to be mocked
+     *      </p>
      *
      * @return
-     *      <p>The MessageProcessorMocker</p>
+     *      <p>
+     *          The MessageProcessorMocker
+     *      </p>
      */
     public MessageProcessorMocker withAttributes(Map<String, Object> attributes) {
         this.messageProcessorAttributes = attributes;
@@ -72,10 +92,14 @@ public class MessageProcessorMocker extends MunitMockingTool {
     }
 
     /**
-     * <p>Defines what @see #MuleMessage to return after the message processor call</p>
+     * <p>
+     *     Defines what {@link MuleMessage} to return after the message processor call
+     * </p>
      *
      * @param message
-     *      <p>The MuleMessage to return </p>
+     *      <p>
+     *          The MuleMessage to return
+     *      </p>
      */
     public void thenReturn(MuleMessage message) {
         validateMessageProcessorName();
@@ -91,7 +115,9 @@ public class MessageProcessorMocker extends MunitMockingTool {
      *     Defines that the message processor must throw an exception when called.
      * </p>
      * @param exception
-     * <p>The exception to be throw</p>
+     * <p>
+     *     The exception to be throw
+     * </p>
      */
     public void thenThrow(Throwable exception) {
         validateMessageProcessorName();
