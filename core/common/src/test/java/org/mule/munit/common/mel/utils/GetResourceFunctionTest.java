@@ -1,9 +1,11 @@
-package org.mule.munit.functions;
+package org.mule.munit.common.mel.utils;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.mule.munit.common.mel.utils.GetResourceFunction;
+import org.mule.munit.common.mel.utils.MunitResource;
 
 /**
  * @author Javier Casal

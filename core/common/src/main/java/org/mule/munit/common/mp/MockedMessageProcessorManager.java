@@ -1,8 +1,5 @@
 package org.mule.munit.common.mp;
 
-import org.apache.commons.collections.ListUtils;
-import org.mockito.internal.util.ListUtil;
-
 import java.util.*;
 
 /**

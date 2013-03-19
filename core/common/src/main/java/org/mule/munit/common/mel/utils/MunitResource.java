@@ -1,10 +1,10 @@
-package org.mule.munit.functions;
-
-import java.io.IOException;
-import java.io.InputStream;
+package org.mule.munit.common.mel.utils;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * <p>

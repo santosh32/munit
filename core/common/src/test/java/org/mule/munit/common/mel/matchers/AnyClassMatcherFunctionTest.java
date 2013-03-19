@@ -1,4 +1,4 @@
-package org.mule.munit.functions;
+package org.mule.munit.common.mel.matchers;
 
 import org.junit.Test;
 import org.mule.munit.common.matchers.Matcher;

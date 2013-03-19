@@ -29,7 +29,7 @@
                 <check>
                     <branchRate>70</branchRate>
                     <lineRate>70</lineRate>
-                    <haltOnFailure>false</haltOnFailure>
+                    <haltOnFailure>true</haltOnFailure>
                     <totalBranchRate>70</totalBranchRate>
                     <totalLineRate>70</totalLineRate>
                     <packageLineRate>70</packageLineRate>

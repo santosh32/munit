@@ -21,7 +21,10 @@
             <groupId>org.mule.modules</groupId>
             <artifactId>mule-module-spring-config</artifactId>
         </dependency>
-
+         <dependency>
+             <groupId>junit</groupId>
+             <artifactId>junit-dep</artifactId>
+         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -44,6 +47,8 @@
             <artifactId>common</artifactId>
             <version>${project.version}</version>
         </dependency>
+
     </dependencies>
+
 
 </project>

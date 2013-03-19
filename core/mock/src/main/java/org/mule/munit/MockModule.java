@@ -10,14 +10,13 @@ import org.mule.api.annotations.Module;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.param.Optional;
 import org.mule.api.context.MuleContextAware;
-import org.mule.api.el.ExpressionLanguageContext;
-import org.mule.api.el.ExpressionLanguageExtension;
 import org.mule.api.processor.MessageProcessor;
-import org.mule.api.transport.PropertyScope;
 import org.mule.munit.common.mocking.*;
-import org.mule.munit.functions.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.mule.munit.common.MunitCore.buildMuleStackTrace;
 
@@ -31,7 +30,7 @@ import static org.mule.munit.common.MunitCore.buildMuleStackTrace;
  * @version since 3.3.2
  */
 @Module(name="mock", schemaVersion="3.3")
-public class MockModule implements MuleContextAware, ExpressionLanguageExtension
+public class MockModule implements MuleContextAware
 {
     private MuleContext muleContext;
 
@@ -195,32 +194,9 @@ public class MockModule implements MuleContextAware, ExpressionLanguageExtension
     }
 
 
-
     @Override
     public void setMuleContext(MuleContext muleContext) {
         this.muleContext = muleContext;
-    }
-
-    @Override
-    public void configureContext(ExpressionLanguageContext context) {
-        context.declareFunction("eq", new EqMatcherFunction());
-        context.declareFunction("anyBoolean", new AnyMatcherFunction(Boolean.class));
-        context.declareFunction("anyByte", new AnyMatcherFunction(Byte.class));
-        context.declareFunction("anyInt", new AnyMatcherFunction(Integer.class));
-        context.declareFunction("anyDouble", new AnyMatcherFunction(Double.class));
-        context.declareFunction("anyFloat", new AnyMatcherFunction(Float.class));
-        context.declareFunction("anyShort", new AnyMatcherFunction(Short.class));
-        context.declareFunction("anyObject", new AnyMatcherFunction(Object.class));
-        context.declareFunction("anyString", new AnyMatcherFunction(String.class));
-        context.declareFunction("anyList", new AnyMatcherFunction(List.class));
-        context.declareFunction("anySet", new AnyMatcherFunction(Set.class));
-        context.declareFunction("anyMap", new AnyMatcherFunction(Map.class));
-        context.declareFunction("anyCollection", new AnyMatcherFunction(Collection.class));
-        context.declareFunction("isNull", new NullMatcherFunction());
-        context.declareFunction("isNotNull", new NotNullMatcherFunction());
-        context.declareFunction("any", new AnyClassMatcherFunction());
-        context.declareFunction("resultOfScript", new FlowResultFunction(muleContext));
-		context.declareFunction("getResource", new GetResourceFunction());
     }
 
    

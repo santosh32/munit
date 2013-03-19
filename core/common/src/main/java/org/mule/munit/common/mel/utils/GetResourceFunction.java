@@ -1,9 +1,9 @@
-package org.mule.munit.functions;
-
-import java.io.File;
+package org.mule.munit.common.mel.utils;
 
 import org.mule.api.el.ExpressionLanguageContext;
 import org.mule.api.el.ExpressionLanguageFunction;
+
+import java.io.File;
 
 /**
  * <p>

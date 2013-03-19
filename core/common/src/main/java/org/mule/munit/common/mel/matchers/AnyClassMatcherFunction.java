@@ -1,4 +1,4 @@
-package org.mule.munit.functions;
+package org.mule.munit.common.mel.matchers;
 
 import org.mule.api.el.ExpressionLanguageContext;
 import org.mule.api.el.ExpressionLanguageFunction;

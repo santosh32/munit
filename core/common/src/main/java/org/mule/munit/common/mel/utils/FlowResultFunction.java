@@ -1,4 +1,4 @@
-package org.mule.munit.functions;
+package org.mule.munit.common.mel.utils;
 
 import com.google.common.base.Preconditions;
 import org.mule.api.MuleContext;
