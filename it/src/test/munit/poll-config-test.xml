@@ -4,10 +4,10 @@
       xmlns:script="http://www.mulesoft.org/schema/mule/scripting"
       xmlns:mock="http://www.mulesoft.org/schema/mule/mock"
       xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
-      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/corehttp://www.mulesoft.org/schema/mule/core/3.2/mule.xsd
-    http://www.mulesoft.org/schema/mule/munithttp://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+      xsi:schemaLocation="
+            http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
             http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
-            http://www.mulesoft.org/schema/mule/mock http://www.mulesoft.org/schema/mule/mock/curren/mule-mock.xsd">
+            http://www.mulesoft.org/schema/mule/mock http://www.mulesoft.org/schema/mule/mock/current/mule-mock.xsd">
 
     <munit:config />
     <mock:config/>
