@@ -12,7 +12,7 @@
         http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.2/mule.xsd
         http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
         http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/3.2/mule-xml.xsd
-        http://www.mulesoft.org/schema/mule/mock http://www.mulesoft.org/schema/mule/mock/3.3/mule-mock.xsd
+        http://www.mulesoft.org/schema/mule/mock http://www.mulesoft.org/schema/mule/mock/current/mule-mock.xsd
      http://www.mulesoft.org/schema/mule/mclient http://www.mulesoft.org/schema/mule/mclient/current/mule-mclient.xsd">
 
 
