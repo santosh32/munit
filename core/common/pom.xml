@@ -40,11 +40,6 @@
             <artifactId>reflections</artifactId>
             <version>0.9.8</version>
         </dependency>
-        <dependency>
-            <groupId>org.mule.modules</groupId>
-            <artifactId>mule-module-hamcrest</artifactId>
-            <version>1.0</version>
-        </dependency>
     </dependencies>
 
 </project>

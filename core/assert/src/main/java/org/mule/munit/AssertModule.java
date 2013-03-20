@@ -1,13 +1,13 @@
 package org.mule.munit;
 
 
-import org.mule.api.MuleContext;
 import org.mule.api.MuleMessage;
-import org.mule.api.context.MuleContextAware;
 import org.mule.api.el.ExpressionLanguageContext;
 import org.mule.api.el.ExpressionLanguageExtension;
+import org.mule.api.transport.PropertyScope;
 import org.mule.munit.common.endpoint.MunitSpringFactoryPostProcessor;
 import org.mule.munit.mel.assertions.*;
+import org.mule.munit.mel.assertions.MessageHasElementAssertionCommand;
 import org.mule.munit.mel.matchers.*;
 import org.mule.munit.mel.utils.FlowResultFunction;
 import org.mule.munit.mel.utils.GetResourceFunction;
@@ -19,9 +19,6 @@ import java.util.Map;
 import java.util.Set;
 
 import static junit.framework.Assert.assertEquals;
-import static org.mule.module.hamcrest.message.AttachmentMatcher.hasInboundAttachment;
-import static org.mule.module.hamcrest.message.PropertyMatcher.*;
-import static org.mule.module.hamcrest.message.PropertyMatcher.hasInvocationProperty;
 
 /**
  * <p>Module to assert payload's results</p>
@@ -139,49 +136,53 @@ public class AssertModule extends MunitSpringFactoryPostProcessor implements Exp
         context.declareFunction("messageHasPropertyInAnyScopeCalled",  new MessageHasElementAssertionMelFunction(new MessageHasElementAssertionCommand(){
             @Override
             public boolean messageHas(String param, MuleMessage muleMessage) {
-                return hasPropertyInAnyScope(param).matches(muleMessage);
+                boolean contains = false;
+                for ( PropertyScope scope : PropertyScope.ALL_SCOPES){
+                    contains = contains || (muleMessage.getProperty(param, scope) != null);
+                }
+                return contains;
             }
         }));
 
         context.declareFunction("messageHasInboundPropertyCalled",  new MessageHasElementAssertionMelFunction(new MessageHasElementAssertionCommand(){
             @Override
             public boolean messageHas(String param, MuleMessage muleMessage) {
-                return hasInboundProperty(param).matches(muleMessage);
+                return muleMessage.getInboundProperty(param) != null;
             }
         }));
 
         context.declareFunction("messageHasOutboundPropertyCalled",  new MessageHasElementAssertionMelFunction(new MessageHasElementAssertionCommand(){
             @Override
             public boolean messageHas(String param, MuleMessage muleMessage) {
-                return hasOutboundProperty(param).matches(muleMessage);
+                return muleMessage.getOutboundProperty(param) != null;
             }
         }));
 
         context.declareFunction("messageHasSessionPropertyCalled",  new MessageHasElementAssertionMelFunction(new MessageHasElementAssertionCommand(){
             @Override
             public boolean messageHas(String param, MuleMessage muleMessage) {
-                return hasSessionProperty(param).matches(muleMessage);
+                return muleMessage.getProperty(param, PropertyScope.SESSION) != null;
             }
         }));
 
         context.declareFunction("messageHasInvocationPropertyCalled",  new MessageHasElementAssertionMelFunction(new MessageHasElementAssertionCommand(){
             @Override
             public boolean messageHas(String param, MuleMessage muleMessage) {
-                return hasInvocationProperty(param).matches(muleMessage);
+                return muleMessage.getInvocationProperty(param) != null;
             }
         }));
 
         context.declareFunction("messageHasInboundAttachmentCalled",  new MessageHasElementAssertionMelFunction(new MessageHasElementAssertionCommand(){
             @Override
             public boolean messageHas(String param, MuleMessage muleMessage) {
-                return hasInboundAttachment(param).matches(muleMessage);
+                return muleMessage.getInboundAttachment(param) != null;
             }
         }));
 
         context.declareFunction("messageHasOutboundAttachmentCalled",  new MessageHasElementAssertionMelFunction(new MessageHasElementAssertionCommand(){
             @Override
             public boolean messageHas(String param, MuleMessage muleMessage) {
-                return hasInboundAttachment(param).matches(muleMessage);
+                return muleMessage.getOutboundAttachment(param) != null;
             }
         }));
 

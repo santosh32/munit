@@ -3,6 +3,7 @@ package org.mule.munit.mel.assertions;
 import org.junit.Test;
 import org.mule.api.MuleMessage;
 import org.mule.api.el.ExpressionLanguageContext;
+import org.mule.munit.mel.assertions.MessageHasElementAssertionCommand;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
