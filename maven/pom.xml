@@ -4,7 +4,7 @@
     <parent>
         <artifactId>munit</artifactId>
         <groupId>org.mule</groupId>
-        <version>3.3.2-M4-SNAPSHOT</version>
+        <version>3.3.2-M5-SNAPSHOT</version>
     </parent>
     <groupId>org.mule.munit</groupId>
     <artifactId>tools</artifactId>

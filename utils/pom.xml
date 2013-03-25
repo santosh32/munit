@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mule.munit.utils</groupId>
     <artifactId>parent</artifactId>
-    <version>3.3.2-M4-SNAPSHOT</version>
+    <version>3.3.2-M5-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Utils for integration testing</name>
@@ -20,8 +20,8 @@
     </modules>
 
     <properties>
-        <mule.version>3.3.1</mule.version>
-        <mule.devkit.version>3.3.1</mule.devkit.version>
+        <mule.version>3.3.2</mule.version>
+        <mule.devkit.version>3.3.2</mule.devkit.version>
         <junit.version>4.9</junit.version>
         <mockito.version>1.8.2</mockito.version>
         <skip.javadoc>true</skip.javadoc>
@@ -261,6 +261,10 @@
             <id>codehaus-releases</id>
             <name>CodeHaus Releases</name>
             <url>http://repository.codehaus.org/</url>
+        </repository>
+        <repository>
+            <id>mule-ee-releases</id>
+            <url>http://dev.ee.mulesource.com/repository/content/repositories/releases/</url>
         </repository>
 
     </repositories>
