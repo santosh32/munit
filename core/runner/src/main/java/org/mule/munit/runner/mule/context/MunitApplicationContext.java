@@ -1,6 +1,7 @@
 package org.mule.munit.runner.mule.context;
 
 import org.mule.api.MuleContext;
+import org.mule.api.config.MuleProperties;
 import org.mule.config.ConfigResource;
 import org.mule.config.spring.MissingParserProblemReporter;
 import org.mule.config.spring.MuleApplicationContext;
@@ -10,6 +11,7 @@ import org.mule.munit.common.endpoint.MunitSpringFactoryPostProcessor;
 import org.mule.munit.common.mp.MunitMessageProcessorInterceptorFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.beans.factory.support.RootBeanDefinition;
@@ -59,12 +61,16 @@ public class MunitApplicationContext extends MuleApplicationContext{
         }
         finally
         {
-            MunitSpringFactoryPostProcessor bean = beanFactory.getBean(MunitSpringFactoryPostProcessor.class);
-            bean.postProcessBeanFactory(beanFactory);
 
             getCurrentMuleContext().remove();
         }
     }
 
 
+    @Override
+    protected void prepareBeanFactory(ConfigurableListableBeanFactory beanFactory) {
+        super.prepareBeanFactory(beanFactory);
+        MunitSpringFactoryPostProcessor bean = beanFactory.getBean(MunitSpringFactoryPostProcessor.class);
+        bean.postProcessBeanFactory(beanFactory);
+    }
 }
