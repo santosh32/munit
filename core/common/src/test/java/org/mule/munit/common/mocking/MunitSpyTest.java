@@ -7,7 +7,7 @@ import org.mule.api.MuleEvent;
 import org.mule.api.MuleException;
 import org.mule.api.processor.MessageProcessor;
 import org.mule.api.registry.MuleRegistry;
-import org.mule.munit.common.mp.MessageProcessorId;
+import org.mule.modules.interceptor.processors.MessageProcessorId;
 import org.mule.munit.common.mp.MockedMessageProcessorManager;
 import org.mule.munit.common.mp.SpyAssertion;
 

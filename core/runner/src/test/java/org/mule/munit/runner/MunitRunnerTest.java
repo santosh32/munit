@@ -9,7 +9,7 @@ import org.mule.api.registry.MuleRegistry;
 import org.mule.munit.config.MunitAfterSuite;
 import org.mule.munit.config.MunitBeforeSuite;
 import org.mule.munit.config.MunitTestFlow;
-import org.mule.munit.runner.output.*;
+import org.mule.munit.runner.output.TestOutputHandler;
 
 import java.util.Arrays;
 import java.util.List;

@@ -2,8 +2,8 @@ package org.mule.munit.mel.matchers;
 
 import org.mule.api.el.ExpressionLanguageContext;
 import org.mule.api.el.ExpressionLanguageFunction;
-import org.mule.munit.common.matchers.AnyClassMatcher;
-import org.mule.munit.common.matchers.DumbMatcher;
+import org.mule.modules.interceptor.matchers.AnyClassMatcher;
+import org.mule.modules.interceptor.matchers.DumbMatcher;
 
 /**
  * <p>

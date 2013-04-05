@@ -5,8 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mule.api.MuleContext;
 import org.mule.api.registry.MuleRegistry;
-import org.mule.munit.common.mp.MessageProcessorCall;
-import org.mule.munit.common.mp.MessageProcessorId;
+import org.mule.modules.interceptor.processors.MessageProcessorCall;
+import org.mule.modules.interceptor.processors.MessageProcessorId;
 import org.mule.munit.common.mp.MockedMessageProcessorManager;
 
 import java.util.ArrayList;

@@ -18,6 +18,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.mule.modules.interceptor.processors.MessageProcessorId.getName;
+import static org.mule.modules.interceptor.processors.MessageProcessorId.getNamespace;
 import static org.mule.munit.common.MunitCore.buildMuleStackTrace;
 
 /**
@@ -267,23 +269,6 @@ public class MockModule implements MuleContextAware
         return attrs;
     }
 
-    private String getNamespace(String when) {
-        String[] split = when.split(":");
-        if (split.length > 1) {
-            return split[0];
-        }
-
-        return "mule";
-    }
-
-    private String getName(String when) {
-        String[] split = when.split(":");
-        if (split.length > 1) {
-            return split[1];
-        }
-
-        return split[0];
-    }
 
     private List<SpyProcess> createSpyAssertion(final List<MessageProcessor> messageProcessorsFrom) {
         List<SpyProcess> mps = new ArrayList<SpyProcess>();

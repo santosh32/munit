@@ -2,12 +2,12 @@ package org.mule.munit.mel.matchers;
 
 import org.mule.api.el.ExpressionLanguageContext;
 import org.mule.api.el.ExpressionLanguageFunction;
-import org.mule.munit.common.matchers.NullMatcher;
+import org.mule.modules.interceptor.matchers.NullMatcher;
 
 
 /**
  * <p>
- *     MEL function for {@link org.mule.munit.common.matchers.NullMatcher}
+ *     MEL function for {@link NullMatcher}
  *
  *     usage:
  *

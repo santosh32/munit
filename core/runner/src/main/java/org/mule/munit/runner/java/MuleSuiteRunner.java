@@ -10,7 +10,8 @@ import org.junit.runner.notification.RunNotifier;
 import org.mule.api.MuleContext;
 import org.mule.munit.runner.MuleContextManager;
 import org.mule.munit.runner.MunitRunner;
-import org.mule.munit.runner.output.*;
+import org.mule.munit.runner.output.DefaultOutputHandler;
+
 import java.lang.reflect.Method;
 
 

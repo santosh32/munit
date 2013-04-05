@@ -3,13 +3,10 @@ package org.mule.munit.mel.assertions;
 import org.junit.Test;
 import org.mule.api.MuleMessage;
 import org.mule.api.el.ExpressionLanguageContext;
-import org.mule.munit.mel.assertions.MessageHasElementAssertionCommand;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * @author Federico, Fernando

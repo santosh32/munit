@@ -3,6 +3,7 @@ package org.mule.munit.common.mp;
 import net.sf.cglib.proxy.MethodInterceptor;
 import org.junit.Test;
 import org.mule.component.simple.EchoComponent;
+import org.mule.modules.interceptor.processors.MessageProcessorId;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 
 import java.util.HashMap;

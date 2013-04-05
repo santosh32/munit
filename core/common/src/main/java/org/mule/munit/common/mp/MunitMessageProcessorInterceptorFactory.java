@@ -2,8 +2,9 @@ package org.mule.munit.common.mp;
 
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
-import org.mule.munit.common.spring.BeanFactoryMethodBuilder;
-import org.mule.munit.common.spring.MethodInterceptorFactory;
+import org.mule.modules.interceptor.processors.MessageProcessorId;
+import org.mule.modules.interceptor.spring.BeanFactoryMethodBuilder;
+import org.mule.modules.interceptor.spring.MethodInterceptorFactory;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 
 import java.util.Map;

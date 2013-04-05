@@ -14,14 +14,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.mule</groupId>
-            <artifactId>mule-core</artifactId>
-        </dependency>
-        <dependency>
+            <artifactId>mule-interceptor-module</artifactId>
             <groupId>org.mule.modules</groupId>
-            <artifactId>mule-module-spring-config</artifactId>
         </dependency>
-
 
         <dependency>
             <groupId>junit</groupId>
@@ -31,15 +26,7 @@
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.mule.tests</groupId>
-            <artifactId>mule-tests-functional</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.reflections</groupId>
-            <artifactId>reflections</artifactId>
-            <version>0.9.8</version>
-        </dependency>
+
     </dependencies>
 
 </project>

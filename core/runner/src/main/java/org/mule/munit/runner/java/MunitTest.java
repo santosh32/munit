@@ -8,7 +8,8 @@ import org.mule.api.MuleException;
 import org.mule.munit.common.MunitCore;
 import org.mule.munit.config.MunitFlow;
 import org.mule.munit.config.MunitTestFlow;
-import org.mule.munit.runner.output.*;
+import org.mule.munit.runner.output.DefaultOutputHandler;
+import org.mule.munit.runner.output.TestOutputHandler;
 import org.mule.tck.MuleTestUtils;
 
 import java.util.List;

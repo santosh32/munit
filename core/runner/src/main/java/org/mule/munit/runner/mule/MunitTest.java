@@ -8,7 +8,7 @@ import org.mule.munit.config.MunitFlow;
 import org.mule.munit.config.MunitTestFlow;
 import org.mule.munit.runner.mule.result.TestResult;
 import org.mule.munit.runner.mule.result.notification.Notification;
-import org.mule.munit.runner.output.*;
+import org.mule.munit.runner.output.TestOutputHandler;
 import org.mule.tck.MuleTestUtils;
 
 import java.io.PrintWriter;

@@ -6,9 +6,10 @@ import org.mule.api.config.MuleProperties;
 import org.mule.api.construct.FlowConstruct;
 import org.mule.api.registry.MuleRegistry;
 import org.mule.api.registry.RegistrationException;
+import org.mule.modules.interceptor.processors.MessageProcessorCall;
 import org.mule.munit.common.endpoint.MockEndpointManager;
-import org.mule.munit.common.mp.MessageProcessorCall;
 import org.mule.munit.common.mp.MockedMessageProcessorManager;
+import org.mule.munit.common.mp.MunitMessageProcessorCall;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,19 +127,19 @@ public class MunitCore {
      */
     public static List<StackTraceElement> buildMuleStackTrace(MuleContext muleContext) {
         MockedMessageProcessorManager manager = (MockedMessageProcessorManager) muleContext.getRegistry().lookupObject(MockedMessageProcessorManager.ID);
-        List<MessageProcessorCall> calls = manager.getCalls();
+        List<MunitMessageProcessorCall> calls = manager.getCalls();
 
         List<StackTraceElement> stackTraceElements = new ArrayList<StackTraceElement>();
 
         StringBuffer stackTrace = new StringBuffer();
-        for (MessageProcessorCall call : calls ){
+        for (MunitMessageProcessorCall call : calls ){
             stackTraceElements.add(0, new StackTraceElement(getFlowConstructName(call), getFullName(call), call.getFileName(), lineNumber(call)));
             stackTrace.insert(0, call.getMessageProcessorId().getFullName());
         }
         return stackTraceElements;
     }
 
-    private static Integer lineNumber(MessageProcessorCall call) {
+    private static Integer lineNumber(MunitMessageProcessorCall call) {
         String lineNumber = call.getLineNumber();
         if ( lineNumber == null ){
             return 0;

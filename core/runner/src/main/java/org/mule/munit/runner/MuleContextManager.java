@@ -5,7 +5,6 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.SimpleLayout;
 import org.mule.api.MuleContext;
-import org.mule.api.MuleException;
 import org.mule.api.config.ConfigurationBuilder;
 import org.mule.api.context.MuleContextBuilder;
 import org.mule.config.DefaultMuleConfiguration;

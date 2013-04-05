@@ -4,7 +4,7 @@ import org.mule.api.MuleContext;
 import org.mule.munit.config.MunitFlow;
 import org.mule.munit.config.MunitTestFlow;
 import org.mule.munit.runner.SuiteBuilder;
-import org.mule.munit.runner.output.*;
+import org.mule.munit.runner.output.TestOutputHandler;
 
 import java.util.List;
 

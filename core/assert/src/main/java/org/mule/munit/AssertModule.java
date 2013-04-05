@@ -7,7 +7,6 @@ import org.mule.api.el.ExpressionLanguageExtension;
 import org.mule.api.transport.PropertyScope;
 import org.mule.munit.common.endpoint.MunitSpringFactoryPostProcessor;
 import org.mule.munit.mel.assertions.*;
-import org.mule.munit.mel.assertions.MessageHasElementAssertionCommand;
 import org.mule.munit.mel.matchers.*;
 import org.mule.munit.mel.utils.FlowResultFunction;
 import org.mule.munit.mel.utils.GetResourceFunction;

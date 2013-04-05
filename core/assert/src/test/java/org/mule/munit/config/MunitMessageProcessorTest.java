@@ -7,10 +7,11 @@ import org.mule.api.expression.ExpressionManager;
 import org.mule.api.lifecycle.InitialisationException;
 import org.mule.api.registry.MuleRegistry;
 import org.mule.api.registry.RegistrationException;
+import org.mule.modules.interceptor.processors.MessageProcessorCall;
+import org.mule.modules.interceptor.processors.MessageProcessorId;
 import org.mule.munit.AssertModule;
-import org.mule.munit.common.mp.MessageProcessorCall;
-import org.mule.munit.common.mp.MessageProcessorId;
 import org.mule.munit.common.mp.MockedMessageProcessorManager;
+import org.mule.munit.common.mp.MunitMessageProcessorCall;
 import org.mule.util.TemplateParser;
 
 import java.util.ArrayList;
@@ -148,9 +149,9 @@ public class MunitMessageProcessorTest {
         }
     }
 
-    private ArrayList<MessageProcessorCall> createCallsForTest() {
-        ArrayList<MessageProcessorCall> calls = new ArrayList<MessageProcessorCall>();
-        calls.add(new MessageProcessorCall(new MessageProcessorId("mp", "nsp")));
+    private ArrayList<MunitMessageProcessorCall> createCallsForTest() {
+        ArrayList<MunitMessageProcessorCall> calls = new ArrayList<MunitMessageProcessorCall>();
+        calls.add(new MunitMessageProcessorCall(new MessageProcessorId("mp", "nsp")));
 
         return calls;
     }

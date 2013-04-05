@@ -8,6 +8,10 @@ import org.mule.api.MuleContext;
 import org.mule.api.MuleEvent;
 import org.mule.api.expression.ExpressionManager;
 import org.mule.api.processor.MessageProcessor;
+import org.mule.modules.interceptor.processors.AbstractMessageProcessorInterceptor;
+import org.mule.modules.interceptor.processors.MessageProcessorBehavior;
+import org.mule.modules.interceptor.processors.MessageProcessorCall;
+import org.mule.modules.interceptor.processors.MessageProcessorId;
 import org.mule.munit.common.MunitCore;
 import org.mule.munit.common.MunitUtils;
 
@@ -23,10 +27,8 @@ import java.util.Map;
  * @author Federico, Fernando
  * @version since 3.3.2
  */
-public class MunitMessageProcessorInterceptor implements MethodInterceptor{
+public class MunitMessageProcessorInterceptor extends AbstractMessageProcessorInterceptor {
 
-    private MessageProcessorId id;
-    private Map<String,String> attributes;
     private String fileName;
     private String lineNumber;
 
@@ -36,11 +38,11 @@ public class MunitMessageProcessorInterceptor implements MethodInterceptor{
 
         MockedMessageProcessorManager manager = getMockedMessageProcessorManager();
 
-        MessageProcessorCall messageProcessorCall = buildCall(event);
+        MunitMessageProcessorCall messageProcessorCall = buildCall(event);
         runSpyBeforeAssertions(manager, event);
 
         registerCall(manager, messageProcessorCall);
-        MockedMessageProcessorBehavior behavior = manager.getBetterMatchingBehavior(messageProcessorCall);
+        MessageProcessorBehavior behavior = manager.getBetterMatchingBehavior(messageProcessorCall);
         if ( behavior != null ){
             if (behavior.getExceptionToThrow() != null) {
                 runSpyAfterAssertions(manager, event);
@@ -57,18 +59,8 @@ public class MunitMessageProcessorInterceptor implements MethodInterceptor{
         return proxy.invokeSuper(obj,args);
     }
 
-    @Override
-    public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
-        Class<?> declaringClass = method.getDeclaringClass();
-        if ( MessageProcessor.class.isAssignableFrom(declaringClass) && method.getName().equals("process") )
-        {
-            return process(obj,args,proxy);
-        }
 
-        return proxy.invokeSuper(obj, args);
-    }
-
-    private void registerCall(MockedMessageProcessorManager manager, MessageProcessorCall messageProcessorCall) {
+    private void registerCall(MockedMessageProcessorManager manager, MunitMessageProcessorCall messageProcessorCall) {
         manager.addCall(messageProcessorCall);
     }
 
@@ -98,18 +90,9 @@ public class MunitMessageProcessorInterceptor implements MethodInterceptor{
         return spyAssertion;
     }
 
-    private MessageProcessorCall buildCall(MuleEvent event) {
-        MessageProcessorCall call = new MessageProcessorCall(id);
-        Map<String, Object> processed = new HashMap<String, Object>();
-        for (Map.Entry<String,String> attrs : attributes.entrySet() ){
-            try{
-                Object evaluate = evaluate(attrs.getValue(), event);
-                processed.put(attrs.getKey(), evaluate);
-            }catch (Throwable t){
-                processed.put(attrs.getKey(), attrs.getValue());
-            }
-        }
-        call.setAttributes(processed);
+    private MunitMessageProcessorCall buildCall(MuleEvent event) {
+        MunitMessageProcessorCall call = new MunitMessageProcessorCall(id);
+        call.setAttributes(getAttributes(event));
         call.setFlowConstruct(event.getFlowConstruct());
         call.setFileName(fileName);
         call.setLineNumber(lineNumber);
@@ -117,33 +100,12 @@ public class MunitMessageProcessorInterceptor implements MethodInterceptor{
     }
 
 
-    private Object evaluate(String elementValue, MuleEvent event) {
-        Object compareTo = elementValue;
-        ExpressionManager expressionManager = getMuleContext().getExpressionManager();
-        if ( expressionManager.isExpression(elementValue)){
-            compareTo = expressionManager.parse(elementValue, event);
-        }
-        else if (!StringUtils.isEmpty(elementValue) ){
-            Object o = getMuleContext().getRegistry().lookupObject(elementValue);
-            if ( o != null ){
-                compareTo = o;
-            }
-        }
-        return compareTo;
-    }
+
+
 
 
     protected MockedMessageProcessorManager getMockedMessageProcessorManager() {
         return ((MockedMessageProcessorManager) getMuleContext().getRegistry().lookupObject(MockedMessageProcessorManager.ID));
-    }
-
-
-    public void setId(MessageProcessorId id) {
-        this.id = id;
-    }
-
-    public void setAttributes(Map<String, String> attributes) {
-        this.attributes = attributes;
     }
 
     public MuleContext getMuleContext() {

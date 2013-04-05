@@ -1,6 +1,6 @@
 package org.mule.munit.mel.assertions;
 
-import org.mule.munit.common.matchers.Matcher;
+import org.mule.modules.interceptor.matchers.Matcher;
 
 
 /**

@@ -12,6 +12,9 @@
          http://www.mulesoft.org/schema/mule/mock http://www.mulesoft.org/schema/mule/mock/current/mule-mock.xsd">
 
 
+    <munit:config/>
+    <mock:config/>
+
     <spring:beans>
         <spring:import resource="mule-config.xml"/>
 
@@ -19,8 +22,7 @@
     </spring:beans>
 
 
-    <munit:config/>
-    <mock:config/>
+
 
     <munit:test name="testingEchoFlow"
                 description="

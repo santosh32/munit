@@ -1,7 +1,6 @@
 package org.mule.munit.runner.mule.context;
 
 import org.mule.config.spring.MuleBeanDefinitionDocumentReader;
-import org.mule.config.spring.MuleHierarchicalBeanDefinitionParserDelegate;
 import org.springframework.beans.factory.xml.BeanDefinitionParserDelegate;
 import org.springframework.beans.factory.xml.XmlReaderContext;
 import org.w3c.dom.Element;

@@ -7,10 +7,11 @@ import org.mule.api.config.MuleProperties;
 import org.mule.api.construct.FlowConstruct;
 import org.mule.api.registry.MuleRegistry;
 import org.mule.api.registry.RegistrationException;
+import org.mule.modules.interceptor.processors.MessageProcessorCall;
+import org.mule.modules.interceptor.processors.MessageProcessorId;
 import org.mule.munit.common.endpoint.MockEndpointManager;
-import org.mule.munit.common.mp.MessageProcessorCall;
-import org.mule.munit.common.mp.MessageProcessorId;
 import org.mule.munit.common.mp.MockedMessageProcessorManager;
+import org.mule.munit.common.mp.MunitMessageProcessorCall;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -104,9 +105,9 @@ public class MunitCoreTest {
         assertEquals(20, stackTraceElements.get(0).getLineNumber());
     }
 
-    private List<MessageProcessorCall> executedCalls() {
-        ArrayList<MessageProcessorCall> calls = new ArrayList<MessageProcessorCall>();
-        MessageProcessorCall call1 = new MessageProcessorCall(new MessageProcessorId("mp1", "nsp1"));
+    private List<MunitMessageProcessorCall> executedCalls() {
+        ArrayList<MunitMessageProcessorCall> calls = new ArrayList<MunitMessageProcessorCall>();
+        MunitMessageProcessorCall call1 = new MunitMessageProcessorCall(new MessageProcessorId("mp1", "nsp1"));
         call1.setFileName("mule-config.xml");
         call1.setLineNumber("20");
         call1.setFlowConstruct(flowConstruct);

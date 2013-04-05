@@ -5,7 +5,8 @@ import org.mule.munit.runner.MuleContextManager;
 import org.mule.munit.runner.MunitRunner;
 import org.mule.munit.runner.mule.result.SuiteResult;
 import org.mule.munit.runner.mule.result.notification.NotificationListener;
-import org.mule.munit.runner.output.*;
+import org.mule.munit.runner.output.DefaultOutputHandler;
+import org.mule.munit.runner.output.TestOutputHandler;
 
 
 /**

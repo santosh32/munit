@@ -2,7 +2,6 @@ package org.mule.munit.mel.assertions;
 
 import org.mule.api.MuleMessage;
 import org.mule.api.el.ExpressionLanguageContext;
-import org.mule.munit.mel.assertions.MessageHasElementAssertionCommand;
 
 
 /**

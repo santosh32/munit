@@ -8,10 +8,11 @@ import org.mule.api.MuleEvent;
 import org.mule.api.MuleException;
 import org.mule.api.config.MuleProperties;
 import org.mule.api.registry.MuleRegistry;
+import org.mule.modules.interceptor.processors.MessageProcessorCall;
+import org.mule.modules.interceptor.processors.MessageProcessorId;
 import org.mule.munit.common.endpoint.MockEndpointManager;
-import org.mule.munit.common.mp.MessageProcessorCall;
-import org.mule.munit.common.mp.MessageProcessorId;
 import org.mule.munit.common.mp.MockedMessageProcessorManager;
+import org.mule.munit.common.mp.MunitMessageProcessorCall;
 import org.mule.munit.config.MunitFlow;
 import org.mule.munit.config.MunitTestFlow;
 import org.mule.munit.runner.mule.result.TestResult;
@@ -103,10 +104,10 @@ public class MunitTestTest {
         assertTrue(testResult.getError().getFullMessage().contains("mp1"));
     }
 
-    private ArrayList<MessageProcessorCall> createTestCalls() {
-        ArrayList<MessageProcessorCall> calls = new ArrayList<MessageProcessorCall>();
-        calls.add(new MessageProcessorCall(new MessageProcessorId("mp1", "namespace1")));
-        calls.add(new MessageProcessorCall(new MessageProcessorId("mp2", "namespace2")));
+    private ArrayList<MunitMessageProcessorCall> createTestCalls() {
+        ArrayList<MunitMessageProcessorCall> calls = new ArrayList<MunitMessageProcessorCall>();
+        calls.add(new MunitMessageProcessorCall(new MessageProcessorId("mp1", "namespace1")));
+        calls.add(new MunitMessageProcessorCall(new MessageProcessorId("mp2", "namespace2")));
 
         return calls;
     }

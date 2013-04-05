@@ -10,6 +10,9 @@ import org.mule.api.MuleException;
 import org.mule.api.MuleMessage;
 import org.mule.api.expression.ExpressionManager;
 import org.mule.api.processor.MessageProcessor;
+import org.mule.modules.interceptor.processors.MessageProcessorBehavior;
+import org.mule.modules.interceptor.processors.MessageProcessorCall;
+import org.mule.modules.interceptor.processors.MessageProcessorId;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -33,7 +36,7 @@ public class MunitMessageProcessorInterceptorTest {
     public static final MessageProcessorId MESSAGE_PROCESSOR_ID = new MessageProcessorId(MP, NAMESPACE);
     public static final MessageProcessorCall MESSAGE_PROCESSOR_CALL = new MessageProcessorCall(MESSAGE_PROCESSOR_ID);
     public static final Exception EXCEPTION_TO_THROW = new Exception();
-    public static final MockedMessageProcessorBehavior EXCEPTION_BEHAVIOR = new MockedMessageProcessorBehavior(MESSAGE_PROCESSOR_CALL, EXCEPTION_TO_THROW);
+    public static final MessageProcessorBehavior EXCEPTION_BEHAVIOR = new MessageProcessorBehavior(MESSAGE_PROCESSOR_CALL, EXCEPTION_TO_THROW);
     public static final String PAYLOAD = "payload";
     public static final Object OBJECT = new Object();
     public static final String ATTR_VALUE = "hello";
@@ -86,7 +89,7 @@ public class MunitMessageProcessorInterceptorTest {
         }
         catch (Exception e){
             assertEquals(EXCEPTION_TO_THROW, e);
-            verify(manager).addCall(any(MessageProcessorCall.class));
+            verify(manager).addCall(any(MunitMessageProcessorCall.class));
             return;
         }
 
@@ -116,7 +119,7 @@ public class MunitMessageProcessorInterceptorTest {
 
         MuleEvent processed = (MuleEvent) interceptor.process(new Object(), new Object[]{event}, proxy);
 
-        verify(manager).addCall(any(MessageProcessorCall.class));
+        verify(manager).addCall(any(MunitMessageProcessorCall.class));
         assertEquals(expectedMessage, processed.getMessage());
     }
 
@@ -143,7 +146,7 @@ public class MunitMessageProcessorInterceptorTest {
 
         MuleEvent processed = (MuleEvent) interceptor.process(new Object(), new Object[]{event}, proxy);
 
-        verify(manager).addCall(any(MessageProcessorCall.class));
+        verify(manager).addCall(any(MunitMessageProcessorCall.class));
         assertEquals(expectedMessage, processed.getMessage());
         assertTrue(beforeAssertionMp.called);
         assertTrue(afterAssertionMp.called);
@@ -175,7 +178,7 @@ public class MunitMessageProcessorInterceptorTest {
 
         MuleEvent processed = (MuleEvent) interceptor.process(new Object(), new Object[]{event}, proxy);
 
-        verify(manager).addCall(any(MessageProcessorCall.class));
+        verify(manager).addCall(any(MunitMessageProcessorCall.class));
         assertEquals(expectedMessage, processed.getMessage());
         assertTrue(beforeAssertionMp.called);
         assertTrue(afterAssertionMp.called);
@@ -200,7 +203,7 @@ public class MunitMessageProcessorInterceptorTest {
 
         Object processed = interceptor.process(OBJECT, args, proxy);
 
-        verify(manager).addCall(any(MessageProcessorCall.class));
+        verify(manager).addCall(any(MunitMessageProcessorCall.class));
         assertEquals(event, processed);
     }
 
@@ -238,8 +241,8 @@ public class MunitMessageProcessorInterceptorTest {
         return messageProcessors;
     }
 
-    private MockedMessageProcessorBehavior returnValueBehavior() {
-        return new MockedMessageProcessorBehavior(MESSAGE_PROCESSOR_CALL, muleMessage());
+    private MessageProcessorBehavior returnValueBehavior() {
+        return new MessageProcessorBehavior(MESSAGE_PROCESSOR_CALL, muleMessage());
     }
 
     private MuleMessage muleMessage() {

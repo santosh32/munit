@@ -1,8 +1,8 @@
 package org.mule.munit.common.mocking;
 
 import org.mule.api.MuleContext;
-import org.mule.munit.common.mp.MessageProcessorCall;
-import org.mule.munit.common.mp.MessageProcessorId;
+import org.mule.modules.interceptor.processors.MessageProcessorCall;
+import org.mule.modules.interceptor.processors.MessageProcessorId;
 
 import java.util.List;
 import java.util.Map;

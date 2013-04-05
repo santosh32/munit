@@ -1,7 +1,7 @@
 package org.mule.munit.mel.matchers;
 
 import org.junit.Test;
-import org.mule.munit.common.matchers.Matcher;
+import org.mule.modules.interceptor.matchers.Matcher;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;

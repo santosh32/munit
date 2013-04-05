@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleMessage;
 import org.mule.api.registry.MuleRegistry;
-import org.mule.munit.common.mp.MockedMessageProcessorBehavior;
+import org.mule.modules.interceptor.processors.MessageProcessorBehavior;
 import org.mule.munit.common.mp.MockedMessageProcessorManager;
 
 import java.util.HashMap;
@@ -44,7 +44,7 @@ public class MessageProcessorMockerTest {
                 .withAttributes(new HashMap<String, Object>())
                 .thenReturn(message);
 
-        verify(manager).addBehavior(any(MockedMessageProcessorBehavior.class));
+        verify(manager).addBehavior(any(MessageProcessorBehavior.class));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -62,7 +62,7 @@ public class MessageProcessorMockerTest {
     public void validateThatBehaviorIsAddedWhenThenThrow(){
         mocker().when("mp").thenThrow(new Exception());
 
-        verify(manager).addBehavior(any(MockedMessageProcessorBehavior.class));
+        verify(manager).addBehavior(any(MessageProcessorBehavior.class));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -75,7 +75,7 @@ public class MessageProcessorMockerTest {
     public void validateThatBehaviorIsAddedWhenThenReturnSame(){
         mocker().when("mp").thenThrow(new Exception());
 
-        verify(manager).addBehavior(any(MockedMessageProcessorBehavior.class));
+        verify(manager).addBehavior(any(MessageProcessorBehavior.class));
     }
 
     private MessageProcessorMocker mocker() {

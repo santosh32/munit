@@ -2,7 +2,7 @@ package org.mule.munit.mel.matchers;
 
 import org.mule.api.el.ExpressionLanguageContext;
 import org.mule.api.el.ExpressionLanguageFunction;
-import org.mule.munit.common.matchers.NotNullMatcher;
+import org.mule.modules.interceptor.matchers.NotNullMatcher;
 
 /**
  * <p>

@@ -3,9 +3,9 @@ package org.mule.munit.common.mocking;
 import org.mule.DefaultMuleMessage;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleMessage;
-import org.mule.munit.common.mp.MessageProcessorCall;
-import org.mule.munit.common.mp.MessageProcessorId;
-import org.mule.munit.common.mp.MockedMessageProcessorBehavior;
+import org.mule.modules.interceptor.processors.MessageProcessorBehavior;
+import org.mule.modules.interceptor.processors.MessageProcessorCall;
+import org.mule.modules.interceptor.processors.MessageProcessorId;
 import org.mule.munit.common.mp.MockedMessageProcessorManager;
 
 import java.util.Map;
@@ -107,7 +107,7 @@ public class MessageProcessorMocker extends MunitMockingTool {
         MockedMessageProcessorManager manager = getManager();
         MessageProcessorCall messageProcessorCall = new MessageProcessorCall(new MessageProcessorId(messageProcessorName, messageProcessorNamespace));
         messageProcessorCall.setAttributes(messageProcessorAttributes);
-        manager.addBehavior(new MockedMessageProcessorBehavior(messageProcessorCall, message));
+        manager.addBehavior(new MessageProcessorBehavior(messageProcessorCall, message));
     }
 
     /**
@@ -125,7 +125,7 @@ public class MessageProcessorMocker extends MunitMockingTool {
         MockedMessageProcessorManager manager = getManager();
         MessageProcessorCall messageProcessorCall = new MessageProcessorCall(new MessageProcessorId(messageProcessorName, messageProcessorNamespace));
         messageProcessorCall.setAttributes(messageProcessorAttributes);
-        manager.addBehavior(new MockedMessageProcessorBehavior(messageProcessorCall, exception));
+        manager.addBehavior(new MessageProcessorBehavior(messageProcessorCall, exception));
     }
 
 
@@ -140,7 +140,7 @@ public class MessageProcessorMocker extends MunitMockingTool {
         MockedMessageProcessorManager manager = getManager();
         MessageProcessorCall messageProcessorCall = new MessageProcessorCall(new MessageProcessorId(messageProcessorName, messageProcessorNamespace));
         messageProcessorCall.setAttributes(messageProcessorAttributes);
-        manager.addBehavior(new MockedMessageProcessorBehavior(messageProcessorCall, new DefaultMuleMessage(NotDefinedPayload.getInstance(), muleContext)));
+        manager.addBehavior(new MessageProcessorBehavior(messageProcessorCall, new DefaultMuleMessage(NotDefinedPayload.getInstance(), muleContext)));
 
     }
 

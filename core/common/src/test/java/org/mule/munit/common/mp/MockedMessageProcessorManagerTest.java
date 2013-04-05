@@ -3,7 +3,10 @@ package org.mule.munit.common.mp;
 import org.junit.Before;
 import org.junit.Test;
 import org.mule.api.MuleMessage;
-import org.mule.munit.common.matchers.EqMatcher;
+import org.mule.modules.interceptor.matchers.EqMatcher;
+import org.mule.modules.interceptor.processors.MessageProcessorBehavior;
+import org.mule.modules.interceptor.processors.MessageProcessorCall;
+import org.mule.modules.interceptor.processors.MessageProcessorId;
 
 import java.util.HashMap;
 import java.util.List;
@@ -79,12 +82,11 @@ public class MockedMessageProcessorManagerTest {
     public void validThatResetRemovesAll(){
         MockedMessageProcessorManager manager = new MockedMessageProcessorManager();
         manager.addCall(createCall());
-        manager.addBehavior(new MockedMessageProcessorBehavior(createCall(),muleMessage));
+        manager.addBehavior(new MessageProcessorBehavior(createCall(),muleMessage));
         manager.addSpyAssertion(MESSAGE_PROCESSOR_ID, new SpyAssertion(null,null));
 
         manager.reset();
 
-        assertTrue(manager.behaviors.isEmpty());
         assertTrue(manager.spyAssertions.isEmpty());
         assertTrue(manager.calls.isEmpty());
     }
@@ -96,18 +98,18 @@ public class MockedMessageProcessorManagerTest {
         Map<String,Object> attributes = bestMatchingCall.getAttributes();
         attributes.put("attr2", "attrValue2");
 
-        manager.addBehavior(new MockedMessageProcessorBehavior(createCall(), muleMessage));
-        manager.addBehavior(new MockedMessageProcessorBehavior(bestMatchingCall, muleMessage));
+        manager.addBehavior(new MessageProcessorBehavior(createCall(), muleMessage));
+        manager.addBehavior(new MessageProcessorBehavior(bestMatchingCall, muleMessage));
 
-        MockedMessageProcessorBehavior matched = manager.getBetterMatchingBehavior(bestMatchingCall);
+        MessageProcessorBehavior matched = manager.getBetterMatchingBehavior(bestMatchingCall);
 
         assertEquals(bestMatchingCall, matched.getMessageProcessorCall());
 
     }
 
 
-    private MessageProcessorCall createCall() {
-        MessageProcessorCall call = new MessageProcessorCall(MESSAGE_PROCESSOR_ID);
+    private MunitMessageProcessorCall createCall() {
+        MunitMessageProcessorCall call = new MunitMessageProcessorCall(MESSAGE_PROCESSOR_ID);
         HashMap<String, Object> attributes = new HashMap<String, Object>();
         attributes.put("attr", "attrValue");
         call.setAttributes(attributes);

@@ -5,7 +5,7 @@ import org.mule.api.MuleContext;
 import org.mule.api.MuleEvent;
 import org.mule.api.MuleException;
 import org.mule.api.processor.MessageProcessor;
-import org.mule.munit.common.mp.MessageProcessorId;
+import org.mule.modules.interceptor.processors.MessageProcessorId;
 import org.mule.munit.common.mp.SpyAssertion;
 
 import java.util.ArrayList;

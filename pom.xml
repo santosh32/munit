@@ -11,8 +11,9 @@
     <name>The Munit Project</name>
 
     <properties>
-        <mule.version>3.4.0-RC1</mule.version>
+        <mule.version>3.4.0-RC3</mule.version>
         <mule.devkit.version>3.4-SNAPSHOT</mule.devkit.version>
+        <interceptor.api.version>3.4-SNAPSHOT</interceptor.api.version>
         <junit.version>4.8.2</junit.version>
         <mockito.version>1.8.2</mockito.version>
         <eclipsePluginVersion>2.5</eclipsePluginVersion>
@@ -28,6 +29,7 @@
         <module>maven</module>
         <module>it</module>
         <module>examples</module>
+
     </modules>
 
 
@@ -71,6 +73,11 @@
                 <groupId>org.mule.tests</groupId>
                 <artifactId>mule-tests-functional</artifactId>
                 <version>${mule.version}</version>
+            </dependency>
+            <dependency>
+                <artifactId>mule-interceptor-module</artifactId>
+                <groupId>org.mule.modules</groupId>
+                <version>${interceptor.api.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
