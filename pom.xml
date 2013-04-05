@@ -11,7 +11,7 @@
     <name>The Munit Project</name>
 
     <properties>
-        <mule.version>3.4.0-RC3</mule.version>
+        <mule.version>3.4.0-RC4</mule.version>
         <mule.devkit.version>3.4-SNAPSHOT</mule.devkit.version>
         <interceptor.api.version>3.4-SNAPSHOT</interceptor.api.version>
         <junit.version>4.8.2</junit.version>
