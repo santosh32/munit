@@ -53,10 +53,10 @@ public abstract class FunctionalMunitSuite {
     }
 
     private MunitConfiguration createConfiguration() {
-       return  new MunitConfiguration(mockInboundEndpoints(), mockingExcludedFlows(), mockConnectors(), getStartupProperties());
+       return new MunitConfiguration(mockInboundEndpoints(), mockingExcludedFlows(), mockConnectors(), getStartupProperties());
     }
 
-    private List<String> mockingExcludedFlows() {
+    protected List<String> mockingExcludedFlows() {
         return new ArrayList<String>();
     }
 
