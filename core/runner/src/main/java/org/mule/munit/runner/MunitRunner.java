@@ -25,7 +25,7 @@ import java.util.List;
 public abstract class MunitRunner<T> {
 
     private TestOutputHandler handler = new DefaultOutputHandler();
-    private MuleContextManager muleContextManager = new MuleContextManager(null);
+    private MuleContextManager muleContextManager = new MuleContextManager(null, null);
 
     private MuleContext muleContext;
 

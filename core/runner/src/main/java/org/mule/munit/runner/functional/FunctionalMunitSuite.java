@@ -26,7 +26,7 @@ public abstract class FunctionalMunitSuite {
     protected MuleContext muleContext;
 
     public FunctionalMunitSuite() {
-        MuleContextManager muleContextManager = new MuleContextManager(createConfiguration());
+        MuleContextManager muleContextManager = new MuleContextManager(createConfiguration(), getStartupProperties());
         try {
             String resources = getConfigResources();
 
@@ -36,6 +36,10 @@ public abstract class FunctionalMunitSuite {
             muleContextManager.killMule(muleContext);
             throw new RuntimeException(e);
         }
+    }
+
+    protected Properties getStartupProperties() {
+        return null;
     }
 
     private MockingConfiguration createConfiguration() {

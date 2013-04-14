@@ -22,6 +22,7 @@ import org.mule.util.ClassUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 
 /**
@@ -36,9 +37,11 @@ public class MuleContextManager {
     public static final String CLASSNAME_ANNOTATIONS_CONFIG_BUILDER = "org.mule.org.mule.munit.config.AnnotationsConfigurationBuilder";
 
     private MockingConfiguration configuration;
+    private Properties startupProperties;
 
-    public MuleContextManager(MockingConfiguration configuration) {
+    public MuleContextManager(MockingConfiguration configuration, Properties startupProperties) {
         this.configuration = configuration;
+        this.startupProperties = startupProperties;
     }
 
     public MuleContext startMule(String resources) throws Exception {
@@ -72,7 +75,7 @@ public class MuleContextManager {
         org.mule.api.context.MuleContextFactory muleContextFactory = new DefaultMuleContextFactory();
 
         List<ConfigurationBuilder> builders = new ArrayList<ConfigurationBuilder>();
-        builders.add(new SimpleConfigurationBuilder(null));
+        builders.add(new SimpleConfigurationBuilder(startupProperties));
         if (ClassUtils.isClassOnPath(CLASSNAME_ANNOTATIONS_CONFIG_BUILDER,
                 getClass())) {
             builders.add((ConfigurationBuilder) ClassUtils.instanciateClass(
