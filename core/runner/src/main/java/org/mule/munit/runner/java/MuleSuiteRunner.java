@@ -1,17 +1,29 @@
 package org.mule.munit.runner.java;
 
-import junit.framework.*;
-import org.junit.runner.Describable;
-import org.junit.runner.Description;
-import org.junit.runner.Runner;
-import org.junit.runner.manipulation.*;
-import org.junit.runner.notification.Failure;
-import org.junit.runner.notification.RunNotifier;
 import org.mule.api.MuleContext;
 import org.mule.munit.runner.MuleContextManager;
 import org.mule.munit.runner.MunitRunner;
-import org.mule.munit.runner.output.*;
+import org.mule.munit.runner.output.DefaultOutputHandler;
+
 import java.lang.reflect.Method;
+
+import junit.framework.AssertionFailedError;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestListener;
+import junit.framework.TestResult;
+import junit.framework.TestSuite;
+
+import org.junit.runner.Describable;
+import org.junit.runner.Description;
+import org.junit.runner.Runner;
+import org.junit.runner.manipulation.Filter;
+import org.junit.runner.manipulation.Filterable;
+import org.junit.runner.manipulation.NoTestsRemainException;
+import org.junit.runner.manipulation.Sortable;
+import org.junit.runner.manipulation.Sorter;
+import org.junit.runner.notification.Failure;
+import org.junit.runner.notification.RunNotifier;
 
 
 /**
@@ -24,7 +36,7 @@ public class MuleSuiteRunner extends Runner implements Filterable, Sortable {
 
     private TestSuite testSuite;
     private MuleContext muleContext;
-    private MuleContextManager muleContextManager = new MuleContextManager(null, null);
+    private MuleContextManager muleContextManager = new MuleContextManager(null);
 
     public MuleSuiteRunner(Class testClass) {
         try {

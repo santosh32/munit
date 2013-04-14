@@ -22,14 +22,14 @@ import java.io.IOException;
 
 
 public class MunitApplicationContext extends MuleApplicationContext{
-    private MockingConfiguration configuration;
+    private MunitConfiguration configuration;
 
-    public MunitApplicationContext(MuleContext muleContext, ConfigResource[] configResources, MockingConfiguration configuration) throws BeansException {
+    public MunitApplicationContext(MuleContext muleContext, ConfigResource[] configResources, MunitConfiguration configuration) throws BeansException {
         super(muleContext, configResources);
         this.configuration = configuration;
     }
 
-    public MunitApplicationContext(MuleContext muleContext, Resource[] springResources, MockingConfiguration configuration) throws BeansException {
+    public MunitApplicationContext(MuleContext muleContext, Resource[] springResources, MunitConfiguration configuration) throws BeansException {
         super(muleContext, springResources);
         this.configuration = configuration;
     }

@@ -9,9 +9,9 @@ import org.springframework.context.ApplicationContext;
 public class MunitSpringXmlConfigurationBuilder extends SpringXmlConfigurationBuilder{
 
 
-    private MockingConfiguration configuration;
+    private MunitConfiguration configuration;
 
-    public MunitSpringXmlConfigurationBuilder(String configResources, MockingConfiguration configuration) throws ConfigurationException {
+    public MunitSpringXmlConfigurationBuilder(String configResources, MunitConfiguration configuration) throws ConfigurationException {
         super(configResources);
         this.configuration = configuration;
     }

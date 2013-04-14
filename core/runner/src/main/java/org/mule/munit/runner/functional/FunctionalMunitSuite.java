@@ -1,7 +1,5 @@
 package org.mule.munit.runner.functional;
 
-import org.junit.After;
-import org.junit.Before;
 import org.mule.DefaultMuleMessage;
 import org.mule.MessageExchangePattern;
 import org.mule.api.MuleContext;
@@ -10,23 +8,35 @@ import org.mule.api.MuleException;
 import org.mule.api.MuleMessage;
 import org.mule.construct.Flow;
 import org.mule.munit.common.MunitCore;
-import org.mule.munit.common.matchers.*;
+import org.mule.munit.common.matchers.AnyClassMatcher;
+import org.mule.munit.common.matchers.EqMatcher;
+import org.mule.munit.common.matchers.Matcher;
+import org.mule.munit.common.matchers.NotNullMatcher;
+import org.mule.munit.common.matchers.NullMatcher;
 import org.mule.munit.common.mocking.EndpointMocker;
 import org.mule.munit.common.mocking.MessageProcessorMocker;
 import org.mule.munit.common.mocking.MunitSpy;
 import org.mule.munit.common.mocking.MunitVerifier;
 import org.mule.munit.runner.MuleContextManager;
-import org.mule.munit.runner.mule.context.MockingConfiguration;
+import org.mule.munit.runner.mule.context.MunitConfiguration;
 import org.mule.tck.MuleTestUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
+
+import org.junit.After;
+import org.junit.Before;
 
 public abstract class FunctionalMunitSuite {
 
     protected MuleContext muleContext;
 
     public FunctionalMunitSuite() {
-        MuleContextManager muleContextManager = new MuleContextManager(createConfiguration(), getStartupProperties());
+        MuleContextManager muleContextManager = new MuleContextManager(createConfiguration());
         try {
             String resources = getConfigResources();
 
@@ -42,8 +52,8 @@ public abstract class FunctionalMunitSuite {
         return null;
     }
 
-    private MockingConfiguration createConfiguration() {
-       return  new MockingConfiguration(mockInboundEndpoints(), mockingExcludedFlows(), mockConnectors());
+    private MunitConfiguration createConfiguration() {
+       return  new MunitConfiguration(mockInboundEndpoints(), mockingExcludedFlows(), mockConnectors(), getStartupProperties());
     }
 
     private List<String> mockingExcludedFlows() {

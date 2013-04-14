@@ -1,9 +1,5 @@
 package org.mule.munit.runner;
 
-import org.apache.log4j.FileAppender;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.SimpleLayout;
 import org.mule.api.MuleContext;
 import org.mule.api.MuleException;
 import org.mule.api.config.ConfigurationBuilder;
@@ -13,7 +9,7 @@ import org.mule.config.builders.SimpleConfigurationBuilder;
 import org.mule.context.DefaultMuleContextBuilder;
 import org.mule.context.DefaultMuleContextFactory;
 import org.mule.munit.common.MunitCore;
-import org.mule.munit.runner.mule.context.MockingConfiguration;
+import org.mule.munit.runner.mule.context.MunitConfiguration;
 import org.mule.munit.runner.mule.context.MunitSpringXmlConfigurationBuilder;
 import org.mule.munit.runner.output.DefaultOutputHandler;
 import org.mule.tck.TestingWorkListener;
@@ -22,7 +18,11 @@ import org.mule.util.ClassUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
+
+import org.apache.log4j.FileAppender;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.SimpleLayout;
 
 
 /**
@@ -36,12 +36,10 @@ public class MuleContextManager {
 
     public static final String CLASSNAME_ANNOTATIONS_CONFIG_BUILDER = "org.mule.org.mule.munit.config.AnnotationsConfigurationBuilder";
 
-    private MockingConfiguration configuration;
-    private Properties startupProperties;
+    private MunitConfiguration configuration;
 
-    public MuleContextManager(MockingConfiguration configuration, Properties startupProperties) {
+    public MuleContextManager(MunitConfiguration configuration) {
         this.configuration = configuration;
-        this.startupProperties = startupProperties;
     }
 
     public MuleContext startMule(String resources) throws Exception {
@@ -75,7 +73,7 @@ public class MuleContextManager {
         org.mule.api.context.MuleContextFactory muleContextFactory = new DefaultMuleContextFactory();
 
         List<ConfigurationBuilder> builders = new ArrayList<ConfigurationBuilder>();
-        builders.add(new SimpleConfigurationBuilder(startupProperties));
+        builders.add(new SimpleConfigurationBuilder(configuration.getStartupProperties()));
         if (ClassUtils.isClassOnPath(CLASSNAME_ANNOTATIONS_CONFIG_BUILDER,
                 getClass())) {
             builders.add((ConfigurationBuilder) ClassUtils.instanciateClass(
