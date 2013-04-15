@@ -73,7 +73,7 @@ public class MuleContextManager {
         org.mule.api.context.MuleContextFactory muleContextFactory = new DefaultMuleContextFactory();
 
         List<ConfigurationBuilder> builders = new ArrayList<ConfigurationBuilder>();
-        builders.add(new SimpleConfigurationBuilder(configuration.getStartupProperties()));
+        builders.add(new SimpleConfigurationBuilder(configuration == null ? null : configuration.getStartupProperties()));
         if (ClassUtils.isClassOnPath(CLASSNAME_ANNOTATIONS_CONFIG_BUILDER,
                 getClass())) {
             builders.add((ConfigurationBuilder) ClassUtils.instanciateClass(
