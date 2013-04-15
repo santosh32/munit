@@ -5,7 +5,7 @@
 
     <groupId>org.mule</groupId>
     <artifactId>munit</artifactId>
-    <version>3.3.2-M5-SNAPSHOT</version>
+    <version>3.3.2-M7-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>The Munit Project</name>
