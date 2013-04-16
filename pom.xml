@@ -11,8 +11,8 @@
     <name>The Munit Project</name>
 
     <properties>
-        <mule.version>3.4.0-RC4</mule.version>
-        <mule.devkit.version>3.4-SNAPSHOT</mule.devkit.version>
+        <mule.version>3.4.0</mule.version>
+        <mule.devkit.version>3.4.0</mule.devkit.version>
         <interceptor.api.version>3.4-SNAPSHOT</interceptor.api.version>
         <junit.version>4.8.2</junit.version>
         <mockito.version>1.8.2</mockito.version>
@@ -35,11 +35,24 @@
 
     <build>
         <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <version>3.0</version>
-                </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
     <dependencyManagement>
