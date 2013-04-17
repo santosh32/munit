@@ -38,11 +38,12 @@ public abstract class FunctionalMunitSuite {
         }
     }
 
-    private MockingConfiguration createConfiguration() {
-       return  new MockingConfiguration(mockInboundEndpoints(), mockingExcludedFlows(), mockConnectors());
+    private MockingConfiguration createConfiguration()
+    {
+        return new MockingConfiguration(mockInboundEndpoints(), mockingExcludedFlows(), mockConnectors(), getStartUpProperties());
     }
 
-    private List<String> mockingExcludedFlows() {
+    protected List<String> mockingExcludedFlows() {
         return new ArrayList<String>();
     }
 
@@ -162,6 +163,9 @@ public abstract class FunctionalMunitSuite {
     protected final Matcher anyInt(){
         return new AnyClassMatcher(Integer.class);
     }
-    
 
+    protected Properties getStartUpProperties()
+    {
+        return null;
+    }
 }
